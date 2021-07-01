@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: rgb(205,205,236);
+    background: linear-gradient(0deg, #d9e7ff 0%,#e3ffe7 100%);
+    /* -webkit-filter: blur(90px); */
+    /* filter: blur(90px); */
+
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    margin: 8vh 0;
+}
+
+.loggingIn {
+    font-weight: bold;
+}
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5vw;
+}
+
+.loginIntro {
+    margin-bottom: 2vh;
+}
