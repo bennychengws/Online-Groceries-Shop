@@ -18,7 +18,7 @@ export default function Home() {
       </div>
       <div className={moduleCss.loginContainer}>
         <div className={moduleCss.loginIntro}>
-          <div className={moduleCss.loggingIn}>Logging in</div>
+          <div className={moduleCss.loggingIn}>Login</div>
           <div>Enter your username and password</div>
         </div>
         <Login />

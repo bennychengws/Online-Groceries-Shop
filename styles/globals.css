@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body, html {
     margin: 0;
     font-family: 'Gilroy', sans-serif;
 }
