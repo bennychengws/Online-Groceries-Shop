@@ -1,12 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    background: #ECE9E6;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(180deg, rgba(255, 238, 238, 0.3), rgba(254, 254, 254), rgba(236, 233, 230, 0.9));  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(180deg, rgba(255, 238, 238, 0.5) 5%,rgb(177, 251, 255, 0.07) 12%, rgba(236, 233, 230, 0.3) 17%,  rgba(255, 255, 255) 40%, rgba(236, 233, 230, 0.6) 90%,rgba(236, 233, 230, 0.8)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
-    /* background: rgb(205,205,236);
+  /* background: rgb(205,205,236);
     background: linear-gradient(0deg, #d9e7ff 0%,#e3ffe7 100%); */
 
 

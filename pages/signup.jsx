@@ -1,10 +1,12 @@
-import {useState} from "react";
-import Signup from "../components/Signup.jsx"
+import { useState } from "react";
+import Signup from "../components/Signup.jsx";
+import Layout from "../components/Layout.jsx";
 
 const signup = () => {
-
-    return (
+  return (
+    <Layout>
       <Signup />
+    </Layout>
   );
 };
 
