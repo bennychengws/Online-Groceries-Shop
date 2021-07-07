@@ -1,21 +1,35 @@
 import React from "react";
-import axios from 'axios'
-import {useState} from "react";
+import axios from "axios";
+import { useState } from "react";
+import moduleCss from "../styles/Signup.module.css";
 
 const Signup = () => {
-	const [formData, setFormData] = useState({ username: "", password: "", email: "", address: "" });
-	const handleClick = async e => {
-			console.log(formData)
-			const res = await axios.post('api/signup', formData)
-	}
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "",
+    address: "",
+  });
+  const handleClick = async (e) => {
+    console.log(formData);
+    const res = await axios.post("api/signup", formData);
+  };
   return (
-    <div className="bg-grey-lighter min-h-screen flex flex-col">
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-        <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+    <div className={moduleCss.container}>
+      <div className=" rounded mb-4 ">
+        <div className="mb-4">
+          <div className={moduleCss.signUpContainer}>
+            <h1 className="mb-2 text-3xl text-left font-bold">Sign up</h1>
+            <h5 className="text-gray-500">
+              Enter your credentials to continue
+            </h5>
+          </div>
+          <label className="block text-gray-500 text-base font-bold mb-1">
+            Username
+          </label>
           <input
             type="text"
-            className="block border border-grey-light w-full p-3 rounded mb-4"
+            className="mb-4 appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 leading-tight focus:outline-none border-b border-teal-500"
             name="username"
             placeholder="Username"
             onChange={(e) =>
@@ -23,9 +37,12 @@ const Signup = () => {
             }
             value={formData.uesrname}
           />
+          <label className="block text-gray-500 text-base font-bold mb-1">
+            Email
+          </label>
           <input
             type="text"
-            className="block border border-grey-light w-full p-3 rounded mb-4"
+            className="mb-4 appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 leading-tight focus:outline-none border-b border-teal-500"
             name="email"
             placeholder="Email"
             onChange={(e) =>
@@ -33,9 +50,12 @@ const Signup = () => {
             }
             value={formData.email}
           />
+          <label className="block text-gray-500 text-base font-bold mb-1">
+            Password
+          </label>
           <input
             type="password"
-            className="block border border-grey-light w-full p-3 rounded mb-4"
+            className="mb-4 appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 leading-tight focus:outline-none border-b border-teal-500"
             name="password"
             placeholder="Password"
             onChange={(e) =>
@@ -43,7 +63,7 @@ const Signup = () => {
             }
             value={formData.password}
           />
-          <input
+          {/* <input
             type="text"
             className="block border border-grey-light w-full p-3 rounded mb-4"
             name="address"
@@ -52,10 +72,10 @@ const Signup = () => {
               setFormData({ ...formData, address: e.target.value })
             }
             value={formData.address}
-          />
+          /> */}
           <button
             type="submit"
-            className="w-full text-center py-3 rounded bg-green-400 text-white hover:bg-green-500 focus:outline-none my-1"
+            className="w-full text-center py-3 rounded-2xl  bg-green-500 text-white hover:bg-green-700 focus:outline-none my-1"
             onClick={handleClick}
           >
             Create Account
@@ -66,6 +86,7 @@ const Signup = () => {
               className="no-underline border-b border-grey-dark text-grey-dark"
               href="#"
             >
+              {" "}
               Terms of Service
             </a>{" "}
             and
@@ -73,6 +94,7 @@ const Signup = () => {
               className="no-underline border-b border-grey-dark text-grey-dark"
               href="#"
             >
+              {" "}
               Privacy Policy
             </a>
           </div>

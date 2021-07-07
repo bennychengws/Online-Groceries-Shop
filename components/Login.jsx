@@ -24,7 +24,7 @@ const Login = () => {
         <form className=" rounded mb-4" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-500 text-base font-bold mb-2"
               htmlFor="username"
             >
               Email
@@ -44,7 +44,7 @@ const Login = () => {
 
           <div className="mb-7">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-500 text-base font-bold mb-2"
               htmlFor="password"
             >
               Password
@@ -92,7 +92,7 @@ const Login = () => {
           </div>
           <div className="flex justify-center">
             <button
-              className=" bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-24 rounded-2xl focus:outline-none focus:shadow-outline"
+              className=" w-full bg-green-500 hover:bg-green-700 text-white font-bold py-3 my-1 rounded-2xl focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Log In
