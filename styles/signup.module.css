@@ -5,6 +5,38 @@
 .signUpContainer {
     display: flex;
     flex-direction: column;
-    margin: 2vh 0;
+    margin-bottom: 4vh;
 
+}
+
+
+.inputContainer {
+    margin-bottom: 4vh;
+
+}
+
+
+.pwdContainer {
+    position: relative;
+    /* z-index: 1; */
+    display:flex;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-color: rgba(226, 226, 226, 1);
+    margin-bottom: 2vh;
+
+}
+
+.signUpTitle {
+    text-align: left;
+    font-weight: bold;
+    font-size: calc(1.25em + 0.5vw);
+}
+
+.declaration {
+    margin-bottom: 2vh
+}
+
+.signUpButton {
+    margin-bottom: 2vh
 }
