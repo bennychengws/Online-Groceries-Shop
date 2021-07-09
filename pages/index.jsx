@@ -1,4 +1,4 @@
-import Head from "next/head";
+
 import Image from "next/image";
 import carrotImage from "../images/Group.png";
 import moduleCss from "../styles/index.module.css";
@@ -20,7 +20,7 @@ export default function Home() {
         <div className={moduleCss.loginContainer}>
           <div className={moduleCss.loginIntro}>
             <div className={moduleCss.loggingIn}>Login</div>
-            <div>Enter your username and password</div>
+            <div className="text-gray-500">Enter your username and password</div>
           </div>
           <Login />
         </div>

@@ -5,16 +5,25 @@
 .signUpContainer {
     display: flex;
     flex-direction: column;
-    margin-bottom: 4vh;
+    margin-bottom: 3vh;
 
 }
 
 
 .inputContainer {
-    margin-bottom: 4vh;
+    margin-bottom: 3vh;
 
 }
 
+.emailContainer {
+    position: relative;
+    /* z-index: 1; */
+    display:flex;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-color: rgba(226, 226, 226, 1);
+    margin-bottom: 3vh;
+}
 
 .pwdContainer {
     position: relative;
@@ -24,7 +33,7 @@
     border-bottom-width: 1px;
     border-color: rgba(226, 226, 226, 1);
     margin-bottom: 2vh;
-
+    
 }
 
 .signUpTitle {
@@ -34,9 +43,15 @@
 }
 
 .declaration {
-    margin-bottom: 2vh
+    margin-bottom: 1.75vh
 }
 
 .signUpButton {
-    margin-bottom: 2vh
+    margin-bottom: 1.75vh
+}
+
+.validationIcon {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
 }

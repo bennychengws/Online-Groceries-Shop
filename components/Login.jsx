@@ -69,7 +69,7 @@ const Login = () => {
                   }
                   value={formData.password}
                 />
-                <span className="pwdIcon">
+                <span>
                   <Image
                     src={isRevealPwd ? hidePwdImg : showPwdImg}
                     width="20vw"
