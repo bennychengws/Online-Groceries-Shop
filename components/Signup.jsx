@@ -34,7 +34,7 @@ const Signup = () => {
     alert("Please enter a valid email")
     } else {
     console.log(formData);
-    // const res = await axios.post("api/signup", formData);
+    const res = await axios.post("api/signup", formData);
     }
   };
 
