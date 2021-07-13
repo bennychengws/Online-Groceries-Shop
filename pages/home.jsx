@@ -29,13 +29,13 @@ const home = () => {
                 Best Selling
                 Goceries
                 {/* {console.log(test)} */}
-                {mongoose.connect('mongodb://localhost/products')}
+                {/* {mongoose.connect('mongodb://localhost/products')}
                 {axios.get('/api/product', async (req, res) => {
                     const records = await Product.find({})
                     console.log('Response => ', records)
                     res.json(records)
                 })
-                }
+                } */}
             </div>
         </div>
     )

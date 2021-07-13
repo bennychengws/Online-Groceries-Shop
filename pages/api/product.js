@@ -1,6 +1,9 @@
 import connectDB from '../../middleware/mongodb';
 import Product from '../../models/product';
+// import dbConnect from '../../utils/dbConnect';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
+// dbConnect();
 
 const productAPI = async (req, res) => {
   console.log(req.body);
@@ -21,7 +24,13 @@ const productAPI = async (req, res) => {
       await product.save()
       return res.status(200).json({ name: 'John Doe' })
     case 'GET':
-      return res.status(200).json({ name: 'John Doe' })
+      try {
+        const products = await Product.find({}).exec();
+        return res.status(200).json(products)        
+      } catch (error) {
+        return res.status(400).json("failed to get products data")        
+      }
+
     default:
       break
   } 

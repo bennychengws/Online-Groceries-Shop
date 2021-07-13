@@ -5,34 +5,42 @@ const product = new Schema({
   name: {
     type: String,
     required: true,
+    default: "",
   },
   category: {
     type: String,
     required: true,
+    default: "",
   },
   brand: {
     type: String,
     required: true,
+    default: "",
   },
   price: {
     type: Number,
     required: true,
+    default: 0,
   },
   volume: {
     type: String,
-    required: false,
+    required: true,
+    default: "",
   },
   productDetail: {
     type: String,
-    required: false,
+    required: true,
+    default: "",
   },
   nutritions: {
     type: String,
-    required: false,
+    required: true,
+    default: "",
   },
   review: {
     type: String,
-    required: false,
+    required: true,
+    default: "",
   },
 });
 
