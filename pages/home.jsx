@@ -1,9 +1,8 @@
 import Image from "next/image";
 import carrotImage from "../images/Group.png";
 import moduleCss from "../styles/home.module.css";
-import axios from "axios";
-import mongoose from "mongoose"
-import Product from '../models/product';
+import NavBar from "../components/NavBar"
+
 
 const home = () => {
     const parameters = {name: "", categories: "", brand: "", price: "", productDetail: "", nutritions: "", review: ""}
@@ -13,7 +12,7 @@ const home = () => {
     // meats * 2
     // filterCategories * 4
     // filterBrand * 4
-    // FindProductsCategories * 8
+    // FindProductsCategories * 6
     // function fetchData() {
     //     const res = axios.get(
     //       "http://localhost:3000/api/product"
@@ -24,19 +23,15 @@ const home = () => {
     return (
         <div className={moduleCss.container}>
             <div className={moduleCss.image}>
-                <Image src={carrotImage} width="30vw" height="40vh"></Image>
-                Exclusive Offer 
-                Best Selling
-                Goceries
-                {/* {console.log(test)} */}
-                {/* {mongoose.connect('mongodb://localhost/products')}
-                {axios.get('/api/product', async (req, res) => {
-                    const records = await Product.find({})
-                    console.log('Response => ', records)
-                    res.json(records)
-                })
-                } */}
+                <Image src={carrotImage} width="20vw" height="25vh"></Image>
             </div>
+            location with icon<br/>
+            discount promotion panel<br/>
+            searchBar
+            <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Exclusive Offer </div><div className={moduleCss.seeAll}>See all</div></div><div>products</div>
+            <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Best Selling</div><div className={moduleCss.seeAll}>See all</div></div><div>products</div>
+            <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Goceries</div><div className={moduleCss.seeAll}>See all</div></div><div>products</div>
+            <NavBar/>
         </div>
     )
 }

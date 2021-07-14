@@ -26,7 +26,7 @@ const productAPI = async (req, res) => {
     case 'GET':
       try {
         const products = await Product.find({}).exec();
-        return res.status(200).json(products)        
+        return res.status(200).json(products[2]["_id"])        
       } catch (error) {
         return res.status(400).json("failed to get products data")        
       }

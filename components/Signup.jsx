@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import moduleCss from "../styles/Signup.module.css";
 import showPwdImg from "../images/eye_visible_hide_hidden_show_icon_145988.png";
 import hidePwdImg from "../images/eye_slash_visible_hide_hidden_show_icon_145987.png";
