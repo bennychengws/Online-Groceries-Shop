@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/router'
 import Image from "next/image";
+import Link from 'next/link'
+import moduleCss from "../styles/NavBar.module.css";
 import shopIcon from "../images/shop.png";
 import shopGreenIcon from "../images/shop_green.png";
 import exploreIcon from "../images/explore.png";
@@ -19,14 +22,55 @@ const navBar = () => {
   const [isCart, setIsCart] = useState(false);
   const [isFavourite, setIsFavourite] = useState(false);
   const [isAccount, setIsAccount] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const path = router.pathname
+    console.log("current pathname: " + path)
+    switch (path) {
+      case "/home":
+        setIsShop(true)
+        break;
+      case "/explore":
+        setIsExplore(true)
+        break;
+
+      case "/cart":
+        setIsCart(true)
+        break;
+
+      case "/favourite":
+        setIsFavourite(true)
+        break;
+
+      case "/account":
+        setIsAccount(true)
+        break;
+
+      default:
+        console.log("pathname not matched")
+    }
+  })
 
   return (
-    <div>
-      <Image src={shopIcon} width="40vw" height="40vh"></Image>
-      <Image src={exploreIcon} width="40vw" height="40vh"></Image>
-      <Image src={cartIcon} width="40vw" height="40vh"></Image>
-      <Image src={favouriteIcon} width="40vw" height="40vh"></Image>
-      <Image src={accountIcon} width="40vw" height="40vh"></Image>
+    <div className={moduleCss.positionalContainer}>
+      <div className={moduleCss.container}>
+
+        <Link href="../home">
+          <Image src={isShop ? shopGreenIcon : shopIcon} width="29px" height="42.17px"></Image>
+        </Link>
+        <Link href="../explore">
+          <Image src={isExplore ? exploreGreenIcon : exploreIcon} width="41px" height="38.45px"></Image>
+        </Link>
+        <Link href="../cart">
+          <Image src={isCart ? cartGreenIcon : cartIcon} width="26px" height="39.73px"></Image>
+        </Link>
+        <Link href="../favourite">
+          <Image src={isFavourite ? favouriteGreenIcon : favouriteIcon} width="53px" height="41.59px"></Image>
+        </Link>
+        <Image src={isAccount ? accountGreenIcon : accountIcon} width="46px" height="42.17px"></Image>
+
+      </div>
     </div>
   )
 }

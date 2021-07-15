@@ -18,5 +18,18 @@
 }
 
 .productContainer {
+    display: grid;
+    grid-template: repeat(auto-fit, minmax(250px, 1fr))/ repeat(auto-fit, minmax(250px, 1fr));
 }
 
+.fruits {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(53, 177, 117, 0.1);
+    /* width: 20vw; */
+    align-items: center;
+    border-radius: 10px;
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(53, 177, 117, 0.7);
+}

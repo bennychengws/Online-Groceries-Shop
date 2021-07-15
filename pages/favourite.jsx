@@ -1,12 +1,15 @@
 import moduleCss from '../styles/favourite.module.css'
+import NavBar from "../components/NavBar"
 
 const cart = () => {
     return (
-        <div className={moduleCss.container}>
-            <div className={moduleCss.title}>Favourite</div>
-            <div className={moduleCss.productContainer}>my products</div>
-            <button>Add All To Cart</button>
-            navBar
+        <div>
+            <div className={moduleCss.container}>
+                <div className={moduleCss.title}>Favourite</div>
+                <div className={moduleCss.productContainer}>my products</div>
+                <button>Add All To Cart</button>
+            </div>
+            <NavBar />
         </div>
     )
 }
