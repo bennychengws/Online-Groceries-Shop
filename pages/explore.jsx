@@ -28,14 +28,40 @@ const explore = () => {
           <Link href="">
             <div className={moduleCss.fruits}>
               <Image src={fruits} width="100vw" height="70vh"></Image>
-              <div>Fresh Fruits & <br/> Vegetables</div>
+              <div>Fresh Fruits & Vegetables</div>
             </div>
           </Link>
-          <div>Cooking Oil & Ghee</div>
-          <div>Meat & Fish</div>
-          <div>Bakery & Snacks</div>
-          <div>Dairy & Eggs</div>
-          <div>Beverages</div>
+          <Link href="">
+            <div className={moduleCss.fruits}>
+              <Image src={oil} width="100vw" height="70vh"></Image>
+              <div>Cooking Oil & Ghee</div>
+            </div>
+          </Link>
+          <Link href="">
+            <div className={moduleCss.fruits}>
+              <Image src={meat} width="100vw" height="70vh"></Image>
+              <div>Meat & Fish</div>
+            </div>
+          </Link>
+          <Link href="">
+            <div className={moduleCss.fruits}>
+              <Image src={bakery} width="100vw" height="70vh"></Image>
+              <div>Bakery & Snacks</div>
+            </div>
+          </Link>
+          <Link href="">
+            <div className={moduleCss.fruits}>
+              <Image src={eggs} width="100vw" height="70vh"></Image>
+              <div>Dairy & Eggs</div>
+            </div>
+          </Link>
+          <Link href="">
+            <div className={moduleCss.fruits}>
+              <Image src={drinks} width="100vw" height="70vh"></Image>
+              <div>Beverages</div>
+            </div>
+          </Link>
+
         </div>
       </div>
       <NavBar />
