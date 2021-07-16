@@ -25,19 +25,47 @@
     gap: 15px 15px
 }
 
-.fruits {
+.categroy {
     display: flex;
     flex-direction: column;
-    background-color: rgba(53, 177, 117, 0.1);
     align-items: center;
     justify-content: space-evenly;
     text-align: center;
     border-radius: 10px;
     border: solid;
     border-width: 1px;
-    border-color: rgba(53, 177, 117, 0.7);
     min-width: 114px;
     min-height: 163px;
     font-weight: bold;
-    font-size: cal(1em + 0.5vw);
+    font-size: calc(0.8em + 0.5vw);
+}
+
+.fruits {
+    background-color: rgba(53, 177, 117, 0.1);
+    border-color: rgba(53, 177, 117, 0.7);
+}
+
+.oil {
+    background-color: rgba(248, 164, 76, 0.1);
+    border-color: rgba(248, 164, 76, 0.7);
+}
+
+.meat {
+    background-color: rgba(247, 165, 147, 0.25);
+    border-color: rgba(247, 165, 147, 1);
+}
+
+.bakery {
+    background-color: rgba(211, 176, 224, 0.25);
+    border-color: rgba(211, 176, 224, 1);
+}
+
+.eggs {
+    background-color: rgba(253, 229, 152, 0.25);
+    border-color: rgba(253, 229, 152, 1);
+}
+
+.drinks {
+    background-color: rgba(183, 223, 245, 0.25);
+    border-color: rgba(183, 223, 245, 1);
 }

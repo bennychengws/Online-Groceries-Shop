@@ -26,37 +26,37 @@ const explore = () => {
         searchBar
         <div className={moduleCss.productContainer}>
           <Link href="">
-            <div className={moduleCss.fruits}>
+            <div className={`${moduleCss.categroy} ${moduleCss.fruits}`}>
               <Image src={fruits} width="100vw" height="70vh"></Image>
               <div>Fresh Fruits & Vegetables</div>
             </div>
           </Link>
           <Link href="">
-            <div className={moduleCss.fruits}>
-              <Image src={oil} width="100vw" height="70vh"></Image>
+            <div className={`${moduleCss.categroy} ${moduleCss.oil}`}>
+              <Image src={oil} width="100vw" height="75vh"></Image>
               <div>Cooking Oil & Ghee</div>
             </div>
           </Link>
           <Link href="">
-            <div className={moduleCss.fruits}>
-              <Image src={meat} width="100vw" height="70vh"></Image>
+            <div className={`${moduleCss.categroy} ${moduleCss.meat}`}>
+              <Image src={meat} width="100vw" height="90vh"></Image>
               <div>Meat & Fish</div>
             </div>
           </Link>
           <Link href="">
-            <div className={moduleCss.fruits}>
-              <Image src={bakery} width="100vw" height="70vh"></Image>
+            <div className={`${moduleCss.categroy} ${moduleCss.bakery}`}>
+              <Image src={bakery} width="100vw" height="80vh"></Image>
               <div>Bakery & Snacks</div>
             </div>
           </Link>
           <Link href="">
-            <div className={moduleCss.fruits}>
+            <div className={`${moduleCss.categroy} ${moduleCss.eggs}`}>
               <Image src={eggs} width="100vw" height="70vh"></Image>
               <div>Dairy & Eggs</div>
             </div>
           </Link>
           <Link href="">
-            <div className={moduleCss.fruits}>
+            <div className={`${moduleCss.categroy} ${moduleCss.drinks}`}>
               <Image src={drinks} width="100vw" height="70vh"></Image>
               <div>Beverages</div>
             </div>
