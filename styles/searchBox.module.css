@@ -1,0 +1,18 @@
+.box {
+    background-color: transparent;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+    margin-bottom: 2vh;
+    background-color: rgba(242, 243, 242, 1);
+    border-radius: 5px;
+    width: 100%;
+    padding: 1.7vw;
+
+
+}

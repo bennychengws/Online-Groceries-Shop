@@ -7,7 +7,7 @@ const cart = () => {
             <div className={moduleCss.container}>
                 <div className={moduleCss.title}>My Cart</div>
                 <div className={moduleCss.productContainer}>my products</div>
-                <button>Go to Checkout</button>
+                <button className={moduleCss.checkOut}>Go to Checkout</button>
             </div>
             <NavBar />
         </div>

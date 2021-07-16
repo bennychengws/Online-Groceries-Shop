@@ -53,7 +53,6 @@ const navBar = () => {
   })
 
   return (
-    <div className={moduleCss.positionalContainer}>
       <div className={moduleCss.container}>
 
         <Link href="../home">
@@ -71,7 +70,6 @@ const navBar = () => {
         <Image src={isAccount ? accountGreenIcon : accountIcon} width="46px" height="42.17px"></Image>
 
       </div>
-    </div>
   )
 }
 

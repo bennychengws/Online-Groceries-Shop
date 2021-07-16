@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from 'next/link'
+import SearchBox from "../components/SearchBox";
 import moduleCss from '../styles/explore.module.css';
 import { useRouter } from "next/router";
 import NavBar from "../components/NavBar";
@@ -21,9 +22,7 @@ const explore = () => {
     <div>
       <div className={moduleCss.container}>
         <div className={moduleCss.title}>Find Products</div>
-        {/* <div onClick={test}>test</div>
-            <Image src={firstImage} width="30vw" height="40vh" onClick={test}/> */}
-        searchBar
+        <SearchBox/>
         <div className={moduleCss.productContainer}>
           <Link href="">
             <div className={`${moduleCss.categroy} ${moduleCss.fruits}`}>

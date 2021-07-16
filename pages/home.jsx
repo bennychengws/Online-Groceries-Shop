@@ -2,7 +2,7 @@ import Image from "next/image";
 import carrotImage from "../images/Group.png";
 import moduleCss from "../styles/home.module.css";
 import NavBar from "../components/NavBar"
-
+import SearchBox from "../components/SearchBox";
 
 const home = () => {
     const parameters = { name: "", categories: "", brand: "", price: "", productDetail: "", nutritions: "", review: "" }
@@ -27,8 +27,8 @@ const home = () => {
                     <Image src={carrotImage} width="20vw" height="25vh"></Image>
                 </div>
                 location with icon<br />
+                <SearchBox/>
                 discount promotion panel<br />
-                searchBar
                 <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Exclusive Offer </div><div className={moduleCss.seeAll}>See all</div></div><div>products</div>
                 <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Best Selling</div><div className={moduleCss.seeAll}>See all</div></div><div>products</div>
                 <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Goceries</div><div className={moduleCss.seeAll}>See all</div></div><div>products</div>

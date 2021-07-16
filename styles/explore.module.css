@@ -8,11 +8,12 @@
 
 }
 
+
 .title {
     font-weight: bold;
     font-size: calc(1.25em + 0.5vw);
     text-align: center;
-    padding: 3vh 0 2vh 0;
+    padding: 4vh 0 3vh 0;
 
 
 }
@@ -22,7 +23,8 @@
     grid-template: 1fr 1fr/ 1fr 1fr;
     align-items: center;
     justify-items: stretch;
-    gap: 15px 15px
+    gap: 15px 15px;
+
 }
 
 .categroy {
@@ -38,6 +40,7 @@
     min-height: 163px;
     font-weight: bold;
     font-size: calc(0.8em + 0.5vw);
+
 }
 
 .fruits {
