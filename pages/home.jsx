@@ -42,7 +42,7 @@ const home = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis quas repudiandae molestiae at non corrupti suscipit quam, nobis maxime dicta voluptate odit expedita ea excepturi vitae temporibus consequatur ullam ad.
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla quod nobis aut praesentium excepturi, esse veritatis tempora debitis ad nostrum ipsum vel, tenetur hic in quibusdam, assumenda id odio eos!
             </div>
-            <NavBar />
+            <NavBar/>
         </div>
     )
 }

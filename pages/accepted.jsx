@@ -7,13 +7,13 @@ const accepted = () => {
     return (
       <Layout>
         <div className={moduleCss.container}>
-            <div>
-                <Image src={acceptedIcon} width="150vw" height="150vh"></Image>
+            <div className={moduleCss.acceptedImage}>
+                <Image src={acceptedIcon} width="269px" height="240px"></Image>
             </div>
-            <div>Your Order has been accepted</div>
-            <div> Your items has been placed and is on it's way to being processed</div>
-            <button>Track Order</button>
-            <button>Back to home</button>
+            <div className={moduleCss.orderAccepted}>Your Order has been accepted</div>
+            <div className={moduleCss.itemsPlaced}> Your items has been placed and is on it's way to being processed</div>
+            <button className={moduleCss.track}>Track Order</button>
+            <button className={moduleCss.back}>Back to home</button>
         </div>
       </Layout>
     )

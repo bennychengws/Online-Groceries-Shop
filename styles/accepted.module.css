@@ -1,6 +1,52 @@
 .container {
+    margin: 0 12vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: space-between */
+    justify-content: space-between;
+    min-height: 100%;
+    text-align: center;
+
+}
+
+.track {
+    position: absolute;
+    bottom: 12vh;
+    background-color: rgba(83, 177, 117, 1);
+    border-radius: 10px;
+    border-color: rgba(72, 158, 103, 1);
+    padding: 2vh 0;
+    width: 80%;
+    color: white;
+
+}
+
+.back {
+    position: absolute;
+    bottom: 7vh;
+    font-weight: bold;
+}
+
+.orderAccepted {
+    /* position: absolute; */
+    top: 50vh;
+    font-weight: bold;
+    font-size: calc(1em + 1.25vh);
+    margin-bottom: 2vh;
+    /* margin: 0 5vw; */
+
+}
+
+.itemsPlaced {
+    /* position: absolute; */
+    font-size: calc(0.8em + 0.5vh);
+    top: 65vh;
+    /* margin: 0 5vw; */
+
+
+}
+
+.acceptedImage {
+    /* position: absolute; */
+    margin: 9vh 3vw 6vh 0;
 }

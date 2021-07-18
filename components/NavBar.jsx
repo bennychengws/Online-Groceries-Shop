@@ -56,18 +56,18 @@ const navBar = () => {
       <div className={moduleCss.container}>
 
         <Link href="../home">
-          <Image src={isShop ? shopGreenIcon : shopIcon} width="29px" height="42.17px"></Image>
+          <Image src={isShop ? shopGreenIcon : shopIcon} width="29px" height="42.17px" className={moduleCss.every}></Image>
         </Link>
         <Link href="../explore">
-          <Image src={isExplore ? exploreGreenIcon : exploreIcon} width="41px" height="38.45px"></Image>
+          <Image src={isExplore ? exploreGreenIcon : exploreIcon} width="41px" height="38.45px" className={moduleCss.every}></Image>
         </Link>
         <Link href="../cart">
-          <Image src={isCart ? cartGreenIcon : cartIcon} width="26px" height="39.73px"></Image>
+          <Image src={isCart ? cartGreenIcon : cartIcon} width="26px" height="39.73px" className={moduleCss.every}></Image>
         </Link>
         <Link href="../favourite">
-          <Image src={isFavourite ? favouriteGreenIcon : favouriteIcon} width="53px" height="41.59px"></Image>
+          <Image src={isFavourite ? favouriteGreenIcon : favouriteIcon} width="53px" height="41.59px" className={moduleCss.every}></Image>
         </Link>
-        <Image src={isAccount ? accountGreenIcon : accountIcon} width="46px" height="42.17px"></Image>
+        <Image src={isAccount ? accountGreenIcon : accountIcon} width="46px" height="42.17px" className={moduleCss.every}></Image>
 
       </div>
   )

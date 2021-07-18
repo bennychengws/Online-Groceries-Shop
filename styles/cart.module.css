@@ -1,6 +1,6 @@
 .container {
     margin: 0;
-    padding: 0;
+    padding: 0 0 70px 0;
     font-family: 'Gilroy', sans-serif;
     min-height: 100vh;
     display: flex;
