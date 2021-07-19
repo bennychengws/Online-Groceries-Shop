@@ -1,10 +1,10 @@
 import moduleCss from "../styles/favourite.module.css";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
-import Failed from "../components/Failed";
+// import Failed from "../components/Failed";
 
 const cart = () => {
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
@@ -14,11 +14,11 @@ const cart = () => {
         <button className={moduleCss.addAllToCart} onClick={() => setShowModal(true)}>Add All To Cart</button>
       </div>
       <NavBar />
-      <Failed
+      {/* <Failed
         onClose={() => setShowModal(false)}
         show={showModal}
       >
-      </Failed>
+      </Failed> */}
     </div>
   );
 };
