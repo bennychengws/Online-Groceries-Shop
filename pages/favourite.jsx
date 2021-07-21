@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import { useState } from "react";
 // import Failed from "../components/Failed";
 
-const cart = () => {
+const favourite = () => {
   // const [showModal, setShowModal] = useState(false);
 
   return (
@@ -23,4 +23,4 @@ const cart = () => {
   );
 };
 
-export default cart;
+export default favourite;

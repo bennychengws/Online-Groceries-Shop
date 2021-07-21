@@ -1,0 +1,10 @@
+.vege {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.vegeTextContainer{
+    display: flex;
+    flex-direction: column;
+}

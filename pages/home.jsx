@@ -4,6 +4,11 @@ import moduleCss from "../styles/home.module.css";
 import NavBar from "../components/NavBar"
 import SearchBox from "../components/SearchBox";
 import banner from "../images/banner.png"
+import Slider from "../components/Slider"
+import fruits from "../images/fruits_&_vegetables.png";
+import eggs from "../images/dairy_&_eggs.png"
+import drinks from "../images/beverages.png"
+import Link from "next/link";
 
 const home = () => {
   const parameters = { name: "", categories: "", brand: "", price: "", productDetail: "", nutritions: "", review: "" }
@@ -30,7 +35,20 @@ const home = () => {
         location with icon<br />
         <SearchBox />
         <div className={moduleCss.banner}>
-          <Image src={banner} weight="368px" height="115px"></Image>
+          <Slider>
+            <Link href="../explore">
+            <div className={moduleCss.vege}>
+              <Image src={fruits} width="150px" height="100px"></Image>
+              <div className={moduleCss.vegeTextContainer}>
+                <div className={moduleCss.vegeTitle}>Fresh Vegetables</div>
+                <div className={moduleCss.vegeContent}>Get Up To 40% OFF</div>
+              </div>
+            </div>
+            </Link>
+            <Image src={eggs} width="100px" height="100px"></Image>
+            <Image src={drinks} width="100px" height="100px"></Image>
+          </Slider>
+          {/* <Image src={banner} weight="368px" height="115px"></Image> */}
         </div>
         <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Exclusive Offer </div><div className={moduleCss.seeAll}>See all</div></div>
         <div className={moduleCss.productContainer}><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div></div>
