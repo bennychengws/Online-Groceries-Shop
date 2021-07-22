@@ -3,7 +3,6 @@ import carrotImage from "../images/Group.png";
 import moduleCss from "../styles/home.module.css";
 import NavBar from "../components/NavBar"
 import SearchBox from "../components/SearchBox";
-import banner from "../images/banner.png"
 import Slider from "../components/Slider"
 import fruits from "../images/fruits_&_vegetables.png";
 import eggs from "../images/dairy_&_eggs.png"
@@ -34,19 +33,36 @@ const home = () => {
         </div>
         location with icon<br />
         <SearchBox />
-        <div className={moduleCss.banner}>
+        <div>
           <Slider>
             <Link href="../explore">
-            <div className={moduleCss.vege}>
-              <Image src={fruits} width="150px" height="100px"></Image>
-              <div className={moduleCss.vegeTextContainer}>
-                <div className={moduleCss.vegeTitle}>Fresh Vegetables</div>
-                <div className={moduleCss.vegeContent}>Get Up To 40% OFF</div>
+              <div className={`${moduleCss.promo} ${moduleCss.vegeColor}`}>
+                <Image src={fruits} width="150px" height="100px"></Image>
+                <div className={moduleCss.promoTextContainer}>
+                  <div className={moduleCss.promoTitle}>Fresh Vegetables</div>
+                  <div className={`${moduleCss.promoContent} ${moduleCss.vegeContentColor}`}>Get Up To 40% OFF</div>
+                </div>
               </div>
-            </div>
             </Link>
-            <Image src={eggs} width="100px" height="100px"></Image>
-            <Image src={drinks} width="100px" height="100px"></Image>
+            <Link href="../explore">
+              <div className={`${moduleCss.promo} ${moduleCss.eggColor}`}>
+                <Image src={eggs} width="100px" height="100px"></Image>
+                <div className={moduleCss.promoTextContainer}>
+                  <div className={moduleCss.promoTitle}>Fresh Eggs</div>
+                  <div className={`${moduleCss.promoContent} ${moduleCss.eggContentColor}`}>Click and Shop</div>
+                </div>
+              </div>
+            </Link>
+            <Link href="../explore">
+              <div className={`${moduleCss.promo} ${moduleCss.drinkColor}`}>
+                <Image src={drinks} width="100px" height="100px"></Image>
+                <div className={moduleCss.promoTextContainer}>
+                  <div className={moduleCss.promoTitle}>New Drinks</div>
+                  <div className={`${moduleCss.promoContent} ${moduleCss.drinkContentColor}`}>Find Out What You Want</div>
+                </div>
+              </div>
+            </Link>
+
           </Slider>
           {/* <Image src={banner} weight="368px" height="115px"></Image> */}
         </div>
