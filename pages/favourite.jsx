@@ -2,9 +2,10 @@ import moduleCss from "../styles/favourite.module.css";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
 // import Failed from "../components/Failed";
+import Accepted from "../components/Accepted"
 
 const favourite = () => {
-  // const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
@@ -19,6 +20,10 @@ const favourite = () => {
         show={showModal}
       >
       </Failed> */}
+      <Accepted
+        show={showModal}
+      >
+      </Accepted>
     </div>
   );
 };

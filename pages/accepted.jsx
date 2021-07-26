@@ -1,5 +1,5 @@
-import acceptedIcon from "../images/accepted.png"
-import Image from "next/dist/client/image"
+import acceptedIcon from "../images/acceptedIcon.png"
+import Image from "next/image";
 import Layout from "../components/Layout";
 import moduleCss from "../styles/accepted.module.css"
 import Link from "next/link";

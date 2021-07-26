@@ -13,6 +13,9 @@ class MainDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <div id="filters-root"></div>
+          <div id="category-root"></div>
+          <div id="accepted-root"></div>
           <div id="failed-root"></div>
           <div id="checkout-root"></div>
         </body>
