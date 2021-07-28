@@ -20,13 +20,14 @@ const Filters = ({ show, onClose }) => {
   const modalContent = show ? (
     <div className={moduleCss.container}>
       <div className={moduleCss.topPanel}>
-        <a
-          href="#"
-          onClick={handleCloseClick}
-          className={moduleCss.styledModalHeader}
-        >
-          x
-        </a>
+        <Link href="#">
+          <a
+            onClick={handleCloseClick}
+            className={moduleCss.styledModalHeader}
+          >
+            x
+          </a>
+        </Link>
         <div>Filters</div>
         <div> </div>
       </div>

@@ -3,6 +3,7 @@ import moduleCss from "../styles/Login.module.css";
 import showPwdImg from "../images/eye_visible_hide_hidden_show_icon_145988.png";
 import hidePwdImg from "../images/eye_slash_visible_hide_hidden_show_icon_145987.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -52,11 +53,11 @@ const Login = () => {
             <div>
               <div
                 className={moduleCss.pwdContainer}
-                // style={{
-                //   borderColor: !formData.password.trim()
-                //     ? "rgba(239, 68, 68, 1)"
-                //     : "rgba(226, 226, 226, 1)"
-                // }}
+              // style={{
+              //   borderColor: !formData.password.trim()
+              //     ? "rgba(239, 68, 68, 1)"
+              //     : "rgba(226, 226, 226, 1)"
+              // }}
               >
                 <input
                   className=" appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none "
@@ -85,9 +86,11 @@ const Login = () => {
               ) : null} */}
             </div>
             <div className="text-right my-2">
-              <a className="text-gray-500 text-sm font-bold" href="#">
-                Forgot Password?
-              </a>
+              <Link href="#">
+                <a className="text-gray-500 text-sm font-bold">
+                  Forgot Password?
+                </a>
+              </Link>
             </div>
           </div>
           <div className="flex justify-center">
@@ -97,19 +100,16 @@ const Login = () => {
             >
               Log In
             </button>
-            {/* <a
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="#"
-            >
-              Doesn't have an account? Signup
-            </a> */}
+
           </div>
         </form>
         <p className="text-center text-gray-500 text-sm font-bold">
           Doesn't have an account?{" "}
-          <a className="text-green-500" href="../signup">
-            Signup
-          </a>
+          <Link href="../signup">
+            <a className="text-green-500" href="../signup">
+              Signup
+            </a>
+          </Link>
         </p>
       </div>
     </div>

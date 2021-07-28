@@ -7,6 +7,7 @@ import Image from "next/image";
 import validator from 'validator';
 import vector from "../images/Vector.png";
 import cross from "../images/Cross.png";
+import Link from "next/link";
 
 
 const Signup = () => {
@@ -30,10 +31,10 @@ const Signup = () => {
 
   const handleClick = async (e) => {
     if (!isEmailValid) {
-    alert("Please enter a valid email")
+      alert("Please enter a valid email")
     } else {
-    console.log(formData);
-    const res = await axios.post("api/signup", formData);
+      console.log(formData);
+      const res = await axios.post("api/signup", formData);
     }
   };
 
@@ -77,12 +78,12 @@ const Signup = () => {
           value={formData.email}
         />
         <span className={moduleCss.validationIcon}>
-        <Image
-          src={isEmailValid ? vector : cross}
-          width="17vw"
-          height="17vh"
-          onClick={() => setIsRevealPwd((prevState) => !prevState)}
-        ></Image>
+          <Image
+            src={isEmailValid ? vector : cross}
+            width="17vw"
+            height="17vh"
+            onClick={() => setIsRevealPwd((prevState) => !prevState)}
+          ></Image>
         </span>
       </div>
       <label className="block text-gray-500 text-base font-bold mb-1">
@@ -121,21 +122,25 @@ const Signup = () => {
       <div className={moduleCss.declaration}>
         <div className="text-left text-sm text-gray-500">
           By continuing, you agree to the
-          <a
-            className="no-underline border-b border-grey-dark text-green-500"
-            href="#"
-          >
-            {" "}
-            Terms of Service
-          </a>{" "}
+          <Link href="#">
+            <a
+              className="no-underline border-b border-grey-dark text-green-500"
+            >
+              {" "}
+              Terms of Service
+            </a>
+          </Link>
+          {" "}
           and
-          <a
-            className="no-underline border-b border-grey-dark text-green-500"
-            href="#"
-          >
-            {" "}
-            Privacy Policy
-          </a>
+          <Link href="#">
+            <a
+              className="no-underline border-b border-grey-dark text-green-500"
+
+            >
+              {" "}
+              Privacy Policy
+            </a>
+          </Link>
         </div>
       </div>
       <div className={moduleCss.signUpButton}>
@@ -150,13 +155,14 @@ const Signup = () => {
 
       <div className="text-center text-sm  font-bold">
         Already have an account?
-        <a
-          className="no-underline border-b border-blue text-green-500"
-          href="../"
-        >
-          {" "}Log in
-        </a>
-        .
+        <Link href="../">
+          <a
+            className="no-underline border-b border-blue text-green-500"
+
+          >
+            {" "}Log in
+          </a>
+        </Link>
       </div>
     </div>
 

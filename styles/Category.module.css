@@ -30,3 +30,11 @@
     font-weight: bold;
     font-size: calc(1.25em + 0.5vw);
 }
+
+.back {
+    cursor: pointer;
+}
+
+.filter{
+    cursor: pointer
+}

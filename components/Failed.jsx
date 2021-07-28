@@ -5,7 +5,7 @@ import Image from "next/image";
 import bag from "../images/bag.png";
 import Link from "next/link";
 
-const Failed = ({ show, onClose}) => {
+const Failed = ({ show, onClose }) => {
   //   const elementRef = useRef();
   const [isBrowser, setIsBrowser] = useState(false);
 
@@ -24,28 +24,29 @@ const Failed = ({ show, onClose}) => {
     <div className={moduleCss.styledModalOverlay}>
       <div className={moduleCss.styledModal}>
         <div>
-        <a
-          href="#"
-          onClick={handleCloseClick}
-          className={moduleCss.styledModalHeader}
-        >
-          x
-        </a>
-        <div className={moduleCss.bagImage}>
-          <Image src={bag} width="180vw" height="180vh"></Image>
-        </div>
+          <Link href="#">
+            <a
+              onClick={handleCloseClick}
+              className={moduleCss.styledModalHeader}
+            >
+              x
+            </a>
+          </Link>
+          <div className={moduleCss.bagImage}>
+            <Image src={bag} width="180vw" height="180vh"></Image>
+          </div>
         </div>
         <div className={moduleCss.textContainer}>
-        <div className={moduleCss.oops}>Oops! Order Failed</div>
-        <div className={moduleCss.wrong}>Something went terribly wrong.</div>
+          <div className={moduleCss.oops}>Oops! Order Failed</div>
+          <div className={moduleCss.wrong}>Something went terribly wrong.</div>
         </div>
         <div className={moduleCss.buttonContainer}>
-        <Link href="#">
-          <button className={moduleCss.try} onClick={handleCloseClick}>Please try again</button>
-        </Link>
-        <Link href="../home">
-          <div className={moduleCss.back}>Back to home</div>
-        </Link>
+          <Link href="#">
+            <button className={moduleCss.try} onClick={handleCloseClick}>Please try again</button>
+          </Link>
+          <Link href="../home">
+            <div className={moduleCss.back}>Back to home</div>
+          </Link>
         </div>
       </div>
     </div>

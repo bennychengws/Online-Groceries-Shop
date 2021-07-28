@@ -1,7 +1,7 @@
 import moduleCss from "../styles/favourite.module.css";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
-// import Failed from "../components/Failed";
+import Failed from "../components/Failed";
 import Accepted from "../components/Accepted"
 
 const favourite = () => {

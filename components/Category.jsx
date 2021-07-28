@@ -24,11 +24,11 @@ const Category = ({ children, show, onClose }) => {
   const modalContent = show ? (
     <div className={moduleCss.container}>
       <div className={moduleCss.topPanel}>
-        <div onClick={handleCloseClick}>
+        <div className={moduleCss.back} onClick={handleCloseClick}>
           <Image src={backArrow} width="10px" height="18px"></Image>
         </div>
         <div className={moduleCss.childrenTitle}>{children}</div>
-        <div onClick={() => (setShowFilter(true), console.log("Clicked"))}>
+        <div className={moduleCss.filter} onClick={() => (setShowFilter(true), console.log("Clicked"))}>
           <Image src={filterIcon} width="16.8px" height="17.85px"></Image>
         </div>
       </div>
