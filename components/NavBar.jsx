@@ -66,8 +66,10 @@ const navBar = () => {
         </Link>
         <Link href="../favourite">
           <Image src={isFavourite ? favouriteGreenIcon : favouriteIcon} width="53px" height="41.59px" className={moduleCss.every}></Image>
-        </Link>
+        </Link >
+        <Link href="../account">
         <Image src={isAccount ? accountGreenIcon : accountIcon} width="46px" height="42.17px" className={moduleCss.every}></Image>
+        </Link>
 
       </div>
   )

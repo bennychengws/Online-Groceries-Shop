@@ -18,6 +18,38 @@ const explore = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [categoryContent, setCategoryContent] = useState("");
+  const categoryList = [
+    {
+      title: "Fresh Fruits & Vegetables",
+      image: <Image src={fruits} width="100vw" height="70vh"></Image>,
+      categoryStyle: moduleCss.fruits
+    },
+    {
+      title: "Cooking Oil & Ghee",
+      image: <Image src={oil} width="100vw" height="75vh"></Image>,
+      categoryStyle: moduleCss.oil
+    },
+    {
+      title: "Meat & Fish",
+      image: <Image src={meat} width="100vw" height="90vh"></Image>,
+      categoryStyle: moduleCss.meat
+    },
+    {
+      title: "Bakery & Snacks",
+      image: <Image src={bakery} width="100vw" height="80vh"></Image>,
+      categoryStyle: moduleCss.bakery
+    },
+    {
+      title: "Dairy & Eggs",
+      image: <Image src={eggs} width="100vw" height="70vh"></Image>,
+      categoryStyle: moduleCss.eggs
+    },
+    {
+      title: "Beverages",
+      image: <Image src={drinks} width="100vw" height="70vh"></Image>,
+      categoryStyle: moduleCss.drinks
+    },
+  ]
   const router = useRouter()
 
   return (
@@ -26,43 +58,12 @@ const explore = () => {
         <div className={moduleCss.title}>Find Products</div>
         <SearchBox/>
         <div className={moduleCss.productContainer}>
-          <Link href="">
-            <div className={`${moduleCss.categroy} ${moduleCss.fruits}`} onClick={()=>(setShowModal(true), setCategoryContent("Fresh Fruits & Vegetables"))}>
-              <Image src={fruits} width="100vw" height="70vh"></Image>
-              <div>Fresh Fruits & Vegetables</div>
-            </div>
-          </Link>
-          <Link href="">
-            <div className={`${moduleCss.categroy} ${moduleCss.oil}`} onClick={()=>(setShowModal(true), setCategoryContent("Cooking Oil & Ghee"))}>
-              <Image src={oil} width="100vw" height="75vh"></Image>
-              <div>Cooking Oil & Ghee</div>
-            </div>
-          </Link>
-          <Link href="">
-            <div className={`${moduleCss.categroy} ${moduleCss.meat}`} onClick={()=>(setShowModal(true), setCategoryContent("Meat & Fish"))}>
-              <Image src={meat} width="100vw" height="90vh"></Image>
-              <div>Meat & Fish</div>
-            </div>
-          </Link>
-          <Link href="">
-            <div className={`${moduleCss.categroy} ${moduleCss.bakery}`} onClick={()=>(setShowModal(true), setCategoryContent("Bakery & Snacks"))}>
-              <Image src={bakery} width="100vw" height="80vh"></Image>
-              <div>Bakery & Snacks</div>
-            </div>
-          </Link>
-          <Link href="">
-            <div className={`${moduleCss.categroy} ${moduleCss.eggs}`} onClick={()=>(setShowModal(true), setCategoryContent("Dairy & Eggs"))}>
-              <Image src={eggs} width="100vw" height="70vh"></Image>
-              <div>Dairy & Eggs</div>
-            </div>
-          </Link>
-          <Link href="">
-            <div className={`${moduleCss.categroy} ${moduleCss.drinks}`} onClick={()=>(setShowModal(true), setCategoryContent("Beverages"))}>
-              <Image src={drinks} width="100vw" height="70vh"></Image>
-              <div>Beverages</div>
-            </div>
-          </Link>
-
+          {categoryList.map((item) => (
+            <div key={item.title} className={`${moduleCss.categroy} ${item.categoryStyle}`} onClick={()=>(setShowModal(true), setCategoryContent(item.title))}>
+              {item.image}
+              <div>{item.title}</div>
+          </div>
+          ))}
         </div>
       </div>
       <NavBar />

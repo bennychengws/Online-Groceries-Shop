@@ -1,0 +1,86 @@
+.container {
+    margin: 0;
+    font-family: 'Gilroy', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 7vh 0 0 0;
+    position: absolute;
+    left: 5vw;
+    align-items: center;
+}
+
+.iconContainer {
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(51, 218, 255, 1);
+    border-radius: 40%;
+    margin-right: 2vh;
+
+}
+
+.accDetails {
+    display: flex;
+    flex-direction: row;
+}
+
+.optionsContainer {
+    position: absolute;
+    left: 0;
+    top: 20vh;
+    width: 100%;
+    border-top: solid;
+    border-top-width: 0.1px;
+    border-color: rgba(226, 226, 226, 1);
+
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    padding: 2vh 5vw;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: solid;
+    border-bottom-width: 0.1px;
+    border-color: rgba(226, 226, 226, 1);
+    cursor: pointer;
+}
+
+.optionsIcon {
+    display: flex;
+    align-items: center;
+}
+
+.firstHalfOption {
+    display: flex;
+    flex-direction: row;
+}
+
+.logOutButton {
+    display: flex;
+    flex-direction: row;
+    padding: 1vh 3vw;
+    width: 80%;
+    justify-content: center;
+    background-color: rgba(242, 243, 242, 1);
+    color: rgba(83, 177, 117, 1);
+    border-radius: 10px;
+    margin: 0 5vw;
+    position: absolute;
+    bottom: 13vh;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.logOutIcon {
+    display: flex;
+    align-items: center;
+}
