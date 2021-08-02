@@ -6,10 +6,65 @@ import Image from "next/image";
 import backArrow from "../images/back_arrow.png";
 import filterIcon from "../images/Filter.png";
 import Filters from "../components/Filters";
+import coca from "../images/coca_cola.png";
+import pepsi from "../images/pepsi.png";
+import dietCoke from "../images/diet_coke.png";
+import orangeJuice from "../images/orange_juice.png";
+import appleJuice from "../images/apple_juice.png";
+import sprite from "../images/sprite_can.png";
+import addToCart from "../images/add_to_cart.png";
 
 const Category = ({ children, show, onClose }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const beverageList = [
+    {
+      name: "Diet Coke",
+      productImage: (
+        <Image src={dietCoke} width="44.49px" height="89.36px"></Image>
+      ),
+      amount: "355ml",
+      price: 7,
+    },
+    {
+      name: "Sprite Can",
+      productImage: (
+        <Image src={sprite} width="51.68px" height="91.77px"></Image>
+      ),
+      amount: "325ml",
+      price: 6.5,
+    },
+    {
+      name: "Apple & Grape Juice",
+      productImage: (
+        <Image src={appleJuice} width="81.68px" height="93.21px"></Image>
+      ),
+      amount: "2L",
+      price: 15,
+    },
+    {
+      name: "Orange Juice",
+      productImage: (
+        <Image src={orangeJuice} width="81.68px" height="93.21px"></Image>
+      ),
+      amount: "2L",
+      price: 15,
+    },
+    {
+      name: "Coca Cola Can",
+      productImage: <Image src={coca} width="48.82px" height="90.44px"></Image>,
+      amount: "325ml",
+      price: 6.8,
+    },
+    {
+      name: "Pepsi Can",
+      productImage: (
+        <Image src={pepsi} width="49.52px" height="94.59px"></Image>
+      ),
+      amount: "330ml",
+      price: 6.8,
+    },
+  ];
 
   useEffect(() => {
     setIsBrowser(true);
@@ -28,11 +83,30 @@ const Category = ({ children, show, onClose }) => {
           <Image src={backArrow} width="10px" height="18px"></Image>
         </div>
         <div className={moduleCss.childrenTitle}>{children}</div>
-        <div className={moduleCss.filter} onClick={() => (setShowFilter(true), console.log("Clicked"))}>
+        <div
+          className={moduleCss.filter}
+          onClick={() => (setShowFilter(true), console.log("Clicked"))}
+        >
           <Image src={filterIcon} width="16.8px" height="17.85px"></Image>
         </div>
       </div>
-      <div>Products</div>
+      <div className={moduleCss.productContainer}>
+        {beverageList.map((item) => (
+          <div key={item.name} className={moduleCss.productBackground}>
+            {item.productImage}
+            <div className={moduleCss.productTopPanel}>
+              <div className={moduleCss.productName}>{item.name}</div>
+              <div style={{color: "rgba(124, 124, 124, 1)"}}>{item.amount}</div>
+            </div>
+            <div className={moduleCss.productBottomPanel}>
+              <div>${item.price}</div>
+              <div>
+                <Image src={addToCart} width="45.67px" height="45.67px"></Image>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
       <Filters onClose={() => setShowFilter(false)} show={showFilter}></Filters>
     </div>
   ) : null;

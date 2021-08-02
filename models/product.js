@@ -22,10 +22,15 @@ const product = new Schema({
     required: true,
     default: 0,
   },
-  volume: {
+  amount: {
     type: String,
     required: true,
     default: "",
+  },
+  orderQuantity: {
+    type: Number,
+    required: true,
+    default: 0,
   },
   productDetail: {
     type: String,

@@ -9,13 +9,14 @@ const productAPI = async (req, res) => {
   console.log(req.body);
   switch (req.method) {
     case 'POST':
-      const {name, category, brand, price, quanity, productDetail, nutritions, review} = req.body
+      const {name, category, brand, price, amount, orderQuantity, productDetail, nutritions, review} = req.body
       const product = new Product({
         name,
         category,
         brand,
         price,
-        quantity,
+        amount,
+        orderQuantity,
         volume,
         productDetail,
         nutritions,

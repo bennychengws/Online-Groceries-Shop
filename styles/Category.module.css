@@ -12,7 +12,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    min-height: 200%;
+    min-height: 100%;
     overflow: hidden;
     text-align: center;
     background-color: white;
@@ -39,4 +39,57 @@
 
 .filter{
     cursor: pointer
+}
+
+.productContainer {
+    display: grid;
+    grid-template: 1fr 1fr/ 1fr 1fr;
+    align-items: stretch;
+    justify-items: stretch;
+    gap: 15px 15px;
+    margin: 0 5vw;
+    padding-bottom: 15px;
+}
+
+.productBackground {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    border-radius: 10px;
+    border: solid;
+    border-width: 1px;
+    min-width: 114px;
+    min-height: 163px;
+    font-weight: bold;
+    font-size: calc(0.8em + 0.5vw);
+    cursor: pointer;
+    border-color: rgba(226, 226, 226, 1);
+    padding-top: 19px;
+}
+
+.productName {
+    color: rgba(24, 23, 37, 1);
+    font-size: calc(1rem + 0.5vw);
+
+}
+
+.productTopPanel {
+    width: 40vw;
+    padding: 5px 10px;
+
+    /* background-color: green; */
+    text-align: left;
+}
+
+.productBottomPanel {
+    display: flex;
+    flex-direction: row;
+    width: 40vw;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    font-size: calc(1rem + 0.5vw);
+    color: rgba(24, 23, 37, 1)
 }
