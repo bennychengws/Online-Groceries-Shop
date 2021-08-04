@@ -1,12 +1,13 @@
 import Image from "next/image";
 import carrotImage from "../images/Group.png";
 import moduleCss from "../styles/home.module.css";
-import NavBar from "../components/NavBar"
+import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
-import Slider from "../components/Slider"
+import Slider from "../components/Slider";
+import MSlider from "../components/MultipleItemSlider";
 import fruits from "../images/fruits_&_vegetables.png";
-import eggs from "../images/dairy_&_eggs.png"
-import drinks from "../images/beverages.png"
+import eggs from "../images/dairy_&_eggs.png";
+import drinks from "../images/beverages.png";
 import Link from "next/link";
 
 const home = () => {
@@ -24,6 +25,38 @@ const home = () => {
   //     );
   //     console.log(res.data)
   // }
+  const promoList = [
+    {
+      categoryName: "Fresh Vegetables",
+      content: "Get Up To 40% OFF",
+      image: <Image src={fruits} width="150px" height="100px"></Image>,
+      bgColor: moduleCss.vegeColor,
+      contentColor: moduleCss.vegeContentColor,
+      linkTo: "../explore"
+    },
+    {
+      categoryName: "Fresh Eggs",
+      content: "Click and Shop",
+      image: <Image src={eggs} width="100px" height="100px"></Image>,
+      bgColor: moduleCss.eggColor,
+      contentColor: moduleCss.eggContentColor,
+      linkTo: "../explore"
+    },
+    {
+      categoryName: "New Drinks",
+      content: "Find Out What You Want",
+      image: <Image src={drinks} width="100px" height="100px"></Image>,
+      bgColor: moduleCss.drinkColor,
+      contentColor: moduleCss.drinkContentColor,
+      linkTo: "../explore"
+    }
+  ]
+
+  const offerList = [
+    {name: <div style={{padding: 8}}>A</div>}, 
+    {name: <div style={{padding: 8}}>B</div>},
+    {name: <div style={{padding: 8}}>C</div>}
+  ]
 
   return (
     <div>
@@ -35,38 +68,21 @@ const home = () => {
         <SearchBox />
         <div>
           <Slider>
-            <Link href="../explore">
-              <div className={`${moduleCss.promo} ${moduleCss.vegeColor}`}>
-                <Image src={fruits} width="150px" height="100px"></Image>
-                <div className={moduleCss.promoTextContainer}>
-                  <div className={moduleCss.promoTitle}>Fresh Vegetables</div>
-                  <div className={`${moduleCss.promoContent} ${moduleCss.vegeContentColor}`}>Get Up To 40% OFF</div>
+            {promoList.map((item) => (
+              <Link href={item.linkTo}>
+                <div className={`${moduleCss.promo} ${item.bgColor}`}>
+                  {item.image}
+                  <div className={moduleCss.promoTextContainer}>
+                    <div className={moduleCss.promoTitle}>{item.categoryName}</div>
+                    <div className={`${moduleCss.promoContent} ${item.contentColor}`}>{item.content}</div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-            <Link href="../explore">
-              <div className={`${moduleCss.promo} ${moduleCss.eggColor}`}>
-                <Image src={eggs} width="100px" height="100px"></Image>
-                <div className={moduleCss.promoTextContainer}>
-                  <div className={moduleCss.promoTitle}>Fresh Eggs</div>
-                  <div className={`${moduleCss.promoContent} ${moduleCss.eggContentColor}`}>Click and Shop</div>
-                </div>
-              </div>
-            </Link>
-            <Link href="../explore">
-              <div className={`${moduleCss.promo} ${moduleCss.drinkColor}`}>
-                <Image src={drinks} width="100px" height="100px"></Image>
-                <div className={moduleCss.promoTextContainer}>
-                  <div className={moduleCss.promoTitle}>New Drinks</div>
-                  <div className={`${moduleCss.promoContent} ${moduleCss.drinkContentColor}`}>Find Out What You Want</div>
-                </div>
-              </div>
-            </Link>
-
+              </Link>
+            ))}
           </Slider>
-          {/* <Image src={banner} weight="368px" height="115px"></Image> */}
         </div>
         <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Exclusive Offer </div><div className={moduleCss.seeAll}>See all</div></div>
+        <div className={moduleCss.productContainer}><MSlider show={3}>{offerList.map((item) => (item.name))}</MSlider></div>
         <div className={moduleCss.productContainer}><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div></div>
         <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Best Selling</div><div className={moduleCss.seeAll}>See all</div></div>
         <div className={moduleCss.productContainer}><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div></div>

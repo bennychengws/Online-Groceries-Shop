@@ -1,5 +1,5 @@
-import moduleCss from '../styles/Slider.module.css'
-import { useEffect, useState, useRef } from 'react'
+import moduleCss from '../styles/Slider.module.css';
+import { useEffect, useState, useRef } from 'react';
 
 
 const Slider = ({ children }) => {
