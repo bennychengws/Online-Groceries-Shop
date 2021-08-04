@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import moduleCss from "../styles/Category.module.css";
-import Link from "next/link";
 import Image from "next/image";
 import backArrow from "../images/back_arrow.png";
 import filterIcon from "../images/Filter.png";
@@ -12,7 +11,7 @@ import dietCoke from "../images/diet_coke.png";
 import orangeJuice from "../images/orange_juice.png";
 import appleJuice from "../images/apple_juice.png";
 import sprite from "../images/sprite_can.png";
-import addToCart from "../images/add_to_cart.png";
+import Goods from "../components/Goods";
 
 const Category = ({ children, show, onClose }) => {
   const [isBrowser, setIsBrowser] = useState(false);
@@ -92,19 +91,7 @@ const Category = ({ children, show, onClose }) => {
       </div>
       <div className={moduleCss.productContainer}>
         {beverageList.map((item) => (
-          <div key={item.name} className={moduleCss.productBackground}>
-            {item.productImage}
-            <div className={moduleCss.productTopPanel}>
-              <div className={moduleCss.productName}>{item.name}</div>
-              <div style={{color: "rgba(124, 124, 124, 1)"}}>{item.amount}</div>
-            </div>
-            <div className={moduleCss.productBottomPanel}>
-              <div>${item.price}</div>
-              <div>
-                <Image src={addToCart} width="45.67px" height="45.67px"></Image>
-              </div>
-            </div>
-          </div>
+          <Goods>{item}</Goods>
         ))}
       </div>
       <Filters onClose={() => setShowFilter(false)} show={showFilter}></Filters>

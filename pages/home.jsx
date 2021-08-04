@@ -1,14 +1,17 @@
 import Image from "next/image";
-import carrotImage from "../images/Group.png";
+import Link from "next/link";
 import moduleCss from "../styles/home.module.css";
 import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
 import Slider from "../components/Slider";
-import MSlider from "../components/MultipleItemSlider";
+import Goods from "../components/Goods";
+import carrotImage from "../images/Group.png";
 import fruits from "../images/fruits_&_vegetables.png";
 import eggs from "../images/dairy_&_eggs.png";
 import drinks from "../images/beverages.png";
-import Link from "next/link";
+import banana from "../images/banana.png";
+import apple from "../images/apple.png";
+import pear from "../images/pear.png";
 
 const home = () => {
   const parameters = { name: "", categories: "", brand: "", price: "", productDetail: "", nutritions: "", review: "" }
@@ -53,9 +56,30 @@ const home = () => {
   ]
 
   const offerList = [
-    {name: <div style={{padding: 8}}>A</div>}, 
-    {name: <div style={{padding: 8}}>B</div>},
-    {name: <div style={{padding: 8}}>C</div>}
+    {
+      name: "Organic Bananas",
+      productImage: (
+        <Image src={banana} width="99.89px" height="79.43px"></Image>
+      ),
+      amount: "7pcs",
+      price: 35,
+    },
+    {
+      name: "Red Apple",
+      productImage: (
+        <Image src={apple} width="103.43px" height="62.56px"></Image>
+      ),
+      amount: "6pcs",
+      price: 20,
+    },
+    {
+      name: "Pear",
+      productImage: (
+        <Image src={pear} width="103.43px" height="62.56px"></Image>
+      ),
+      amount: "4pcs",
+      price: 12,
+    },
   ]
 
   return (
@@ -82,7 +106,8 @@ const home = () => {
           </Slider>
         </div>
         <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Exclusive Offer </div><div className={moduleCss.seeAll}>See all</div></div>
-        <div className={moduleCss.productContainer}><MSlider show={3}>{offerList.map((item) => (item.name))}</MSlider></div>
+        <div className={moduleCss.productContainer}>{offerList.map((item) => <div className={moduleCss.product}><Goods>{item}</Goods></div>)}</div>
+
         <div className={moduleCss.productContainer}><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div></div>
         <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Best Selling</div><div className={moduleCss.seeAll}>See all</div></div>
         <div className={moduleCss.productContainer}><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div></div>
