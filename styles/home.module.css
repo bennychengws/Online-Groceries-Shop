@@ -7,10 +7,23 @@
   flex-direction: column;
 }
 
-.image {
+.carrotImage {
   display: flex;
   justify-content: center;
   margin: 4vh 0 1vh 0;
+}
+
+.locationContainer {
+  display: flex;
+  flex-direction: row; 
+  justify-content: center;
+}
+
+.locationImage {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  margin-bottom: 20px;
 }
 
 .subtitles {
@@ -29,6 +42,7 @@
 .seeAll {
   color: rgba(16, 185, 129, 1);
   font-size: calc(0.25em + 0.5vw);
+  cursor: pointer;
 }
 
 .productContainer {
@@ -47,7 +61,7 @@
   margin-right: 5vw;
 }
 
-@media screen and (min-width: 1367px) {
+@media screen and (min-width: 767px) {
   .productContainer {
     width: 100%;
     height: 35vh;
@@ -60,7 +74,6 @@
     scrollbar-width: thin; */
   }
   
-
   .product {
     display: flex;
     border-radius: 10px;
@@ -75,6 +88,8 @@
   justify-content: center;
   cursor: pointer;
   border-radius: 1em;
+  margin: 0 1px;
+  height: 100%;
 }
 
 .promoTextContainer {
@@ -99,18 +114,27 @@
   background: #C6FFDD;  /* fallback for old browsers */
   background: -webkit-linear-gradient(180deg, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(180deg, rgba(251, 215, 134, 0.3), rgba(236, 233, 230, 0.3), rgba(198, 255, 168, 0.3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: solid;
+  border-width: 0.5px;
+  border-color: rgba(242, 243, 242, 1);
 }
 
 .eggColor {
   background: #C6FFDD;  /* fallback for old browsers */
   background: -webkit-linear-gradient(180deg, #f7797d, #FBD786, #F7797D);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(180deg, rgba(251, 215, 134, 0.3), rgba(236, 233, 230, 0.3), rgba(251, 189, 191, 0.3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: solid;
+  border-width: 0.5px;
+  border-color: rgba(242, 243, 242, 1);
 }
 
 .drinkColor {
   background: #C6FFDD;  /* fallback for old browsers */
   background: -webkit-linear-gradient(180deg, #f7797d, #FBD786, #B7DFF5);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(180deg, rgba(251, 215, 134, 0.3), rgba(236, 233, 230, 0.3), rgba(109, 213, 250, 0.3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: solid;
+  border-width: 0.5px;
+  border-color: rgba(242, 243, 242, 1);
 }
 
 .vegeContentColor {
@@ -124,3 +148,30 @@
 .drinkContentColor {
   color: #4286F4;
 }
+
+.tabContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.tab {
+  display: flex;
+  flex-direction: row;  
+  align-items: center;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  width: 100%;
+  padding: 10px;
+  justify-content: space-around;
+}
+
+.pulseTabBgColor {
+  background-color: rgba(248, 164, 76, 0.15);
+}
+
+.riceTabBgColor {
+  background-color: rgba(183, 223, 245, 0.25);
+}
+
