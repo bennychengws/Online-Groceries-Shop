@@ -12,6 +12,12 @@ import drinks from "../images/beverages.png";
 import banana from "../images/banana.png";
 import apple from "../images/apple.png";
 import pear from "../images/pear.png";
+import bellPR from "../images/bellPepperR.png";
+import ginger from "../images/ginger.png";
+import chicken from "../images/chicken.png";
+import beefBone from "../images/beefBone.png";
+import rice from "../images/rice.png";
+import pulses from "../images/pulses.png";
 
 const home = () => {
   const parameters = { name: "", categories: "", brand: "", price: "", productDetail: "", nutritions: "", review: "" }
@@ -59,7 +65,7 @@ const home = () => {
     {
       name: "Organic Bananas",
       productImage: (
-        <Image src={banana} width="99.89px" height="79.43px"></Image>
+        <Image src={banana} width="93" height="63px"></Image>
       ),
       amount: "7pcs",
       price: 35,
@@ -67,7 +73,7 @@ const home = () => {
     {
       name: "Red Apple",
       productImage: (
-        <Image src={apple} width="103.43px" height="62.56px"></Image>
+        <Image src={apple} width="93px" height="63px"></Image>
       ),
       amount: "6pcs",
       price: 20,
@@ -75,10 +81,96 @@ const home = () => {
     {
       name: "Pear",
       productImage: (
-        <Image src={pear} width="103.43px" height="62.56px"></Image>
+        <Image src={pear} width="93px" height="63px"></Image>
       ),
       amount: "4pcs",
       price: 12,
+    },
+    {
+      name: "Pear2",
+      productImage: (
+        <Image src={pear} width="93px" height="63px"></Image>
+      ),
+      amount: "4pcs",
+      price: 12,
+    },
+    {
+      name: "Pear3",
+      productImage: (
+        <Image src={pear} width="93px" height="63px"></Image>
+      ),
+      amount: "4pcs",
+      price: 12,
+    },
+    {
+      name: "Pear4",
+      productImage: (
+        <Image src={pear} width="93px" height="63px"></Image>
+      ),
+      amount: "4pcs",
+      price: 12,
+    },
+    {
+      name: "Pear5",
+      productImage: (
+        <Image src={pear} width="93px" height="63px"></Image>
+      ),
+      amount: "4pcs",
+      price: 12,
+    },
+  ]
+
+  const bestSellingList = [
+    {
+      name: "Bell Pepper Red",
+      productImage: (
+        <Image src={bellPR} width="93px" height="63px"></Image>
+      ),
+      amount: "800kg",
+      price: 25,
+    },
+    {
+      name: "Ginger",
+      productImage: (
+        <Image src={beefBone} width="93px" height="63px"></Image>
+      ),
+      amount: "700g",
+      price: 13,
+    },
+    {
+      name: "Organic Bananas",
+      productImage: (
+        <Image src={banana} width="93" height="63px"></Image>
+      ),
+      amount: "7pcs",
+      price: 35,
+    },
+  ]
+
+  const groceriesList = [
+    {
+      name: "Beef Bone",
+      productImage: (
+        <Image src={beefBone} width="93px" height="63px"></Image>
+      ),
+      amount: "1kg",
+      price: 30,
+    },
+    {
+      name: "Broller Chiken",
+      productImage: (
+        <Image src={chicken} width="93px" height="63px"></Image>
+      ),
+      amount: "1kg",
+      price: 40,
+    },
+    {
+      name: "Organic Bananas",
+      productImage: (
+        <Image src={banana} width="93" height="63px"></Image>
+      ),
+      amount: "7pcs",
+      price: 35,
     },
   ]
 
@@ -93,7 +185,7 @@ const home = () => {
         <div>
           <Slider>
             {promoList.map((item) => (
-              <Link href={item.linkTo}>
+              <Link href={item.linkTo} key={item.categoryName}>
                 <div className={`${moduleCss.promo} ${item.bgColor}`}>
                   {item.image}
                   <div className={moduleCss.promoTextContainer}>
@@ -106,22 +198,13 @@ const home = () => {
           </Slider>
         </div>
         <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Exclusive Offer </div><div className={moduleCss.seeAll}>See all</div></div>
-        <div className={moduleCss.productContainer}>{offerList.map((item) => <div className={moduleCss.product}><Goods>{item}</Goods></div>)}</div>
+        <div className={moduleCss.productContainer}>{offerList.map((item) => <div key={item.name} className={moduleCss.product} ><Goods>{item}</Goods></div>)}</div>
 
-        <div className={moduleCss.productContainer}><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div></div>
         <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Best Selling</div><div className={moduleCss.seeAll}>See all</div></div>
-        <div className={moduleCss.productContainer}><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div></div>
+        <div className={moduleCss.productContainer}>{bestSellingList.map((item) => <div key={item.name} className={moduleCss.product} ><Goods>{item}</Goods></div>)}</div>
+
         <div className={moduleCss.subtitleRows}><div className={moduleCss.subtitles}>Goceries</div><div className={moduleCss.seeAll}>See all</div></div>
-        <div className={moduleCss.productContainer}><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div><div className={moduleCss.product}>product</div></div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, quibusdam provident libero qui eum nostrum illo veniam earum a beatae tenetur explicabo rerum perferendis minus ducimus quo voluptatibus amet aperiam.
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci eaque veritatis et recusandae quam corrupti tenetur illo tempora cumque quasi! Ad suscipit quasi magnam magni qui at officiis laboriosam harum!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab hic quisquam sequi dolor alias mollitia molestias? Eligendi, aut tempora soluta nobis nisi cumque? Reprehenderit deserunt rem recusandae. Culpa, minima cum.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias ad illo esse molestiae ipsam! Magni, nam? Ducimus, laudantium. Laboriosam, ipsam voluptatum? Sequi quos eveniet perferendis quidem minima. Quidem, vel illo!
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus optio aliquam odio, minima culpa aperiam voluptatem repudiandae provident ullam molestias quas, itaque vel mollitia dolorem? Consectetur ratione dolor dignissimos at!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, sunt dolorem. Officiis id vitae minima, quo eveniet quia distinctio facere saepe, quasi ducimus error sequi dolor, reiciendis quaerat dolores vero.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe nobis atque exercitationem? Impedit ratione harum quis, nulla dolore deserunt sunt voluptate ipsum amet repellat in mollitia dolorum necessitatibus ullam sint!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis quas repudiandae molestiae at non corrupti suscipit quam, nobis maxime dicta voluptate odit expedita ea excepturi vitae temporibus consequatur ullam ad.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla quod nobis aut praesentium excepturi, esse veritatis tempora debitis ad nostrum ipsum vel, tenetur hic in quibusdam, assumenda id odio eos!
+        <div className={moduleCss.productContainer}>{groceriesList.map((item) => <div key={item.name} className={moduleCss.product} ><Goods>{item}</Goods></div>)}</div>
       </div>
       <NavBar />
     </div>

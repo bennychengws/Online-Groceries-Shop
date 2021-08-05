@@ -12,7 +12,6 @@ import bakery from "../images/bakery_&_snacks.png";
 import eggs from "../images/dairy_&_eggs.png";
 import drinks from "../images/beverages.png";
 import Category from "../components/Category";
-import Filters from "../components/Filters";
 
 const explore = () => {
   const [showModal, setShowModal] = useState(false);

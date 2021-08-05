@@ -33,6 +33,13 @@
     font-size: calc(1.25em + 0.5vw);
 }
 
+@media screen and (max-width: 360px) {
+    .childrenTitle {
+        font-weight: bold;
+        font-size: calc(1em + 0.5vw);
+    }
+}
+
 .back {
     cursor: pointer;
 }
