@@ -1,7 +1,9 @@
+import { useState } from "react";
 import moduleCss from "../styles/cart.module.css";
 import NavBar from "../components/NavBar";
 import Checkout from "../components/Checkout";
-import { useState } from "react";
+import Failed from "../components/Failed";
+import Accepted from "../components/Accepted"
 
 const cart = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,6 +20,15 @@ const cart = () => {
         <button className={moduleCss.checkOut} onClick={() => setShowModal(true)}>Go to Checkout</button>
       </div>
       <NavBar />
+      {/* <Failed
+        onClose={() => setShowModal(false)}
+        show={showModal}
+      >
+      </Failed> */}
+      {/* <Accepted
+        show={showModal}
+      >
+      </Accepted> */}
     </div>
   );
 };

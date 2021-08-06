@@ -175,18 +175,18 @@ const home = () => {
             {promoList.map((item) => (
               <Link href={item.linkTo} key={item.categoryName}>
                 <div >
-                <div className={`${moduleCss.promo} ${item.bgColor}`}>
-                  {item.image}
-                  <div className={moduleCss.promoTextContainer}>
-                    <div className={moduleCss.promoTitle}>
-                      {item.categoryName}
+                  <div className={`${moduleCss.promo} ${item.bgColor}`}>
+                    {item.image}
+                    <div className={moduleCss.promoTextContainer}>
+                      <div className={moduleCss.promoTitle}>
+                        {item.categoryName}
+                      </div>
+                      <div
+                        className={`${moduleCss.promoContent} ${item.contentColor}`}
+                      >
+                        {item.content}
+                      </div>
                     </div>
-                    <div
-                      className={`${moduleCss.promoContent} ${item.contentColor}`}
-                    >
-                      {item.content}
-                    </div>
-                  </div>
                   </div>
                 </div>
               </Link>
