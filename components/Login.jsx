@@ -94,13 +94,14 @@ const Login = () => {
             </div>
           </div>
           <div className="flex justify-center">
+          <Link href="../home">
             <button
               className=" w-full bg-green-500 hover:bg-green-700 text-white font-bold py-3 my-1 rounded-2xl focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Log In
+                Log In
             </button>
-
+          </Link>
           </div>
         </form>
         <p className="text-center text-gray-500 text-sm font-bold">

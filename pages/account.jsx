@@ -68,6 +68,7 @@ const account = () => {
           ))}
         </div>
       </div>
+      <Link href="../">
       <div className={moduleCss.logOutButton}>
         <div className={moduleCss.logOutIcon}>
           <Image src={logOut} width="18px" height="18px"></Image>
@@ -75,6 +76,7 @@ const account = () => {
         <div>Log Out</div>
         <div></div>
       </div>
+      </Link>
       <NavBar />
     </div>
   );

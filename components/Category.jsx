@@ -20,7 +20,7 @@ const Category = ({ children, show, onClose }) => {
     {
       name: "Diet Coke",
       productImage: (
-        <Image src={dietCoke} width="44.49px" height="89.36px"></Image>
+        <Image src={dietCoke} width="35px" height="80px"></Image>
       ),
       amount: "355ml",
       price: 7,
@@ -28,7 +28,7 @@ const Category = ({ children, show, onClose }) => {
     {
       name: "Sprite Can",
       productImage: (
-        <Image src={sprite} width="51.68px" height="91.77px"></Image>
+        <Image src={sprite} width="45px" height="80px"></Image>
       ),
       amount: "325ml",
       price: 6.5,
@@ -36,7 +36,7 @@ const Category = ({ children, show, onClose }) => {
     {
       name: "Apple & Grape Juice",
       productImage: (
-        <Image src={appleJuice} width="81.68px" height="93.21px"></Image>
+        <Image src={appleJuice} width="80px" height="80px"></Image>
       ),
       amount: "2L",
       price: 15,
@@ -44,21 +44,21 @@ const Category = ({ children, show, onClose }) => {
     {
       name: "Orange Juice",
       productImage: (
-        <Image src={orangeJuice} width="81.68px" height="93.21px"></Image>
+        <Image src={orangeJuice} width="80px" height="80px"></Image>
       ),
       amount: "2L",
       price: 15,
     },
     {
       name: "Coca Cola Can",
-      productImage: <Image src={coca} width="48.82px" height="90.44px"></Image>,
+      productImage: <Image src={coca} width="45px" height="80px"></Image>,
       amount: "325ml",
       price: 6.8,
     },
     {
       name: "Pepsi Can",
       productImage: (
-        <Image src={pepsi} width="49.52px" height="94.59px"></Image>
+        <Image src={pepsi} width="45px" height="80px"></Image>
       ),
       amount: "330ml",
       price: 6.8,

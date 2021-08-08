@@ -69,7 +69,9 @@ const Checkout = ({ show, onClose, children, title }) => {
           <Link href="#">
             <a className={moduleCss.styledModalDeclarationDetails}> Conditions</a>
           </Link></div></div>
-        <button className={moduleCss.styledModalButton}>Place Order</button>
+        <Link href="../home">
+          <button className={moduleCss.styledModalButton}>Place Order</button>
+        </Link>
       </div>
     </div >
   ) : null;

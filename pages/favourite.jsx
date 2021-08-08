@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import moduleCss from "../styles/favourite.module.css";
 import NavBar from "../components/NavBar";
 import backArrow from "../images/back arrow.png";
@@ -50,22 +51,25 @@ const favourite = () => {
       amount: "330ml",
       price: 6.8,
     },
-
   ];
   const [showModal, setShowModal] = useState(false);
-  const [isLastItem, setIsLastItem] = useState(false); 
 
   return (
     <div>
       <div className={moduleCss.container}>
         <div className={moduleCss.title}>Favourite</div>
-        <div className={moduleCss.itemContentWrapper}>
-          {favouriteList.map((item) => (
-            <div key={item.name} className={moduleCss.itemContent} style={{}}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div></div></div><div></div><div className={moduleCss.priceAndArrow}><div>${item.price}</div><div className={moduleCss.arrowContainer}><Image src={backArrow} width="8.4px" height="14px"></Image></div></div></div>
-          ))}
+        <div className={moduleCss.itemContentWrapper} style={{borderBottom: favouriteList.length === 0? "hidden" : ""}}>
+          {favouriteList.map((item, index) => {
+            if (index === favouriteList.length-1) {
+              return <div key={item.name} className={moduleCss.itemContent} style={{borderBottom: "hidden"}}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div></div></div><div className={moduleCss.priceAndArrow}><div>${item.price}</div><div className={moduleCss.arrowContainer}><Image src={backArrow} width="8.4px" height="14px"></Image></div></div></div>
+            } else {
+              return <div key={item.name} className={moduleCss.itemContent}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div></div></div><div className={moduleCss.priceAndArrow}><div>${item.price}</div><div className={moduleCss.arrowContainer}><Image src={backArrow} width="8.4px" height="14px"></Image></div></div></div>
+            }
+          })}
         </div>
-        <button className={moduleCss.addAllToCart} onClick={() => setShowModal(true)}>Add All To Cart</button>
-            {console.log(favouriteList[favouriteList.length-1])}
+        <Link href="../cart">
+          <button className={moduleCss.addAllToCart} onClick={() => setShowModal(true)} style={{position: favouriteList.length === 0? "fixed" : "", bottom: favouriteList.length === 0? "13vh" : "0" }}>Add All To Cart</button>
+        </Link>
       </div>
       <NavBar />
     </div>

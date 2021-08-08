@@ -53,7 +53,7 @@
   display: flex;
   flex-direction: row;
   overflow-y: hidden;
-  overflow-x: auto;
+  overflow-x: scroll;
   white-space: nowrap; 
 }
 
@@ -69,11 +69,14 @@
     height: 35vh;
     display: flex;
     flex-direction: row;
+    overflow: hidden;
+    white-space: nowrap; 
+  }
+
+  .productContainer:hover {
     overflow-y: hidden;
     overflow-x: auto;
-    white-space: nowrap; 
-    /* scrollbar-color: rebeccapurple green;
-    scrollbar-width: thin; */
+
   }
   
   .product {

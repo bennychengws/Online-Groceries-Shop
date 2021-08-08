@@ -11,7 +11,7 @@
     min-height: 163px;
     font-weight: bold;
     font-size: calc(0.8em + 0.5vw);
-    cursor: pointer;
+    /* cursor: pointer; */
     border-color: rgba(226, 226, 226, 1);
     padding: 15px 10px 0px 10px;
 }
@@ -19,7 +19,6 @@
 .productName {
     color: rgba(24, 23, 37, 1);
     font-size: calc(1rem + 0.5vw);
-
 }
 
 .productTopPanel {
@@ -28,6 +27,7 @@
     /* background-color: green; */
     text-align: left;
 }
+
 
 .productBottomPanel {
     display: flex;
@@ -80,8 +80,8 @@
         min-width: 114px;
         min-height: 163px;
         font-weight: bold;
-        font-size: calc(0.8em + 0.5vw);
-        cursor: pointer;
+        font-size: calc(0.7em + 0.1vw);
+        /* cursor: pointer; */
         border-color: rgba(226, 226, 226, 1);
         padding: 15px 10px 0px 10px;
         max-height: 30vh;
@@ -89,14 +89,14 @@
     
     .productName {
         color: rgba(24, 23, 37, 1);
-        font-size: calc(1rem + 0.5vw);
+        font-size: calc(0.9rem + 0.2vw);
     
     }
     
     .productTopPanel {
         min-width: 216px;
         width: 15vw;
-        padding: 5px 7px;
+        padding: 0 7px;
         /* background-color: green; */
         text-align: left;
     }
@@ -108,8 +108,8 @@
         width: 15vw;
         align-items: center;
         justify-content: space-between;
-        padding: 5px 7px;
-        font-size: calc(1rem + 0.5vw);
+        padding: 0 7px;
+        font-size: calc(0.9rem + 0.2vw);
         color: rgba(24, 23, 37, 1)
     }
 }
