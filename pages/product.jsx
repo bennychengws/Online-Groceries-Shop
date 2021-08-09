@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Router from 'next/router'
 import moduleCss from "../styles/product.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,16 +29,16 @@ const product = () => {
   return (
     <div className={moduleCss.container}>
       <div className={moduleCss.upperPart}>
-        <div className={moduleCss.backArrowImg}><Image src={backArrow} width="8.4px" height="14px"></Image></div>
+        <div className={moduleCss.backArrowImg} onClick={() => Router.back()}><Image src={backArrow} width="8.4px" height="14px"></Image></div>
         <div className={moduleCss.productImage}>{product.productImage}</div>
       </div>
       <div>
-        <div><div>{product.name}</div><div><Image src={heartE} width="24px" height="24px"></Image></div></div>
-        <div>{product.amount}</div>  
-        <div><div><div><Image src={add} width="35px" height="35px"></Image></div><div>{product.quantity}</div><div><Image src={reduce} width="35px" height="35px"></Image></div></div><div>${product.price}</div></div>
-        <div><div><div>Product Detail</div><div><Image src={expandArrow} width="8.4px" height="14px"></Image></div></div><div>{product.productDetail}</div></div>
-        <div><div>Nutritions</div><div>{product.nutritions}</div></div>
-        <div><div>Review</div><div>{product.rating}</div></div>
+        <div className={moduleCss.nameAndHeart}><div>{product.name}</div><div><Image src={heartE} width="24px" height="24px"></Image></div></div>
+        <div className={moduleCss.amount}>{product.amount}</div>  
+        <div className={moduleCss.qtyAndPrice}><div className={moduleCss.qtyPanel}><div className={moduleCss.reduceQtyButton}><Image src={reduce} width="35px" height="35px"></Image></div><div>{product.quantity}</div><div className={moduleCss.addQtyButton}><Image src={add} width="35px" height="35px"></Image></div></div><div>${product.price}</div></div>
+        <div className={moduleCss.productDetailPanel}><div className={moduleCss.productDetailAndExpand}><div className={moduleCss.infoTitle}>Product Detail</div><div className={moduleCss.expandButton}><Image src={expandArrow} width="8.4px" height="14px"></Image></div></div><div className={moduleCss.productDetail}>{product.productDetail}</div></div>
+        <div className={moduleCss.infoPanel}><div className={moduleCss.infoTitle}>Nutritions</div><div className={moduleCss.nutri}>{product.nutritions}</div></div>
+        <div className={moduleCss.infoPanel}><div className={moduleCss.infoTitle}>Review</div><div>{product.rating}</div></div>
       </div> 
       <Link href="../cart">
           <button className={moduleCss.addToBasket} onClick={() => setShowModal(true)}>Add To Basket</button>
