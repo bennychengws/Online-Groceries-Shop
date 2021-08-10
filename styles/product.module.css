@@ -41,6 +41,13 @@
     color: rgba(24, 23, 37, 1);
 }
 
+.heartImg {
+    position: relative;
+    display: flex;
+    width: 24px;
+    height: 24px;
+}
+
 .amount {
     color: rgba(124, 124, 124, 1);
     margin: 0 5vw;
