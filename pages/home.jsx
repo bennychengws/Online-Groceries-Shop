@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import moduleCss from "../styles/home.module.css";
@@ -5,6 +6,7 @@ import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
 import Slider from "../components/Slider";
 import Goods from "../components/Goods";
+import Category from "../components/Category";
 import carrotImage from "../images/Group.png";
 import location from "../images/locationicon.png";
 import fruits from "../images/fruits_&_vegetables.png";
@@ -157,9 +159,12 @@ const home = () => {
     },
   ];
 
+  const [showModal, setShowModal] = useState(false);
+  const [categoryContent, setCategoryContent] = useState("");
+
   return (
     <div>
-      <div className={moduleCss.container}>
+      <div className={moduleCss.container} style={{overflow: showModal ? "hidden" : "auto", height: showModal ? "100vh": "auto"}}>
         <div className={moduleCss.carrotImage}>
           <Image src={carrotImage} width="20vw" height="25vh"></Image>
         </div>
@@ -194,9 +199,9 @@ const home = () => {
           </Slider>
         </div>
         <div className={moduleCss.subtitleRows}>
-          <div className={moduleCss.subtitles}>Exclusive Offer </div>
+          <div className={moduleCss.subtitles}>Exclusive Offer</div>
           <Link href="#">
-            <div className={moduleCss.seeAll}>See all</div>
+            <div className={moduleCss.seeAll} onClick={() => (setShowModal(true), setCategoryContent("Exclusive Offer"))}>See all</div>
           </Link>
         </div>
         <div className={moduleCss.productContainer}>
@@ -209,7 +214,7 @@ const home = () => {
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Best Selling</div>
           <Link href="#">
-            <div className={moduleCss.seeAll}>See all</div>
+            <div className={moduleCss.seeAll} onClick={() => (setShowModal(true), setCategoryContent("Best Selling"))}>See all</div>
           </Link>
         </div>
         <div className={moduleCss.productContainer}>
@@ -222,7 +227,7 @@ const home = () => {
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Groceries</div>
           <Link href="#">
-            <div className={moduleCss.seeAll}>See all</div>
+            <div className={moduleCss.seeAll} onClick={() => (setShowModal(true), setCategoryContent("Groceries"))}>See all</div>
           </Link>
         </div>
         <div className={moduleCss.tabContainer}>
@@ -250,6 +255,9 @@ const home = () => {
         </div>
       </div>
       <NavBar />
+      <Category onClose={() => setShowModal(false)} show={showModal}>
+        {categoryContent}
+      </Category>
     </div>
   );
 };

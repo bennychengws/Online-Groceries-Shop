@@ -90,8 +90,8 @@ const Category = ({ children, show, onClose }) => {
         </div>
       </div>
       <div className={moduleCss.productContainer}>
-        {beverageList.map((item) => (
-          <Goods>{item}</Goods>
+        {beverageList.map((item, index) => (
+          <Goods key={index}>{item}</Goods>
         ))}
       </div>
       <Filters onClose={() => setShowFilter(false)} show={showFilter}></Filters>
