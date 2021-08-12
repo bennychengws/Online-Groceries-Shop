@@ -52,7 +52,7 @@ const explore = () => {
 
   return (
     <div>
-      <div className={moduleCss.container}>
+      <div className={moduleCss.container} style={{overflow: showModal ? "hidden" : "auto", height: showModal ? "100vh": "auto"}}>
         <div className={moduleCss.title}>Find Products</div>
         <SearchBox />
         <div className={moduleCss.productContainer}>
