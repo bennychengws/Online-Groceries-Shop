@@ -70,7 +70,7 @@ const explore = () => {
           ))}
         </div>
       </div>
-      <NavBar />
+      <NavBar style={{display : showModal ? "none" : "flex"}}/>
       <Category onClose={() => setShowModal(false)} show={showModal}>
         {categoryContent}
       </Category>

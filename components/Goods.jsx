@@ -5,8 +5,8 @@ import moduleCss from "../styles/Goods.module.css";
 import addToCart from "../images/add_to_cart.png";
 import apple from "../images/apple.png";
 
-const Goods = ({ showProductInfo, setShowProductInfo, children }) => {
-  const [showModal, setShowModal] = useState(false);
+const Goods = ({ children }) => {
+  const [showProductInfo, setShowProductInfo] = useState(false);
   const { name, productImage, amount, price } = children;
   const productInfo = {
     name: "Natural Red Apple",
@@ -29,13 +29,13 @@ const Goods = ({ showProductInfo, setShowProductInfo, children }) => {
       </div>
       <div className={moduleCss.productBottomPanel}>
         <div>${price}</div>
-        <div style={{cursor: "pointer", display: "flex"}} onClick={setShowProductInfo(true)}>
-          <Image src={addToCart} width="35px" height="35px"></Image>
+        <div style={{cursor: "pointer", display: "flex"}} onClick={() => setShowProductInfo(true)}>
+          <Image src={addToCart} width="30px" height="30px"></Image>
         </div>
       </div>
       <Product
-        onClose={setShowProductInfo(false)}
-        show={showModal}
+        onClose={() => setShowProductInfo(false)}
+        show={showProductInfo}
       >
         {productInfo}
       </Product>

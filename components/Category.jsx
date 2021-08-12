@@ -16,7 +16,6 @@ import Goods from "../components/Goods";
 const Category = ({ children, show, onClose }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  const [showProductInfo, setShowProductInfo] = useState(false);
   const beverageList = [
     {
       name: "Diet Coke",
@@ -77,7 +76,7 @@ const Category = ({ children, show, onClose }) => {
   };
 
   const modalContent = show ? (
-    <div className={moduleCss.container} style={{overflow: showFilter ? "hidden" : "auto", height: showFilter ? "100vh": "auto"}}>
+    <div className={moduleCss.container}>
       <div className={moduleCss.topPanel}>
         <div className={moduleCss.back} onClick={handleCloseClick}>
           <Image src={backArrow} width="10px" height="18px"></Image>
@@ -92,7 +91,7 @@ const Category = ({ children, show, onClose }) => {
       </div>
       <div className={moduleCss.productContainer}>
         {beverageList.map((item, index) => (
-          <Goods key={index} setShowProductInfo={(bool) => setShowProductInfo(bool)} >{item}</Goods>
+          <Goods key={index}>{item}</Goods>
         ))}
       </div>
       <Filters onClose={() => setShowFilter(false)} show={showFilter}></Filters>

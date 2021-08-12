@@ -159,12 +159,12 @@ const home = () => {
     },
   ];
 
-  const [showModal, setShowModal] = useState(false);
+  const [showSeeAll, setShowSeeAll] = useState(false);
   const [categoryContent, setCategoryContent] = useState("");
 
   return (
     <div>
-      <div className={moduleCss.container} style={{overflow: showModal ? "hidden" : "auto", height: showModal ? "100vh": "auto"}}>
+      <div className={moduleCss.container} style={{overflow: showSeeAll ? "hidden" : "auto", height: showSeeAll ? "100vh": "auto"}}>
         <div className={moduleCss.carrotImage}>
           <Image src={carrotImage} width="20vw" height="25vh"></Image>
         </div>
@@ -201,7 +201,7 @@ const home = () => {
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Exclusive Offer</div>
           <Link href="#">
-            <div className={moduleCss.seeAll} onClick={() => (setShowModal(true), setCategoryContent("Exclusive Offer"))}>See all</div>
+            <div className={moduleCss.seeAll} onClick={() => (setShowSeeAll(true), setCategoryContent("Exclusive Offer"))}>See all</div>
           </Link>
         </div>
         <div className={moduleCss.productContainer}>
@@ -214,7 +214,7 @@ const home = () => {
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Best Selling</div>
           <Link href="#">
-            <div className={moduleCss.seeAll} onClick={() => (setShowModal(true), setCategoryContent("Best Selling"))}>See all</div>
+            <div className={moduleCss.seeAll} onClick={() => (setShowSeeAll(true), setCategoryContent("Best Selling"))}>See all</div>
           </Link>
         </div>
         <div className={moduleCss.productContainer}>
@@ -227,7 +227,7 @@ const home = () => {
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Groceries</div>
           <Link href="#">
-            <div className={moduleCss.seeAll} onClick={() => (setShowModal(true), setCategoryContent("Groceries"))}>See all</div>
+            <div className={moduleCss.seeAll} onClick={() => (setShowSeeAll(true), setCategoryContent("Groceries"))}>See all</div>
           </Link>
         </div>
         <div className={moduleCss.tabContainer}>
@@ -254,8 +254,8 @@ const home = () => {
           ))}
         </div>
       </div>
-      <NavBar />
-      <Category onClose={() => setShowModal(false)} show={showModal}>
+      <NavBar/>
+      <Category onClose={() => setShowSeeAll(false)} show={showSeeAll}>
         {categoryContent}
       </Category>
     </div>

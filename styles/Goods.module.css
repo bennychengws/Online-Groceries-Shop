@@ -108,7 +108,7 @@
         width: 15vw;
         align-items: center;
         justify-content: space-between;
-        padding: 0 7px;
+        padding: 5px 7px;
         font-size: calc(0.9rem + 0.2vw);
         color: rgba(24, 23, 37, 1)
     }
