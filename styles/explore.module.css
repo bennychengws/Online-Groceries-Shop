@@ -1,6 +1,6 @@
 .container {
     margin: 0 5vw;
-    padding: 0 0 70px 0;
+    padding: 0 0 75px 0;
     font-family: 'Gilroy', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -72,4 +72,9 @@
 .drinks {
     background-color: rgba(183, 223, 245, 0.25);
     border-color: rgba(183, 223, 245, 1);
+}
+
+.groceries {
+    background-color: rgba(131, 106, 246, 0.15);
+    border-color: rgba(131, 106, 246, 0.5);
 }

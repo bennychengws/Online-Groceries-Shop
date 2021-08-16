@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Rating from "../components/Rating"
 import heartE from "../images/heartEmpty.png";
-import heartR from "../images/heartRed.png"
+import heartR from "../images/heartRed.png";
 import downArrow from "../images/downArrow.png";
 import expandArrow from "../images/back arrow.png";
 import backArrow from "../images/back_arrow.png";

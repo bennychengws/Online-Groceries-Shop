@@ -16,7 +16,7 @@ const account = () => {
     {
       option: "Orders",
       optionImage: <Image src={orders} width="18px" height="20px"></Image>,
-      linkTo: "../home",
+      linkTo: "../order",
       marginStyle: {marginLeft: "15px"}
     },
     {

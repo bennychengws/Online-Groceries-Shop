@@ -4,6 +4,8 @@ import Link from "next/link";
 import moduleCss from "../styles/favourite.module.css";
 import NavBar from "../components/NavBar";
 import backArrow from "../images/back arrow.png";
+import cross from "../images/crossClose.png";
+import cartButton from "../images/cartButton.png";
 import coca from "../images/coca_cola.png";
 import pepsi from "../images/pepsi.png";
 import dietCoke from "../images/diet_coke.png";
@@ -61,9 +63,39 @@ const favourite = () => {
         <div className={moduleCss.itemContentWrapper} style={{borderBottom: favouriteList.length === 0? "hidden" : ""}}>
           {favouriteList.map((item, index) => {
             if (index === favouriteList.length-1) {
-              return <div key={item.name} className={moduleCss.itemContent} style={{borderBottom: "hidden"}}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div></div></div><div className={moduleCss.priceAndArrow}><div>${item.price}</div><div className={moduleCss.arrowContainer}><Image src={backArrow} width="8.4px" height="14px"></Image></div></div></div>
+              return <div key={item.name} className={moduleCss.itemContent} style={{borderBottom: "hidden"}}>
+                        <div className={moduleCss.imgAndDescription}>
+                          <Link href="../product">
+                            <div className={moduleCss.itemImage}>{item.productImage}</div>
+                          </Link>
+                          <div>
+                            <div className={moduleCss.name}>{item.name}</div>
+                            <div className={moduleCss.amount}>{item.amount}</div>
+                          </div>
+                        </div>
+                        <div className={moduleCss.priceAndButtons}>
+                          <div>${item.price}</div>
+                          <div className={moduleCss.carts}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
+                          <div className={moduleCss.cross}><Image src={cross}  layout="fill" objectFit="contain" quality={100}></Image></div>                    
+                        </div>
+                      </div>
             } else {
-              return <div key={item.name} className={moduleCss.itemContent}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div></div></div><div className={moduleCss.priceAndArrow}><div>${item.price}</div><div className={moduleCss.arrowContainer}><Image src={backArrow} width="8.4px" height="14px"></Image></div></div></div>
+              return <div key={item.name} className={moduleCss.itemContent}>
+                        <div className={moduleCss.imgAndDescription}>
+                        <Link href="../product">
+                          <div className={moduleCss.itemImage}>{item.productImage}</div>
+                        </Link>  
+                          <div>
+                            <div className={moduleCss.name}>{item.name}</div>
+                            <div className={moduleCss.amount}>{item.amount}</div>
+                          </div>
+                        </div>
+                        <div className={moduleCss.priceAndButtons}>
+                          <div>${item.price}</div>
+                          <div className={moduleCss.carts}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
+                          <div className={moduleCss.cross}><Image src={cross}  layout="fill" objectFit="contain" quality={100}></Image></div>
+                        </div>
+                      </div>
             }
           })}
         </div>

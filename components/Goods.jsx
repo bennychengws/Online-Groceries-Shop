@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
-import Product from "../components/Product"
+import Link from "next/link";
+// import Product from "../components/Product"
 import moduleCss from "../styles/Goods.module.css";
 import addToCart from "../images/add_to_cart.png";
 import apple from "../images/apple.png";
@@ -29,16 +30,18 @@ const Goods = ({ children }) => {
       </div>
       <div className={moduleCss.productBottomPanel}>
         <div>${price}</div>
-        <div style={{cursor: "pointer", display: "flex"}} onClick={() => setShowProductInfo(true)}>
-          <Image src={addToCart} width="30px" height="30px"></Image>
-        </div>
+        <Link href="../product">
+          <div style={{cursor: "pointer", display: "flex"}} onClick={() => setShowProductInfo(true)}>
+            <Image src={addToCart} width="30px" height="30px"></Image>
+          </div>
+        </Link>
       </div>
-      <Product
+      {/* <Product
         onClose={() => setShowProductInfo(false)}
         show={showProductInfo}
       >
         {productInfo}
-      </Product>
+      </Product> */}
     </div>
   );
 };

@@ -48,7 +48,7 @@ const navBar = () => {
         break;
 
       default:
-        console.log("pathname not matched")
+        console.log("non-navbar's path")
     }
   })
 

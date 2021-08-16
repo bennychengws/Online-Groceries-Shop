@@ -26,7 +26,7 @@ const Accepted = ({ show }) => {
           {" "}
           Your items has been placed and is on it's way to being processed
         </div>
-        <Link href="#">
+        <Link href="../order">
           <button className={moduleCss.track}>Track Order</button>
         </Link>
         <Link href="../home">

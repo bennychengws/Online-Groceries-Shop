@@ -10,10 +10,9 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 540px) {
 .styledModal {
     width: 100%;
-    height: 60%;
+    height: auto;
     border-radius: 15px 15px 0 0;
     background-color: rgba(242, 243, 242, 1);
     display:flex;
@@ -22,13 +21,12 @@
 
 }
 
-}
 
-@media screen and (min-width: 540.00000001px) {
+@media screen and (min-width: 767px) {
 .styledModal {
     width: 60%;
-    height: 60%;
-    border-radius: 15px 15px 0 0;
+    height: auto;
+    border-radius: 15px 15px 15px 15px;
     background-color: rgba(242, 243, 242, 1);
     display:flex;
     flex-direction: column;
@@ -67,14 +65,30 @@
     padding: 0px 15px; 
 }
 
-.styledModalRow{
+.styledModalRow {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     padding: 1.5vh 0px;
     border-bottom: solid;
     border-bottom-width: 1px;
     border-color: rgba(226, 226, 226, 0.7)
+}
+
+
+.styledModalFirstRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   /* border-bottom: solid;
+    border-bottom-width: 1px;
+    border-color: rgba(226, 226, 226, 0.7) */
+}
+
+.styledModalSecondRow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 1vh;
 }
 
 .styledModalRowTitle {
@@ -100,22 +114,21 @@
     align-items: center;
 }
 
-@media screen and (max-width: 540px) {
-    .styledModalDeclaration {
-        padding: 10px 15px;
-        font-size: 13.35px;
-        color: #7C7C7C;
+.styledModalDeclaration {
+    padding: 10px 15px;
+    font-size: 13.35px;
+    color: #7C7C7C;
 
-    }
-
-    .styledModalDeclarationDetails {
-        font-weight: bold;
-        color: rgba(24, 23, 37);
-
-    }
 }
 
-@media screen and (min-width: 540.00000001px) {
+.styledModalDeclarationDetails {
+    font-weight: bold;
+    color: rgba(24, 23, 37);
+
+}
+
+
+@media screen and (min-width: 767px) {
     .styledModalDeclaration {
         text-align: center;
         padding: 10px 15px;
