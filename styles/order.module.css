@@ -58,21 +58,20 @@
 .name {
     font-weight: bold;
     color: rgba(24, 23, 37, 1);
+    margin-bottom: 0.2vh;
 }
 
-.amount {
+.price {
+    color: rgba(34, 34, 34, 1);
+    font-size: calc(0.5em + 0.8vw);
+    font-weight: 500;
+    margin-bottom: 1vh;
+}
+
+.amountAndQty {
     color: rgba(124, 124, 124, 1);
     font-size: calc(0.5em + 0.5vw);
 }
-
-/* .quantityContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 110px;
-    margin-top: 10px;
-} */
 
 .Qty {
     font-weight: bold;
@@ -80,47 +79,26 @@
 
 }
 
-/* .qtyControlIcon {
-    display: flex;
-    cursor: pointer;
-} */
 
-/* .crossAndPrice {
-    display: flex;
-    flex-direction: column;
-    font-weight: bold;
-    align-items: flex-end;
-    justify-content: space-between;
-
-} */
-
-.priceAndButtons {
+.statusAndCancel {
     display: flex;
     flex-direction: column;
     font-weight: bold;
     align-items: center;
+    width: 25%;
+    font-size: calc(0.5em + 0.3vw);
+    text-align: center;
+    justify-content: space-around;
 }
 
 .cancelOrder{
-    font-weight: normal;
     border: solid;
     border-radius: 10px;
     border-width: 1px;
-    border-color: red;
-    color: red;
+    border-color: rgba(248, 164, 76, 0.7);
+    background-color: rgba(253, 229, 76, 0.3);
+    color: rgba(247, 165, 87, 1);
     padding: 2px 5px;
-    font-size: calc(0.5rem + 0.7vw);
 }
 
-/* .checkOut {
-    display: flex;
-    background-color: rgba(83, 177, 117, 1);
-    border-radius: 10px;
-    border-color: rgba(72, 158, 103, 1);
-    padding: 1vh 0;
-    width: 80%;
-    justify-content: center;
-    color: white;
-    margin: 3vh 0;
-        
-} */
+

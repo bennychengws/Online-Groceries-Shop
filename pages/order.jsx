@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import moduleCss from "../styles/order.module.css";
 import NavBar from "../components/NavBar";
-import cartButton from "../images/cartButton.png";
-import cross from "../images/crossClose.png";
+import Cancel from "../components/Cancel";
 import bellPR from "../images/bellPepperR.png";
 import eggCR from "../images/eggChickenRed.png";
 import ginger from "../images/ginger.png";
@@ -21,7 +20,8 @@ const order = () => {
       ),
       amount: "700g",
       price: 13,
-      quantity: 1
+      quantity: 1,
+      deliveryStatus: 3
     },
     {
       name: "Egg Chicken Red",
@@ -30,7 +30,8 @@ const order = () => {
       ),
       amount: "4pcs",
       price: 4,
-      quantity: 1
+      quantity: 1,
+      deliveryStatus: 2
     },
     {
       name: "Ginger",
@@ -39,7 +40,8 @@ const order = () => {
       ),
       amount: "700g",
       price: 13,
-      quantity: 1
+      quantity: 1,
+      deliveryStatus: 1
     },
     {
       name: "Organic Bananas",
@@ -62,15 +64,16 @@ const order = () => {
                           <Link href="../product">
                             <div className={moduleCss.itemImage}>{item.productImage}</div>
                           </Link>
-                          <div>
-                            <div className={moduleCss.name}>{item.name}</div>
-                            <div className={moduleCss.amount}>{item.amount}</div>
-                          </div>
+                          <ul>
+                            <li className={moduleCss.name}>{item.name}</li>
+                            <li className={moduleCss.price}>${item.price}</li>
+                            <li className={moduleCss.amountAndQty}>{item.amount}</li>
+                            <li className={moduleCss.amountAndQty}>Total qty: {item.quantity}</li>
+                          </ul>
                         </div>
-                        <div className={moduleCss.priceAndButtons}>
-                          <div>${item.price}</div>
-                          {/* <div className={moduleCss.carts}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
-                          <div className={moduleCss.cross}><Image src={cross}  layout="fill" objectFit="contain" quality={100}></Image></div>                     */}
+                        <div className={moduleCss.statusAndCancel}>
+                          <div>{item.deliveryStatus===3 ? "Arrived Station" : item.deliveryStatus=== 2 ? "Shipped" : "Pending to deliver"}</div>
+                          <button className={moduleCss.cancelOrder} onClick={() => setShowModal(true)}>Cancel?</button>
                         </div>
                       </div>
             } else {
@@ -79,41 +82,24 @@ const order = () => {
                         <Link href="../product">
                           <div className={moduleCss.itemImage}>{item.productImage}</div>
                         </Link>  
-                          <div>
-                            <div className={moduleCss.name}>{item.name}</div>
-                            <div className={moduleCss.amount}>{item.amount}</div>
-                          </div>
+                          <ul>
+                            <li className={moduleCss.name}>{item.name}</li>
+                            <li className={moduleCss.price}>${item.price}</li>
+                            <li className={moduleCss.amountAndQty}>{item.amount}</li>
+                            <li className={moduleCss.amountAndQty}>Total qty: {item.quantity}</li>
+                          </ul>
                         </div>
-                        <div className={moduleCss.priceAndButtons}>
-                          <div>${item.price}</div>
-                          <div className={moduleCss.cancelOrder}>Cancel Order</div>
-                          {/* <div className={moduleCss.carts}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
-                          <div className={moduleCss.cross}><Image src={cross}  layout="fill" objectFit="contain" quality={100}></Image></div> */}
+                        <div className={moduleCss.statusAndCancel}>
+                          <div>{item.deliveryStatus===3 ? "Arrived Station" : item.deliveryStatus=== 2 ? "Shipped" : "Pending to deliver"}</div>
+                          <button className={moduleCss.cancelOrder} onClick={() => setShowModal(true)}>Cancel?</button>
                         </div>
                       </div>
             }
           })}
-          {/* {cartList.map((item, index) => {
-            if (index === cartList.length-1) {
-              return <div key={item.name} className={moduleCss.itemContent} style={{borderBottom: "hidden"}}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{cursor: "pointer"}}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.price}</div><div></div></div></div>
-            } else {
-              return <div key={item.name} className={moduleCss.itemContent}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{cursor: "pointer"}}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.price}</div><div></div></div></div>
-            }
-          })} */}
         </div>
-        {/* <Checkout onClose={() => setShowModal(false)} show={showModal}></Checkout> */}
-        {/* <button className={moduleCss.checkOut} onClick={() => setShowModal(true)} style={{position: cartList.length === 0? "fixed" : "", bottom: cartList.length === 0? "13vh" : "0" }}>Go to Checkout</button> */}
       </div>
+      <Cancel onClose={() => setShowModal(false)} show={showModal}></Cancel>
       <NavBar />
-      {/* <Failed
-        onClose={() => setShowModal(false)}
-        show={showModal}
-      >
-      </Failed> */}
-      {/* <Accepted
-        show={showModal}
-      >
-      </Accepted> */}
     </div>
   );
 };
