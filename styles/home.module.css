@@ -9,6 +9,20 @@
   height: auto;
 }
 
+@media screen and (min-width: 767px) {
+  .container {
+    margin: 0 5vw;
+    padding: 70px 0 0 0;
+    font-family: "Gilroy", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: auto;
+  }
+  
+}
+
 .carrotImage {
   display: flex;
   justify-content: center;
