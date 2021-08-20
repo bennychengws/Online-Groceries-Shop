@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import moduleCss from "../styles/cart.module.css";
 import NavBar from "../components/NavBar";
@@ -16,7 +16,9 @@ import banana from "../images/banana.png";
 
 const cart = () => {
   const [showModal, setShowModal] = useState(false);
-  const cartList = [
+  const [totalPriceCount, setTotalPriceCount] = useState(0);
+
+  const [cartList, setCartList] = useState([
     {
       name: "Bell Pepper Red",
       productImage: (
@@ -51,23 +53,53 @@ const cart = () => {
       price: 35,
       quantity: 1
     },
-  ]
+  ])
+
+  const handleQuantityIncrease = (index) => {
+    const newCartList = [...cartList];
+
+    newCartList[index].quantity++;
+
+    setCartList(newCartList);
+    calculateTotal();
+  };
+
+  const handleQuantityDecrease = (index) => {
+    const newCartList = [...cartList];
+    if (newCartList[index].quantity > 1){
+      newCartList[index].quantity--;
+    }
+    setCartList(newCartList);
+    calculateTotal();
+  };
+
+  const calculateTotal = () => {
+    const totalPrice = cartList.reduce((total, item) => {
+      return total + (item.price * item.quantity);
+    }, 0);
+  
+    setTotalPriceCount(totalPrice);
+  };
+
+  useEffect(() => {
+    calculateTotal();
+  }, [])
 
   return (
     <div>
       <div className={moduleCss.container}>
         <div className={moduleCss.title}>My Cart</div>
-        <div className={moduleCss.itemContentWrapper} style={{borderBottom: cartList.length === 0? "hidden" : ""}}>
+        <div className={moduleCss.itemContentWrapper} style={{ borderBottom: cartList.length === 0 ? "hidden" : "" }}>
           {cartList.map((item, index) => {
-            if (index === cartList.length-1) {
-              return <div key={item.name} className={moduleCss.itemContent} style={{borderBottom: "hidden"}}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{cursor: "pointer"}}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.price}</div><div></div></div></div>
+            if (index === cartList.length - 1) {
+              return <div key={item.name} className={moduleCss.itemContent} style={{ borderBottom: "hidden" }}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.price * item.quantity}</div><div></div></div></div>
             } else {
-              return <div key={item.name} className={moduleCss.itemContent}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{cursor: "pointer"}}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.price}</div><div></div></div></div>
+              return <div key={item.name} className={moduleCss.itemContent}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.price * item.quantity}</div><div></div></div></div>
             }
           })}
         </div>
         <Checkout onClose={() => setShowModal(false)} show={showModal}></Checkout>
-        <button className={moduleCss.checkOut} onClick={() => setShowModal(true)} style={{position: cartList.length === 0? "fixed" : "", bottom: cartList.length === 0? "13vh" : "0" }}>Go to Checkout</button>
+        <button className={moduleCss.checkOut} onClick={() => setShowModal(true)} style={{ position: cartList.length === 0 ? "fixed" : "", bottom: cartList.length === 0 ? "13vh" : "0" }}><div></div>Go to Checkout<div className={moduleCss.totalPrice}>${totalPriceCount}</div></button>
       </div>
       <NavBar />
       {/* <Failed
