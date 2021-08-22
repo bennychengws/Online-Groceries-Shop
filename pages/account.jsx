@@ -10,6 +10,7 @@ import delivery from "../images/deliceryAddress.png";
 import payment from "../images/paymentMethod.png";
 import backArrow from "../images/back arrow.png";
 import accIcon from "../images/accIcon.png";
+// import Noti from "../components/NotificationContainer"
 
 const account = () => {
   const optionList = [
@@ -52,7 +53,7 @@ const account = () => {
         </div>
         <div className={moduleCss.optionsContainer}>
           {optionList.map((item) => (
-            <Link href={item.linkTo}>
+            <Link href={item.linkTo} key={item.option}>
               <div className={moduleCss.options}>
                 <div className={moduleCss.firstHalfOption}>
                   <div className={moduleCss.optionsIcon}>

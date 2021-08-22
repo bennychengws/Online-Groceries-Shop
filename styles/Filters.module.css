@@ -31,7 +31,7 @@
     font-weight: bold;
     font-size: calc(1.25em + 0.5vw);
     text-align: left;
-    margin-bottom: 1vh;
+    margin: 1vh 0;
 }
 
 @media screen and (max-width: 360px) {
@@ -66,4 +66,8 @@
     margin: 3vh 5vw;
     height: 100%;
     
+}
+
+.optionColor {
+    color: rgba(24, 23, 37);
 }

@@ -42,6 +42,7 @@
 
 .itemContent {
     width: 100%;
+
     border-bottom: solid;
     border-bottom-width: 1px;
     border-bottom-color: rgba(226, 226, 226, 1);
@@ -77,31 +78,36 @@
     font-size: calc(0.5em + 0.5vw);
 }
 
-.priceAndButtons {
+.Buttons {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     font-weight: bold;
     align-items: center;
+}
+
+.rowAndButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .carts {
     position: relative;
     display: flex;
-    align-items: center;
     cursor: pointer;
     width: 20px;
     height: 20px;
-    margin-left: 3vw;
+    /* margin-left: 3vw; */
 }
 
 .cross {
     position: relative;
     display: flex;
-    align-items: center;
     cursor: pointer;
     width: 15px;
     height: 15px;
-    margin-left: 2vw;
+    /* margin-left: 2vw; */
 }
 
 .addAllToCart {
@@ -112,6 +118,7 @@
     padding: 1vh 0;
     width: 80%;
     justify-content: center;
+    align-items: center;
     color: white;
     margin: 3vh 0;
     /* position: fixed;

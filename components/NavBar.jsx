@@ -51,24 +51,34 @@ const navBar = () => {
         console.log("non-navbar's path")
     }
   })
-
+  // layout="fill" objectFit="contain" quality={100}
   return (
       <div className={moduleCss.container}>
 
         <Link href="../home">
-          <Image src={isShop ? shopGreenIcon : shopIcon} width="29px" height="42.17px" className={moduleCss.every}></Image>
+          <div className={moduleCss.home}>
+            <Image src={isShop ? shopGreenIcon : shopIcon} layout="fill" objectFit="contain" quality={100}></Image>
+          </div>
         </Link>
         <Link href="../explore">
-          <Image src={isExplore ? exploreGreenIcon : exploreIcon} width="41px" height="38.45px" className={moduleCss.every}></Image>
+          <div className={moduleCss.explore}>
+            <Image src={isExplore ? exploreGreenIcon : exploreIcon} layout="fill" objectFit="contain" quality={100}></Image>
+          </div>
         </Link>
         <Link href="../cart">
-          <Image src={isCart ? cartGreenIcon : cartIcon} width="26px" height="39.73px" className={moduleCss.every}></Image>
+          <div className={moduleCss.cart}>
+            <Image src={isCart ? cartGreenIcon : cartIcon} layout="fill" objectFit="cover" quality={100}></Image>
+          </div>
         </Link>
         <Link href="../favourite">
-          <Image src={isFavourite ? favouriteGreenIcon : favouriteIcon} width="53px" height="41.59px" className={moduleCss.every}></Image>
+          <div className={moduleCss.favourite}>
+            <Image src={isFavourite ? favouriteGreenIcon : favouriteIcon} layout="fill" objectFit="contain" quality={100}></Image>
+          </div>
         </Link >
         <Link href="../account">
-        <Image src={isAccount ? accountGreenIcon : accountIcon} width="46px" height="42.17px" className={moduleCss.every}></Image>
+          <div className={moduleCss.account}>
+            <Image src={isAccount ? accountGreenIcon : accountIcon} layout="fill" objectFit="contain" quality={100}></Image>
+          </div>
         </Link>
 
       </div>

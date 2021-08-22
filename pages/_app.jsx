@@ -1,6 +1,7 @@
 // import "../styles/globals.css";
 import Head from 'next/head'
 import 'tailwindcss/tailwind.css'
+import 'react-notifications/lib/notifications.css';
 
 
 function MyApp({ Component, pageProps }) {

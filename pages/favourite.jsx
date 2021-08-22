@@ -2,6 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import moduleCss from "../styles/favourite.module.css";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import NavBar from "../components/NavBar";
 import backArrow from "../images/back arrow.png";
 import cross from "../images/crossClose.png";
@@ -14,7 +15,7 @@ import sprite from "../images/sprite_can.png";
 
 
 const favourite = () => {
-  const favouriteList = [
+  const [favouriteList, setFavouriteList] = useState([
     {
       name: "Diet Coke",
       productImage: (
@@ -53,8 +54,31 @@ const favourite = () => {
       amount: "330ml",
       price: 6.8,
     },
-  ];
+  ])
+  
+  const [addToCartList , setAddToCartList] = useState([]) 
+
   const [showModal, setShowModal] = useState(false);
+  const deleteItem = (item) => {
+    setFavouriteList(favouriteList.filter((otherItems) => otherItems.name !== item.name))
+    createNotification("warning", item)
+  }
+
+  const addToCart = (item) => {
+    setAddToCartList(addToCartList => [...addToCartList, item])
+    setFavouriteList(favouriteList.filter((listItem) => listItem.name !== item.name))
+    createNotification("success", item)
+    console.log(addToCartList)
+  }
+
+  const createNotification = (type, item) => {
+      switch (type) {
+        case "success":
+          return NotificationManager.success(`You have added the ${item.name} to the cart`, "Added to Cart");
+        case "warning":
+          return NotificationManager.warning(`You have deleted the ${item.name} from the list`, 'Deleted', 3000);
+      }
+  }
 
   return (
     <div>
@@ -64,45 +88,48 @@ const favourite = () => {
           {favouriteList.map((item, index) => {
             if (index === favouriteList.length-1) {
               return <div key={item.name} className={moduleCss.itemContent} style={{borderBottom: "hidden"}}>
-                        <div className={moduleCss.imgAndDescription}>
-                          <Link href="../product">
-                            <div className={moduleCss.itemImage}>{item.productImage}</div>
-                          </Link>
-                          <div>
+                        <Link href="../product">
+                          <div className={moduleCss.itemImage}>{item.productImage}</div>
+                        </Link>  
+                        <div style={{width: "100%"}}>
+                          <div className={moduleCss.rowAndButton}>
                             <div className={moduleCss.name}>{item.name}</div>
-                            <div className={moduleCss.amount}>{item.amount}</div>
+                            <div className={moduleCss.cross} onClick={() => deleteItem(item)}><Image src={cross}  layout="fill" objectFit="cover" quality={100}></Image></div>
                           </div>
-                        </div>
-                        <div className={moduleCss.priceAndButtons}>
-                          <div>${item.price}</div>
-                          <div className={moduleCss.carts}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
-                          <div className={moduleCss.cross}><Image src={cross}  layout="fill" objectFit="contain" quality={100}></Image></div>                    
+                          <div className={moduleCss.amount}>{item.amount}</div>
+                          <div className={moduleCss.rowAndButton}>
+                            <div style={{fontWeight: "bold"}}>${item.price}</div>
+                            <div className={moduleCss.carts} onClick={() => addToCart(item)}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
+                          </div>
                         </div>
                       </div>
             } else {
               return <div key={item.name} className={moduleCss.itemContent}>
-                        <div className={moduleCss.imgAndDescription}>
                         <Link href="../product">
                           <div className={moduleCss.itemImage}>{item.productImage}</div>
                         </Link>  
-                          <div>
+                        <div style={{width: "100%"}}>
+                          <div className={moduleCss.rowAndButton}>
                             <div className={moduleCss.name}>{item.name}</div>
-                            <div className={moduleCss.amount}>{item.amount}</div>
+                            <div className={moduleCss.cross} onClick={() => deleteItem(item)}><Image src={cross}  layout="fill" objectFit="cover" quality={100}></Image></div>
                           </div>
-                        </div>
-                        <div className={moduleCss.priceAndButtons}>
-                          <div>${item.price}</div>
-                          <div className={moduleCss.carts}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
-                          <div className={moduleCss.cross}><Image src={cross}  layout="fill" objectFit="contain" quality={100}></Image></div>
+                          <div className={moduleCss.amount}>{item.amount}</div>
+                          <div className={moduleCss.rowAndButton}>
+                            <div style={{fontWeight: "bold"}}>${item.price}</div>
+                            <div className={moduleCss.carts} onClick={() => addToCart(item)}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
+                          </div>
                         </div>
                       </div>
             }
           })}
         </div>
         <Link href="../cart">
-          <button className={moduleCss.addAllToCart} onClick={() => setShowModal(true)} style={{position: favouriteList.length === 0? "fixed" : "", bottom: favouriteList.length === 0? "13vh" : "0" }}>Add All To Cart</button>
+          <button className={moduleCss.addAllToCart} onClick={() => setShowModal(true)} style={{position: favouriteList.length === 0? "fixed" : "", bottom: favouriteList.length === 0? "13vh" : "0" }}>
+            Add All To Cart
+          </button>
         </Link>
       </div>
+      <NotificationContainer/>
       <NavBar />
     </div>
   );

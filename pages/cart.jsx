@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import moduleCss from "../styles/cart.module.css";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 import NavBar from "../components/NavBar";
 import Checkout from "../components/Checkout";
 import Failed from "../components/Failed";
@@ -26,7 +28,8 @@ const cart = () => {
       ),
       amount: "700g",
       price: 13,
-      quantity: 1
+      quantity: 1,
+      productTotalPrice: 1
     },
     {
       name: "Egg Chicken Red",
@@ -35,7 +38,8 @@ const cart = () => {
       ),
       amount: "4pcs",
       price: 4,
-      quantity: 1
+      quantity: 1,
+      productTotalPrice: 1
     },
     {
       name: "Ginger",
@@ -44,14 +48,16 @@ const cart = () => {
       ),
       amount: "700g",
       price: 13,
-      quantity: 1
+      quantity: 1,
+      productTotalPrice: 1
     },
     {
       name: "Organic Bananas",
       productImage: <Image src={banana} width="93" height="63px"></Image>,
       amount: "7pcs",
       price: 35,
-      quantity: 1
+      quantity: 1,
+      productTotalPrice: 1
     },
   ])
 
@@ -61,6 +67,7 @@ const cart = () => {
     newCartList[index].quantity++;
 
     setCartList(newCartList);
+    calculateProductTotalPrice()
     calculateTotal();
   };
 
@@ -70,20 +77,47 @@ const cart = () => {
       newCartList[index].quantity--;
     }
     setCartList(newCartList);
+    calculateProductTotalPrice()
     calculateTotal();
   };
 
   const calculateTotal = () => {
     const totalPrice = cartList.reduce((total, item) => {
-      return total + (item.price * item.quantity);
+      return total + item.productTotalPrice;
     }, 0);
   
     setTotalPriceCount(totalPrice);
+    console.log("cT")
   };
-
+  
   useEffect(() => {
     calculateTotal();
+    console.log(cartList)
+  })
+
+  const calculateProductTotalPrice = () => {
+    const newCartList = [...cartList];
+    newCartList.map((item) => {
+      item.productTotalPrice = item.price * item.quantity
+    })
+    setCartList(newCartList) 
+    console.log("cPTP")
+  }
+
+  useEffect(() => {
+    calculateProductTotalPrice();
+    console.log(cartList)
   }, [])
+
+  const deleteItem = (item) => {
+    setCartList(cartList.filter((otherItems) => otherItems.name !== item.name))
+    createNotification(item)
+  }
+
+  const createNotification = (item) => (
+    NotificationManager.warning(`You have deleted the ${item.name} from the cart`, 'Deleted', 3000)
+  )
+
 
   return (
     <div>
@@ -92,15 +126,16 @@ const cart = () => {
         <div className={moduleCss.itemContentWrapper} style={{ borderBottom: cartList.length === 0 ? "hidden" : "" }}>
           {cartList.map((item, index) => {
             if (index === cartList.length - 1) {
-              return <div key={item.name} className={moduleCss.itemContent} style={{ borderBottom: "hidden" }}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.price * item.quantity}</div><div></div></div></div>
+              return <div key={item.name} className={moduleCss.itemContent} style={{ borderBottom: "hidden" }}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }} onClick={() => deleteItem(item)}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.productTotalPrice}</div><div></div></div></div>
             } else {
-              return <div key={item.name} className={moduleCss.itemContent}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.price * item.quantity}</div><div></div></div></div>
+              return <div key={item.name} className={moduleCss.itemContent}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}>{item.productImage}</div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amount}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }} onClick={() => deleteItem(item)}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.productTotalPrice}</div><div></div></div></div>
             }
           })}
         </div>
         <Checkout onClose={() => setShowModal(false)} show={showModal}></Checkout>
         <button className={moduleCss.checkOut} onClick={() => setShowModal(true)} style={{ position: cartList.length === 0 ? "fixed" : "", bottom: cartList.length === 0 ? "13vh" : "0" }}><div></div>Go to Checkout<div className={moduleCss.totalPrice}>${totalPriceCount}</div></button>
       </div>
+      <NotificationContainer/>
       <NavBar />
       {/* <Failed
         onClose={() => setShowModal(false)}
