@@ -9,25 +9,26 @@ const productAPI = async (req, res) => {
   console.log(req.body);
   switch (req.method) {
     case 'POST':
-      const {name, category, brand, price, amount, orderQuantity, productDetail, nutritions, review} = req.body
+      const {name, category, brand, price, amounPerQty, productDetail, nutritions, rating, productImage} = req.body
       const product = new Product({
         name,
         category,
         brand,
         price,
-        amount,
-        orderQuantity,
-        volume,
+        // productTotalPrice,
+        amounPerQty,
+        // orderQuantity,
         productDetail,
         nutritions,
-        review
+        rating,
+        productImage
       })
       await product.save()
       return res.status(200).json({ name: 'John Doe' })
     case 'GET':
       try {
-        const products = await Product.find({}).exec();
-        return res.status(200).json(products[0]["name"])        
+        const products = await Product.find({}).lean().exec();
+        return res.status(200).json(products)        
       } catch (error) {
         return res.status(400).json("failed to get products data")        
       }

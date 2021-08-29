@@ -28,7 +28,6 @@
     text-align: left;
 }
 
-
 .productBottomPanel {
     display: flex;
     flex-direction: row;
@@ -39,6 +38,14 @@
     font-size: calc(1rem + 0.5vw);
     color: rgba(24, 23, 37, 1)
 }
+
+.productImage {
+    position: relative;
+    width: 65%;
+    height: 55%;
+    cursor: "pointer";
+}
+
 
 @media screen and (max-width: 360px) {
     .productName {

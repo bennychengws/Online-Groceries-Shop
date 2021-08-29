@@ -22,31 +22,41 @@ const product = new Schema({
     required: true,
     default: 0,
   },
-  amount: {
+  // productTotalPrice: {
+  //   type: Number,
+  //   required: false,
+  //   default: 0,
+  // },
+  amounPerQty: {
     type: String,
     required: true,
     default: "",
   },
-  orderQuantity: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
+  // orderQuantity: {
+  //   type: Number,
+  //   required: false,
+  //   default: 0,
+  // },
   productDetail: {
     type: String,
-    required: true,
+    required: false,
     default: "",
   },
   nutritions: {
     type: String,
-    required: true,
+    required: false,
     default: "",
   },
-  review: {
+  rating: {
+    type: Number,
+    required: false,
+    default: "",
+  },
+  productImage: {
     type: String,
-    required: true,
-    default: "",
-  },
+    required: false,
+    default: ""
+  }
 });
 
 

@@ -6,6 +6,7 @@ import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
 import Slider from "../components/Slider";
 import Goods from "../components/Goods";
+import GoodsV2 from "../components/GoodsV2";
 import Category from "../components/Category";
 import carrotImage from "../images/Group.png";
 import location from "../images/locationicon.png";
@@ -22,29 +23,7 @@ import beefBone from "../images/beefBone.png";
 import rice from "../images/rice.png";
 import pulses from "../images/pulses.png";
 
-const home = () => {
-  const parameters = {
-    name: "",
-    categories: "",
-    brand: "",
-    price: "",
-    productDetail: "",
-    nutritions: "",
-    review: "",
-  };
-  // beverages * 6
-  // eggs * 6
-  // fruits * 5
-  // meats * 2
-  // filterCategories * 4
-  // filterBrand * 4
-  // FindProductsCategories * 6
-  // function fetchData() {
-  //     const res = axios.get(
-  //       "http://localhost:3000/api/product"
-  //     );
-  //     console.log(res.data)
-  // }
+const home = ({products}) => {
   const promoList = [
     {
       categoryName: "Fresh Vegetables",
@@ -72,95 +51,97 @@ const home = () => {
     },
   ];
 
-  const offerList = [
-    {
-      name: "Organic Bananas",
-      productImage: <Image src={banana} width="93" height="63px"></Image>,
-      amount: "7pcs",
-      price: 35,
-    },
-    {
-      name: "Red Apple",
-      productImage: <Image src={apple} width="93px" height="63px"></Image>,
-      amount: "6pcs",
-      price: 20,
-    },
-    {
-      name: "Pear",
-      productImage: <Image src={pear} width="93px" height="63px"></Image>,
-      amount: "4pcs",
-      price: 12,
-    },
-    {
-      name: "Pear2",
-      productImage: <Image src={pear} width="93px" height="63px"></Image>,
-      amount: "4pcs",
-      price: 12,
-    },
-    {
-      name: "Pear3",
-      productImage: <Image src={pear} width="93px" height="63px"></Image>,
-      amount: "4pcs",
-      price: 12,
-    },
-    {
-      name: "Pear4",
-      productImage: <Image src={pear} width="93px" height="63px"></Image>,
-      amount: "4pcs",
-      price: 12,
-    },
-    {
-      name: "Pear5",
-      productImage: <Image src={pear} width="93px" height="63px"></Image>,
-      amount: "4pcs",
-      price: 12,
-    },
-  ];
+  // const offerList = [
+  //   {
+  //     name: "Organic Bananas",
+  //     productImage: <Image src={banana} width="93" height="63px"></Image>,
+  //     amount: "7pcs",
+  //     price: 35,
+  //   },
+  //   {
+  //     name: "Red Apple",
+  //     productImage: <Image src={apple} width="93px" height="63px"></Image>,
+  //     amount: "6pcs",
+  //     price: 20,
+  //   },
+  //   {
+  //     name: "Pear",
+  //     productImage: <Image src={pear} width="93px" height="63px"></Image>,
+  //     amount: "4pcs",
+  //     price: 12,
+  //   },
+  //   {
+  //     name: "Pear2",
+  //     productImage: <Image src={pear} width="93px" height="63px"></Image>,
+  //     amount: "4pcs",
+  //     price: 12,
+  //   },
+  //   {
+  //     name: "Pear3",
+  //     productImage: <Image src={pear} width="93px" height="63px"></Image>,
+  //     amount: "4pcs",
+  //     price: 12,
+  //   },
+  //   {
+  //     name: "Pear4",
+  //     productImage: <Image src={pear} width="93px" height="63px"></Image>,
+  //     amount: "4pcs",
+  //     price: 12,
+  //   },
+  //   {
+  //     name: "Pear5",
+  //     productImage: <Image src={pear} width="93px" height="63px"></Image>,
+  //     amount: "4pcs",
+  //     price: 12,
+  //   },
+  // ];
 
-  const bestSellingList = [
-    {
-      name: "Bell Pepper Red",
-      productImage: <Image src={bellPR} width="93px" height="63px"></Image>,
-      amount: "800kg",
-      price: 25,
-    },
-    {
-      name: "Ginger",
-      productImage: <Image src={ginger} width="93px" height="63px"></Image>,
-      amount: "700g",
-      price: 13,
-    },
-    {
-      name: "Organic Bananas",
-      productImage: <Image src={banana} width="93" height="63px"></Image>,
-      amount: "7pcs",
-      price: 35,
-    },
-  ];
+  // const bestSellingList = [
+  //   {
+  //     name: "Bell Pepper Red",
+  //     productImage: <Image src={bellPR} width="93px" height="63px"></Image>,
+  //     amount: "800kg",
+  //     price: 25,
+  //   },
+  //   {
+  //     name: "Ginger",
+  //     productImage: <Image src={ginger} width="93px" height="63px"></Image>,
+  //     amount: "700g",
+  //     price: 13,
+  //   },
+  //   {
+  //     name: "Organic Bananas",
+  //     productImage: <Image src={banana} width="93" height="63px"></Image>,
+  //     amount: "7pcs",
+  //     price: 35,
+  //   },
+  // ];
 
-  const groceriesList = [
-    {
-      name: "Beef Bone",
-      productImage: <Image src={beefBone} width="93px" height="63px"></Image>,
-      amount: "1kg",
-      price: 30,
-    },
-    {
-      name: "Broller Chiken",
-      productImage: <Image src={chicken} width="93px" height="63px"></Image>,
-      amount: "1kg",
-      price: 40,
-    },
-    {
-      name: "Organic Bananas",
-      productImage: <Image src={banana} width="93" height="63px"></Image>,
-      amount: "7pcs",
-      price: 35,
-    },
-  ];
+  // const groceriesList = [
+  //   {
+  //     name: "Beef Bone",
+  //     productImage: <Image src={beefBone} width="93px" height="63px"></Image>,
+  //     amount: "1kg",
+  //     price: 30,
+  //   },
+  //   {
+  //     name: "Broller Chiken",
+  //     productImage: <Image src={chicken} width="93px" height="63px"></Image>,
+  //     amount: "1kg",
+  //     price: 40,
+  //   },
+  //   {
+  //     name: "Organic Bananas",
+  //     productImage: <Image src={banana} width="93" height="63px"></Image>,
+  //     amount: "7pcs",
+  //     price: 35,
+  //   },
+  // ];
 
   const [showSeeAll, setShowSeeAll] = useState(false);
   const [categoryContent, setCategoryContent] = useState("");
+
+  console.log(products)
 
   return (
     <div>
@@ -205,11 +186,18 @@ const home = () => {
           </Link>
         </div>
         <div className={moduleCss.productContainer}>
-          {offerList.map((item) => (
+          {/* {offerList.map((item) => (
             <div key={item.name} className={moduleCss.product}>
               <Goods>{item}</Goods>
             </div>
-          ))}
+          ))} */}
+          {products.map((item) => {
+            if (item.discount[0] >= 0.15) {            
+            return <div key={item._id} className={moduleCss.product}>
+              <GoodsV2>{item}</GoodsV2>
+            </div>
+            }
+          })}          
         </div>
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Best Selling</div>
@@ -218,11 +206,18 @@ const home = () => {
           </Link>
         </div>
         <div className={moduleCss.productContainer}>
-          {bestSellingList.map((item) => (
+          {/* {bestSellingList.map((item) => (
             <div key={item.name} className={moduleCss.product}>
               <Goods>{item}</Goods>
             </div>
-          ))}
+          ))} */}
+          {products.map((item) => {
+            if (item.totalSales >= 10) {            
+            return <div key={item.name} className={moduleCss.product}>
+              <GoodsV2>{item}</GoodsV2>
+            </div>
+            }
+          })}           
         </div>
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Groceries</div>
@@ -247,11 +242,18 @@ const home = () => {
           </div>
         </div>
         <div className={moduleCss.productContainer}>
-          {groceriesList.map((item) => (
+          {/* {groceriesList.map((item) => (
             <div key={item.name} className={moduleCss.product}>
               <Goods>{item}</Goods>
             </div>
-          ))}
+          ))} */}
+          {products.map((item) => {
+            if (item.category === "Groceries") {            
+            return <div key={item.name} className={moduleCss.product}>
+              <GoodsV2>{item}</GoodsV2>
+            </div>
+            }
+          })}           
         </div>
       </div>
       <NavBar/>
@@ -263,3 +265,11 @@ const home = () => {
 };
 
 export default home;
+
+export async function getServerSideProps() {
+  const data = await fetch("http://localhost:3000/api/product");
+  const productData = await data.json();
+  return {
+    props: { products: productData },
+  };
+}
