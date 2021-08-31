@@ -13,23 +13,23 @@ import add from "../../images/addQtyButton.png"
 import reduce from "../../images/reduceQtyButton.png"
 import apple from "../../images/apple.png";
 
-const product = ({productData}) => {
+const product = ({productItem}) => {
   const router = useRouter()
-  const { id } = router.query  
-  // console.log(id)
-  console.log(productData)
-  
+  console.log(productItem)
+
+  const {_id, name, category, productImage, brand, amountPerQty, nutritions, productDetail, rating, discount, discountedPrice} = productItem[0];
+  console.log(name)
+
   const [product, setProduct] = useState({
-    name: "Natural Red Apple",
-    productImage: <Image src={apple} layout="fill" objectFit="contain" quality={100}></Image>,
-    amount: "6pcs",
+    name: name,
+    productImage: productImage,
+    amount: amountPerQty,
     quantity: 1,
-    price: 20,
+    price: discountedPrice,
     productTotalPrice: 1,
-    productDetail:
-      "Apples are nutritious. Apples may be good for weight loss. Apples may be good for your heart. As kind of a healthful and varied diet.",
-    nutritions: "100g",
-    rating: 4.3,
+    productDetail: productDetail,
+    nutritions: nutritions,
+    rating: rating,
   })
 
   const [showModal, setShowModal] = useState(false);
@@ -68,7 +68,7 @@ const product = ({productData}) => {
     <div className={moduleCss.container}>
       <div className={moduleCss.upperPart}>
         <div className={moduleCss.backArrowImg} onClick={() => router.back()}><Image src={backArrow} width="8.4px" height="14px"></Image></div>
-        <div className={moduleCss.productImage}>{product.productImage}</div>
+        <div className={moduleCss.productImage}><Image src={`data:image/png;base64,${product.productImage}`} layout="fill" objectFit="contain" quality={100}></Image></div>
       </div>
       <div>
         <div className={moduleCss.nameAndHeart}><div>{product.name}</div><div className={moduleCss.heartImg} onClick={() => setIsFavourite(!isFavourite)}><Image src={isFavourite ? heartR: heartE} layout="fill" objectFit="contain" quality={100}></Image></div></div>
@@ -91,15 +91,10 @@ const product = ({productData}) => {
 export default product;
 
 export async function getServerSideProps(context) {
-  const data = context.params
-  // console.log(context.query) 
-  // returns { id: episode.itunes.episode, title: episode.title}
-  
-
-  //you can make DB queries using the data in context.query
+  const data = await fetch(`http://localhost:3000/api/product/${context.params.id}`);
+  const productData = await data.json();
   return {
-      props: { 
-         productData: data//pass it to the page props
-      }
-  }
+    props: { productItem: productData },
+  };
 }
+

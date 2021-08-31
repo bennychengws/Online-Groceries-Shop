@@ -70,7 +70,7 @@ const explore = () => {
         <SearchBox />
         <div className={moduleCss.productContainer}>
           {categoryList.map((item) => (
-            <Link key={item.id} href={{pathname: "explore/[id]", query: {id: item.id, title: item.title}}}>
+            <Link key={item.id} href={{pathname: "explore/[category]", query: {category: item.id, title: item.title}}}>
               <div
                 className={`${moduleCss.categroy} ${item.categoryStyle}`}
                 // onClick={() => (

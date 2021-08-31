@@ -8,7 +8,7 @@ import apple from "../images/apple.png";
 
 const Goods = ({ children }) => {
   const [showProductInfo, setShowProductInfo] = useState(false);
-  // const {name, productImage, amountPerQty, discountedPrice} = children;
+  const {_id, name, productImage, amountPerQty, discountedPrice} = children;
   const productInfo = {
     name: "Natural Red Apple",
     productImage: <Image src={apple} layout="fill" objectFit="contain" quality={100}></Image>,
@@ -25,14 +25,14 @@ const Goods = ({ children }) => {
 
   return (
     <div className={moduleCss.productBackground} >
-      <div className={moduleCss.productImage}><Image src={`data:image/png;base64,${children.productImage}`} layout="fill" objectFit="contain" quality={100}></Image></div>
+      <div className={moduleCss.productImage}><Image src={`data:image/png;base64,${productImage}`} layout="fill" objectFit="contain" quality={100}></Image></div>
       <div className={moduleCss.productTopPanel}>
-        <div className={moduleCss.productName}>{children.name}</div>
-        <div style={{ color: "rgba(124, 124, 124, 1)" }}>{children.amountPerQty}</div>
+        <div className={moduleCss.productName}>{name}</div>
+        <div style={{ color: "rgba(124, 124, 124, 1)" }}>{amountPerQty}</div>
       </div>
       <div className={moduleCss.productBottomPanel}>
-        <div>${children.discountedPrice}</div>
-        <Link href={{pathname: "product/[id]", query: {id: children._id}}}>
+        <div>${discountedPrice}</div>
+        <Link href={{pathname: "product/[id]", query: {id:_id}}}>
           <div style={{cursor: "pointer", display: "flex"}} onClick={() => setShowProductInfo(true)}>
             <Image src={addToCart} width="30px" height="30px"></Image>
           </div>
