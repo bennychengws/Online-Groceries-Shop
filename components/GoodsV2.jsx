@@ -32,7 +32,7 @@ const Goods = ({ children }) => {
       </div>
       <div className={moduleCss.productBottomPanel}>
         <div>${discountedPrice}</div>
-        <Link href={{pathname: "product/[id]", query: {id:_id}}}>
+        <Link href={{pathname: "../product/[id]", query: {id:_id}}}>
           <div style={{cursor: "pointer", display: "flex"}} onClick={() => setShowProductInfo(true)}>
             <Image src={addToCart} width="30px" height="30px"></Image>
           </div>

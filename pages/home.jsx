@@ -192,7 +192,7 @@ const home = ({products}) => {
             </div>
           ))} */}
           {products.map((item) => {
-            if (item.discount[0] >= 0.15) {            
+            if (item.discounts[0] >= 0.15) {            
             return <div key={item._id} className={moduleCss.product}>
               <GoodsV2>{item}</GoodsV2>
             </div>
@@ -248,7 +248,7 @@ const home = ({products}) => {
             </div>
           ))} */}
           {products.map((item) => {
-            if (item.category === "Groceries") {            
+            if (item.categoryTags.includes("groceries")) {            
             return <div key={item.name} className={moduleCss.product}>
               <GoodsV2>{item}</GoodsV2>
             </div>

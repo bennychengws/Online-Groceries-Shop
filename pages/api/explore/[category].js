@@ -5,9 +5,9 @@ import Product from '../../../models/product';
 
 // dbConnect();
 
-const productItemAPI = async (req, res) => {
-  const { id } = req.query
-  console.log(id);
+const categoryAPI = async (req, res) => {
+//   const { category } = req.query
+//   console.log(category);
   switch (req.method) {
     case 'POST':
       const {name, category, brand, price, amounPerQty, productDetail, nutritions, rating, productImage} = req.body
@@ -28,7 +28,9 @@ const productItemAPI = async (req, res) => {
       return res.status(200).json({ name: 'John Doe' })
     case 'GET':
       try {
-        const product = await Product.findOne({_id: id}).lean().exec();
+        const { category } = req.query
+        console.log("req: " + category);
+        const product = await Product.find({categoryTags: [category]}).lean().exec();
         return res.status(200).json(JSON.stringify(product))        
       } catch (error) {
         return res.status(400).json("failed to get products data")        
@@ -39,4 +41,4 @@ const productItemAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(productItemAPI)
+export default connectDB(categoryAPI)

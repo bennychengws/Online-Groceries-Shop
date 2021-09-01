@@ -17,7 +17,7 @@ const product = ({productItem}) => {
   const router = useRouter()
   console.log(productItem)
 
-  const {_id, name, category, productImage, brand, amountPerQty, nutritions, productDetail, rating, discount, discountedPrice} = productItem[0];
+  const {_id, name, category, productImage, brand, amountPerQty, nutritions, productDetail, rating, discount, discountedPrice} = productItem;
   console.log(name)
 
   const [product, setProduct] = useState({

@@ -1,18 +1,35 @@
 .box {
-    background-color: transparent;
+    /* background-color: transparent; */
     outline: 2px solid transparent;
     outline-offset: 2px;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 0 10px 10px 0;
+    padding: 1.7vw 1.7vw 1.7vw 1vw;
+    background-color: rgba(242, 243, 242, 1);
+
 }
 
 .container {
     display: flex;
     margin-bottom: 2vh;
-    background-color: rgba(242, 243, 242, 1);
-    border-radius: 5px;
+    /* border-radius: 5px; */
     width: 100%;
-    padding: 1.7vw;
+    /* padding: 1.7vw; */
+}
 
+.magnifier {
+    display: flex;
+    cursor: pointer;
+    background-color: rgba(222, 223, 222, 1);
+    border-radius: 5px 0 0 5px;
+    padding: 1vw;
+    align-items: center
+}
 
+.magnifier:hover {
+    cursor: pointer;
+    background-color: rgba(212, 213, 212, 1);
+    border-radius: 5px 0 0 5px;
+    padding: 1vw;
+    align-items: center
 }
