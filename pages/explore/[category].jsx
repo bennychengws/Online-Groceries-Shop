@@ -14,9 +14,10 @@ import appleJuice from "../../images/apple_juice.png";
 import sprite from "../../images/sprite_can.png";
 import GoodsV2 from "../../components/GoodsV2";
 
-const bakeryAndSnacks = (children) => {
+const exploreCategory = (props) => {
   // const router = useRouter();
-  console.log(children)
+  console.log(props)
+  const {title, categoryData} = props
   const [showFilter, setShowFilter] = useState(false);
   // const beverageList = [
   //   {
@@ -66,7 +67,7 @@ const bakeryAndSnacks = (children) => {
         {/* <div className={moduleCss.back} onClick={() => router.back()}>
           <Image src={backArrow} width="10px" height="18px"></Image>
         </div> */}
-        <div className={moduleCss.childrenTitle}>{children.title}</div>
+        <div className={moduleCss.childrenTitle}>{title}</div>
         <div
           className={moduleCss.filter}
           onClick={() => (setShowFilter(true), console.log("Clicked"))}
@@ -78,7 +79,7 @@ const bakeryAndSnacks = (children) => {
         {/* {beverageList.map((item, index) => (
           <Goods key={index}>{item}</Goods>
         ))} */}
-        {children.categoryData.map((item, index) => (
+        {categoryData.map((item, index) => (
           <GoodsV2 key={index}>{item}</GoodsV2>
         ))}        
       </div>
@@ -88,7 +89,7 @@ const bakeryAndSnacks = (children) => {
   );
 };
 
-export default bakeryAndSnacks;
+export default exploreCategory;
 
 export async function getServerSideProps(context) {
 

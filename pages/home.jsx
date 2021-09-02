@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import moduleCss from "../styles/home.module.css";
@@ -143,6 +144,14 @@ const home = ({products}) => {
 
   console.log(products)
 
+  // const router = useRouter();
+  // const [searchQuery, setSearchQuery] = useState(" ");
+  // const handleSearchBoxSubmit = (event) => {
+  //   event.preventDefault();
+  //   router.push(`/search?=${searchQuery}`);
+  //   return null
+  // }
+
   return (
     <div>
       <div className={moduleCss.container} style={{overflow: showSeeAll ? "hidden" : "auto", height: showSeeAll ? "100vh": "auto"}}>
@@ -155,7 +164,11 @@ const home = ({products}) => {
           </div>
           <div>Hong Kong</div>
         </div>
-        <SearchBox />
+        <div style={{marginBottom: "2vh"}}>
+          {/* <SearchBox searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearchBoxSubmit /> */}
+          <SearchBox/>
+        </div>
+        
         <div>
           <Slider>
             {promoList.map((item) => (

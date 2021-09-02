@@ -5,7 +5,7 @@ import Product from '../../../models/product';
 
 // dbConnect();
 
-const categoryAPI = async (req, res) => {
+const searchAPI = async (req, res) => {
 //   const { category } = req.query
 //   console.log(category);
   switch (req.method) {
@@ -28,9 +28,9 @@ const categoryAPI = async (req, res) => {
       return res.status(200).json({ name: 'John Doe' })
     case 'GET':
       try {
-        const { category } = req.query
-        console.log("req: " + category);
-        const product = await Product.find({categoryTags: category}).lean().exec();
+        const { slug } = req.query
+        console.log("req: " + slug);
+        const product = await Product.find({$text: {$search: slug}}).lean().exec();
         return res.status(200).json(JSON.stringify(product))        
       } catch (error) {
         return res.status(400).json("failed to get products data")        
@@ -41,4 +41,4 @@ const categoryAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(categoryAPI)
+export default connectDB(searchAPI)
