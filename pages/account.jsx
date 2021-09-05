@@ -32,11 +32,12 @@ const account = () => {
       linkTo: "#",
       marginStyle: {marginLeft: "12px"}
     },
+    
   ];
 
   return (
     <div className={moduleCss.container}>
-      <div>
+      <div className={moduleCss.accContainerWrapper}>
         <div className={moduleCss.accContainer}>
           <div className={moduleCss.iconContainer}>
             <Image src={accIcon} width="46px" height="48px"></Image>

@@ -7,11 +7,17 @@
     align-items: center;
 }
 
+.accContainerWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .accContainer {
     display: flex;
     flex-direction: row;
-    margin: 7vh 0 0 0;
-    position: absolute;
+    margin: 7vh 5vw 2vh 5vw;
+    /* position: absolute; */
     left: 5vw;
     align-items: center;
 }
@@ -26,12 +32,7 @@
         align-items: center;
     }
     .accContainer {
-        display: flex;
-        flex-direction: row;
-        margin: 3vh 0 0 0;
-        position: absolute;
-        left: 5vw;
-        align-items: center;
+        margin: 3vh 5vw 2vh 5vw;
     }
     
 }
@@ -51,9 +52,9 @@
 }
 
 .optionsContainer {
-    position: absolute;
+    /* position: absolute;
     left: 0;
-    top: 20vh;
+    top: 20vh; */
     width: 100%;
     border-top: solid;
     border-top-width: 0.1px;
