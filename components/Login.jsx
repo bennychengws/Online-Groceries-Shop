@@ -7,16 +7,15 @@ import Link from "next/link";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
     email: "",
-    address: "",
+    password: "",
   });
   const [isRevealPwd, setIsRevealPwd] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
+    console.log("submit:")
+    console.log(formData);
   };
 
   return (
@@ -94,14 +93,14 @@ const Login = () => {
             </div>
           </div>
           <div className="flex justify-center">
-          <Link href="../home">
+          {/* <Link href="../home"> */}
             <button
               className=" w-full bg-green-500 hover:bg-green-700 text-white font-bold py-3 my-1 rounded-2xl focus:outline-none focus:shadow-outline"
               type="submit"
             >
                 Log In
             </button>
-          </Link>
+          {/* </Link> */}
           </div>
         </form>
         <p className="text-center text-gray-500 text-sm font-bold">

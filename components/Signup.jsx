@@ -155,7 +155,7 @@ const Signup = () => {
 
       <div className="text-center text-sm  font-bold">
         Already have an account?
-        <Link href="../">
+        <Link href="/">
           <a
             className="no-underline border-b border-blue text-green-500"
 
