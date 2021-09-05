@@ -1,0 +1,117 @@
+.container {
+    margin: 0;
+    padding: 0 0 70px 0;
+    font-family: 'Gilroy', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+@media screen and (min-width: 767px) {
+    .container {
+        margin: 0;
+        padding: 70px 0 0 0;
+        font-family: 'Gilroy', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+    }
+}
+
+.title {
+    font-weight: bold;
+    font-size: calc(1.25em + 0.5vw);
+    text-align: center;
+    padding: 3vh 0 2vh 0;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-color:  rgba(226, 226, 226, 1);
+    width: 100%;
+
+}
+
+.itemContentWrapper {
+    width: 100%;
+    padding: 0 10vw ;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-color:  rgba(226, 226, 226, 1);
+}
+
+.itemContent {
+    width: 100%;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(226, 226, 226, 1);
+    padding: 1.5vh 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.itemImage {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    margin-right: 5vw
+}
+
+.imgAndDescription {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.name {
+    font-weight: bold;
+    color: rgba(24, 23, 37, 1);
+    margin-bottom: 0.2vh;
+}
+
+.price {
+    color: rgba(34, 34, 34, 1);
+    font-size: calc(0.5em + 0.8vw);
+    font-weight: 500;
+    margin-bottom: 1vh;
+}
+
+.amountAndQty {
+    color: rgba(124, 124, 124, 1);
+    font-size: calc(0.5em + 0.5vw);
+}
+
+.Qty {
+    font-weight: bold;
+    color: rgba(24, 23, 37, 1);
+
+}
+
+
+.statusAndCancel {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    align-items: center;
+    width: 25%;
+    font-size: calc(0.5em + 0.3vw);
+    text-align: center;
+    justify-content: space-around;
+}
+
+.cancelOrder{
+    border: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: rgba(248, 164, 76, 0.7);
+    background-color: rgba(253, 229, 76, 0.3);
+    color: rgba(247, 165, 87, 1);
+    padding: 2px 5px;
+}
+
+

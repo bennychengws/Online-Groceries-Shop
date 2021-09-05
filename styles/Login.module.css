@@ -1,0 +1,15 @@
+.pwdContainer {
+    position: relative;
+    /* z-index: 1; */
+    display:flex;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-color: rgba(226, 226, 226, 1);
+}
+/* 
+.pwdIcon {
+    position: absolute; 
+    left: -1px;
+    top: -1px;
+    z-index: 4;
+} */

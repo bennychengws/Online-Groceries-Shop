@@ -1,0 +1,159 @@
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+    font-family: "Gilroy", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 30;
+    background-color: white;
+}
+
+.upperPart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(242, 243, 242, 1);
+    border-radius: 0 0 10px 10px;
+}
+
+.backArrowImg {
+    display: flex;
+    align-self: flex-start;
+    margin: 3vh 5vw;
+    cursor: pointer;
+}
+
+.productImage {
+    position: relative;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    margin: 5vh 0;
+}
+
+.nameAndHeart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3vh 5vw 0 5vw;
+    font-size: calc(1rem + 0.5vw);
+    font-weight: bold;
+    color: rgba(24, 23, 37, 1);
+}
+
+.heartImg {
+    position: relative;
+    display: flex;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.amount {
+    color: rgba(124, 124, 124, 1);
+    margin: 0 5vw;
+}
+
+.qtyAndPrice {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3vh 5vw;
+    font-weight: bold;
+    font-size: calc(1rem + 0.5vw);
+}
+
+.addQtyButton{
+    display: flex;
+    cursor: pointer;
+}
+
+.reduceQtyButton{
+    display: flex;
+    cursor: pointer;
+}
+
+.qtyPanel {
+    width: 120px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.productDetailPanel {
+    margin: 0 5vw;
+    padding: 2vh 0;
+    border-top: solid;
+    border-top-width: 1px;
+    border-top-color: rgba(226, 226, 226, 0.7);
+}
+
+.productDetailAndExpand {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1vh;
+    cursor: pointer;
+}
+
+/* .productDetailTitle {
+    font-weight: bold;
+} */
+
+.expandButton {
+ display: flex;
+}
+
+.productDetail {
+    color: rgba(124, 124, 124, 1);
+}
+
+.infoPanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 5vw;
+    padding: 2vh 0;
+    border-top: solid;
+    border-top-width: 1px;
+    border-top-color: rgba(226, 226, 226, 0.7);
+}
+
+.infoTitle {
+    font-weight: bold;
+}
+
+.nutri {
+    font-size: calc(0.8rem + 0.2vw);
+    color: rgba(124, 124, 124, 1);
+    padding: 1px 3px;
+    background-color: rgba(235, 235, 235, 1);
+    border-radius: 5px;
+}
+
+.addToBasket {
+    display: flex;
+    background-color: rgba(83, 177, 117, 1);
+    border-radius: 10px;
+    border-color: rgba(72, 158, 103, 1);
+    padding: 1vh 0;
+    width: 80%;
+    justify-content: center;
+    color: white;
+    margin: 3vh 5vw;
+    align-self: center;
+    /* position: fixed;
+    bottom: 13vh; */
+        
+}

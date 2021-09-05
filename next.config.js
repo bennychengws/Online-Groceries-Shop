@@ -1,5 +1,18 @@
 module.exports = {
-    env: {
-        mongodburl: "mongodb+srv://dbAdmin:GmjzIMjYuheH475Z@cluster0.bcxlu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    }
+  env: {
+    mongodburl:
+      "mongodb+srv://dbAdmin:GmjzIMjYuheH475Z@cluster0.bcxlu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  },
+//   async redirects() {
+//     return [
+//       {
+//         source: "../search",
+//         destination: "../home",
+//         permanent: true,
+//       },
+//     ];
+//   },
 };
+
+// const withCSS = require('@zeit/next-css')
+// module.exports = withCSS()

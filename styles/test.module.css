@@ -1,0 +1,16 @@
+.vege {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.vegeTextContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.productImage {
+    position: relative;
+    width: 70px;
+    height: 70px;
+}

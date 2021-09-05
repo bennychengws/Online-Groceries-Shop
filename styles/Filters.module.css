@@ -1,0 +1,73 @@
+.container {
+    z-index: 20;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Gilroy', sans-serif;
+    margin: 0;
+    /* display: flex; */
+    /* flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; */
+    min-height: 100vh;
+    text-align: center;
+    background-color: white;
+    overflow: hidden;
+}
+
+.topPanel {
+    margin: 3vh 0 3vh 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    font-size: calc(1.25em + 0.5vw);
+}
+
+.Title {
+    font-weight: bold;
+    font-size: calc(1.25em + 0.5vw);
+    text-align: left;
+    margin: 1vh 0;
+}
+
+@media screen and (max-width: 360px) {
+    .topPanel {
+        margin: 3vh 0 3vh 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        font-weight: bold;
+        font-size: calc(1em + 0.5vw);
+    }
+    
+    .Title {
+        font-weight: bold;
+        font-size: calc(1em + 0.5vw);
+        text-align: left;
+        margin-bottom: 1vh;
+    }
+}
+
+.filterPanel {
+    position: absolute;
+    background-color: rgba(242, 243, 242);
+    border-radius: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+
+.filterContent {
+    margin: 3vh 5vw;
+    height: 100%;
+    
+}
+
+.optionColor {
+    color: rgba(24, 23, 37);
+}
