@@ -11,8 +11,13 @@
   "dependencies": {
     "axios": "^0.21.1",
     "axois": "^0.0.1-security",
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.5.0",
+    "express-session": "^1.17.2",
     "mongoose": "^5.12.15",
     "next": "^11.0.1",
+    "next-connect": "^0.10.2",
+    "passport": "^0.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-notifications": "^1.7.2",
