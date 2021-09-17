@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moduleCss from "../styles/Login.module.css";
+import axios from "axios";
 import showPwdImg from "../images/eye_visible_hide_hidden_show_icon_145988.png";
 import hidePwdImg from "../images/eye_slash_visible_hide_hidden_show_icon_145987.png";
 import Image from "next/image";
@@ -7,16 +8,17 @@ import Link from "next/link";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+    // username: "",
     email: "",
-    address: "",
+    password: "",
+    // address: "",
   });
   const [isRevealPwd, setIsRevealPwd] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit");
+    console.log(formData);
+    const res = await axios.post("api/login", formData);
   };
 
   return (
@@ -94,14 +96,14 @@ const Login = () => {
             </div>
           </div>
           <div className="flex justify-center">
-          <Link href="../home">
+          {/* <Link href="../home"> */}
             <button
               className=" w-full bg-green-500 hover:bg-green-700 text-white font-bold py-3 my-1 rounded-2xl focus:outline-none focus:shadow-outline"
               type="submit"
             >
                 Log In
             </button>
-          </Link>
+          {/* </Link> */}
           </div>
         </form>
         <p className="text-center text-gray-500 text-sm font-bold">
