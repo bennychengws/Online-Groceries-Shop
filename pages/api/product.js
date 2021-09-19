@@ -1,5 +1,6 @@
 import connectDB from '../../middleware/mongodb';
 import Product from '../../models/product';
+import authenticate from '../../middleware/authenticate';
 // import dbConnect from '../../utils/dbConnect';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
@@ -38,4 +39,4 @@ const productAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(productAPI)
+export default connectDB(authenticate(productAPI))

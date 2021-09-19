@@ -15,7 +15,7 @@ const usersAPI = async (req, res) => {
         const users = await User.find({}).lean().exec();
         return res.status(200).json(users)        
       } catch (error) {
-        return res.status(400).json("failed to get products data")        
+        return res.status(400).json("failed to get users data")        
       }
 
     default:

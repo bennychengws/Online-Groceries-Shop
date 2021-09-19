@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moduleCss from "../styles/Login.module.css";
 import axios from "axios";
 import showPwdImg from "../images/eye_visible_hide_hidden_show_icon_145988.png";
 import hidePwdImg from "../images/eye_slash_visible_hide_hidden_show_icon_145987.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 
 const Login = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     // username: "",
     email: "",
@@ -18,8 +21,22 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    const res = await axios.post("api/login", formData);
+    const res = await fetch("api/login", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        formData
+      }),
+    });
+    if(res.ok) {
+      router.push("../home")
+    }
   };
+
+  useEffect(() => {
+    // Prefetch the homepage
+    router.prefetch("../home")
+  }, [])
 
   return (
     <div>
