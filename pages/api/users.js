@@ -23,4 +23,4 @@ const usersAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(authenticate(usersAPI))
+export default authenticate(connectDB(usersAPI))

@@ -11,6 +11,7 @@ import payment from "../images/paymentMethod.png";
 import backArrow from "../images/back arrow.png";
 import accIcon from "../images/accIcon.png";
 // import Noti from "../components/NotificationContainer"
+import authenticationCheck from "../lib/authenticationCheck";
 
 const account = () => {
   const optionList = [
@@ -85,3 +86,20 @@ const account = () => {
 };
 
 export default account;
+
+export async function getServerSideProps(context) {
+  const authenticated = authenticationCheck(context)
+
+  if (!authenticated) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },      
+    };
+  }
+  
+  return {
+    props: {},
+  };
+}

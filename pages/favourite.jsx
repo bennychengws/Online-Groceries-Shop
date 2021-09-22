@@ -12,6 +12,7 @@ import pepsi from "../images/pepsi.png";
 import dietCoke from "../images/diet_coke.png";
 import appleJuice from "../images/apple_juice.png";
 import sprite from "../images/sprite_can.png";
+import authenticationCheck from "../lib/authenticationCheck";
 
 
 const favourite = () => {
@@ -136,3 +137,20 @@ const favourite = () => {
 };
 
 export default favourite;
+
+export async function getServerSideProps(context) {
+  const authenticated = authenticationCheck(context)
+
+  if (!authenticated) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },      
+    };
+  }
+  
+  return {
+    props: {},
+  };
+}

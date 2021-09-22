@@ -11,7 +11,31 @@ module.exports = {
       apiUrl: process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000/api' // development api
           : 'http://localhost:3000/api' // production api
-  }
+  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       has: [
+  //         // {
+  //         //   type: 'query',
+  //         //   key: 'page',
+  //         //   // the page value will not be available in the
+  //         //   // destination since value is provided and doesn't
+  //         //   // use a named capture group e.g. (?<page>home)
+  //         //   value: 'home',
+  //         // },
+  //         {
+  //           type: 'cookie',
+  //           key: 'auth',
+  //           value: 'true',
+  //         },
+  //       ],
+  //       permanent: true,
+  //       destination: '/home',
+  //     },
+  //   ]
+  // }
 //   async redirects() {
 //     return [
 //       {

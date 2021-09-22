@@ -24,6 +24,7 @@ import beefBone from "../images/beefBone.png";
 import rice from "../images/rice.png";
 import pulses from "../images/pulses.png";
 import fetchWrapper from "../lib/fetchWrapper";
+import authenticationCheck from "../lib/authenticationCheck";
 
 const home = ({products}) => {
   const promoList = [

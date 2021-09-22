@@ -39,4 +39,4 @@ const productAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(authenticate(productAPI))
+export default authenticate(connectDB(productAPI))

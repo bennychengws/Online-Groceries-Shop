@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import moduleCss from "../styles/cart.module.css";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import authenticationCheck from "../lib/authenticationCheck";
 
 import NavBar from "../components/NavBar";
 import Checkout from "../components/Checkout";
@@ -151,3 +152,20 @@ const cart = () => {
 };
 
 export default cart;
+
+export async function getServerSideProps(context) {
+  const authenticated = authenticationCheck(context)
+
+  if (!authenticated) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },      
+    };
+  }
+  
+  return {
+    props: {},
+  };
+}

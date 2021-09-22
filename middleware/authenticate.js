@@ -2,6 +2,7 @@ import getConfig from 'next/config';
 import Jwt from "jsonwebtoken";
 
 const authenticate = handler => async (req, res) => {
+
   const { serverRuntimeConfig } = getConfig();
   Jwt.verify(req.cookies.auth, serverRuntimeConfig.secret, async function (err, decoded) {
     console.log(req.cookies.auth)

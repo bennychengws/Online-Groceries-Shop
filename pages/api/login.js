@@ -43,4 +43,4 @@ const loginAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(authenticate(loginAPI))
+export default connectDB(loginAPI)
