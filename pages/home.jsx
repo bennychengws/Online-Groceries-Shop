@@ -144,7 +144,7 @@ const home = ({products}) => {
   const [showSeeAll, setShowSeeAll] = useState(false);
   const [categoryContent, setCategoryContent] = useState("");
 
-  console.log(products)
+  // console.log(products)
 
   // const router = useRouter();
   // const [searchQuery, setSearchQuery] = useState(" ");

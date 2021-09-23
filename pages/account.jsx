@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from "next/link";
 import moduleCss from "../styles/account.module.css";
@@ -14,6 +15,8 @@ import accIcon from "../images/accIcon.png";
 import authenticationCheck from "../lib/authenticationCheck";
 
 const account = () => {
+  const router = useRouter();
+
   const optionList = [
     {
       option: "Orders",
@@ -35,6 +38,14 @@ const account = () => {
     },
     
   ];
+
+  const handleLogout = async() => {
+    console.log("clicked")
+    const res = await fetch("api/logout", {method: 'GET',})
+    if(res.ok) {
+      router.push("/")
+    }
+  }
 
   return (
     <div className={moduleCss.container}>
@@ -71,15 +82,15 @@ const account = () => {
           ))}
         </div>
       </div>
-      <Link href="../">
-      <div className={moduleCss.logOutButton}>
+      {/* <Link href="../"> */}
+      <button className={moduleCss.logOutButton} onClick={handleLogout}>
         <div className={moduleCss.logOutIcon}>
           <Image src={logOut} width="18px" height="18px"></Image>
         </div>
         <div>Log Out</div>
         <div></div>
-      </div>
-      </Link>
+      </button>
+      {/* </Link> */}
       <NavBar />
     </div>
   );

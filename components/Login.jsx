@@ -30,6 +30,8 @@ const Login = () => {
     });
     if(res.ok) {
       router.push("../home")
+    } else {
+      router.reload()
     }
   };
 
