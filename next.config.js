@@ -3,7 +3,7 @@ module.exports = {
     mongodburl:
       "mongodb+srv://dbAdmin:GmjzIMjYuheH475Z@cluster0.bcxlu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   serverRuntimeConfig: {
       secret: '66c504de-57d7-4690-bb39-4a7ddc36d909'
   },

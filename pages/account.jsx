@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from "next/link";
@@ -13,9 +13,20 @@ import backArrow from "../images/back arrow.png";
 import accIcon from "../images/accIcon.png";
 // import Noti from "../components/NotificationContainer"
 import authenticationCheck from "../lib/authenticationCheck";
+import jwt_decode from "jwt-decode"
+import fetchWrapper from "../lib/fetchWrapper";
 
-const account = () => {
+
+const account = (props) => {
   const router = useRouter();
+  // const userInfo = acctContent.decoded
+  console.log(props.email)
+  // console.log(props)
+  const [isEditing, setIsEditing] = useState(false)
+  const [formData, setFormData] = useState({
+    username: props.username,
+    email: props.email,
+  });
 
   const optionList = [
     {
@@ -39,6 +50,12 @@ const account = () => {
     
   ];
 
+  const handleEditUsername = () => {
+    setIsEditing(!isEditing)
+    console.log("user: " + formData.username)
+    console.log(formData)
+  }
+
   const handleLogout = async() => {
     console.log("clicked")
     const res = await fetch("api/logout", {method: 'GET',})
@@ -56,12 +73,15 @@ const account = () => {
           </div>
           <div>
             <div className={moduleCss.accDetails}>
-              <div>Afsar Hossen</div>
-              <div style={{ marginLeft: "5px" }}>
+            {
+              isEditing ? <input type="text" name="username" onChange={(e) => setFormData({ ...formData, username: e.target.value})} value={formData.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
+              : <div>{formData.username}</div>
+            }
+              <div className={moduleCss.usernameEditButton} onClick={handleEditUsername}>
                 <Image src={pencil} width="15px" height="15px"></Image>
               </div>
             </div>
-            <div>Imsuvo97@gmail.com</div>
+            <div>{formData.email}</div>
           </div>
         </div>
         <div className={moduleCss.optionsContainer}>
@@ -109,8 +129,18 @@ export async function getServerSideProps(context) {
       },      
     };
   }
-  
+
+  const token = context.req.cookies.auth;
+  const decoded = jwt_decode(token);
+   
+  console.log(decoded.email);
+
+  // return {
+  //   props: {acctContent: decoded},
+  // };
+  const data = await fetchWrapper(`http://localhost:3000/api/user/${decoded.email}`, context);
+
   return {
-    props: {},
+    props: data,
   };
 }

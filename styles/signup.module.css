@@ -31,9 +31,7 @@
     display:flex;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-color: rgba(226, 226, 226, 1);
-    margin-bottom: 2vh;
-    
+    border-color: rgba(226, 226, 226, 1);    
 }
 
 .signUpTitle {
@@ -43,6 +41,7 @@
 }
 
 .declaration {
+    margin-top: 2vh;
     margin-bottom: 1.75vh
 }
 

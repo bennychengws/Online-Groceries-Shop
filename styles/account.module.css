@@ -22,6 +22,11 @@
     align-items: center;
 }
 
+.usernameEditButton{
+    margin-left: "5px";
+
+}
+
 @media screen and (min-width: 767px) {
     .container {
         padding: 70px 0 0 0;

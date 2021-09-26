@@ -8,7 +8,7 @@ import bellPR from "../images/bellPepperR.png";
 import eggCR from "../images/eggChickenRed.png";
 import ginger from "../images/ginger.png";
 import banana from "../images/banana.png";
-
+import authenticationCheck from "../lib/authenticationCheck";
 
 const order = () => {
   const [showModal, setShowModal] = useState(false);
@@ -105,3 +105,20 @@ const order = () => {
 };
 
 export default order;
+
+export async function getServerSideProps(context) {
+  const authenticated = authenticationCheck(context)
+
+  if (!authenticated) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },      
+    };
+  }
+  
+  return {
+    props: {},
+  };
+}

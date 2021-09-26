@@ -6,6 +6,7 @@ import hidePwdImg from "../images/eye_slash_visible_hide_hidden_show_icon_145987
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const Login = () => {
   const router = useRouter();
@@ -31,7 +32,9 @@ const Login = () => {
     if(res.ok) {
       router.push("../home")
     } else {
-      router.reload()
+      // router.reload()
+      setFormData({email: "", password: "",})
+      createNotification("warning")
     }
   };
 
@@ -39,6 +42,14 @@ const Login = () => {
     // Prefetch the homepage
     router.prefetch("../home")
   }, [])
+
+  const createNotification = (type) => {
+    switch (type) {
+      case "warning":
+        return NotificationManager.warning('Please enter a correct email and password', 'Incorrect Email/Password', 3000);
+    }
+  }
+
 
   return (
     <div>
@@ -134,6 +145,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
+      <NotificationContainer/>
     </div>
   );
 };
