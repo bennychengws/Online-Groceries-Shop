@@ -50,10 +50,19 @@ const account = (props) => {
     
   ];
 
-  const handleEditUsername = () => {
+  const handleEditUsername = async() => {
     setIsEditing(!isEditing)
     console.log("user: " + formData.username)
     console.log(formData)
+  //   const res = await fetchWrapper(`api/user/${props.email}`, {
+  //     method: 'PUT',
+  //     body: JSON.stringify({
+  //       formData
+  //     }),
+  // });
+  //   if(res.ok) {
+  //     console.log("updated username")
+  //   }
   }
 
   const handleLogout = async() => {
