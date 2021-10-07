@@ -15,6 +15,7 @@ import accIcon from "../images/accIcon.png";
 import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode"
 import fetchWrapper from "../lib/fetchWrapper";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 const account = (props) => {
@@ -54,15 +55,18 @@ const account = (props) => {
     setIsEditing(!isEditing)
     console.log("user: " + formData.username)
     console.log(formData)
-  //   const res = await fetchWrapper(`api/user/${props.email}`, {
-  //     method: 'PUT',
-  //     body: JSON.stringify({
-  //       formData
-  //     }),
-  // });
-  //   if(res.ok) {
-  //     console.log("updated username")
-  //   }
+    if(isEditing) {
+      const res = await fetch(`api/user/${props.email}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formData
+        }),
+      });
+      if(res.ok) {
+        console.log("updated username")
+      }
+    }
   }
 
   const handleLogout = async() => {
@@ -83,7 +87,11 @@ const account = (props) => {
           <div>
             <div className={moduleCss.accDetails}>
             {
-              isEditing ? <input type="text" name="username" onChange={(e) => setFormData({ ...formData, username: e.target.value})} value={formData.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
+              isEditing ? 
+              <div>
+              <input type="text" name="username" onChange={(e) => setFormData({ ...formData, username: e.target.value})} value={formData.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
+              {/* <button onClick={handleSubmitEditedUsername}>Submit</button> */}
+              </div>
               : <div>{formData.username}</div>
             }
               <div className={moduleCss.usernameEditButton} onClick={handleEditUsername}>

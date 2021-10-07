@@ -12,11 +12,14 @@ const userAccountAPI = async (req, res) => {
         return res.status(405).json({ message: 'We only support Get' });
     case 'PUT':
       try {
-        const { username } = req.body.formData
+        console.log("Put method")
+        console.log(req.body)
+        const { username, email } = req.body.formData
+        console.log(email)
         console.log(username)
         await User.updateOne({email: email}, {$set: {username: username}}) 
         return res.status(200).json({message: 'Username updated successfully', success: true});
-      } catch {
+      } catch(error) {
         return res.status(400).json({message: new Error(error).message, success: false,});
       }
     case 'GET':
