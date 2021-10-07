@@ -50,19 +50,35 @@ const account = (props) => {
     
   ];
 
-  const handleEditUsername = async() => {
+  const handleEditUsernameButton = () => {
     setIsEditing(!isEditing)
+    // if(isEditing) {
+    //   const res = await fetch(`api/user/${props.email}`, {
+    //     method: 'PUT',
+    //     body: JSON.stringify({
+    //       formData
+    //     }),
+    //   });
+    //   if(res.ok) {
+    //     console.log("updated username")
+    //   }
+    // } 
+  }
+
+  const handleSubmitEditedUsername = async() =>{
     console.log("user: " + formData.username)
     console.log(formData)
-  //   const res = await fetchWrapper(`api/user/${props.email}`, {
-  //     method: 'PUT',
-  //     body: JSON.stringify({
-  //       formData
-  //     }),
-  // });
-  //   if(res.ok) {
-  //     console.log("updated username")
-  //   }
+      const res = await fetch(`api/user/${props.email}`, {
+        method: 'PUT',
+        body: {
+          formData
+          // username: formData.username,
+          // email: formData.email
+        },
+      });
+      if(res.ok) {
+        console.log("updated username")
+      }
   }
 
   const handleLogout = async() => {
@@ -83,10 +99,14 @@ const account = (props) => {
           <div>
             <div className={moduleCss.accDetails}>
             {
-              isEditing ? <input type="text" name="username" onChange={(e) => setFormData({ ...formData, username: e.target.value})} value={formData.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
+              isEditing ?
+              <div>
+              <input type="text" name="username" onChange={(e) => setFormData({ ...formData, username: e.target.value})} value={formData.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
+                <button onClick={handleSubmitEditedUsername}>Submit</button>
+              </div> 
               : <div>{formData.username}</div>
             }
-              <div className={moduleCss.usernameEditButton} onClick={handleEditUsername}>
+              <div className={moduleCss.usernameEditButton} onClick={handleEditUsernameButton}>
                 <Image src={pencil} width="15px" height="15px"></Image>
               </div>
             </div>
