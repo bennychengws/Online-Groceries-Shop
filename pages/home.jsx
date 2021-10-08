@@ -23,7 +23,7 @@ import chicken from "../images/chicken.png";
 import beefBone from "../images/beefBone.png";
 import rice from "../images/rice.png";
 import pulses from "../images/pulses.png";
-import fetchWrapper from "../lib/fetchWrapper";
+import {fetchWrapper} from "../lib/fetchWrapper";
 import authenticationCheck from "../lib/authenticationCheck";
 
 const home = ({products}) => {
@@ -299,7 +299,7 @@ export async function getServerSideProps(context) {
   //     },
   //   }
   // }
-  const data = await fetchWrapper("http://localhost:3000/api/product", context)
+  const data = await fetchWrapper.get("http://localhost:3000/api/product", context)
   // const productData = await data.json();
   return {
     props: { products: data },

@@ -155,7 +155,7 @@ export async function getServerSideProps(context) {
   // return {
   //   props: {acctContent: decoded},
   // };
-  const data = await fetchWrapper(`http://localhost:3000/api/user/${decoded.email}`, context);
+  const data = await fetchWrapper(`http://localhost:3000/api/user/${decoded.email}`, context, "GET");
 
   return {
     props: data,
