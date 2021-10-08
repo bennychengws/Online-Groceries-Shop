@@ -13,17 +13,14 @@ const userAccountAPI = async (req, res) => {
     case 'PUT':
       try {
         console.log("Put method")
-        // console.log(req.body)
-        const { username, email } = req.body
-        console.log(username)
+        console.log(req.body)
+        const { username, email } = req.body.formData
         console.log(email)
-        const user = await User.updateOne({email: email}, {$set: {username: username}}) 
-        // return res.status(200).json({message: 'Username updated successfully', success: true});
-        // console.log(user)
-        return res.status(200).json('Username updated successfully');
+        console.log(username)
+        await User.updateOne({email: email}, {$set: {username: username}}) 
+        return res.status(200).json({message: 'Username updated successfully', success: true});
       } catch(error) {
-        // return res.status(400).json({message: new Error(error).message, success: false,});
-        return res.status(400).json('Username failed to update');
+        return res.status(400).json({message: new Error(error).message, success: false,});
       }
     case 'GET':
       try {
@@ -41,4 +38,4 @@ const userAccountAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(userAccountAPI)
+export default authenticate(connectDB(userAccountAPI))
