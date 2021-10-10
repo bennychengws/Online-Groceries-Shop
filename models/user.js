@@ -13,11 +13,10 @@ const user = new Schema({
   password: {
     type: String,
     required: true
+  },
+  address: {
+    type: String,
   }
-  // address: {
-  //   type: String,
-  //   required: true
-  // }
 });
 
 mongoose.models = {};

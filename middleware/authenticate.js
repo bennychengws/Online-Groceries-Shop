@@ -7,11 +7,11 @@ const authenticate = handler => async (req, res) => {
   Jwt.verify(req.cookies.auth, serverRuntimeConfig.secret, async function (err, decoded) {
     console.log(req.cookies.auth)
     if (!err && decoded) {
-      console.log("authenticated")
+      console.log("authenticated by wrapper")
       console.log(res.statusCode)
       return handler(req, res);
     }
-    console.log("Not authenticated")
+    console.log("Not authenticated by wrapper")
     console.log(err)
     return res.status(401).json({
       message: 'Sorry you are not authenticated'

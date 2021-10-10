@@ -282,26 +282,26 @@ const home = ({products}) => {
 export default home;
 
 export async function getServerSideProps(context) {
-  // const data = await fetch(
-  //   "http://localhost:3000/api/product",
-  //   {
-  //     headers: {
-  //       cookie: context.req?.headers.cookie
-  //     }
-  //   } 
-  // );
-  // console.log(data.status)
-  // if(data.status === 401) {
-  //   return {
-  //     redirect: {
-  //       destination: '/',
-  //       permanent: true,
-  //     },
-  //   }
-  // }
-  const data = await fetchWrapper.get("http://localhost:3000/api/product", context)
-  // const productData = await data.json();
+  const data = await fetch(
+    "http://localhost:3000/api/product",
+    {
+      headers: {
+        cookie: context.req?.headers.cookie
+      }
+    } 
+  );
+  console.log(data.status)
+  if(data.status === 401) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },
+    }
+  }
+  // const data = await fetchWrapper.get("http://localhost:3000/api/product", context)
+  const productData = await data.json();
   return {
-    props: { products: data },
+    props: { products: productData },
   };
 }

@@ -1,5 +1,6 @@
 import connectDB from '../../middleware/mongodb';
 import cookie from 'cookie';
+import authenticate from '../../middleware/authenticate';
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
@@ -18,4 +19,4 @@ const logoutAPI = async (req, res) => {
   }
 }
 
-export default connectDB(logoutAPI)
+export default authenticate(connectDB(logoutAPI))

@@ -14,19 +14,18 @@ import accIcon from "../images/accIcon.png";
 // import Noti from "../components/NotificationContainer"
 import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode"
-import fetchWrapper from "../lib/fetchWrapper";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
-const account = (props) => {
+const account = ({accountInfo}) => {
   const router = useRouter();
   // const userInfo = acctContent.decoded
-  console.log(props.email)
+  console.log(accountInfo.email)
   // console.log(props)
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
-    username: props.username,
-    email: props.email,
+    username: accountInfo.username,
+    email: accountInfo.email,
   });
 
   const optionList = [
@@ -39,7 +38,7 @@ const account = (props) => {
     {
       option: "Delivery Address",
       optionImage: <Image src={delivery} width="16.81px" height="20.17px"></Image>,
-      linkTo: "#",
+      linkTo: "../address",
       marginStyle: {marginLeft: "16px"}
     },
     {
@@ -56,7 +55,8 @@ const account = (props) => {
     console.log("user: " + formData.username)
     console.log(formData)
     if(isEditing) {
-      const res = await fetch(`api/user/${props.email}`, {
+      // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
+      const res = await fetch(`api/user/${accountInfo.email}/info/username`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -64,8 +64,15 @@ const account = (props) => {
         }),
       });
       if(res.ok) {
+        createNotification("success")
         console.log("updated username")
+      } else if(res.status === 401) {
+        // createNotification("error", "Sorry you are not authenticated")
+        router.push("/")
+      } else {
+        createNotification("error", "Some errors occur, please try again")
       }
+
     }
   }
 
@@ -74,6 +81,15 @@ const account = (props) => {
     const res = await fetch("api/logout", {method: 'GET',})
     if(res.ok) {
       router.push("/")
+    }
+  }
+
+  const createNotification = (type, message) => {
+    switch (type) {
+      case "success":
+        return NotificationManager.success(`You have succefully changed your username`, "Successful Change");
+      case "error":
+        return NotificationManager.error(message, 'Ooops', 3000);
     }
   }
 
@@ -119,7 +135,6 @@ const account = (props) => {
           ))}
         </div>
       </div>
-      {/* <Link href="../"> */}
       <button className={moduleCss.logOutButton} onClick={handleLogout}>
         <div className={moduleCss.logOutIcon}>
           <Image src={logOut} width="18px" height="18px"></Image>
@@ -127,8 +142,8 @@ const account = (props) => {
         <div>Log Out</div>
         <div></div>
       </button>
-      {/* </Link> */}
       <NavBar />
+      <NotificationContainer/>
     </div>
   );
 };
@@ -137,27 +152,21 @@ export default account;
 
 export async function getServerSideProps(context) {
   const authenticated = authenticationCheck(context)
-
   if (!authenticated) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: true,
-      },      
-    };
+    return {redirect: {destination: '/', permanent: true,}, };
   }
-
-  const token = context.req.cookies.auth;
+  const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
-   
-  console.log(decoded.email);
-
-  // return {
-  //   props: {acctContent: decoded},
-  // };
-  const data = await fetchWrapper(`http://localhost:3000/api/user/${decoded.email}`, context, "GET");
-
+  const data = await fetch(`http://localhost:3000/api/user/${decoded.email}`, 
+    {
+      headers: {cookie: context.req?.headers.cookie}} 
+  );
+  console.log(data.status)
+  if(data.status === 401) {
+    return {redirect: {destination: '/', permanent: true,}, };
+  }
+  const accountData = await data.json();
   return {
-    props: data,
+    props: {accountInfo: accountData}
   };
 }

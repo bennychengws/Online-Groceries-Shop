@@ -25,6 +25,8 @@ const helloAPI = async (req, res) => {
         username,
         email,
         password: hashedPassword,
+        address: "",
+        // paymentMethod: ""
       })
       await user.save()
       return res.status(200).json({ name: 'John Doe' })
