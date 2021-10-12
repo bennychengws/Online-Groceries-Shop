@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from 'next/router'
 import axios from "axios";
 import moduleCss from "../styles/Signup.module.css";
 import showPwdImg from "../images/eye_visible_hide_hidden_show_icon_145988.png";
@@ -12,6 +13,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 const Signup = () => {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -62,8 +64,10 @@ const Signup = () => {
       createNotification("error")
     } else {
         try {
-          const res = await axios.post("api/signup", formData);
+          await axios.post("api/signup", formData);
           createNotification("success")
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          router.push("/")
         } catch (e) {
           console.log(e.response.data.message);
           createNotification("warning", e.response.data.message)

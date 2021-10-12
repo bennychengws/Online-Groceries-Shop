@@ -22,7 +22,14 @@
     margin-left: 0.5rem;
 }
 
-.addressContent {
+.methodTitle {
+    display:inline;
+    border-bottom: dotted;
+    border-bottom-width: 1px;
+    border-color: rgba(83, 177, 117, 1);
+}
+
+.paymentContent {
     display: block;
     height: auto;
     width: auto;
@@ -44,63 +51,6 @@
     border-color: rgba(83, 177, 117, 1);
 }
 
-.press {
-    margin: 2vh 0;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: #53B175;
-    color: white;
-}
-
-.inputWrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.inputField {
-    margin-left: 1vw;
-    border-bottom: solid;
-    border-bottom-width: 1px;
-    border-bottom-color:rgba(83, 177, 117, 1);
-    /* border-radius: 5px; */
-    width: 70%;
-}
-
-.inputField:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-
-}
-
-.submitCancelRow {
-    display: flex;
-    flex-direction: row;
-}
-
-.submit {
-    margin-top: 2vh;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: #53B175;
-    color: white;
-    /* border: solid;
-    border-radius: 5px;
-    border-width: 1px;
-    padding: 3px;
-    border-color: rgba(83, 177, 117, 1); */
-}
-
-.cancel {
-    margin-top: 2vh;
-    margin-left: 1vw;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: palevioletred;
-    color: white;
-    cursor: pointer;
-}
-
 .logOutButton {
     display: flex;
     flex-direction: row;
@@ -111,8 +61,6 @@
     color: rgba(83, 177, 117, 1);
     border-radius: 10px;
     margin: 0 5vw;
-    position: absolute;
-    bottom: 13vh;
     justify-content: space-between;
     cursor: pointer;
     align-self: center;

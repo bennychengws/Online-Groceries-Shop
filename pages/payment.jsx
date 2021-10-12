@@ -2,54 +2,18 @@ import React, { useState } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import NavBar from "../components/NavBar";
+import EditPayment from "../components/EditPayment";
 import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from "react-notifications";
-import moduleCss from "../styles/address.module.css";
-import delivery from "../images/deliceryAddress.png";
+import moduleCss from "../styles/payment.module.css";
+import payment from "../images/paymentMethod.png";
 import logOut from "../images/logOut.png";
 
 
-const address = ({addressInfo}) => {
+const paymentMethod = ({}) => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    email: addressInfo.email,
-    country: "",
-    region: "",
-    city: "",
-    streetAddressLine1: "",
-    streetAddressLine2: ""
-  });
-  console.log(formData);
-
-  const [isChangingAddress, setIsChangingAddress] = useState(false)
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    setIsChangingAddress(!isChangingAddress)
-    console.log(formData)
-    if(isChangingAddress) {
-      // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
-      const res = await fetch(`api/user/${addressInfo.email}/info/address`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formData
-        }),
-      });
-      if(res.ok) {
-        createNotification("success")
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        console.log("updated address")
-        router.reload()
-      } else if(res.status === 401) {
-        createNotification("error", "Sorry you are not authenticated")
-        router.push("/")
-      } else {
-        createNotification("error", "Some errors occur, please try again")
-      }
-    }
-  }
+  const [isChangingPaymentMethod, setIsChangingPaymentMethod] = useState(false)
 
   const handleLogout = async() => {
     console.log("clicked")
@@ -58,38 +22,36 @@ const address = ({addressInfo}) => {
       router.push("/")
     }
   }
-  
-  const createNotification = (type, message) => {
-    switch (type) {
-      case "success":
-        return NotificationManager.success(`You have succefully updated your registered address`, "Successful Change", 10000);
-      case "error":
-        return NotificationManager.error(message, 'Ooops', 3000);
-    }
-  }
 
   return (
     <div className={moduleCss.container}>
       <div className={moduleCss.pageTitleContent}>
         <div className={moduleCss.pageTitleWithIcon}>
-          <Image src={delivery} width="16.81px" height="20.17px"></Image>
-          <div className={moduleCss.pageTitle}>Registered Address</div>
+          <Image src={payment} width="16.81px" height="20.17px"></Image>
+          <div className={moduleCss.pageTitle}>Registered Payment Method</div>
         </div>
-        <div className={moduleCss.addressContent}>
-          <div>Country: {addressInfo.address.country}</div>
-          <div>Region: {addressInfo.address.region}</div>
-          <div>City: {addressInfo.address.city}</div>
+        <div className={moduleCss.paymentContent}>
+          <div>Method: Mastercard ending in: </div>
+          <div>Name on card: </div>
+          <div>Expiration Date: </div>
+        </div>
+        {/* <span className="mr-2">Mastercard</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors2" value={1} defaultChecked></input> */}
+        {/* <div className={moduleCss.addressContent}>
+          <div>Country: {paymentAcctInfo.address.country}</div>
+          <div>Region: {paymentAcctInfo.address.region}</div>
+          <div>City: {paymentAcctInfo.address.city}</div>
           <div className={moduleCss.streetAddressWrapper}>
             <div className={moduleCss.streetAddressTitle}>Street Address</div>
-            <div>Line 1: {addressInfo.address.streetAddressLine1}</div>
-            <div>Line 2: {addressInfo.address.streetAddressLine2}</div>
+            <div>Line 1: {paymentAcctInfo.address.streetAddressLine1}</div>
+            <div>Line 2: {paymentAcctInfo.address.streetAddressLine2}</div>
           </div>
-        </div>
-        <button className={moduleCss.press} onClick={() => setIsChangingAddress(!isChangingAddress)} style={{display: isChangingAddress ? "none" : "block"}}>Press here to change address</button>
-        <div style={{display: isChangingAddress ? "block" : "none", marginTop: "3vh"}}>
+        </div> */}
+        {/* <button className={moduleCss.press} onClick={() => setIsChangingPaymentMethod(!isChangingPaymentMethod)} style={{display: isChangingPaymentMethod ? "none" : "block"}}>Press here to update payment method</button> */}
+        <EditPayment/>
+        {/* <div style={{display: isChangingPaymentMethod ? "block" : "none", marginTop: "3vh"}}>
           <div className={moduleCss.pageTitleWithIcon} >
-            <Image src={delivery} width="16.81px" height="20.17px"></Image>
-            <div className={moduleCss.pageTitle}>New Address</div>
+            <Image src={payment} width="16.81px" height="20.17px"></Image>
+            <div className={moduleCss.pageTitle}>Edit Payment Method</div>
           </div>
           <form className={moduleCss.addressContent} onSubmit={handleSubmit}>
             <div className={moduleCss.inputWrapper} >
@@ -117,18 +79,13 @@ const address = ({addressInfo}) => {
             </div>
             <div className={moduleCss.submitCancelRow}>
               <button className={moduleCss.submit}>Submit</button>
-              <div className={moduleCss.cancel} onClick={() => {setIsChangingAddress(!isChangingAddress), setFormData({...formData, country: "", region: "", city: "", streetAddressLine1: "", streetAddressLine2: ""})}}>Cancel</div>
+              <div className={moduleCss.cancel} onClick={() => {setIsChangingPaymentMethod(!isChangingPaymentMethod), setFormData({...formData, country: "", region: "", city: "", streetAddressLine1: "", streetAddressLine2: ""})}}>Cancel</div>
             </div>
           </form>
-        </div>
+        </div> */}
       </div>
-      <button 
-        className={moduleCss.logOutButton} 
-        onClick={handleLogout} style={{ position: isChangingAddress? "static" : "fixed", bottom: isChangingAddress ? "0" : "13vh" }}
-      >
-        <div className={moduleCss.logOutIcon}>
-          <Image src={logOut} width="18px" height="18px"></Image>
-        </div>
+      <button className={moduleCss.logOutButton} onClick={handleLogout}>
+        <div className={moduleCss.logOutIcon}><Image src={logOut} width="18px" height="18px"></Image></div>
         <div>Log Out</div>
         <div></div>
       </button>
@@ -138,7 +95,7 @@ const address = ({addressInfo}) => {
   );
 };
 
-export default address;
+export default paymentMethod;
 
 export async function getServerSideProps(context) {
   const authenticated = authenticationCheck(context)
@@ -155,8 +112,8 @@ export async function getServerSideProps(context) {
   if(data.status === 401) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  const addressData = await data.json();
+  const paymentAcctData = await data.json();
   return {
-    props: {addressInfo: addressData}
+    props: {paymentAcctInfo: paymentAcctData}
   };
 }

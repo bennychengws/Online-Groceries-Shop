@@ -15,7 +15,7 @@ const user = new Schema({
     required: true
   },
   address: {
-    type: String,
+    type: Object,
   }
 });
 

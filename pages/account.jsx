@@ -44,7 +44,7 @@ const account = ({accountInfo}) => {
     {
       option: "Payment Methods",
       optionImage: <Image src={payment} width="20px" height="13.45px"></Image>,
-      linkTo: "#",
+      linkTo: "../payment",
       marginStyle: {marginLeft: "12px"}
     },
     

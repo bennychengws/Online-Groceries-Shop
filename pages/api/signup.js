@@ -25,7 +25,13 @@ const helloAPI = async (req, res) => {
         username,
         email,
         password: hashedPassword,
-        address: "",
+        address: {
+          country: "",
+          region: "",
+          city: "",
+          streetAddressLine1: "",
+          streetAddressLine2: ""
+        },
         // paymentMethod: ""
       })
       await user.save()

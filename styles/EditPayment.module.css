@@ -1,15 +1,7 @@
 .container {
-    margin: 0;
-    padding: 0 0 75px 0;
-
+    margin: 2vh 0;
+    padding: 0;
     font-family: 'Gilroy', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start
-}
-.pageTitleContent {
-    margin: 7vh 5vw 2vh 5vw;
 }
 
 .pageTitleWithIcon {
@@ -22,7 +14,14 @@
     margin-left: 0.5rem;
 }
 
-.addressContent {
+.methodTitle {
+    display:inline;
+    border-bottom: dotted;
+    border-bottom-width: 1px;
+    border-color: rgba(83, 177, 117, 1);
+}
+
+.paymentContent {
     display: block;
     height: auto;
     width: auto;
@@ -44,12 +43,12 @@
     border-color: rgba(83, 177, 117, 1);
 }
 
-.press {
-    margin: 2vh 0;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: #53B175;
-    color: white;
+.optionalButtonWrapper {
+    display: flex;
+    height: auto;
+    width: auto;
+    margin: 0.5rem;
+    align-items: center;
 }
 
 .inputWrapper {
@@ -99,44 +98,4 @@
     background-color: palevioletred;
     color: white;
     cursor: pointer;
-}
-
-.logOutButton {
-    display: flex;
-    flex-direction: row;
-    padding: 1vh 3vw;
-    width: 80%;
-    justify-content: center;
-    background-color: rgba(242, 243, 242, 1);
-    color: rgba(83, 177, 117, 1);
-    border-radius: 10px;
-    margin: 0 5vw;
-    position: absolute;
-    bottom: 13vh;
-    justify-content: space-between;
-    cursor: pointer;
-    align-self: center;
-}
-
-.logOutIcon {
-    display: flex;
-    align-items: center;
-}
-
-@media screen and (min-width: 767px) {
-    .container {
-        padding: 70px 0 0 0;
-        font-family: 'Gilroy', sans-serif;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start
-    }
-    .pageTitleContent {
-        margin: 2vh 5vw 2vh 5vw;
-    }
-
-    .logOutButton {
-        margin: 4vh 0;
-    }
 }
