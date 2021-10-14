@@ -16,6 +16,12 @@ const user = new Schema({
   },
   address: {
     type: Object,
+  },
+  favourite: {
+    type: Array,
+  },
+  cart: {
+    type: Array,
   }
 });
 

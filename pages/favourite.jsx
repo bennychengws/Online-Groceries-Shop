@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from "next/link";
 import moduleCss from "../styles/favourite.module.css";
@@ -13,49 +14,57 @@ import dietCoke from "../images/diet_coke.png";
 import appleJuice from "../images/apple_juice.png";
 import sprite from "../images/sprite_can.png";
 import authenticationCheck from "../lib/authenticationCheck";
+import jwt_decode from "jwt-decode";
 
 
-const favourite = () => {
-  const [favouriteList, setFavouriteList] = useState([
-    {
-      name: "Diet Coke",
-      productImage: (
-        <Image src={dietCoke} width="44.49px" height="89.36px"></Image>
-      ),
-      amount: "355ml",
-      price: 7,
-    },
-    {
-      name: "Sprite Can",
-      productImage: (
-        <Image src={sprite} width="51.68px" height="91.77px"></Image>
-      ),
-      amount: "325ml",
-      price: 6.5,
-    },
-    {
-      name: "Apple & Grape Juice",
-      productImage: (
-        <Image src={appleJuice} width="81.68px" height="93.21px"></Image>
-      ),
-      amount: "2L",
-      price: 15,
-    },
-    {
-      name: "Coca Cola Can",
-      productImage: <Image src={coca} width="48.82px" height="90.44px"></Image>,
-      amount: "325ml",
-      price: 6.8,
-    },
-    {
-      name: "Pepsi Can",
-      productImage: (
-        <Image src={pepsi} width="49.52px" height="94.59px"></Image>
-      ),
-      amount: "330ml",
-      price: 6.8,
-    },
-  ])
+const favourite = ({ accountInfo, favouriteProductInfo }) => {
+  // const [favouriteList, setFavouriteList] = useState([
+  //   {
+  //     name: "Diet Coke",
+  //     productImage: (
+  //       <Image src={dietCoke} width="44.49px" height="89.36px"></Image>
+  //     ),
+  //     amount: "355ml",
+  //     price: 7,
+  //   },
+  //   {
+  //     name: "Sprite Can",
+  //     productImage: (
+  //       <Image src={sprite} width="51.68px" height="91.77px"></Image>
+  //     ),
+  //     amount: "325ml",
+  //     price: 6.5,
+  //   },
+  //   {
+  //     name: "Apple & Grape Juice",
+  //     productImage: (
+  //       <Image src={appleJuice} width="81.68px" height="93.21px"></Image>
+  //     ),
+  //     amount: "2L",
+  //     price: 15,
+  //   },
+  //   {
+  //     name: "Coca Cola Can",
+  //     productImage: <Image src={coca} width="48.82px" height="90.44px"></Image>,
+  //     amount: "325ml",
+  //     price: 6.8,
+  //   },
+  //   {
+  //     name: "Pepsi Can",
+  //     productImage: (
+  //       <Image src={pepsi} width="49.52px" height="94.59px"></Image>
+  //     ),
+  //     amount: "330ml",
+  //     price: 6.8,
+  //   },
+  // ])
+  const router = useRouter()
+
+  const [favouriteList, setFavouriteList] = useState([]) 
+
+  useEffect(() => {
+    setFavouriteList(favouriteProductInfo)
+  }, [])
   
   const [addToCartList , setAddToCartList] = useState([]) 
 
@@ -89,34 +98,30 @@ const favourite = () => {
           {favouriteList.map((item, index) => {
             if (index === favouriteList.length-1) {
               return <div key={item.name} className={moduleCss.itemContent} style={{borderBottom: "hidden"}}>
-                        <Link href="../product">
-                          <div className={moduleCss.itemImage}>{item.productImage}</div>
-                        </Link>  
+                        <div className={moduleCss.itemImage}><Image src={`data:image/png;base64,${item.productImage}`} layout="fill" objectFit="contain" quality={100} onClick={() => router.push(`/product/${item._id}`)}></Image></div>
                         <div style={{width: "100%"}}>
                           <div className={moduleCss.rowAndButton}>
                             <div className={moduleCss.name}>{item.name}</div>
                             <div className={moduleCss.cross} onClick={() => deleteItem(item)}><Image src={cross}  layout="fill" objectFit="cover" quality={100}></Image></div>
                           </div>
-                          <div className={moduleCss.amount}>{item.amount}</div>
+                          <div className={moduleCss.amount}>{item.AmountPerQty}</div>
                           <div className={moduleCss.rowAndButton}>
-                            <div style={{fontWeight: "bold"}}>${item.price}</div>
+                            <div style={{fontWeight: "bold"}}>${item.markedPrice}</div>
                             <div className={moduleCss.carts} onClick={() => addToCart(item)}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
                           </div>
                         </div>
                       </div>
             } else {
               return <div key={item.name} className={moduleCss.itemContent}>
-                        <Link href="../product">
-                          <div className={moduleCss.itemImage}>{item.productImage}</div>
-                        </Link>  
+                        <div className={moduleCss.itemImage}><Image src={`data:image/png;base64,${item.productImage}`} layout="fill" objectFit="contain" quality={100} onClick={() => router.push(`/product/${item._id}`)}></Image></div>
                         <div style={{width: "100%"}}>
                           <div className={moduleCss.rowAndButton}>
                             <div className={moduleCss.name}>{item.name}</div>
                             <div className={moduleCss.cross} onClick={() => deleteItem(item)}><Image src={cross}  layout="fill" objectFit="cover" quality={100}></Image></div>
                           </div>
-                          <div className={moduleCss.amount}>{item.amount}</div>
+                          <div className={moduleCss.amount}>{item.AmountPerQty}</div>
                           <div className={moduleCss.rowAndButton}>
-                            <div style={{fontWeight: "bold"}}>${item.price}</div>
+                            <div style={{fontWeight: "bold"}}>${item.markedPrice}</div>
                             <div className={moduleCss.carts} onClick={() => addToCart(item)}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
                           </div>
                         </div>
@@ -139,18 +144,44 @@ const favourite = () => {
 export default favourite;
 
 export async function getServerSideProps(context) {
+  //Check authentication and get user account information 
+  //As well as the favourite product ID 
   const authenticated = authenticationCheck(context)
-
   if (!authenticated) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: true,
-      },      
-    };
+    return {redirect: {destination: '/', permanent: true,}, };
   }
-  
+  const token = context.req.cookies.auth
+  const decoded = jwt_decode(token);
+  const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
+    headers: {cookie: context.req?.headers.cookie}} 
+  );
+  console.log(accAPIData.status)
+  if(accAPIData.status === 401) {
+    return {redirect: {destination: '/', permanent: true,}, };
+  }
+  const accountData =  await accAPIData.json();
+
+  //Get the favourite product information by its ID
+  var processingArray = []
+  for(var i = 0; i < accountData.favourite.length; i++) {
+    for (const [key, value] of Object.entries(accountData.favourite[i])) {
+      if (key === "_id")
+      processingArray.push(value);
+    }
+    // console.log(processingArray)
+  }
+  let url = `http://localhost:3000/api/syncFavouriteDetails/${processingArray.join('/')}`
+  // console.log(url)
+  const productAPIdata = await fetch(url, {
+    headers: {cookie: context.req?.headers.cookie}} 
+  );
+  console.log(productAPIdata.status)
+  if(productAPIdata.status === 401) {
+    return {redirect: {destination: '/', permanent: true,}, };
+  }
+  const favouriteProductData = await productAPIdata.json();
+
   return {
-    props: {},
+    props: { accountInfo: accountData, favouriteProductInfo: favouriteProductData },
   };
 }

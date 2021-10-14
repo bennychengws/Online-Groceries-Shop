@@ -147,9 +147,8 @@ export async function getServerSideProps(context) {
   }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
-  const data = await fetch(`http://localhost:3000/api/user/${decoded.email}/info/address`, 
-    {
-      headers: {cookie: context.req?.headers.cookie}} 
+  const data = await fetch(`http://localhost:3000/api/user/${decoded.email}/info/address`, {
+    headers: {cookie: context.req?.headers.cookie}} 
   );
   console.log(data.status)
   if(data.status === 401) {
