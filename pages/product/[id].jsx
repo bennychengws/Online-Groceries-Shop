@@ -90,9 +90,9 @@ const product = ({productItem, accountInfo}) => {
     });
     // The setIsFavourite(!isFavourite) will not change isFavourite after the end of the handleFavourite function
     if(res.ok && isFavourite===false) {
-      createNotification("success", `You have added the ${name} to favourite`)
+      createNotification("success", `You have added the ${name} to Favourite`)
     } else if (res.ok && isFavourite===true) {
-      createNotification("warning", `You have deleted the ${name} from favourite`)
+      createNotification("warning", `You have deleted the ${name} from Favourite`)
     } else if(res.status === 401) {
       createNotification("error", "Sorry you are not authenticated")
       router.push("/")
@@ -123,7 +123,7 @@ const product = ({productItem, accountInfo}) => {
       }),
     });
     if(res.ok) {
-      createNotification("success", `You have added the ${name} to cart`)
+      createNotification("success", `You have added the ${name} to Cart`)
     } else if(res.status === 401) {
       createNotification("error", "Sorry you are not authenticated")
       router.push("/")
@@ -145,27 +145,20 @@ const product = ({productItem, accountInfo}) => {
     }
   }
 
-  const handleTest = async() => {
-    console.log(accountInfo.favourite)
-    var processingArray = []
-    for(var i = 0; i < accountInfo.favourite.length; i++) {
-      for (const [key, value] of Object.entries(accountInfo.favourite[i])) {
-        if (key === "_id")
-        processingArray.push(value);
-      }
-      console.log(processingArray)
-    }
-    let url = `http://localhost:3000/api/syncFavouriteDetails/${processingArray.join('/')}`
-    console.log(url)
-    const res = await fetch(url);
-    // const res = await fetch(`api/syncFavouriteDetails`, {
-    //   method: 'GET',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     processingArray
-    //   }),
-    // });
-  }
+  // const handleTest = async() => {
+  //   console.log(accountInfo.favourite)
+  //   var processingArray = []
+  //   for(var i = 0; i < accountInfo.favourite.length; i++) {
+  //     for (const [key, value] of Object.entries(accountInfo.favourite[i])) {
+  //       if (key === "_id")
+  //       processingArray.push(value);
+  //     }
+  //     console.log(processingArray)
+  //   }
+  //   let url = `http://localhost:3000/api/syncFavouriteDetails/${processingArray.join('/')}`
+  //   console.log(url)
+  //   const res = await fetch(url);
+  // }
   
   return (
     <div className={moduleCss.container}>
@@ -186,7 +179,7 @@ const product = ({productItem, accountInfo}) => {
       </div> 
       {/* <Link href="../cart"> */}
       <button className={moduleCss.addToBasket} onClick={handleCart}>Add To Basket</button>
-      <button onClick={handleTest}>Click</button>
+      {/* <button onClick={handleTest}>Click</button> */}
       {/* </Link>  */}
       <NotificationContainer/>
     </div>

@@ -75,14 +75,43 @@ const favourite = ({ accountInfo, favouriteProductInfo }) => {
   }
 
   const addToCart = (item) => {
-    setAddToCartList(addToCartList => [...addToCartList, item])
-    setFavouriteList(favouriteList.filter((listItem) => listItem.name !== item.name))
+    const itemToCart = {name: item.name, _id: item._id, quantity: 1}
+    for (var i = 0; i < accountInfo.cart.length; i++) {
+      if (accountInfo.cart[i]._id === item._id) {
+        createNotification("info", item)
+        return;
+      }
+    }
+    // if(addToCartList.includes(itemToCart)) {
+    //   createNotification("info", item)
+    //   return;
+    // }
+
+    setAddToCartList(addToCartList => [...addToCartList, itemToCart])
+    // setFavouriteList(favouriteList.filter((listItem) => listItem.name !== item.name))
+
+    //   for(var i = 0; i < accountInfo.cart.length; i++) {
+    //     if (accountInfo.cart[i]._id === _id) {
+    //       createNotification("info", `${name} is already in your cart`)
+    //       return;
+    //     }
+    //   }
+    // } else {
+    //   createNotification("info", item)
+    //   return;
+    
     createNotification("success", item)
     console.log(addToCartList)
   }
 
+  console.log(addToCartList)
+  console.log(addToCartList.includes({name: "Ginger", _id: "6130a0c5d3cc359de01975a3", quantity: 1}))
+
+
   const createNotification = (type, item) => {
       switch (type) {
+        case "info":
+          return NotificationManager.info(`${item.name} is already in your cart`, "Duplicated");
         case "success":
           return NotificationManager.success(`You have added the ${item.name} to the cart`, "Added to Cart");
         case "warning":
@@ -170,9 +199,9 @@ export async function getServerSideProps(context) {
     }
     // console.log(processingArray)
   }
-  let url = `http://localhost:3000/api/syncFavouriteDetails/${processingArray.join('/')}`
+  var urlForFavourite = `http://localhost:3000/api/syncFavouriteDetails/${processingArray.join('/')}`
   // console.log(url)
-  const productAPIdata = await fetch(url, {
+  const productAPIdata = await fetch(urlForFavourite, {
     headers: {cookie: context.req?.headers.cookie}} 
   );
   console.log(productAPIdata.status)
