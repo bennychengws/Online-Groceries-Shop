@@ -35,7 +35,7 @@ const product = ({productItem, accountInfo}) => {
     rating: rating,
   })
 
-  const addToCartItemInfo = {name: name, _id: _id, quantity: product.quantity}
+  const addToCartItemInfo = [{name: name, _id: _id, quantity: product.quantity}]
   // console.log(addToCartItemInfo)
 
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -102,17 +102,17 @@ const product = ({productItem, accountInfo}) => {
   }
 
   const handleCart = async() => {
-    if(!isAddedToCart) {
-      for(var i = 0; i < accountInfo.cart.length; i++) {
-        if (accountInfo.cart[i]._id === _id) {
-          createNotification("info", `${name} is already in your cart`)
-          return;
-        }
-      }
-    } else {
-      createNotification("info", `${name} is already in your cart`)
-      return;
-    }
+    // if(!isAddedToCart) {
+    //   for(var i = 0; i < accountInfo.cart.length; i++) {
+    //     if (accountInfo.cart[i]._id === _id) {
+    //       createNotification("info", `${name} is already in your cart`)
+    //       return;
+    //     }
+    //   }
+    // } else {
+    //   createNotification("info", `${name} is already in your cart`)
+    //   return;
+    // }
 
     setIsAddedToCart(true)
     const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleCart`, {

@@ -69,53 +69,105 @@ const favourite = ({ accountInfo, favouriteProductInfo }) => {
   const [addToCartList , setAddToCartList] = useState([]) 
 
   const [showModal, setShowModal] = useState(false);
-  const deleteItem = (item) => {
+
+  const deleteItem = async(item) => {
+    const addToFavouriteItemInfo = {name: item.name, _id: item._id}
+    const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleFavourite`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        addToFavouriteItemInfo
+      }),
+    });
+    if(res.ok) {
+      createNotification("warning", item)
+    } else if(res.status === 401) {
+      createNotification("error", null, "Sorry you are not authenticated")
+      router.push("/")
+    } else {
+      createNotification("error", null, "Some errors occur, please try again")
+    }
     setFavouriteList(favouriteList.filter((otherItems) => otherItems.name !== item.name))
-    createNotification("warning", item)
   }
 
-  const addToCart = (item) => {
-    const itemToCart = {name: item.name, _id: item._id, quantity: 1}
-    for (var i = 0; i < accountInfo.cart.length; i++) {
-      if (accountInfo.cart[i]._id === item._id) {
-        createNotification("info", item)
-        return;
-      }
-    }
-    // if(addToCartList.includes(itemToCart)) {
-    //   createNotification("info", item)
-    //   return;
-    // }
-
-    setAddToCartList(addToCartList => [...addToCartList, itemToCart])
-    // setFavouriteList(favouriteList.filter((listItem) => listItem.name !== item.name))
-
-    //   for(var i = 0; i < accountInfo.cart.length; i++) {
-    //     if (accountInfo.cart[i]._id === _id) {
-    //       createNotification("info", `${name} is already in your cart`)
-    //       return;
+  const addToCart = async(items) => {
+    var processingArray = [...items]
+    // for (var i = 0; i < accountInfo.cart.length; i++) {
+    //   for (var j = 0; j < processingArray.length; j++) {
+    //     if (accountInfo.cart[i]._id === processingArray[j]._id) {
+    //       createNotification("info", processingArray[j])
+    //       if (processingArray.length === 1) {
+    //         return;
+    //       } else if (processingArray.length > 1) {
+    //         processingArray.filter((otherItems) => otherItems.name !== processingArray[j].name)
+    //         // processingArray.splice(j, 1)
+    //       } else {
+    //         createNotification("error", null, "Some errors occur, please try again")
+    //       }
     //     }
     //   }
-    // } else {
-    //   createNotification("info", item)
-    //   return;
-    
-    createNotification("success", item)
-    console.log(addToCartList)
+    // }
+
+    // for (var k = 0; k < addToCartList.length; k++) {
+    //   for (var m = 0; m < processingArray.length; m++) {
+    //     if (addToCartList.includes(processingArray[m]._id)) {
+    //       createNotification("info", processingArray[m])
+    //       if (processingArray.length === 1) {
+    //         return;
+    //       } else if (processingArray.length > 1) {
+    //         processingArray.filter((otherItems) => otherItems.name !== processingArray[m].name)
+    //       } else {
+    //         createNotification("error", null, "Some errors occur, please try again")
+    //       }
+    //     }
+    //   }
+    // }
+
+    var addToCartItemInfo = []
+    for (var j = 0; j < processingArray.length; j++) {
+      addToCartItemInfo.push({name: processingArray[j].name, _id: processingArray[j]._id, quantity: 1})
+    } 
+
+    const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleCart`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        addToCartItemInfo
+      }),
+    });
+    if(res.ok) {
+      for (var j = 0; j < processingArray.length; j++) {
+        createNotification("success", processingArray[j])
+      }
+    } else if(res.status === 401) {
+      createNotification("error", null, "Sorry you are not authenticated")
+      router.push("/")
+    } else {
+      createNotification("error", null, "Some errors occur, please try again")
+    }
+
+    var idList = []
+    for (var j = 0; j < processingArray.length; j++) { 
+      idList.push(processingArray[j]._id)
+    }
+    // setAddToCartList(addToCartList => [...addToCartList, ...idList])
   }
 
-  console.log(addToCartList)
-  console.log(addToCartList.includes({name: "Ginger", _id: "6130a0c5d3cc359de01975a3", quantity: 1}))
+
+  // console.log(addToCartList)
 
 
-  const createNotification = (type, item) => {
+
+  const createNotification = (type, item, message) => {
       switch (type) {
         case "info":
           return NotificationManager.info(`${item.name} is already in your cart`, "Duplicated");
         case "success":
-          return NotificationManager.success(`You have added the ${item.name} to the cart`, "Added to Cart");
+          return NotificationManager.success(`You have added the ${item.name} to Cart`, "Added to Cart");
         case "warning":
-          return NotificationManager.warning(`You have deleted the ${item.name} from the list`, 'Deleted', 3000);
+          return NotificationManager.warning(`You have deleted the ${item.name} from Favourite`, 'Deleted', 3000);
+        case "warning":
+          return NotificationManager.error(message, 'Ooops', 3000, () => {}, false );   
       }
   }
 
@@ -136,7 +188,7 @@ const favourite = ({ accountInfo, favouriteProductInfo }) => {
                           <div className={moduleCss.amount}>{item.AmountPerQty}</div>
                           <div className={moduleCss.rowAndButton}>
                             <div style={{fontWeight: "bold"}}>${item.markedPrice}</div>
-                            <div className={moduleCss.carts} onClick={() => addToCart(item)}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
+                            <div className={moduleCss.carts} onClick={() => addToCart([item])}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
                           </div>
                         </div>
                       </div>
@@ -151,18 +203,18 @@ const favourite = ({ accountInfo, favouriteProductInfo }) => {
                           <div className={moduleCss.amount}>{item.AmountPerQty}</div>
                           <div className={moduleCss.rowAndButton}>
                             <div style={{fontWeight: "bold"}}>${item.markedPrice}</div>
-                            <div className={moduleCss.carts} onClick={() => addToCart(item)}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
+                            <div className={moduleCss.carts} onClick={() => addToCart([item])}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
                           </div>
                         </div>
                       </div>
             }
           })}
         </div>
-        <Link href="../cart">
-          <button className={moduleCss.addAllToCart} onClick={() => setShowModal(true)} style={{position: favouriteList.length === 0? "fixed" : "", bottom: favouriteList.length === 0? "13vh" : "0" }}>
+        {/* <Link href="../cart"> */}
+          <button className={moduleCss.addAllToCart} onClick={() => addToCart(favouriteList)} style={{position: favouriteList.length === 0? "fixed" : "", bottom: favouriteList.length === 0? "13vh" : "0" }}>
             Add All To Cart
           </button>
-        </Link>
+        {/* </Link> */}
       </div>
       <NotificationContainer/>
       <NavBar />

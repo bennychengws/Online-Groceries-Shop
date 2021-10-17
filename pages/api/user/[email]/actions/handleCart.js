@@ -20,7 +20,11 @@ const handleCartAPI = async (req, res) => {
         const { addToCartItemInfo } = req.body
         const { email } = req.query 
         console.log(addToCartItemInfo)
-        await User.updateOne({email: email}, {$addToSet: {cart: addToCartItemInfo}}) 
+        // if (addToCartItemInfo.length === 1) {
+        //   await User.updateOne({email: email}, {$addToSet: {cart: addToCartItemInfo[0]}}) 
+        // } else {
+          await User.updateMany({email: email}, {$push: {cart: {$each: addToCartItemInfo }}}) 
+        // }
         return res.status(200).json({message: 'The Product is successfully added to cart', success: true});
       } catch(error) {
         console.log("an error occured")
