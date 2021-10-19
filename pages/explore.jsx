@@ -13,7 +13,7 @@ import eggs from "../images/dairy_&_eggs.png";
 import drinks from "../images/beverages.png";
 import groceries from "../images/groceries.png";
 // import Category from "../components/Category";
-import authenticationCheck from "../lib/authenticationCheck";
+// import authenticationCheck from "../lib/authenticationCheck";
 
 const explore = () => {
   const [showModal, setShowModal] = useState(false);
@@ -98,16 +98,16 @@ const explore = () => {
 export default explore;
 
 export async function getServerSideProps(context) {
-  const authenticated = authenticationCheck(context)
+  // const authenticated = authenticationCheck(context)
 
-  if (!authenticated) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: true,
-      },      
-    };
-  }
+  // if (!authenticated) {
+  //   return {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: true,
+  //     },      
+  //   };
+  // }
   
   return {
     props: {},

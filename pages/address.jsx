@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import NavBar from "../components/NavBar";
-import authenticationCheck from "../lib/authenticationCheck";
+// import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import moduleCss from "../styles/address.module.css";
@@ -141,10 +141,10 @@ const address = ({addressInfo}) => {
 export default address;
 
 export async function getServerSideProps(context) {
-  const authenticated = authenticationCheck(context)
-  if (!authenticated) {
-    return {redirect: {destination: '/', permanent: true,}, };
-  }
+  // const authenticated = authenticationCheck(context)
+  // if (!authenticated) {
+  //   return {redirect: {destination: '/', permanent: true,}, };
+  // }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
   const data = await fetch(`http://localhost:3000/api/user/${decoded.email}/info/address`, {

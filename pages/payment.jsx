@@ -98,10 +98,10 @@ const paymentMethod = ({}) => {
 export default paymentMethod;
 
 export async function getServerSideProps(context) {
-  const authenticated = authenticationCheck(context)
-  if (!authenticated) {
-    return {redirect: {destination: '/', permanent: true,}, };
-  }
+  // const authenticated = authenticationCheck(context)
+  // if (!authenticated) {
+  //   return {redirect: {destination: '/', permanent: true,}, };
+  // }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
   const data = await fetch(`http://localhost:3000/api/user/${decoded.email}/info/address`, 

@@ -12,7 +12,7 @@ import payment from "../images/paymentMethod.png";
 import backArrow from "../images/back arrow.png";
 import accIcon from "../images/accIcon.png";
 // import Noti from "../components/NotificationContainer"
-import authenticationCheck from "../lib/authenticationCheck";
+// import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode"
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
@@ -151,10 +151,10 @@ const account = ({accountInfo}) => {
 export default account;
 
 export async function getServerSideProps(context) {
-  const authenticated = authenticationCheck(context)
-  if (!authenticated) {
-    return {redirect: {destination: '/', permanent: true,}, };
-  }
+  // const authenticated = authenticationCheck(context)
+  // if (!authenticated) {
+  //   return {redirect: {destination: '/', permanent: true,}, };
+  // }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
   const data = await fetch(`http://localhost:3000/api/user/${decoded.email}`, 

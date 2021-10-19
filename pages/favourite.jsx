@@ -13,7 +13,7 @@ import pepsi from "../images/pepsi.png";
 import dietCoke from "../images/diet_coke.png";
 import appleJuice from "../images/apple_juice.png";
 import sprite from "../images/sprite_can.png";
-import authenticationCheck from "../lib/authenticationCheck";
+// import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode";
 
 
@@ -227,10 +227,10 @@ export default favourite;
 export async function getServerSideProps(context) {
   //Check authentication and get user account information 
   //As well as the favourite product ID 
-  const authenticated = authenticationCheck(context)
-  if (!authenticated) {
-    return {redirect: {destination: '/', permanent: true,}, };
-  }
+  // const authenticated = authenticationCheck(context)
+  // if (!authenticated) {
+  //   return {redirect: {destination: '/', permanent: true,}, };
+  // }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
   const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {

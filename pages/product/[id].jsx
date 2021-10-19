@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import authenticationCheck from "../../lib/authenticationCheck";
+// import authenticationCheck from "../../lib/authenticationCheck";
 
 import Rating from "../../components/Rating"
 import heartE from "../../images/heartEmpty.png";
@@ -189,10 +189,10 @@ const product = ({productItem, accountInfo}) => {
 export default product;
 
 export async function getServerSideProps(context) {
-  const authenticated = authenticationCheck(context)
-  if (!authenticated) {
-    return {redirect: {destination: '/', permanent: true,}, };
-  }
+  // const authenticated = authenticationCheck(context)
+  // if (!authenticated) {
+  //   return {redirect: {destination: '/', permanent: true,}, };
+  // }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
   const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {

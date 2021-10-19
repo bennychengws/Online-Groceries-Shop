@@ -107,16 +107,16 @@ const order = () => {
 export default order;
 
 export async function getServerSideProps(context) {
-  const authenticated = authenticationCheck(context)
+  // const authenticated = authenticationCheck(context)
 
-  if (!authenticated) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: true,
-      },      
-    };
-  }
+  // if (!authenticated) {
+  //   return {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: true,
+  //     },      
+  //   };
+  // }
   
   return {
     props: {},
