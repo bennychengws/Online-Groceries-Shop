@@ -5,34 +5,66 @@ import 'react-notifications/lib/notifications.css';
 import { UserWrapper } from "../context/UserContext";
 import getConfig from 'next/config';
 import Jwt from "jsonwebtoken";
-import nextCookies from 'next-cookies';
 import { useRouter } from 'next/router'
-import { useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import Cookies from 'js-cookie';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
+  // const [authenticated, setAuthenticated] = useState(false);
 
   const authenticationCheck = () => {
     const { serverRuntimeConfig } = getConfig();
-    const { auth } = nextCookies(ctx);
+    const auth = Cookies.get("auth");
     // console.log(context.req.cookies.auth)
-    var authenticated = false;
+    // var authenticated = false
     Jwt.verify(auth, serverRuntimeConfig.secret, async function (err, decoded) {
     if (!err && decoded) {
         console.log("authenticated by the authentication check function")
-        authenticated = true;
+        if (router.asPath === "/") {
+          router.push("/home");
+        } else {
+          // not really solved
+          return;
+        }
+        // authenticated = true
       }
-    }) 
-    return authenticated
+    })
+    if (router.asPath === "/") {
+      // not really solved
+      return;
+    } else {
+      router.push("/");
+    } 
+    // authenticated = false
   }
 
+  console.log(router.asPath)
+
   useEffect(() => {
-    const authenticated = authenticationCheck()
-    if (!authenticated && router.pathname !== "/") {
-      router.push("/")
+    // run authentication check on initial load
+    // authenticationCheck();
+
+    // set authenticated to false to hide page content while changing routes
+    // const hideContent = () => setAuthenticated(false);
+    // router.events.on('routeChangeStart', hideContent);
+
+    // run authentication check on route change
+    router.events.on('routeChangeComplete', authenticationCheck)
+
+    // unsubscribe from events in useEffect return function
+    return () => {
+        // router.events.off('routeChangeStart', hideContent);
+        router.events.off('routeChangeComplete', authenticationCheck);
     }
-  }, [pageProps]);
+  }, []);
+
+  // useEffect(() => {
+  //   const authenticated = authenticationCheck()
+  //   if (!authenticated && router.pathname !== "/") {
+  //     router.push("/")
+  //   }
+  // }, [pageProps]);
 
   return (
     <>

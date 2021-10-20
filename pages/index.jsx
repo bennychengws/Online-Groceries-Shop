@@ -44,16 +44,16 @@ export async function getServerSideProps(context) {
   //     authenticated = true;
   //   }
   // });
-  const authenticated = authenticationCheck(context)
+  // const authenticated = authenticationCheck(context)
 
-  if (authenticated) {
-    return {
-      redirect: {
-        destination: '../home',
-        permanent: true,
-      },      
-    };
-  }
+  // if (authenticated) {
+  //   return {
+  //     redirect: {
+  //       destination: '../home',
+  //       permanent: true,
+  //     },      
+  //   };
+  // }
   
   return {
     props: {},
