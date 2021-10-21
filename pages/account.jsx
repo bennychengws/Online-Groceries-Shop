@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from "next/link";
@@ -15,18 +15,37 @@ import accIcon from "../images/accIcon.png";
 // import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode"
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { useUserContext } from "../context/UserContext";
 
 
-const account = ({accountInfo}) => {
+const account = () => {
+  const [userState, setUserState] = useUserContext();
+
+  useEffect(() => {
+    if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
+      setUserState(JSON.parse(localStorage.getItem('myAccount')))
+    }
+  }, [])
+
+
+
+  // setUserState(accountInfo)
+  console.log(userState)
+  if (typeof window !== "undefined") {
+    var a = JSON.parse(localStorage.getItem('myAccount'))
+
+  }
+  // console.log(a)
+
   const router = useRouter();
   // const userInfo = acctContent.decoded
-  console.log(accountInfo.email)
+  // console.log(userState.email)
   // console.log(props)
   const [isEditing, setIsEditing] = useState(false)
-  const [formData, setFormData] = useState({
-    username: accountInfo.username,
-    email: accountInfo.email,
-  });
+//  const [formData, setFormData] = useState({
+//    username: userState.username,
+//    email: userState.email,
+//  });
 
   const optionList = [
     {
@@ -52,20 +71,23 @@ const account = ({accountInfo}) => {
 
   const handleEditUsername = async() => {
     setIsEditing(!isEditing)
-    console.log("user: " + formData.username)
-    console.log(formData)
+    console.log("user: " + userState.username)
+    console.log(userState)
     if(isEditing) {
       // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
-      const res = await fetch(`api/user/${accountInfo.email}/info/username`, {
+      const res = await fetch(`api/user/${userState.email}/info/username`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          formData
+          username: userState.username,
+          email: userState.email
         }),
       });
       if(res.ok) {
         createNotification("success")
         console.log("updated username")
+        // setUserState({...userState, username: formData.username })
+        localStorage.setItem('myAccount', JSON.stringify(userState))
       } else if(res.status === 401) {
         // createNotification("error", "Sorry you are not authenticated")
         router.push("/")
@@ -80,6 +102,7 @@ const account = ({accountInfo}) => {
     console.log("clicked")
     const res = await fetch("api/logout", {method: 'GET',})
     if(res.ok) {
+      localStorage.removeItem('myAccount');
       router.push("/")
     }
   }
@@ -105,16 +128,16 @@ const account = ({accountInfo}) => {
             {
               isEditing ? 
               <div>
-              <input type="text" name="username" onChange={(e) => setFormData({ ...formData, username: e.target.value})} value={formData.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
+              <input type="text" name="username" onChange={(e) => setUserState({ ...userState, username: e.target.value})} value={userState.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
               {/* <button onClick={handleSubmitEditedUsername}>Submit</button> */}
               </div>
-              : <div>{formData.username}</div>
+              : <div>{userState.username}</div>
             }
               <div className={moduleCss.usernameEditButton} onClick={handleEditUsername}>
                 <Image src={pencil} width="15px" height="15px"></Image>
               </div>
             </div>
-            <div>{formData.email}</div>
+            <div>{userState.email}</div>
           </div>
         </div>
         <div className={moduleCss.optionsContainer}>
@@ -150,23 +173,23 @@ const account = ({accountInfo}) => {
 
 export default account;
 
-export async function getServerSideProps(context) {
-  // const authenticated = authenticationCheck(context)
-  // if (!authenticated) {
-  //   return {redirect: {destination: '/', permanent: true,}, };
-  // }
-  const token = context.req.cookies.auth
-  const decoded = jwt_decode(token);
-  const data = await fetch(`http://localhost:3000/api/user/${decoded.email}`, 
-    {
-      headers: {cookie: context.req?.headers.cookie}} 
-  );
-  console.log(data.status)
-  if(data.status === 401) {
-    return {redirect: {destination: '/', permanent: true,}, };
-  }
-  const accountData = await data.json();
-  return {
-    props: {accountInfo: accountData}
-  };
-}
+// export async function getServerSideProps(context) {
+//   // const authenticated = authenticationCheck(context)
+//   // if (!authenticated) {
+//   //   return {redirect: {destination: '/', permanent: true,}, };
+//   // }
+//   const token = context.req.cookies.auth
+//   const decoded = jwt_decode(token);
+//   const data = await fetch(`http://localhost:3000/api/user/${decoded.email}`, 
+//     {
+//       headers: {cookie: context.req?.headers.cookie}} 
+//   );
+//   console.log(data.status)
+//   if(data.status === 401) {
+//     return {redirect: {destination: '/', permanent: true,}, };
+//   }
+//   const accountData = await data.json();
+//   return {
+//     props: {accountInfo: accountData}
+//   };
+// }

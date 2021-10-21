@@ -15,7 +15,7 @@ const userAccountAPI = async (req, res) => {
         const { email } = req.query
         console.log(email)
         // const users = await User.find({}).lean().exec();
-        const user = await User.findOne({email: email}).lean().exec();
+        const user = await User.findOne({email: email}, {password: 0}).lean().exec();
         return res.status(200).json(user)      
       } catch (error) {
         return res.status(400).json("failed to get users data");        

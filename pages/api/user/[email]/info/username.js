@@ -14,7 +14,7 @@ const usernameAPI = async (req, res) => {
       try {
         console.log("Put method")
         console.log(req.body)
-        const { username, email } = req.body.formData
+        const { username, email } = req.body
         console.log(email)
         console.log(username)
         await User.updateOne({email: email}, {$set: {username: username}}) 

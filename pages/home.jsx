@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,8 +25,25 @@ import rice from "../images/rice.png";
 import pulses from "../images/pulses.png";
 import {fetchWrapper} from "../lib/fetchWrapper";
 import authenticationCheck from "../lib/authenticationCheck";
+import axios from "axios"
+import jwt_decode from "jwt-decode";
+import { useUserContext } from "../context/UserContext";
 
-const home = ({products}) => {
+const home = ({products, account}) => {
+  const [userState, setUserState] = useUserContext();
+
+  useEffect(() => {
+    setUserState(account)
+  }, [])
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+    localStorage.setItem('myAccount', JSON.stringify(userState))
+    }
+  }, [userState])  
+
+  console.log(userState)
+
   const promoList = [
     {
       categoryName: "Fresh Vegetables",
@@ -282,26 +299,59 @@ const home = ({products}) => {
 export default home;
 
 export async function getServerSideProps(context) {
-  const data = await fetch(
-    "http://localhost:3000/api/product",
-    {
-      headers: {
-        cookie: context.req?.headers.cookie
-      }
-    } 
+  const token = context.req.cookies.auth
+  const decoded = jwt_decode(token);
+  const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
+    headers: {cookie: context.req?.headers.cookie}} 
   );
-  console.log(data.status)
-  if(data.status === 401) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: true,
-      },
-    }
+  const productAPIData = await fetch("http://localhost:3000/api/product", {
+    headers: {cookie: context.req?.headers.cookie}} 
+  );
+  console.log(`productAPI status: ${productAPIData.status}`)
+  if(accAPIData.status === 401 || productAPIData.status === 401) {
+    return {redirect: {destination: '/', permanent: true,}, };
   }
-  // const data = await fetchWrapper.get("http://localhost:3000/api/product", context)
-  const productData = await data.json();
+  const productData = await productAPIData.json();
+  const accountData = await accAPIData.json();
   return {
-    props: { products: productData },
+    props: { account: accountData, products: productData },
   };
 }
+
+// export async function getServerSideProps(context) {
+//   try {
+//   var res = await axios.get(
+//     "http://localhost:3000/api/product",
+//     {
+//       headers: {
+//         cookie: context.req?.headers.cookie
+//       }
+//     } 
+//   );
+//   var productData = await res.data;
+//   console.log(res.status)
+//   } catch (error) {
+//     if (error instanceof TypeError) {
+//       return {
+//         redirect: {
+//           destination: '/',
+//           permanent: true,
+//         },
+//       }      
+//     }
+//   // if(error.res === 401) {
+//   //   return {
+//   //     redirect: {
+//   //       destination: '/',
+//   //       permanent: true,
+//   //     },
+//   //   }
+//   // }
+//   }
+//   // console.log(res)
+//   // const data = await fetchWrapper.get("http://localhost:3000/api/product", context)
+  
+//   return {
+//     props: { products: productData },
+//   };
+// }

@@ -2,7 +2,7 @@
 import Head from 'next/head'
 import 'tailwindcss/tailwind.css'
 import 'react-notifications/lib/notifications.css';
-import { UserWrapper } from "../context/UserContext";
+import { UserWrapper, useUserContext } from "../context/UserContext";
 import getConfig from 'next/config';
 import Jwt from "jsonwebtoken";
 import { useRouter } from 'next/router'
@@ -11,7 +11,6 @@ import Cookies from 'js-cookie';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
-  // const [authenticated, setAuthenticated] = useState(false);
 
   const authenticationCheck = () => {
     const { serverRuntimeConfig } = getConfig();
@@ -41,23 +40,23 @@ function MyApp({ Component, pageProps }) {
 
   console.log(router.asPath)
 
-  useEffect(() => {
-    // run authentication check on initial load
-    // authenticationCheck();
+  // useEffect(() => {
+  //   // run authentication check on initial load
+  //   // authenticationCheck();
 
-    // set authenticated to false to hide page content while changing routes
-    // const hideContent = () => setAuthenticated(false);
-    // router.events.on('routeChangeStart', hideContent);
+  //   // set authenticated to false to hide page content while changing routes
+  //   // const hideContent = () => setAuthenticated(false);
+  //   // router.events.on('routeChangeStart', hideContent);
 
-    // run authentication check on route change
-    router.events.on('routeChangeComplete', authenticationCheck)
+  //   // run authentication check on route change
+  //   router.events.on('routeChangeComplete', authenticationCheck)
 
-    // unsubscribe from events in useEffect return function
-    return () => {
-        // router.events.off('routeChangeStart', hideContent);
-        router.events.off('routeChangeComplete', authenticationCheck);
-    }
-  }, []);
+  //   // unsubscribe from events in useEffect return function
+  //   return () => {
+  //       // router.events.off('routeChangeStart', hideContent);
+  //       router.events.off('routeChangeComplete', authenticationCheck);
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   const authenticated = authenticationCheck()
@@ -101,4 +100,21 @@ export default MyApp
 //   return {
 //     props: {},
 //   }
+// }
+
+// export async function getStaticProps() {
+//   const token = context.req.cookies.auth
+//   const decoded = jwt_decode(token);
+//   const data = await fetch(`http://localhost:3000/api/user/${decoded.email}`, 
+//     {
+//       headers: {cookie: context.req?.headers.cookie}} 
+//   );
+//   console.log(data.status)
+//   if(data.status === 401) {
+//     return {redirect: {destination: '/', permanent: true,}, };
+//   }
+//   const accountData = await data.json();
+//   return {
+//     props: {accountInfo: accountData}
+//   };
 // }
