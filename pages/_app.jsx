@@ -11,52 +11,68 @@ import Cookies from 'js-cookie';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
+  const [authenticated, setAuthenticated] = useState(false);
 
-  const authenticationCheck = () => {
+  const authenticationCheck = (url) => {
     const { serverRuntimeConfig } = getConfig();
     const auth = Cookies.get("auth");
-    // console.log(context.req.cookies.auth)
-    // var authenticated = false
+    console.log("auth: " + auth)
+    const publicPaths = ['/'];
+    const path = url.split('/images')[0];
+    console.log("path: " + path)
+
     Jwt.verify(auth, serverRuntimeConfig.secret, async function (err, decoded) {
-    if (!err && decoded) {
+      if (!(!err && decoded) && !publicPaths.includes(path)) {
+        setAuthenticated(false)
+        console.log("Not authenticated by the authentication check function")        
+        router.push("/")  
+      } else {
         console.log("authenticated by the authentication check function")
-        if (router.asPath === "/") {
-          router.push("/home");
-        } else {
-          // not really solved
-          return;
-        }
-        // authenticated = true
+        setAuthenticated(true)
       }
     })
-    if (router.asPath === "/") {
-      // not really solved
-      return;
-    } else {
-      router.push("/");
-    } 
-    // authenticated = false
+    // // console.log(context.req.cookies.auth)
+    // // var authenticated = false
+    // Jwt.verify(auth, serverRuntimeConfig.secret, async function (err, decoded) {
+    // if (!err && decoded) {
+    //     console.log("authenticated by the authentication check function")
+    //     if (router.asPath === "/") {
+    //       router.push("/home");
+    //     } else {
+    //       // not really solved
+    //       return;
+    //     }
+    //     // authenticated = true
+    //   }
+    // })
+    // if (router.asPath === "/") {
+    //   // not really solved
+    //   return;
+    // } else {
+    //   router.push("/");
+    // } 
+    // // authenticated = false
   }
 
   console.log(router.asPath)
 
-  // useEffect(() => {
-  //   // run authentication check on initial load
-  //   // authenticationCheck();
+  useEffect(() => {
+    // run authentication check on initial load
+    authenticationCheck(router.asPath);
 
-  //   // set authenticated to false to hide page content while changing routes
-  //   // const hideContent = () => setAuthenticated(false);
-  //   // router.events.on('routeChangeStart', hideContent);
+    // set authenticated to false to hide page content while changing routes
+    const hideContent = () => setAuthenticated(false);
+    router.events.on('routeChangeStart', hideContent);
 
-  //   // run authentication check on route change
-  //   router.events.on('routeChangeComplete', authenticationCheck)
+    // run authentication check on route change
+    router.events.on('routeChangeComplete', authenticationCheck)
 
-  //   // unsubscribe from events in useEffect return function
-  //   return () => {
-  //       // router.events.off('routeChangeStart', hideContent);
-  //       router.events.off('routeChangeComplete', authenticationCheck);
-  //   }
-  // }, []);
+    // unsubscribe from events in useEffect return function
+    return () => {
+        router.events.off('routeChangeStart', hideContent);
+        router.events.off('routeChangeComplete', authenticationCheck);
+    }
+  }, []);
 
   // useEffect(() => {
   //   const authenticated = authenticationCheck()
@@ -72,7 +88,8 @@ function MyApp({ Component, pageProps }) {
           <link rel="stylesheet" href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css" />
           {/* <link rel="stylesheet" href="path/node_modules/keen-slider/keen-slider.min.css" /> */}
         </Head>
-        <Component {...pageProps} />
+        {authenticated && <Component {...pageProps} />}        
+        {/* <Component {...pageProps} /> */}
       </UserWrapper>
     </>
   )
