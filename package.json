@@ -13,7 +13,6 @@
     "axois": "^0.0.1-security",
     "bcrypt": "^5.0.1",
     "cookie": "^0.4.1",
-    "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "mongoose": "^5.12.15",
@@ -21,6 +20,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-notifications": "^1.7.2",
+    "swr": "^1.0.1",
     "validator": "^13.6.0"
   },
   "devDependencies": {

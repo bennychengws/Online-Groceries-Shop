@@ -17,13 +17,13 @@ const handleCartAPI = async (req, res) => {
         // const { username, email } = req.body.formData
         // console.log(email)
         // console.log(username)
-        const { addToCartItemInfo } = req.body
+        // const { addToCartItemInfo } = req.body
         const { email } = req.query 
-        console.log(addToCartItemInfo)
+        // console.log(addToCartItemInfo)
         // if (addToCartItemInfo.length === 1) {
         //   await User.updateOne({email: email}, {$addToSet: {cart: addToCartItemInfo[0]}}) 
         // } else {
-          await User.updateMany({email: email}, {$push: {cart: {$each: addToCartItemInfo }}}) 
+        await User.updateMany({email: email}, {$push: {cart: {$each: req.body }}}) 
         // }
         return res.status(200).json({message: 'The Product is successfully added to cart', success: true});
       } catch(error) {

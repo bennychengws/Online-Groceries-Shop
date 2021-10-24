@@ -2,19 +2,35 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 const UserContext = createContext();
 
-export function UserWrapper({ children }) {
-   const [userState, setUserState] = useState({});
-   const contextValue = useMemo(() => {
-      return [userState, setUserState];
-   }, [userState, setUserState]);
+const UserContextProvider = ({ children }) => {
+  const [userState, setUserState] = useState({});
 
-   return (
-   <UserContext.Provider value={contextValue}>
+  const setUserContent = (content) => {
+   setUserState(content)
+  } 
+
+  return (
+    <UserContext.Provider value={{ userState, setUserContent }}>
       {children}
-   </UserContext.Provider>
-   );
-}
+    </UserContext.Provider>
+  );
+};
 
-export function useUserContext() {
-   return useContext(UserContext);
-}
+export { UserContext, UserContextProvider };
+
+// export function UserWrapper({ children }) {
+//    const [userState, setUserState] = useState({});
+//    const contextValue = useMemo(() => {
+//       return [userState, setUserState];
+//    }, [userState, setUserState]);
+
+//    return (
+//    <UserContext.Provider value={contextValue}>
+//       {children}
+//    </UserContext.Provider>
+//    );
+// }
+
+// export function useUserContext() {
+//    return useContext(UserContext);
+// }

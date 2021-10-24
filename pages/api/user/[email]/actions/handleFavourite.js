@@ -17,10 +17,10 @@ const handleFavouriteAPI = async (req, res) => {
         // const { username, email } = req.body.formData
         // console.log(email)
         // console.log(username)
-        const { addToFavouriteItemInfo } = req.body
+        // const { addToFavouriteItemInfo } = req.body
         const { email } = req.query 
-        console.log(addToFavouriteItemInfo)
-        await User.updateOne({email: email}, {$addToSet: {favourite: addToFavouriteItemInfo}}) 
+        // console.log(addToFavouriteItemInfo)
+        await User.updateOne({email: email}, {$addToSet: {favourite: req.body}}) 
         return res.status(200).json({message: 'The Product is successfully added to favourite', success: true});
       } catch(error) {
         // console.log("an error occured")
@@ -33,10 +33,10 @@ const handleFavouriteAPI = async (req, res) => {
         // const { username, email } = req.body.formData
         // console.log(email)
         // console.log(username)
-        const { addToFavouriteItemInfo } = req.body
+        // const { addToFavouriteItemInfo } = req.body
         const { email } = req.query 
-        console.log(addToFavouriteItemInfo)
-        await User.updateOne({email: email}, {$pull: {favourite: addToFavouriteItemInfo}}) 
+        // console.log(addToFavouriteItemInfo)
+        await User.updateOne({email: email}, {$pull: {favourite: req.body}}) 
         return res.status(200).json({message: 'The Product is successfully deleted to favourite', success: true});
       } catch(error) {
         // console.log("an error occured")

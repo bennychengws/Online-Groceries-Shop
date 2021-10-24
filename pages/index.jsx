@@ -35,25 +35,16 @@ export default function Home() {
 }
 
 export async function getServerSideProps(context) {
-  // const { serverRuntimeConfig } = getConfig();
-  // console.log(context.req.cookies.auth)
-  // let authenticated = false;
-  // Jwt.verify(context.req.cookies.auth, serverRuntimeConfig.secret, async function (err, decoded) {
-  //   if (!err && decoded) {
-  //     console.log("authenticated")
-  //     authenticated = true;
-  //   }
-  // });
-  // const authenticated = authenticationCheck(context)
+  const authenticated = authenticationCheck(context)
 
-  // if (authenticated) {
-  //   return {
-  //     redirect: {
-  //       destination: '../home',
-  //       permanent: true,
-  //     },      
-  //   };
-  // }
+  if (authenticated) {
+    return {
+      redirect: {
+        destination: '../home',
+        permanent: true,
+      },      
+    };
+  }
   
   return {
     props: {},

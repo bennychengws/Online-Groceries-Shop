@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext  } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,17 +23,18 @@ import chicken from "../images/chicken.png";
 import beefBone from "../images/beefBone.png";
 import rice from "../images/rice.png";
 import pulses from "../images/pulses.png";
-import {fetchWrapper} from "../lib/fetchWrapper";
+// import {fetchWrapper} from "../lib/fetchWrapper";
 import authenticationCheck from "../lib/authenticationCheck";
 import axios from "axios"
 import jwt_decode from "jwt-decode";
-import { useUserContext } from "../context/UserContext";
+import fetchHandler from "../lib/fetchHandler";
+import { UserContext } from "../context/UserContext";
 
 const home = ({products, account}) => {
-  const [userState, setUserState] = useUserContext();
+  const {userState, setUserContent} = useContext(UserContext);
 
   useEffect(() => {
-    setUserState(account)
+    setUserContent(account)
   }, [])
 
   useEffect(() => {
@@ -299,22 +300,28 @@ const home = ({products, account}) => {
 export default home;
 
 export async function getServerSideProps(context) {
+  const authenticated = authenticationCheck(context)
+  if (!authenticated) {
+    return {redirect: {destination: '/', permanent: true,}, };
+  }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
-  const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
-    headers: {cookie: context.req?.headers.cookie}} 
-  );
-  const productAPIData = await fetch("http://localhost:3000/api/product", {
-    headers: {cookie: context.req?.headers.cookie}} 
-  );
+  const accAPIData = await fetchHandler(`http://localhost:3000/api/user/${decoded.email}`, "get", context);
+  // const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
+  //   headers: {cookie: context.req?.headers.cookie}} 
+  // );
+  // const productAPIData = await fetch("http://localhost:3000/api/product", {
+  //   headers: {cookie: context.req?.headers.cookie}} 
+  // );
+  const productAPIData = await fetchHandler("http://localhost:3000/api/product", "get", context);
   console.log(`productAPI status: ${productAPIData.status}`)
   if(accAPIData.status === 401 || productAPIData.status === 401) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  const productData = await productAPIData.json();
-  const accountData = await accAPIData.json();
+  // const productData = await productAPIData.json();
+  // const accountData = await accAPIData.json();
   return {
-    props: { account: accountData, products: productData },
+    props: { account: accAPIData.data, products: productAPIData.data },
   };
 }
 

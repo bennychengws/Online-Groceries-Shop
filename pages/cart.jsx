@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/router'
 import Image from "next/image";
 import moduleCss from "../styles/cart.module.css";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-// import authenticationCheck from "../lib/authenticationCheck";
-
+import authenticationCheck from "../lib/authenticationCheck";
+import { clientAuthenticationCheck } from "../lib/clientAuthenticationCheck";
 import NavBar from "../components/NavBar";
 import Checkout from "../components/Checkout";
 import Failed from "../components/Failed";
@@ -15,9 +16,11 @@ import bellPR from "../images/bellPepperR.png";
 import eggCR from "../images/eggChickenRed.png";
 import ginger from "../images/ginger.png";
 import banana from "../images/banana.png";
+import router from "next/router";
 
 
 const cart = () => {
+  const router = useRouter()
   const [showModal, setShowModal] = useState(false);
   const [totalPriceCount, setTotalPriceCount] = useState(0);
 
@@ -96,6 +99,7 @@ const cart = () => {
     console.log(cartList)
   })
 
+
   const calculateProductTotalPrice = () => {
     const newCartList = [...cartList];
     newCartList.map((item) => {
@@ -109,6 +113,11 @@ const cart = () => {
     calculateProductTotalPrice();
     console.log(cartList)
   }, [])
+
+  useEffect(async() => {
+    const isAuthenticated = await clientAuthenticationCheck()
+    if (!isAuthenticated) router.push("/")
+  }, [calculateProductTotalPrice])
 
   const deleteItem = (item) => {
     setCartList(cartList.filter((otherItems) => otherItems.name !== item.name))
@@ -154,16 +163,16 @@ const cart = () => {
 export default cart;
 
 export async function getServerSideProps(context) {
-  // const authenticated = authenticationCheck(context)
+  const authenticated = authenticationCheck(context)
 
-  // if (!authenticated) {
-  //   return {
-  //     redirect: {
-  //       destination: '/',
-  //       permanent: true,
-  //     },      
-  //   };
-  // }
+  if (!authenticated) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },      
+    };
+  }
   
   return {
     props: {},

@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-// import authenticationCheck from "../../lib/authenticationCheck";
+import authenticationCheck from "../../lib/authenticationCheck";
+import fetchHandler from "../../lib/fetchHandler";
 
 import Rating from "../../components/Rating"
 import heartE from "../../images/heartEmpty.png";
@@ -81,13 +82,16 @@ const product = ({productItem, accountInfo}) => {
     }
     // console.log("ready to fetch")
     // console.log(method)
-    const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleFavourite`, {
-      method: method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        addToFavouriteItemInfo
-      }),
-    });
+    // const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleFavourite`, {
+    //   method: method,
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     addToFavouriteItemInfo
+    //   }),
+    // });
+
+    const res = await fetchHandler(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleFavourite`, method, undefined, addToFavouriteItemInfo)
+    
     // The setIsFavourite(!isFavourite) will not change isFavourite after the end of the handleFavourite function
     if(res.ok && isFavourite===false) {
       createNotification("success", `You have added the ${name} to Favourite`)
@@ -114,14 +118,17 @@ const product = ({productItem, accountInfo}) => {
     //   return;
     // }
 
-    setIsAddedToCart(true)
-    const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleCart`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        addToCartItemInfo
-      }),
-    });
+    // setIsAddedToCart(true)
+    // const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleCart`, {
+    //   method: 'PUT',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     addToCartItemInfo
+    //   }),
+    // });
+
+    const res = await fetchHandler(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleCart`, 'PUT', undefined, addToCartItemInfo)
+
     if(res.ok) {
       createNotification("success", `You have added the ${name} to Cart`)
     } else if(res.status === 401) {
@@ -189,10 +196,10 @@ const product = ({productItem, accountInfo}) => {
 export default product;
 
 export async function getServerSideProps(context) {
-  // const authenticated = authenticationCheck(context)
-  // if (!authenticated) {
-  //   return {redirect: {destination: '/', permanent: true,}, };
-  // }
+  const authenticated = authenticationCheck(context)
+  if (!authenticated) {
+    return {redirect: {destination: '/', permanent: true,}, };
+  }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
   const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {

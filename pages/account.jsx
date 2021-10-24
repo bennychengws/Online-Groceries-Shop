@@ -12,18 +12,19 @@ import payment from "../images/paymentMethod.png";
 import backArrow from "../images/back arrow.png";
 import accIcon from "../images/accIcon.png";
 // import Noti from "../components/NotificationContainer"
-// import authenticationCheck from "../lib/authenticationCheck";
+import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode"
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { useUserContext } from "../context/UserContext";
+import fetchHandler from "../lib/fetchHandler";
 
 
 const account = () => {
-  const [userState, setUserState] = useUserContext();
+  const {userState, setUserContent} = useContext(UserContext);
 
   useEffect(() => {
     if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
-      setUserState(JSON.parse(localStorage.getItem('myAccount')))
+      setUserContent(JSON.parse(localStorage.getItem('myAccount')))
     }
   }, [])
 
@@ -31,10 +32,10 @@ const account = () => {
 
   // setUserState(accountInfo)
   console.log(userState)
-  if (typeof window !== "undefined") {
-    var a = JSON.parse(localStorage.getItem('myAccount'))
+  // if (typeof window !== "undefined") {
+  //   var a = JSON.parse(localStorage.getItem('myAccount'))
 
-  }
+  // }
   // console.log(a)
 
   const router = useRouter();
@@ -75,14 +76,15 @@ const account = () => {
     console.log(userState)
     if(isEditing) {
       // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
-      const res = await fetch(`api/user/${userState.email}/info/username`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: userState.username,
-          email: userState.email
-        }),
-      });
+      // const res = await fetch(`api/user/${userState.email}/info/username`, {
+      //   method: 'PUT',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({
+      //     username: userState.username,
+      //     email: userState.email
+      //   }),
+      // });
+      const res = await fetchHandler(`api/user/${userState.email}/info/username`, "PUT", undefined, {username: userState.username, email: userState.email})
       if(res.ok) {
         createNotification("success")
         console.log("updated username")
@@ -172,6 +174,16 @@ const account = () => {
 };
 
 export default account;
+
+export async function getServerSideProps(context) {
+  const authenticated = authenticationCheck(context)
+  if (!authenticated) {
+    return {redirect: {destination: '/', permanent: true,}, };
+  }
+  return {
+    props: {}
+  };
+}
 
 // export async function getServerSideProps(context) {
 //   // const authenticated = authenticationCheck(context)

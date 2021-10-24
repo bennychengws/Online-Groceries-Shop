@@ -1,19 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import NavBar from "../components/NavBar";
-// import authenticationCheck from "../lib/authenticationCheck";
+import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import moduleCss from "../styles/address.module.css";
 import delivery from "../images/deliceryAddress.png";
 import logOut from "../images/logOut.png";
+import { UserContext } from "../context/UserContext";
 
-
-const address = ({addressInfo}) => {
+const address = () => {
   const router = useRouter();
+  const {userState, setUserContent} = useContext(UserContext);
+  // console.log(typeof window !== "undefined" )
+  // console.log(localStorage.getItem('myAccount') )
+
+  useEffect(() => {
+    if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
+      setUserContent(JSON.parse(localStorage.getItem('myAccount')))
+    }
+  }, [])
+  const {address} = userState
+  // const {city} = address
+  // console.log(address)
+  // console.log(address.country)
+  // console.log(city)
+
+  // if (typeof window !== "undefined") {
+  //   var a = JSON.parse(localStorage.getItem('myAccount'))
+
+  // }
+  // console.log(a)
   const [formData, setFormData] = useState({
-    email: addressInfo.email,
+    email: userState.email,
     country: "",
     region: "",
     city: "",
@@ -30,7 +50,7 @@ const address = ({addressInfo}) => {
     console.log(formData)
     if(isChangingAddress) {
       // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
-      const res = await fetch(`api/user/${addressInfo.email}/info/address`, {
+      const res = await fetch(`api/user/${userState.email}/info/address`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -76,19 +96,20 @@ const address = ({addressInfo}) => {
           <div className={moduleCss.pageTitle}>Registered Address</div>
         </div>
         <div className={moduleCss.addressContent}>
-          <div>Country: {addressInfo.address.country}</div>
-          <div>Region: {addressInfo.address.region}</div>
-          <div>City: {addressInfo.address.city}</div>
+          <div>Country: {formData.country}</div>
+          <div>Region: {formData.region}</div>
+          <div>City: {formData.city}</div>
           <div className={moduleCss.streetAddressWrapper}>
             <div className={moduleCss.streetAddressTitle}>Street Address</div>
-            <div>Line 1: {addressInfo.address.streetAddressLine1}</div>
-            <div>Line 2: {addressInfo.address.streetAddressLine2}</div>
+            <div>Line 1: {formData.streetAddressLine1}</div>
+            <div>Line 2: {formData.streetAddressLine2}</div>
           </div>
         </div>
         <button className={moduleCss.press} onClick={() => setIsChangingAddress(!isChangingAddress)} style={{display: isChangingAddress ? "none" : "block"}}>Press here to change address</button>
         <div style={{display: isChangingAddress ? "block" : "none", marginTop: "3vh"}}>
           <div className={moduleCss.pageTitleWithIcon} >
             <Image src={delivery} width="16.81px" height="20.17px"></Image>
+            <p>{userState.address.country}</p>
             <div className={moduleCss.pageTitle}>New Address</div>
           </div>
           <form className={moduleCss.addressContent} onSubmit={handleSubmit}>
@@ -140,22 +161,32 @@ const address = ({addressInfo}) => {
 
 export default address;
 
+
 export async function getServerSideProps(context) {
-  // const authenticated = authenticationCheck(context)
-  // if (!authenticated) {
-  //   return {redirect: {destination: '/', permanent: true,}, };
-  // }
-  const token = context.req.cookies.auth
-  const decoded = jwt_decode(token);
-  const data = await fetch(`http://localhost:3000/api/user/${decoded.email}/info/address`, {
-    headers: {cookie: context.req?.headers.cookie}} 
-  );
-  console.log(data.status)
-  if(data.status === 401) {
+  const authenticated = authenticationCheck(context)
+  if (!authenticated) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  const addressData = await data.json();
   return {
-    props: {addressInfo: addressData}
+    props: {}
   };
 }
+// export async function getServerSideProps(context) {
+//   const authenticated = authenticationCheck(context)
+//   if (!authenticated) {
+//     return {redirect: {destination: '/', permanent: true,}, };
+//   }
+//   const token = context.req.cookies.auth
+//   const decoded = jwt_decode(token);
+//   const data = await fetch(`http://localhost:3000/api/user/${decoded.email}/info/address`, {
+//     headers: {cookie: context.req?.headers.cookie}} 
+//   );
+//   console.log(data.status)
+//   if(data.status === 401) {
+//     return {redirect: {destination: '/', permanent: true,}, };
+//   }
+//   const addressData = await data.json();
+//   return {
+//     props: {addressInfo: addressData}
+//   };
+// }
