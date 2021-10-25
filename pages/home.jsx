@@ -28,20 +28,26 @@ import authenticationCheck from "../lib/authenticationCheck";
 import axios from "axios"
 import jwt_decode from "jwt-decode";
 import fetchHandler from "../lib/fetchHandler";
-import { UserContext } from "../context/UserContext";
+// import { UserContext } from "../context/UserContext";
+import { useUserContext } from "../context/UserContext";
 
 const home = ({products, account}) => {
-  const {userState, setUserContent} = useContext(UserContext);
+  // const {userState, setUserContent} = useContext(UserContext);
+  // const [userState, setUserState] = useUserContext()
+  const [userState, dispatch] = useUserContext()
+  // dispatch({type: "init_stored", value: account})
 
   useEffect(() => {
-    setUserContent(account)
+    // setUserContent(account)
+    // setUserState(account)
+    dispatch({type: "init_stored", value: account})
   }, [])
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-    localStorage.setItem('myAccount', JSON.stringify(userState))
-    }
-  }, [userState])  
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //   localStorage.setItem('myAccount', JSON.stringify(userState))
+  //   }
+  // }, [userState])  
 
   console.log(userState)
 

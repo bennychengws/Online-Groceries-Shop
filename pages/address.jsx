@@ -8,20 +8,27 @@ import {NotificationContainer, NotificationManager} from "react-notifications";
 import moduleCss from "../styles/address.module.css";
 import delivery from "../images/deliceryAddress.png";
 import logOut from "../images/logOut.png";
-import { UserContext } from "../context/UserContext";
+// import { UserContext } from "../context/UserContext";
+import { useUserContext } from "../context/UserContext";
+import fetchHandler from "../lib/fetchHandler";
 
 const address = () => {
   const router = useRouter();
-  const {userState, setUserContent} = useContext(UserContext);
+  // const {userState, setUserContent} = useContext(UserContext);
+  const [userState, dispatch] = useUserContext()
+
+  // useEffect(() => {
+  //   dispatch({type: "init_stored", value: account})
+  // }, [])
   // console.log(typeof window !== "undefined" )
   // console.log(localStorage.getItem('myAccount') )
 
-  useEffect(() => {
-    if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
-      setUserContent(JSON.parse(localStorage.getItem('myAccount')))
-    }
-  }, [])
-  const {address} = userState
+  // useEffect(() => {
+  //   if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
+  //     setUserContent(JSON.parse(localStorage.getItem('myAccount')))
+  //   }
+  // }, [])
+  // const {address} = userState
   // const {city} = address
   // console.log(address)
   // console.log(address.country)
@@ -32,8 +39,8 @@ const address = () => {
 
   // }
   // console.log(a)
+  const email =  userState?.email
   const [formData, setFormData] = useState({
-    email: userState.email,
     country: "",
     region: "",
     city: "",
@@ -50,16 +57,19 @@ const address = () => {
     console.log(formData)
     if(isChangingAddress) {
       // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
-      const res = await fetch(`api/user/${userState.email}/info/address`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formData
-        }),
-      });
+      // const res = await fetch(`api/user/${userState.email}/info/address`, {
+      //   method: 'PUT',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({
+      //     email,
+      //     formData
+      //   }),
+      // });
+      const res = await fetchHandler(`api/user/${userState.email}/info/address`, "PUT", undefined, {email, formData})
       if(res.ok) {
         createNotification("success")
         await new Promise(resolve => setTimeout(resolve, 3000));
+        dispatch({type: "init_stored", value: { ...userState, address: formData}})
         console.log("updated address")
         router.reload()
       } else if(res.status === 401) {
@@ -96,20 +106,19 @@ const address = () => {
           <div className={moduleCss.pageTitle}>Registered Address</div>
         </div>
         <div className={moduleCss.addressContent}>
-          <div>Country: {formData.country}</div>
-          <div>Region: {formData.region}</div>
-          <div>City: {formData.city}</div>
+          <div>Country: {userState?.address?.country}</div>
+          <div>Region: {userState?.address?.region}</div>
+          <div>City: {userState?.address?.city}</div>
           <div className={moduleCss.streetAddressWrapper}>
             <div className={moduleCss.streetAddressTitle}>Street Address</div>
-            <div>Line 1: {formData.streetAddressLine1}</div>
-            <div>Line 2: {formData.streetAddressLine2}</div>
+            <div>Line 1: {userState?.address?.streetAddressLine1}</div>
+            <div>Line 2: {userState?.address?.streetAddressLine2}</div>
           </div>
         </div>
         <button className={moduleCss.press} onClick={() => setIsChangingAddress(!isChangingAddress)} style={{display: isChangingAddress ? "none" : "block"}}>Press here to change address</button>
         <div style={{display: isChangingAddress ? "block" : "none", marginTop: "3vh"}}>
           <div className={moduleCss.pageTitleWithIcon} >
             <Image src={delivery} width="16.81px" height="20.17px"></Image>
-            <p>{userState.address.country}</p>
             <div className={moduleCss.pageTitle}>New Address</div>
           </div>
           <form className={moduleCss.addressContent} onSubmit={handleSubmit}>

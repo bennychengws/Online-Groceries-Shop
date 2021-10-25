@@ -20,18 +20,22 @@ import fetchHandler from "../lib/fetchHandler";
 
 
 const account = () => {
-  const {userState, setUserContent} = useContext(UserContext);
+  // const {userState, setUserContent} = useContext(UserContext);
+  const [userState, dispatch] = useUserContext()
 
-  useEffect(() => {
-    if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
-      setUserContent(JSON.parse(localStorage.getItem('myAccount')))
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
+  //     setUserContent(JSON.parse(localStorage.getItem('myAccount')))
+  //   }
+  // }, [])
 
 
 
   // setUserState(accountInfo)
   console.log(userState)
+  console.log(Object.keys(userState))
+  console.log(JSON.stringify(userState))
+
   // if (typeof window !== "undefined") {
   //   var a = JSON.parse(localStorage.getItem('myAccount'))
 
@@ -89,7 +93,7 @@ const account = () => {
         createNotification("success")
         console.log("updated username")
         // setUserState({...userState, username: formData.username })
-        localStorage.setItem('myAccount', JSON.stringify(userState))
+        // localStorage.setItem('myAccount', JSON.stringify(userState))
       } else if(res.status === 401) {
         // createNotification("error", "Sorry you are not authenticated")
         router.push("/")
@@ -130,7 +134,7 @@ const account = () => {
             {
               isEditing ? 
               <div>
-              <input type="text" name="username" onChange={(e) => setUserState({ ...userState, username: e.target.value})} value={userState.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
+              <input type="text" name="username" onChange={(e) => dispatch({type: "init_stored", value: { ...userState, username: e.target.value}})} value={userState.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
               {/* <button onClick={handleSubmitEditedUsername}>Submit</button> */}
               </div>
               : <div>{userState.username}</div>

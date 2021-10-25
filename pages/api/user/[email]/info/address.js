@@ -14,7 +14,8 @@ const addressAPI = async (req, res) => {
       try {
         console.log("Put method")
         console.log(req.body)
-        const { email, country, region, city, streetAddressLine1, streetAddressLine2 } = req.body.formData
+        const { email } = req.body
+        const { country, region, city, streetAddressLine1, streetAddressLine2 } = req.body.formData
         console.log(email)
         console.log(country)
         console.log(region)

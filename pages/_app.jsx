@@ -2,7 +2,8 @@
 import Head from 'next/head'
 import 'tailwindcss/tailwind.css'
 import 'react-notifications/lib/notifications.css';
-import { UserContextProvider } from '../context/UserContext';
+// import { UserContextProvider } from '../context/UserContext';
+import { UserWrapper } from '../context/UserContext';
 import getConfig from 'next/config';
 import Jwt from "jsonwebtoken";
 import { useRouter } from 'next/router'
@@ -68,14 +69,16 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <UserContextProvider>
+      {/* <UserContextProvider> */}
+      <UserWrapper>
         <Head>
           <link rel="stylesheet" href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css" />
           {/* <link rel="stylesheet" href="path/node_modules/keen-slider/keen-slider.min.css" /> */}
         </Head>
         {/* {authenticated && <Component {...pageProps} />}         */}
         <Component {...pageProps} />
-      </UserContextProvider>
+      </UserWrapper>
+      {/* </UserContextProvider> */}
     </>
   )
 }
