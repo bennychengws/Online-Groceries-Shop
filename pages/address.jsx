@@ -67,11 +67,12 @@ const address = () => {
       // });
       const res = await fetchHandler(`api/user/${userState.email}/info/address`, "PUT", undefined, {email, formData})
       if(res.ok) {
-        createNotification("success")
-        await new Promise(resolve => setTimeout(resolve, 3000));
         dispatch({type: "init_stored", value: { ...userState, address: formData}})
         console.log("updated address")
-        router.reload()
+        setFormData({country: "", region: "", city: "", streetAddressLine1: "", streetAddressLine2: ""})
+        createNotification("success")
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        // router.reload()
       } else if(res.status === 401) {
         createNotification("error", "Sorry you are not authenticated")
         router.push("/")

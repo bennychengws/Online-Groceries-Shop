@@ -47,7 +47,8 @@ const handleFavouriteAPI = async (req, res) => {
         const { email } = req.query
         console.log(email)
         // const users = await User.find({}).lean().exec();
-        const user = await User.findOne({email: email}, {favourite: 1}).lean().exec();
+        // const user = await User.find({email: email}).populate(favourite).lean().exec();
+        const user = await User.populated('favourite');
         return res.status(200).json(user)      
       } catch (error) {
         return res.status(400).json("failed to get users data");        

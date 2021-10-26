@@ -312,14 +312,14 @@ export async function getServerSideProps(context) {
   }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
-  const accAPIData = await fetchHandler(`http://localhost:3000/api/user/${decoded.email}`, "get", context);
+  const accAPIData = await fetchHandler(`http://localhost:3000/api/user/${decoded.email}`, "GET", context);
   // const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
   //   headers: {cookie: context.req?.headers.cookie}} 
   // );
   // const productAPIData = await fetch("http://localhost:3000/api/product", {
   //   headers: {cookie: context.req?.headers.cookie}} 
   // );
-  const productAPIData = await fetchHandler("http://localhost:3000/api/product", "get", context);
+  const productAPIData = await fetchHandler("http://localhost:3000/api/product", "GET", context);
   console.log(`productAPI status: ${productAPIData.status}`)
   if(accAPIData.status === 401 || productAPIData.status === 401) {
     return {redirect: {destination: '/', permanent: true,}, };

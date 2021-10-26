@@ -56,6 +56,9 @@ const product = new Schema({
     type: String,
     required: false,
     default: ""
+  },
+  likedBy: {
+    type: [{ type: Schema.ObjectId, ref: 'users' }]
   }
 });
 

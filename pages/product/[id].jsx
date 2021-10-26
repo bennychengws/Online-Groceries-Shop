@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import authenticationCheck from "../../lib/authenticationCheck";
 import fetchHandler from "../../lib/fetchHandler";
+import { useUserContext } from "../../context/UserContext";
 
 import Rating from "../../components/Rating"
 import heartE from "../../images/heartEmpty.png";
@@ -17,12 +18,14 @@ import backArrow from "../../images/back_arrow.png";
 import add from "../../images/addQtyButton.png"
 import reduce from "../../images/reduceQtyButton.png"
 
-const product = ({productItem, accountInfo}) => {
+const product = ({productItem}) => {
   const router = useRouter()
+  const [userState, dispatch] = useUserContext()
+
   // console.log(accountInfo.cart)
   // console.log(accountInfo.email)
   const {_id, name, category, productImage, brand, amountPerQty, nutritions, productDetail, rating, discount, discountedPrice} = productItem;
-  const addToFavouriteItemInfo = {name: name, _id: _id}
+  const addToFavouriteItemInfo = _id
 
   const [product, setProduct] = useState({
     name: name,
@@ -66,16 +69,20 @@ const product = ({productItem, accountInfo}) => {
   }, [])
 
   useEffect(() => {
-    for(var i = 0; i < accountInfo.favourite.length; i++) {
-      if (accountInfo.favourite[i]._id === _id) {
+    // for(var i = 0; i < accountInfo.favourite.length; i++) {
+      for(var i = 0; i < userState?.favourite?.length; i++) {
+      // if (accountInfo.favourite[i]._id === _id) {
+        if (userState?.favourite[i] === _id) {
         setIsFavourite(true)
         break;
       }
     }
-  }, [])
+  }, [userState])
+
 
   const handleFavourite = async() => {
     setIsFavourite(!isFavourite)
+    var newArray = userState.favourite.slice()
     var method = 'DELETE'
     if(!isFavourite) {
       var method = 'PUT'
@@ -90,12 +97,17 @@ const product = ({productItem, accountInfo}) => {
     //   }),
     // });
 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleFavourite`, method, undefined, addToFavouriteItemInfo)
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState.email}/actions/handleFavourite`, method, undefined, addToFavouriteItemInfo)
     
     // The setIsFavourite(!isFavourite) will not change isFavourite after the end of the handleFavourite function
     if(res.ok && isFavourite===false) {
+      
+      newArray.push(addToFavouriteItemInfo)
+      dispatch({type: "init_stored", value: { ...userState, favourite: newArray}})
       createNotification("success", `You have added the ${name} to Favourite`)
     } else if (res.ok && isFavourite===true) {
+      let anArray = newArray.filter((otherItems) => otherItems.name !== name)
+      dispatch({type: "init_stored", value: { ...userState, favourite: anArray}})
       createNotification("warning", `You have deleted the ${name} from Favourite`)
     } else if(res.status === 401) {
       createNotification("error", "Sorry you are not authenticated")
@@ -127,9 +139,13 @@ const product = ({productItem, accountInfo}) => {
     //   }),
     // });
 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleCart`, 'PUT', undefined, addToCartItemInfo)
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState.email}/actions/handleCart`, 'PUT', undefined, addToCartItemInfo)
 
     if(res.ok) {
+      let newArray = userState.cart.slice()
+      let [value] = addToCartItemInfo
+      newArray.push(value)
+      dispatch({type: "init_stored", value: { ...userState, cart: newArray}})
       createNotification("success", `You have added the ${name} to Cart`)
     } else if(res.status === 401) {
       createNotification("error", "Sorry you are not authenticated")
@@ -200,27 +216,26 @@ export async function getServerSideProps(context) {
   if (!authenticated) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  const token = context.req.cookies.auth
-  const decoded = jwt_decode(token);
-  const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
-    headers: {cookie: context.req?.headers.cookie}} 
-  );
-  console.log(accAPIData.status)
-  if(accAPIData.status === 401) {
-    return {redirect: {destination: '/', permanent: true,}, };
-  }
-  const accountData =  await accAPIData.json();
-
-  const productAPIdata = await fetch(`http://localhost:3000/api/product/${context.params.id}`, {
-    headers: {cookie: context.req?.headers.cookie}} 
-  );
+  // const token = context.req.cookies.auth
+  // const decoded = jwt_decode(token);
+  // const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
+  //   headers: {cookie: context.req?.headers.cookie}} 
+  // );
+  // console.log(accAPIData.status)
+  // if(accAPIData.status === 401) {
+  //   return {redirect: {destination: '/', permanent: true,}, };
+  // }
+  // const accountData =  await accAPIData.json();
+  const productAPIdata = await fetchHandler(`http://localhost:3000/api/product/${context.params.id}`, "GET", context);
+  // const productAPIdata = await fetch(`http://localhost:3000/api/product/${context.params.id}`, {
+  //   headers: {cookie: context.req?.headers.cookie}} 
+  // );
   if(productAPIdata.status === 401) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  const productData = await productAPIdata.json();
-  
+  // const productData = await productAPIdata.json();
   return {
-    props: { productItem: productData, accountInfo: accountData },
+    props: { productItem: productAPIdata.data},
   };
 }
 

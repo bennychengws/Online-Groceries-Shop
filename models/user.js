@@ -18,7 +18,7 @@ const user = new Schema({
     type: Object,
   },
   favourite: {
-    type: Array,
+    type: [{ type: Schema.ObjectId, ref: 'products' }],
   },
   cart: {
     type: Array,
