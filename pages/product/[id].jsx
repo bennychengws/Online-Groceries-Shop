@@ -39,7 +39,7 @@ const product = ({productItem}) => {
     rating: rating,
   })
 
-  const addToCartItemInfo = [{name: name, _id: _id, quantity: product.quantity}]
+  const addToCartItemInfo = [{_id: _id, quantity: product.quantity}]
   // console.log(addToCartItemInfo)
 
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -97,7 +97,7 @@ const product = ({productItem}) => {
     //   }),
     // });
 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState.email}/actions/handleFavourite`, method, undefined, addToFavouriteItemInfo)
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleFavourite`, method, undefined, addToFavouriteItemInfo)
     
     // The setIsFavourite(!isFavourite) will not change isFavourite after the end of the handleFavourite function
     if(res.ok && isFavourite===false) {
@@ -106,7 +106,7 @@ const product = ({productItem}) => {
       dispatch({type: "init_stored", value: { ...userState, favourite: newArray}})
       createNotification("success", `You have added the ${name} to Favourite`)
     } else if (res.ok && isFavourite===true) {
-      let anArray = newArray.filter((otherItems) => otherItems.name !== name)
+      let anArray = newArray.filter((otherIDs) => otherIDs !== _id)
       dispatch({type: "init_stored", value: { ...userState, favourite: anArray}})
       createNotification("warning", `You have deleted the ${name} from Favourite`)
     } else if(res.status === 401) {
@@ -139,7 +139,7 @@ const product = ({productItem}) => {
     //   }),
     // });
 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState.email}/actions/handleCart`, 'PUT', undefined, addToCartItemInfo)
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, 'PUT', undefined, addToCartItemInfo)
 
     if(res.ok) {
       let newArray = userState.cart.slice()

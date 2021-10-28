@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const user = new Schema({
+  // _id: {
+  //   type: Schema.Types.ObjectId,
+  // },
   username: {
     type: String,
     required: true
@@ -18,10 +21,10 @@ const user = new Schema({
     type: Object,
   },
   favourite: {
-    type: [{ type: Schema.ObjectId, ref: 'products' }],
+    type: [{ type: Schema.Types.ObjectId, ref: 'products' }],
   },
   cart: {
-    type: Array,
+    type: [{ _id: {type: Schema.Types.ObjectId, ref: 'products' }, quantity: {type: Number}}],
   }
 });
 

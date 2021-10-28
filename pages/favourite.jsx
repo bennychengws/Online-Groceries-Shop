@@ -15,9 +15,10 @@ import appleJuice from "../images/apple_juice.png";
 import sprite from "../images/sprite_can.png";
 import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode";
+import fetchHandler from "../lib/fetchHandler";
+import { useUserContext } from "../context/UserContext";
 
-
-const favourite = ({ accountInfo, favouriteProductInfo }) => {
+const favourite = ({ favourite }) => {
   // const [favouriteList, setFavouriteList] = useState([
   //   {
   //     name: "Diet Coke",
@@ -59,11 +60,12 @@ const favourite = ({ accountInfo, favouriteProductInfo }) => {
   //   },
   // ])
   const router = useRouter()
+  const [userState, dispatch] = useUserContext()
 
   const [favouriteList, setFavouriteList] = useState([]) 
 
   useEffect(() => {
-    setFavouriteList(favouriteProductInfo)
+    setFavouriteList(favourite)
   }, [])
   
   const [addToCartList , setAddToCartList] = useState([]) 
@@ -71,16 +73,12 @@ const favourite = ({ accountInfo, favouriteProductInfo }) => {
   const [showModal, setShowModal] = useState(false);
 
   const deleteItem = async(item) => {
-    const addToFavouriteItemInfo = {name: item.name, _id: item._id}
-    const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleFavourite`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        addToFavouriteItemInfo
-      }),
-    });
+    var newArray = userState.favourite.slice()
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleFavourite`, "DELETE", undefined, item._id);
     if(res.ok) {
       createNotification("warning", item)
+      let anArray = newArray.filter((otherIDs) => otherIDs !== item._id)
+      dispatch({type: "init_stored", value: { ...userState, favourite: anArray}})
     } else if(res.status === 401) {
       createNotification("error", null, "Sorry you are not authenticated")
       router.push("/")
@@ -128,7 +126,7 @@ const favourite = ({ accountInfo, favouriteProductInfo }) => {
       addToCartItemInfo.push({name: processingArray[j].name, _id: processingArray[j]._id, quantity: 1})
     } 
 
-    const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleCart`, {
+    const res = await fetch(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -233,36 +231,48 @@ export async function getServerSideProps(context) {
   }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
-  const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
-    headers: {cookie: context.req?.headers.cookie}} 
-  );
-  console.log(accAPIData.status)
-  if(accAPIData.status === 401) {
+  console.log("decoded: " + decoded.sub)
+  const favouriteAPIData = await fetchHandler(`http://localhost:3000/api/user/${decoded.sub}/actions/handleFavourite`, "GET", context)
+  console.log(`favouriteAPI status: ${favouriteAPIData.status}`)
+  if (favouriteAPIData.status === 401) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  const accountData =  await accAPIData.json();
-
-  //Get the favourite product information by its ID
-  var processingArray = []
-  for(var i = 0; i < accountData.favourite.length; i++) {
-    for (const [key, value] of Object.entries(accountData.favourite[i])) {
-      if (key === "_id")
-      processingArray.push(value);
-    }
-    // console.log(processingArray)
-  }
-  var urlForFavourite = `http://localhost:3000/api/syncFavouriteDetails/${processingArray.join('/')}`
-  // console.log(url)
-  const productAPIdata = await fetch(urlForFavourite, {
-    headers: {cookie: context.req?.headers.cookie}} 
-  );
-  console.log(productAPIdata.status)
-  if(productAPIdata.status === 401) {
-    return {redirect: {destination: '/', permanent: true,}, };
-  }
-  const favouriteProductData = await productAPIdata.json();
-
   return {
-    props: { accountInfo: accountData, favouriteProductInfo: favouriteProductData },
+    props: { favourite: favouriteAPIData.data },
   };
+
+  // const token = context.req.cookies.auth
+  // const decoded = jwt_decode(token);
+  // const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded._id}`, {
+  //   headers: {cookie: context.req?.headers.cookie}} 
+  // );
+  // console.log(accAPIData.status)
+  // if(accAPIData.status === 401) {
+  //   return {redirect: {destination: '/', permanent: true,}, };
+  // }
+  // const accountData =  await accAPIData.json();
+
+  // //Get the favourite product information by its ID
+  // var processingArray = []
+  // for(var i = 0; i < accountData.favourite.length; i++) {
+  //   for (const [key, value] of Object.entries(accountData.favourite[i])) {
+  //     if (key === "_id")
+  //     processingArray.push(value);
+  //   }
+  //   // console.log(processingArray)
+  // }
+  // var urlForFavourite = `http://localhost:3000/api/syncFavouriteDetails/${processingArray.join('/')}`
+  // // console.log(url)
+  // const productAPIdata = await fetch(urlForFavourite, {
+  //   headers: {cookie: context.req?.headers.cookie}} 
+  // );
+  // console.log(productAPIdata.status)
+  // if(productAPIdata.status === 401) {
+  //   return {redirect: {destination: '/', permanent: true,}, };
+  // }
+  // const favouriteProductData = await productAPIdata.json();
+
+  // return {
+  //   props: { accountInfo: accountData, favouriteProductInfo: favouriteProductData },
+  // };
 }

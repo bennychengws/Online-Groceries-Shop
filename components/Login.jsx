@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import fetchHandler from "../lib/fetchHandler";
 
 const Login = () => {
   const router = useRouter();
@@ -22,13 +23,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    const res = await fetch("api/login", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        formData
-      }),
-    });
+    // const res = await fetch("api/login", {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     formData
+    //   }),
+    // });
+    const res = await fetchHandler("api/login", "POST", undefined, formData)
     if(res.ok) {
       router.push("../home")
     } else {

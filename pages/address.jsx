@@ -39,7 +39,6 @@ const address = () => {
 
   // }
   // console.log(a)
-  const email =  userState?.email
   const [formData, setFormData] = useState({
     country: "",
     region: "",
@@ -65,7 +64,7 @@ const address = () => {
       //     formData
       //   }),
       // });
-      const res = await fetchHandler(`api/user/${userState.email}/info/address`, "PUT", undefined, {email, formData})
+      const res = await fetchHandler(`api/user/${userState._id}/info/address`, "PUT", undefined, formData)
       if(res.ok) {
         dispatch({type: "init_stored", value: { ...userState, address: formData}})
         console.log("updated address")

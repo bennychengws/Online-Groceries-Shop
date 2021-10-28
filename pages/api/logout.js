@@ -7,8 +7,6 @@ import authenticate from '../../middleware/authenticate';
 const logoutAPI = async (req, res) => {
   switch (req.method) {
     case 'POST':
-      return res.status(405).json({ message: 'We only support GET' });
-    case 'GET':
       res.setHeader('Set-Cookie', [
         cookie.serialize('auth', '', {
           maxAge: -1,
@@ -16,6 +14,16 @@ const logoutAPI = async (req, res) => {
         }),
       ]);
       return res.status(200).json({ message: 'Logout' });
+      // return res.status(405).json({ message: 'We only support GET' });
+    case 'GET':
+      // res.setHeader('Set-Cookie', [
+      //   cookie.serialize('auth', '', {
+      //     maxAge: -1,
+      //     path: '/',
+      //   }),
+      // ]);
+      // return res.status(200).json({ message: 'Logout' });
+      return res.status(405).json({ message: 'We only support POST' });
   }
 }
 

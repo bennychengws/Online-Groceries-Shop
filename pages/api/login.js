@@ -12,7 +12,7 @@ const loginAPI = async (req, res) => {
   const { serverRuntimeConfig } = getConfig();
   console.log(req.body.formData);
   // const users = await User.find({}).lean().exec();
-  const { email, password } = req.body.formData
+  const { email, password } = req.body
   switch (req.method) {
     case 'POST':
       const user = await User.findOne({email: email}).lean().exec();

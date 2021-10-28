@@ -88,7 +88,7 @@ const account = () => {
       //     email: userState.email
       //   }),
       // });
-      const res = await fetchHandler(`api/user/${userState.email}/info/username`, "PUT", undefined, {username: userState.username, email: userState.email})
+      const res = await fetchHandler(`api/user/${userState._id}/info/username`, "PUT", undefined, {username: userState.username})
       if(res.ok) {
         createNotification("success")
         console.log("updated username")
@@ -106,7 +106,8 @@ const account = () => {
 
   const handleLogout = async() => {
     console.log("clicked")
-    const res = await fetch("api/logout", {method: 'GET',})
+    // const res = await fetch("api/logout", {method: 'GET',})
+    const res = await fetchHandler(`api/logout`, "POST" )
     if(res.ok) {
       localStorage.removeItem('myAccount');
       router.push("/")

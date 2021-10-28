@@ -312,7 +312,8 @@ export async function getServerSideProps(context) {
   }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
-  const accAPIData = await fetchHandler(`http://localhost:3000/api/user/${decoded.email}`, "GET", context);
+  console.log("decoded: " + decoded.sub)
+  const accAPIData = await fetchHandler(`http://localhost:3000/api/user/${decoded.sub}`, "GET", context);
   // const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
   //   headers: {cookie: context.req?.headers.cookie}} 
   // );

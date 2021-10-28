@@ -58,8 +58,11 @@ const product = new Schema({
     default: ""
   },
   likedBy: {
-    type: [{ type: Schema.ObjectId, ref: 'users' }]
-  }
+    type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
+  },
+  addedToCartBy : {
+    type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
+  },
 });
 
 
