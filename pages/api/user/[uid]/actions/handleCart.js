@@ -27,7 +27,11 @@ const handleCartAPI = async (req, res) => {
         // } else {
         await User.updateMany({_id: uid}, {$push: {cart: {$each: req.body }}}) 
         // await Product.updateOne({_id: req.body._id}, {$addToSet: {addedToCartBy: uid}}) 
-        await Product.updateMany({_id: req.body._id}, {$push: {addedToCartBy: {$each: uid}}}) 
+        var idArray = []
+        for (var i = 0; i < req.body.length; i++ ) {
+          idArray.push(req.body[i]._id)
+        }
+        await Product.updateMany({_id: {$in: idArray}}, {$addToSet: {addedToCartBy: uid}}) 
         
         // }
         return res.status(200).json({message: 'The Product is successfully added to cart', success: true});

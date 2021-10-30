@@ -123,16 +123,17 @@ const favourite = ({ favourite }) => {
 
     var addToCartItemInfo = []
     for (var j = 0; j < processingArray.length; j++) {
-      addToCartItemInfo.push({name: processingArray[j].name, _id: processingArray[j]._id, quantity: 1})
+      addToCartItemInfo.push({_id: processingArray[j]._id, quantity: 1})
     } 
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "PUT", undefined, addToCartItemInfo);
 
-    const res = await fetch(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        addToCartItemInfo
-      }),
-    });
+    // const res = await fetch(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, {
+    //   method: 'PUT',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     addToCartItemInfo
+    //   }),
+    // });
     if(res.ok) {
       for (var j = 0; j < processingArray.length; j++) {
         createNotification("success", processingArray[j])
