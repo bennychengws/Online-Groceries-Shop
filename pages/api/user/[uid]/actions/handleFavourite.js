@@ -40,7 +40,7 @@ const handleFavouriteAPI = async (req, res) => {
         // console.log(addToFavouriteItemInfo)
         await User.updateOne({_id: uid}, {$pull: {favourite: req.body}}) 
         await Product.updateOne({_id: req.body}, {$pull: {likedBy: uid}}) 
-        return res.status(200).json({message: 'The Product is successfully deleted to favourite', success: true});
+        return res.status(200).json({message: 'The Product is successfully deleted from favourite', success: true});
       } catch(error) {
         // console.log("an error occured")
         return res.status(400).json({message: new Error(error).message, success: false,});
@@ -49,7 +49,7 @@ const handleFavouriteAPI = async (req, res) => {
       try {
 
         // const users = await User.find({}).lean().exec();
-        const user = await User.find({_id: uid}, {favourite: 1}).populate('favourite').lean().exec();
+        const user = await User.find({_id: uid}, {favourite: 1}).populate('favourite', ['name', 'amountPerQty', 'discountedPrice', 'productImage']).lean().exec();
         const [{favourite}] = user
         // const user = await User.find({email: email}).populate(favourite).lean().exec();
         // const user = await User.populated('favourite');

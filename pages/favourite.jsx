@@ -67,6 +67,8 @@ const favourite = ({ favourite }) => {
   useEffect(() => {
     setFavouriteList(favourite)
   }, [])
+
+  console.log(favourite)
   
   const [addToCartList , setAddToCartList] = useState([]) 
 
@@ -135,6 +137,9 @@ const favourite = ({ favourite }) => {
     //   }),
     // });
     if(res.ok) {
+      let originalArray = userState.cart.slice()
+      const combinbedArray = originalArray.concat(addToCartItemInfo)
+      dispatch({type: "init_stored", value: { ...userState, cart: combinbedArray}})
       for (var j = 0; j < processingArray.length; j++) {
         createNotification("success", processingArray[j])
       }
@@ -184,9 +189,9 @@ const favourite = ({ favourite }) => {
                             <div className={moduleCss.name}>{item.name}</div>
                             <div className={moduleCss.cross} onClick={() => deleteItem(item)}><Image src={cross}  layout="fill" objectFit="cover" quality={100}></Image></div>
                           </div>
-                          <div className={moduleCss.amount}>{item.AmountPerQty}</div>
+                          <div className={moduleCss.amount}>{item.amountPerQty}</div>
                           <div className={moduleCss.rowAndButton}>
-                            <div style={{fontWeight: "bold"}}>${item.markedPrice}</div>
+                            <div style={{fontWeight: "bold"}}>${item.discountedPrice}</div>
                             <div className={moduleCss.carts} onClick={() => addToCart([item])}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
                           </div>
                         </div>
@@ -199,9 +204,9 @@ const favourite = ({ favourite }) => {
                             <div className={moduleCss.name}>{item.name}</div>
                             <div className={moduleCss.cross} onClick={() => deleteItem(item)}><Image src={cross}  layout="fill" objectFit="cover" quality={100}></Image></div>
                           </div>
-                          <div className={moduleCss.amount}>{item.AmountPerQty}</div>
+                          <div className={moduleCss.amount}>{item.amountPerQty}</div>
                           <div className={moduleCss.rowAndButton}>
-                            <div style={{fontWeight: "bold"}}>${item.markedPrice}</div>
+                            <div style={{fontWeight: "bold"}}>${item.discountedPrice}</div>
                             <div className={moduleCss.carts} onClick={() => addToCart([item])}><Image src={cartButton}  layout="fill" objectFit="contain" quality={100}></Image></div>
                           </div>
                         </div>
