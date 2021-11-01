@@ -9,7 +9,7 @@ import expandArrow from "../images/back arrow.png";
 import downArrow from "../images/downArrow.png";
 import card from "../images/card.png"
 
-const Checkout = ({ show, onClose, children, title }) => {
+const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   //   const elementRef = useRef();
   const [isBrowser, setIsBrowser] = useState(false);
   const [isDeliveryCollapsed, setIsDeliveryCollapsed] = useState(false);
@@ -18,6 +18,7 @@ const Checkout = ({ show, onClose, children, title }) => {
   const [showAcceptedModal, setShowAcceptedModal] = useState(false);
   const [showFailedModal, setShowFailedModal] = useState(false);
 
+  console.log(cartList)
 
   useEffect(() => {
     // const divElement = elementRef.current;
@@ -97,13 +98,13 @@ const Checkout = ({ show, onClose, children, title }) => {
                 <div className={moduleCss.ImagePattern}>{isDeliveryCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div>
               </div>
             </div>
-            {deliveryList.map((option) => (
-              <div className={moduleCss.styledModalSecondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
+            {deliveryList.map((option, upperIndex) => (
+              <div key={upperIndex} className={moduleCss.styledModalSecondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
                 {option.list.map((item, index) => {
                   if (index === 0) {
-                    return <label className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors1" value={index + 1} defaultChecked></input></label>
+                    return <label key={index} className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors1" value={index + 1} defaultChecked></input></label>
                   } else {
-                    return <label className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors1" value={index + 1}></input></label>
+                    return <label key={index} className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors1" value={index + 1}></input></label>
                   }
                 })}
               </div></div></div></div>
@@ -117,13 +118,13 @@ const Checkout = ({ show, onClose, children, title }) => {
                 <div className={moduleCss.ImagePattern}>{isPaymentCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div>
               </div>
             </div>
-            {paymentList.map((option) => (
-              <div className={moduleCss.styledModalSecondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
+            {paymentList.map((option, upperIndex) => (
+              <div key={upperIndex} className={moduleCss.styledModalSecondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
                 {option.list.map((item, index) => {
                   if (index === 0) {
-                    return <label className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors2" value={index + 1} defaultChecked></input></label>
+                    return <label key={index} className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors2" value={index + 1} defaultChecked></input></label>
                   } else {
-                    return <label className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors2" value={index + 1}></input></label>
+                    return <label key={index} className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors2" value={index + 1}></input></label>
                   }
                 })}
               </div></div></div></div>
@@ -137,13 +138,13 @@ const Checkout = ({ show, onClose, children, title }) => {
                 <div className={moduleCss.ImagePattern}>{isPromoCodeCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div>
               </div>
             </div>
-            {promoCodeList.map((option) => (
-              <div className={moduleCss.styledModalSecondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
+            {promoCodeList.map((option, upperIndex) => (
+              <div key={upperIndex} className={moduleCss.styledModalSecondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
                 {option.list.map((item, index) => {
                   if (index === 0) {
-                    return <label className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors3" value={index + 1} defaultChecked></input></label>
+                    return <label key={index} className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors3" value={index + 1} defaultChecked></input></label>
                   } else {
-                    return <label className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors3" value={index + 1}></input></label>
+                    return <label key={index} className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors3" value={index + 1}></input></label>
                   }
                 })}
               </div></div></div></div>
@@ -152,7 +153,7 @@ const Checkout = ({ show, onClose, children, title }) => {
           <div className={moduleCss.styledModalRow}>
             <div className={moduleCss.styledModalFirstRow}>
               <div className={moduleCss.styledModalRowTitle}>Total Cost</div>
-              <div className={moduleCss.StyledModalRowBody}>$13.97</div>
+              <div className={moduleCss.StyledModalRowBody}>{totalPrice}</div>
             </div>
           </div>
         </div>

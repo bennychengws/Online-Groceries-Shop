@@ -77,7 +77,7 @@ const cart = ({cart}) => {
     setCartList(dummyArray)
   }, [])
 
-  console.log(cartList)
+  // console.log(cartList)
 
   const handleQuantityIncrease = (index) => {
     const newCartList = [...cartList];
@@ -110,7 +110,7 @@ const cart = ({cart}) => {
   
   useEffect(() => {
     calculateTotal();
-    console.log(cartList)
+    // console.log(cartList)
   })
 
   useEffect(async() => {
@@ -162,7 +162,7 @@ const cart = ({cart}) => {
             }
           })}
         </div>
-        <Checkout onClose={() => setShowModal(false)} show={showModal}></Checkout>
+        <Checkout onClose={() => setShowModal(false)} show={showModal} totalPrice={totalPriceCount} cartList={cartList}></Checkout>
         <button className={moduleCss.checkOut} onClick={() => setShowModal(true)} style={{ position: cartList.length === 0 ? "fixed" : "", bottom: cartList.length === 0 ? "13vh" : "0" }}><div></div>Go to Checkout<div className={moduleCss.totalPrice}>${totalPriceCount}</div></button>
       </div>
       <NotificationContainer/>

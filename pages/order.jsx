@@ -67,7 +67,7 @@ const order = () => {
                           <ul>
                             <li className={moduleCss.name}>{item.name}</li>
                             <li className={moduleCss.price}>${item.price}</li>
-                            <li className={moduleCss.amountAndQty}>{item.amount}</li>
+                            {/* <li className={moduleCss.amountAndQty}>{item.amount}</li> */}
                             <li className={moduleCss.amountAndQty}>Total qty: {item.quantity}</li>
                           </ul>
                         </div>
@@ -85,7 +85,7 @@ const order = () => {
                           <ul>
                             <li className={moduleCss.name}>{item.name}</li>
                             <li className={moduleCss.price}>${item.price}</li>
-                            <li className={moduleCss.amountAndQty}>{item.amount}</li>
+                            {/* <li className={moduleCss.amountAndQty}>{item.amount}</li> */}
                             <li className={moduleCss.amountAndQty}>Total qty: {item.quantity}</li>
                           </ul>
                         </div>
