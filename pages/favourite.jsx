@@ -68,9 +68,15 @@ const favourite = ({ favourite }) => {
     setFavouriteList(favourite)
   }, [])
 
+  useEffect(() => {
+    setCart(userState.cart)
+  }, [userState])
+
   console.log(favourite)
   
-  const [addToCartList , setAddToCartList] = useState([]) 
+  // const [addToCartList , setAddToCartList] = useState([]) 
+  const [cart, setCart] = useState([])
+
 
   const [showModal, setShowModal] = useState(false);
 
@@ -92,42 +98,35 @@ const favourite = ({ favourite }) => {
 
   const addToCart = async(items) => {
     var processingArray = [...items]
-    // for (var i = 0; i < accountInfo.cart.length; i++) {
-    //   for (var j = 0; j < processingArray.length; j++) {
-    //     if (accountInfo.cart[i]._id === processingArray[j]._id) {
-    //       createNotification("info", processingArray[j])
-    //       if (processingArray.length === 1) {
-    //         return;
-    //       } else if (processingArray.length > 1) {
-    //         processingArray.filter((otherItems) => otherItems.name !== processingArray[j].name)
-    //         // processingArray.splice(j, 1)
-    //       } else {
-    //         createNotification("error", null, "Some errors occur, please try again")
-    //       }
-    //     }
-    //   }
-    // }
-
-    // for (var k = 0; k < addToCartList.length; k++) {
-    //   for (var m = 0; m < processingArray.length; m++) {
-    //     if (addToCartList.includes(processingArray[m]._id)) {
-    //       createNotification("info", processingArray[m])
-    //       if (processingArray.length === 1) {
-    //         return;
-    //       } else if (processingArray.length > 1) {
-    //         processingArray.filter((otherItems) => otherItems.name !== processingArray[m].name)
-    //       } else {
-    //         createNotification("error", null, "Some errors occur, please try again")
-    //       }
-    //     }
-    //   }
-    // }
-
     var addToCartItemInfo = []
     for (var j = 0; j < processingArray.length; j++) {
       addToCartItemInfo.push({_id: processingArray[j]._id, quantity: 1})
     } 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "PUT", undefined, addToCartItemInfo);
+    
+    let cartArray = cart
+    console.log(cartArray)
+    for (var m = 0; m < addToCartItemInfo.length; m++) {
+      console.log("addToCartItemInfo id: " + addToCartItemInfo[m]._id)
+      let duplicated = false;
+      for (var n = 0; n < cartArray.length; n++) {
+        console.log("cartArray id: " + cartArray[n]._id)
+        if (addToCartItemInfo[m]._id === cartArray[n]._id) {
+          console.log(`Quantity of ${addToCartItemInfo[m]._id} in old cartArray: `  + cartArray[n].quantity)
+          console.log(`Quantity of ${addToCartItemInfo[m]._id} in addToCartItemInfo: `  + addToCartItemInfo[m].quantity)
+          cartArray[n].quantity = addToCartItemInfo[m].quantity + cartArray[n].quantity
+          console.log(`Quantity of ${addToCartItemInfo[m]._id} in new cartArray: `  + cartArray[n].quantity)
+          duplicated = true
+          setCart(cartArray)
+          break;
+        }
+      }
+      if (!duplicated) {
+        cartArray.push(addToCartItemInfo[m])
+        setCart(cartArray)
+      }
+    }
+    console.log(cart)
+    // const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "PUT", undefined, addToCartItemInfo);
 
     // const res = await fetch(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, {
     //   method: 'PUT',
@@ -136,10 +135,14 @@ const favourite = ({ favourite }) => {
     //     addToCartItemInfo
     //   }),
     // });
+
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "PUT", undefined, cartArray);
+
     if(res.ok) {
-      let originalArray = userState.cart.slice()
-      const combinbedArray = originalArray.concat(addToCartItemInfo)
-      dispatch({type: "init_stored", value: { ...userState, cart: combinbedArray}})
+      // let originalArray = userState.cart.slice()
+      // const combinbedArray = originalArray.concat(addToCartItemInfo)
+      // dispatch({type: "init_stored", value: { ...userState, cart: combinbedArray}})
+      dispatch({type: "init_stored", value: { ...userState, cart: cartArray}})
       for (var j = 0; j < processingArray.length; j++) {
         createNotification("success", processingArray[j])
       }
@@ -149,12 +152,6 @@ const favourite = ({ favourite }) => {
     } else {
       createNotification("error", null, "Some errors occur, please try again")
     }
-
-    var idList = []
-    for (var j = 0; j < processingArray.length; j++) { 
-      idList.push(processingArray[j]._id)
-    }
-    // setAddToCartList(addToCartList => [...addToCartList, ...idList])
   }
 
 

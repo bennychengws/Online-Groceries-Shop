@@ -17,11 +17,12 @@ import expandArrow from "../../images/back arrow.png";
 import backArrow from "../../images/back_arrow.png";
 import add from "../../images/addQtyButton.png"
 import reduce from "../../images/reduceQtyButton.png"
+import { set } from "mongoose";
 
 const product = ({productItem}) => {
   const router = useRouter()
   const [userState, dispatch] = useUserContext()
-
+  const [cart, setCart] = useState([])
   // console.log(accountInfo.cart)
   // console.log(accountInfo.email)
   const {_id, name, category, productImage, brand, amountPerQty, nutritions, productDetail, rating, discount, discountedPrice} = productItem;
@@ -77,6 +78,7 @@ const product = ({productItem}) => {
         break;
       }
     }
+    setCart(userState.cart)
   }, [userState])
 
 
@@ -137,15 +139,38 @@ const product = ({productItem}) => {
     //   body: JSON.stringify({
     //     addToCartItemInfo
     //   }),
-    // });
+      // });
+    let cartArray = cart
+    console.log(cartArray)
+    for (var m = 0; m < addToCartItemInfo.length; m++) {
+      console.log("addToCartItemInfo id: " + addToCartItemInfo[m]._id)
+      let duplicated = false;
+      for (var n = 0; n < cartArray.length; n++) {
+        console.log("cartArray id: " + cartArray[n]._id)
+        if (addToCartItemInfo[m]._id === cartArray[n]._id) {
+          console.log(`Quantity of ${addToCartItemInfo[m]._id} in old cartArray: `  + cartArray[n].quantity)
+          console.log(`Quantity of ${addToCartItemInfo[m]._id} in addToCartItemInfo: `  + addToCartItemInfo[m].quantity)
+          cartArray[n].quantity = addToCartItemInfo[m].quantity + cartArray[n].quantity
+          console.log(`Quantity of ${addToCartItemInfo[m]._id} in new cartArray: `  + cartArray[n].quantity)
+          duplicated = true
+          setCart(cartArray)
+          break;
+        }
+      }
+      if (!duplicated) {
+        cartArray.push(addToCartItemInfo[m])
+        setCart(cartArray)
+      }
+    }
 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, 'PUT', undefined, addToCartItemInfo)
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, 'PUT', undefined, cartArray)
 
     if(res.ok) {
-      let newArray = userState.cart.slice()
-      let [value] = addToCartItemInfo
-      newArray.push(value)
-      dispatch({type: "init_stored", value: { ...userState, cart: newArray}})
+      // let newArray = userState.cart.slice()
+      // let [value] = addToCartItemInfo
+      // newArray.push(value)
+      // dispatch({type: "init_stored", value: { ...userState, cart: newArray}})
+      dispatch({type: "init_stored", value: { ...userState, cart: cartArray}})
       createNotification("success", `You have added the ${name} to Cart`)
     } else if(res.status === 401) {
       createNotification("error", "Sorry you are not authenticated")

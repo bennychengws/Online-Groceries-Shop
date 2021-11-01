@@ -10,26 +10,20 @@ import authenticate from "../../../../../middleware/authenticate";
 const handleCartAPI = async (req, res) => {
   var { uid } = req.query;
   switch (req.method) {
-    // case 'POST':
-    //     return res.status(405).json({ message: 'We only support Get and Put' });
+    case 'POST':
+        return res.status(405).json({ message: 'We only support Get and Put' });
     case "PUT":
       try {
         console.log("Put method");
         console.log(req.body);
-
-        // const { username, email } = req.body.formData
-        // console.log(email)
-        // console.log(username)
-        // const { addToCartItemInfo } = req.body
-        // console.log(addToCartItemInfo)
-        // if (addToCartItemInfo.length === 1) {
-        //   await User.updateOne({email: email}, {$addToSet: {cart: addToCartItemInfo[0]}})
-        // } else {
-        await User.updateMany(
+        // await User.updateMany(
+        //   { _id: uid },
+        //   { $push: { cart: { $each: req.body } } }
+        // );
+        await User.updateOne(
           { _id: uid },
-          { $push: { cart: { $each: req.body } } }
-        );
-        // await Product.updateOne({_id: req.body._id}, {$addToSet: {addedToCartBy: uid}})
+          { $set: { cart: req.body } }
+        );        
         var idArray = [];
         for (var i = 0; i < req.body.length; i++) {
           idArray.push(req.body[i]._id);
@@ -38,8 +32,6 @@ const handleCartAPI = async (req, res) => {
           { _id: { $in: idArray } },
           { $addToSet: { addedToCartBy: uid } }
         );
-
-        // }
         return res.status(200).json({
           message: "The Product is successfully added to cart",
           success: true,
@@ -54,24 +46,16 @@ const handleCartAPI = async (req, res) => {
       try {
         console.log("Delete method")
         console.log(req.body)
-    //     // const { username, email } = req.body.formData
-    //     // console.log(email)
-    //     // console.log(username)
-    //     const { favouriteItemInfo } = req.body
-    //     const { email } = req.query
-    //     console.log(favouriteItemInfo)
         await User.updateOne({_id: uid}, {$pull: {cart: req.body}}) 
-        await Product.updateOne({_id: req.body}, {$pull: {addedToCartBy: uid}}) 
+        await Product.updateOne({_id: req.body._id}, {$pull: {addedToCartBy: uid}}) 
         return res.status(200).json({message: 'The Product is successfully deleted from cart', success: true});
       } catch(error) {
-    // console.log("an error occured")
         return res.status(400).json({message: new Error(error).message, success: false,});
       } 
     case "GET":
       try {
-        // const users = await User.find({}).lean().exec();
         const user = await User.find({ _id: uid }, { cart: 1 })
-          .populate("cart._id")
+          .populate("cart._id", ['name', 'amountPerQty', 'discountedPrice', 'productImage'])
           .lean()
           .exec();
         var [{ cart }] = user;

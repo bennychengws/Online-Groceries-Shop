@@ -120,18 +120,19 @@ const cart = ({cart}) => {
 
   const deleteItem = async(item) => {
     var newArray = userState.cart.slice()
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "DELETE", undefined, item._id);
+    const itemToBeDeleted = {_id: item._id, quantity: item.quantity} 
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "DELETE", undefined, itemToBeDeleted);
     if(res.ok) {
-      createNotification("warning", item)
-      let anArray = newArray.filter((otherIDs) => otherIDs !== item._id)
+      setCartList(cartList.filter((otherItems) => otherItems._id !== item._id))
+      let anArray = newArray.filter((otherIDs) => otherIDs._id !== item._id)
       dispatch({type: "init_stored", value: { ...userState, cart: anArray}})
+      createNotification("warning", item)
     } else if(res.status === 401) {
       createNotification("error", null, "Sorry you are not authenticated")
       router.push("/")
     } else {
       createNotification("error", null, "Some errors occur, please try again")
     }
-    setCartList(cartList.filter((otherItems) => otherItems.name !== item.name))
     // createNotification(item)
   }
 
@@ -155,9 +156,9 @@ const cart = ({cart}) => {
         <div className={moduleCss.itemContentWrapper} style={{ borderBottom: cartList.length === 0 ? "hidden" : "" }}>
           {cartList.map((item, index) => {
             if (index === cartList.length - 1) {
-              return <div key={index} className={moduleCss.itemContent} style={{ borderBottom: "hidden" }}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}><Image src={`data:image/png;base64,${item.productImage}`} layout="fill" objectFit="contain" quality={100} onClick={() => router.push(`/product/${item._id}`)}></Image></div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amountPerQty}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }} onClick={() => deleteItem(item)}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.productTotalPrice}</div><div></div></div></div>
+              return <div key={item._id} className={moduleCss.itemContent} style={{ borderBottom: "hidden" }}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}><Image src={`data:image/png;base64,${item.productImage}`} layout="fill" objectFit="contain" quality={100} onClick={() => router.push(`/product/${item._id}`)}></Image></div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amountPerQty}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }} onClick={() => deleteItem(item)}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.productTotalPrice}</div><div></div></div></div>
             } else {
-              return <div key={index} className={moduleCss.itemContent}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}><Image src={`data:image/png;base64,${item.productImage}`} layout="fill" objectFit="contain" quality={100} onClick={() => router.push(`/product/${item._id}`)}></Image></div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amountPerQty}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }} onClick={() => deleteItem(item)}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.productTotalPrice}</div><div></div></div></div>
+              return <div key={item._id} className={moduleCss.itemContent}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}><Image src={`data:image/png;base64,${item.productImage}`} layout="fill" objectFit="contain" quality={100} onClick={() => router.push(`/product/${item._id}`)}></Image></div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amountPerQty}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }} onClick={() => deleteItem(item)}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.productTotalPrice}</div><div></div></div></div>
             }
           })}
         </div>
