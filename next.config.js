@@ -2,6 +2,7 @@ module.exports = {
   env: {
     mongodburl:
       "mongodb+srv://dbAdmin:GmjzIMjYuheH475Z@cluster0.bcxlu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    PAYPAL_CLIENT_ID: "AUNoSVgSLuz9QuQv9d414brbmTW5M4SKTgzbRe7MshLFjgOkoOtBGZG97zokiJDyHboqXjTrCu2rfwKr" 
   },
   reactStrictMode: false,
   serverRuntimeConfig: {

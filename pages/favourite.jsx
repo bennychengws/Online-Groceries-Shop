@@ -84,16 +84,17 @@ const favourite = ({ favourite }) => {
     var newArray = userState.favourite.slice()
     const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleFavourite`, "DELETE", undefined, item._id);
     if(res.ok) {
-      createNotification("warning", item)
+      setFavouriteList(favouriteList.filter((otherItems) => otherItems._id !== item._id))
       let anArray = newArray.filter((otherIDs) => otherIDs !== item._id)
       dispatch({type: "init_stored", value: { ...userState, favourite: anArray}})
+      createNotification("warning", item)
     } else if(res.status === 401) {
       createNotification("error", null, "Sorry you are not authenticated")
       router.push("/")
     } else {
       createNotification("error", null, "Some errors occur, please try again")
     }
-    setFavouriteList(favouriteList.filter((otherItems) => otherItems.name !== item.name))
+
   }
 
   const addToCart = async(items) => {

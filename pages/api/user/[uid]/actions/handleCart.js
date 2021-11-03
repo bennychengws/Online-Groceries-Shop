@@ -46,8 +46,10 @@ const handleCartAPI = async (req, res) => {
       try {
         console.log("Delete method")
         console.log(req.body)
-        await User.updateOne({_id: uid}, {$pull: {cart: req.body}}) 
-        await Product.updateOne({_id: req.body._id}, {$pull: {addedToCartBy: uid}}) 
+        // await User.updateOne({_id: uid}, {$pull: {cart: {_id: req.body._id}}})
+        // await Product.updateOne({_id: req.body._id}, {$pull: {addedToCartBy: uid}}) 
+        await User.updateOne({_id: uid}, {$pull: {cart: {_id: req.body}}})  
+        await Product.updateOne({_id: req.body}, {$pull: {addedToCartBy: uid}}) 
         return res.status(200).json({message: 'The Product is successfully deleted from cart', success: true});
       } catch(error) {
         return res.status(400).json({message: new Error(error).message, success: false,});

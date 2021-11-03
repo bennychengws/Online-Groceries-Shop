@@ -10,6 +10,8 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from "react";
 // import { clientAuthenticationCheck } from '../lib/clientAuthenticationCheck';
 // import { authenticationCheck } from '../lib/authenticationCheck';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+// import {PAYPAL_CLIENT_ID} from '../utils/constants'
 
 function MyApp({ Component, pageProps }) {
   // const router = useRouter()
@@ -67,9 +69,17 @@ function MyApp({ Component, pageProps }) {
   //   if (!isAuthenticated && !publicPaths.includes(path)) router.push("/")
   // })
 
+  const initialOptions = {
+    "client-id": process.env.PAYPAL_CLIENT_ID,
+    currency: "HKD",
+//    intent: "capture",
+//    "data-client-token": "abc123xyz==",
+};
+
   return (
     <>
       {/* <UserContextProvider> */}
+      <PayPalScriptProvider options= {initialOptions}>
       <UserWrapper>
         <Head>
           <link rel="stylesheet" href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css" />
@@ -78,6 +88,7 @@ function MyApp({ Component, pageProps }) {
         {/* {authenticated && <Component {...pageProps} />}         */}
         <Component {...pageProps} />
       </UserWrapper>
+      </PayPalScriptProvider>
       {/* </UserContextProvider> */}
     </>
   )

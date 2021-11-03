@@ -120,9 +120,13 @@ const cart = ({cart}) => {
 
   const deleteItem = async(item) => {
     var newArray = userState.cart.slice()
-    const itemToBeDeleted = {_id: item._id, quantity: item.quantity} 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "DELETE", undefined, itemToBeDeleted);
+    // const itemToBeDeleted = {_id: item._id, quantity: item.quantity} 
+    // const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "DELETE", undefined, itemToBeDeleted);
+    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "DELETE", undefined, item._id);
     if(res.ok) {
+      // setCartList(cartList.filter((otherItems) => otherItems._id !== item._id))
+      // let anArray = newArray.filter((otherIDs) => otherIDs._id !== item._id)
+      // dispatch({type: "init_stored", value: { ...userState, cart: anArray}})
       setCartList(cartList.filter((otherItems) => otherItems._id !== item._id))
       let anArray = newArray.filter((otherIDs) => otherIDs._id !== item._id)
       dispatch({type: "init_stored", value: { ...userState, cart: anArray}})

@@ -8,6 +8,7 @@ import Accepted from "../components/Accepted";
 import expandArrow from "../images/back arrow.png";
 import downArrow from "../images/downArrow.png";
 import card from "../images/card.png"
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   //   const elementRef = useRef();
@@ -18,7 +19,12 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   const [showAcceptedModal, setShowAcceptedModal] = useState(false);
   const [showFailedModal, setShowFailedModal] = useState(false);
 
-  console.log(cartList)
+  const [succeeded, setSucceeded] = useState(false);
+  const [paypalErrorMessage, setPaypalErrorMessage] = useState("");
+  const [orderID, setOrderID] = useState(false);
+  const [billingDetails, setBillingDetails] = useState("");
+
+  // console.log(cartList)
 
   useEffect(() => {
     // const divElement = elementRef.current;
@@ -32,6 +38,49 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
     setIsPaymentCollapsed(false);
     setIsPromoCodeCollapsed(false);
     onClose();
+  };
+
+  const createOrder = (data, actions) => {
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: {
+              // charge users $499 per order
+              value: totalPrice,
+            },
+          },
+        ],
+        // remove the applicaiton_context object if you need your users to add a shipping address
+        application_context: {
+         shipping_preference: "NO_SHIPPING",
+        },
+      })
+      .then((orderID) => {
+        setOrderID(orderID);
+        return orderID;
+      });
+  };
+// sb-3plcd8386248@business.example.com
+// z_&GL(?3
+
+// sb-tfbim8386247@personal.example.com
+// /v)7OLL+
+
+
+  const onApprove = (data, actions) => {
+    return actions.order.capture().then(function (details) {
+      const {payer} = details;
+      setBillingDetails(payer);
+      setSucceeded(true);
+      // setShowFailedModal(true);
+
+      setShowAcceptedModal(true);
+    }).catch(function(error) {      
+      setPaypalErrorMessage("Something went wrong.");
+      console.log(error);
+      setShowFailedModal(true);
+    });
   };
 
   // const handlePlaceOrder = (e) => {
@@ -78,7 +127,8 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   //   },
   // ]
 
-  const deliveryList = [{list: ["DHL","SF Express", "Pick up at our store"], rowControl: {display: isDeliveryCollapsed ? "block" : "none"}}]
+  // const deliveryList = [{list: ["DHL", "SF Express", "Pick up at our store"], rowControl: {display: isDeliveryCollapsed ? "block" : "none"}}]
+  const deliveryList = [{list: ["Pick up at our store"], rowControl: {display: isDeliveryCollapsed ? "block" : "none"}}]
   const paymentList = [{list: ["Paybal", "FPS", "MasterCard"], rowControl: {display: isPaymentCollapsed ? "block" : "none"}}]
   const promoCodeList = [{list: ["None"], rowControl: {display: isPromoCodeCollapsed ? "block" : "none"}}]
 
@@ -110,7 +160,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
               </div></div></div></div>
             ))}
           </div>
-          <div className={moduleCss.styledModalRow}>
+          {/* <div className={moduleCss.styledModalRow}>
             <div className={moduleCss.styledModalFirstRow}>
               <div className={moduleCss.styledModalRowTitle}>Payment</div>
               <div className={moduleCss.rightOptions} onClick={() => setIsPaymentCollapsed(!isPaymentCollapsed)}>
@@ -129,7 +179,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
                 })}
               </div></div></div></div>
             ))}
-          </div>
+          </div> */}
           <div className={moduleCss.styledModalRow}>
             <div className={moduleCss.styledModalFirstRow}>
               <div className={moduleCss.styledModalRowTitle}>Promo Code</div>
@@ -166,10 +216,24 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
             <a className={moduleCss.styledModalDeclarationDetails}> Conditions</a>
           </Link></div></div>
         {/* <Link href="../home"> */}
-          <button className={moduleCss.styledModalButton} onClick={() => setShowAcceptedModal(true)}>Place Order</button>
+          {/* <button className={moduleCss.styledModalButton} onClick={() => setShowAcceptedModal(true)}>Place Order</button> */}
+          <div className={moduleCss.styledModalButton} >
+          <PayPalButtons
+                style={{
+                  color: "blue",
+                  shape: "pill",
+//                  label: "pay",
+                  tagline: false,
+                  layout: "horizontal",
+                }}
+                createOrder={createOrder}
+                onApprove={onApprove}
+          />
+          </div>
         {/* </Link> */}
       </div>
       <Accepted show={showAcceptedModal}></Accepted> 
+      <Failed show={showFailedModal} onClose={() => setShowFailedModal(false)}></Failed>
     </div >
   ) : null;
 

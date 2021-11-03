@@ -144,7 +144,7 @@
 }
 
 
-.styledModalButton {
+/* .styledModalButton {
     background-color: #53B175;
     color: white;
     width: 80%;
@@ -152,6 +152,16 @@
     border-radius: 10px;
     align-self: center;
     margin-bottom: 10px; 
+} */
+
+.styledModalButton {
+    z-index: 0;
+    width: 80%;
+    padding: 2vh 0;
+    border-radius: 10px;
+    align-self: center;
+    margin-bottom: 10px; 
 }
+
 
 
