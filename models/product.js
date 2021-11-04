@@ -63,6 +63,9 @@ const product = new Schema({
   addedToCartBy : {
     type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
   },
+  orderedBy : {
+    type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
+  },
 });
 
 

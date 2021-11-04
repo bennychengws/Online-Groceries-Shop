@@ -11,7 +11,7 @@ const handleCartAPI = async (req, res) => {
   var { uid } = req.query;
   switch (req.method) {
     case 'POST':
-        return res.status(405).json({ message: 'We only support Get and Put' });
+        return res.status(405).json({ message: 'We only support Get, Put, and Delete' });
     case "PUT":
       try {
         console.log("Put method");
@@ -20,27 +20,14 @@ const handleCartAPI = async (req, res) => {
         //   { _id: uid },
         //   { $push: { cart: { $each: req.body } } }
         // );
-        await User.updateOne(
-          { _id: uid },
-          { $set: { cart: req.body } }
-        );        
+        await User.updateOne({ _id: uid }, { $set: { cart: req.body } });        
         var idArray = [];
-        for (var i = 0; i < req.body.length; i++) {
-          idArray.push(req.body[i]._id);
-        }
-        await Product.updateMany(
-          { _id: { $in: idArray } },
-          { $addToSet: { addedToCartBy: uid } }
-        );
-        return res.status(200).json({
-          message: "The Product is successfully added to cart",
-          success: true,
-        });
+        for (var i = 0; i < req.body.length; i++) { idArray.push(req.body[i]._id);}
+        await Product.updateMany({ _id: { $in: idArray } }, { $addToSet: { addedToCartBy: uid } });
+        return res.status(200).json({message: "The Product is successfully added to cart", success: true,});
       } catch (error) {
         console.log("an error occured");
-        return res
-          .status(400)
-          .json({ message: new Error(error).message, success: false });
+        return res.status(400).json({ message: new Error(error).message, success: false });
       }
     case 'DELETE':
       try {

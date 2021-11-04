@@ -9,6 +9,8 @@ import expandArrow from "../images/back arrow.png";
 import downArrow from "../images/downArrow.png";
 import card from "../images/card.png"
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import fetchHandler from "../lib/fetchHandler";
+import { useUserContext } from "../context/UserContext";
 
 const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   //   const elementRef = useRef();
@@ -18,6 +20,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   const [isPromoCodeCollapsed, setIsPromoCodeCollapsed] = useState(false);
   const [showAcceptedModal, setShowAcceptedModal] = useState(false);
   const [showFailedModal, setShowFailedModal] = useState(false);
+  const [userState, dispatch] = useUserContext()
 
   const [succeeded, setSucceeded] = useState(false);
   const [paypalErrorMessage, setPaypalErrorMessage] = useState("");
@@ -69,12 +72,24 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
 
 
   const onApprove = (data, actions) => {
-    return actions.order.capture().then(function (details) {
+    return actions.order.capture().then(async function (details) {
+      await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "PUT", undefined, []);
+      dispatch({type: "init_stored", value: { ...userState, cart: []}})
+
+      let newOrder = {
+        _orderID: "",
+        totalPrice: totalPrice,
+        status: "Pending to deliver",
+        items: cartList
+      }
+      let orderArray = userState.orders.slice()
+      orderArray.push(newOrder)
+      await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleOrder`, "PUT", undefined, newOrder);
+      dispatch({type: "init_stored", value: { ...userState, orders: orderArray}})
       const {payer} = details;
       setBillingDetails(payer);
       setSucceeded(true);
       // setShowFailedModal(true);
-
       setShowAcceptedModal(true);
     }).catch(function(error) {      
       setPaypalErrorMessage("Something went wrong.");

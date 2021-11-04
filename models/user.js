@@ -34,9 +34,21 @@ const user = new Schema({
   orders: {
     type: [
       {
-        _id: { type: Schema.Types.ObjectId, ref: "products" },
-        quantity: { type: Number },
-        price: { type: Number, default: 0 },
+        _orderId: {type: Schema.Types.ObjectId},
+        items: {
+          type: [
+            {
+              _id: { type: Schema.Types.ObjectId, ref: "products", required: true },
+              name: { type: String, required: true, default: "",},
+              productImage: {type: String, required: false, default: ""},
+              quantity: { type: Number, required: true },
+              amounPerQty: {type: String, default: ""},
+              discountedPrice: { type: Number, default: 0, required: true },
+              productTotalPrice: { type: Number, default: 0, required: true },
+            }
+          ]
+        },
+        totalPrice: { type: Number, default: 0, required: true },
         status: { type: String, default: "Pending to deliver" },
       },
     ],

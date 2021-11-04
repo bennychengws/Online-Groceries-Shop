@@ -10,8 +10,8 @@ import authenticate from '../../../../../middleware/authenticate';
 const handleFavouriteAPI = async (req, res) => {
   var { uid } = req.query
   switch (req.method) {
-    // case 'POST':
-    //     return res.status(405).json({ message: 'We only support Get and Put' });
+    case 'POST':
+        return res.status(405).json({ message: 'We only support Get, Put, and elete' });
     case 'PUT':
       try {
         console.log("Put method")

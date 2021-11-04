@@ -77,7 +77,7 @@ const cart = ({cart}) => {
     setCartList(dummyArray)
   }, [])
 
-  // console.log(cartList)
+  console.log(cartList)
 
   const handleQuantityIncrease = (index) => {
     const newCartList = [...cartList];
