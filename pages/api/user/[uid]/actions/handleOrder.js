@@ -45,7 +45,8 @@ const handleOrderAPI = async (req, res) => {
     case "GET":
       try {
         // const user = await User.find({ _id: uid }, { orders: 1 }).populate("orders._id", ['name', 'amountPerQty', 'price', 'productImage']).lean().exec();
-        const user = await User.find({ _id: uid }, { orders: 1 }).lean().exec();        
+        const user = await User.find({ _id: uid }, { orders: 1 }).lean().exec(); 
+        const [{ orders }] = user;       
         // var [{ cart }] = user;
         // var flattenedCart = cart.flatMap(
         //   (i) => i._id
@@ -54,7 +55,7 @@ const handleOrderAPI = async (req, res) => {
         //   flattenedCart[j].quantity = cart[j].quantity
         // }  
         // return res.status(200).json(flattenedCart);
-        return res.status(200).json(user);
+        return res.status(200).json(orders);
       } catch (error) {
         return res.status(400).json("failed to get users data");
       }
