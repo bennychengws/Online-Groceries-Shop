@@ -16,7 +16,7 @@ import bellPR from "../images/bellPepperR.png";
 import eggCR from "../images/eggChickenRed.png";
 import ginger from "../images/ginger.png";
 import banana from "../images/banana.png";
-import router from "next/router";
+// import router from "next/router";
 import jwt_decode from "jwt-decode";
 import fetchHandler from "../lib/fetchHandler";
 import { useUserContext } from "../context/UserContext";

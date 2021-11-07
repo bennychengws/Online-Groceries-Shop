@@ -1,6 +1,6 @@
 .layout {
     z-index: 5;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -10,7 +10,6 @@
     font-family: 'Gilroy', sans-serif;
     min-height: 100vh;
     background-color: white;
-    
 }
 
 .container {

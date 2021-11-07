@@ -154,6 +154,12 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
 
   const modalContent = show ? (
     <div className={moduleCss.styledModalOverlay}>
+      <style jsx global>{`
+        body {
+          overflow: hidden;
+        }
+      `}
+      </style>
       <div className={moduleCss.styledModal}>
         <div className={moduleCss.styledModalHeader}>
           <div className={moduleCss.styledModalCheckOut}>Checkout</div>

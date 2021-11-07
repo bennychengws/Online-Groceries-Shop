@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import moduleCss from "../styles/Accepted.module.css";
+import moduleCss from "../styles/accepted.module.css";
 // import Layout from "../components/Layout";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +15,12 @@ const Accepted = ({ show }) => {
 
   const modalContent = show ? (
     <div className={moduleCss.layout}>
+      <style jsx global>{`
+        body {
+          overflow: hidden;
+        }
+      `}
+      </style>
       <div className={moduleCss.container}>
         <div className={moduleCss.acceptedImage}>
           <Image src={acceptedIcon} width="269px" height="240px"></Image>
@@ -26,7 +32,7 @@ const Accepted = ({ show }) => {
           {" "}
           Your items has been placed and is on it's way to being processed
         </div>
-        <Link href="../order">
+        <Link href="../my_orders">
           <button className={moduleCss.track}>Track Order</button>
         </Link>
         <Link href="../home">

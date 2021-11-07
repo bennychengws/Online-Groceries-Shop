@@ -56,7 +56,7 @@ const account = () => {
     {
       option: "Orders",
       optionImage: <Image src={orders} width="18px" height="20px"></Image>,
-      linkTo: "../order",
+      linkTo: "../my_orders",
       marginStyle: {marginLeft: "15px"}
     },
     {
@@ -65,12 +65,12 @@ const account = () => {
       linkTo: "../address",
       marginStyle: {marginLeft: "16px"}
     },
-    {
-      option: "Payment Methods",
-      optionImage: <Image src={payment} width="20px" height="13.45px"></Image>,
-      linkTo: "../payment",
-      marginStyle: {marginLeft: "12px"}
-    },
+    // {
+    //   option: "Payment Methods",
+    //   optionImage: <Image src={payment} width="20px" height="13.45px"></Image>,
+    //   linkTo: "../payment",
+    //   marginStyle: {marginLeft: "12px"}
+    // },
     
   ];
 

@@ -32,9 +32,9 @@ const helloAPI = async (req, res) => {
           streetAddressLine1: "",
           streetAddressLine2: ""
         },
-        cart,
-        favourite,
-        orders
+        cart: [],
+        favourite: [],
+        orders:[]
         // paymentMethod: ""
       })
       await user.save()
