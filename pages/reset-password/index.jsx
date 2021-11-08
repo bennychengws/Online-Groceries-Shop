@@ -6,18 +6,26 @@ import Image from "next/image";
 import carrotImage from "../../images/Group.png";
 import backArrow from "../../images/back_arrow.png";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import fetchHandler from "../../lib/fetchHandler";
 
 const index = () => {
-  const nodemailer = require("nodemailer");
 
   const router = useRouter()
-  const [email, setEmail] = useState("");
+  const [formData, setformData] = useState({
+    email: ""
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
-    createNotification("success")
-
+    console.log(formData.email);
+    const res = await fetchHandler("api/reset-password", "POST", undefined, formData)
+    if (res.ok) {
+      createNotification("success")
+    } else if (res.status === 409) {
+      createNotification("warning")
+    } else {
+      createNotification("error")
+    }
     // const res = await fetch("api/login", {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
@@ -39,6 +47,8 @@ const index = () => {
     switch (type) {
       case "success":
         return NotificationManager.success(`Please check your email in order to reset password`, "Email Sent");
+      case "warning":
+        return NotificationManager.warning(`Your email address has not been registered`, "Email Not Found");  
       case "error":
         return NotificationManager.error("Something is wrong, please try again", 'Ooops', 3000);
     }
@@ -59,12 +69,12 @@ const index = () => {
           <form className=" rounded mb-4" onSubmit={handleSubmit}>
             <input
               className="mb-3 appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 leading-tight focus:outline-none border-b border-teal-500"
-              id="username"
+              id="email"
               type="text"
               placeholder="Enter email"
               autoComplete="off"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              onChange={(e) => setformData({...formData, email: e.target.value})}
+              value={formData.email}
             />
             <button
               className=" w-full bg-green-500 hover:bg-green-700 text-white font-bold py-3 my-1 rounded-2xl focus:outline-none focus:shadow-outline"
