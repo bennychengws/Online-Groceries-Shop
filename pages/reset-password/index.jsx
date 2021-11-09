@@ -6,7 +6,7 @@ import Image from "next/image";
 import carrotImage from "../../images/Group.png";
 import backArrow from "../../images/back_arrow.png";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import fetchHandler from "../../lib/fetchHandler";
+import axios from "axios";
 
 const index = () => {
 
@@ -18,29 +18,18 @@ const index = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData.email);
-    const res = await fetchHandler("api/reset-password", "POST", undefined, formData)
-    if (res.ok) {
-      createNotification("success")
-    } else if (res.status === 409) {
+    try {
+    await axios.post("http://localhost:3000/api/sendEmail", formData)
+    createNotification("success")
+    } catch (error) { 
+
+      if (error.response.data.status === 409) {
       createNotification("warning")
-    } else {
+      } else {
+      console.log(error.response.data.message)
       createNotification("error")
     }
-    // const res = await fetch("api/login", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     formData
-    //   }),
-    // });
-    // const res = await fetchHandler("api/login", "POST", undefined, formData)
-    // if(res.ok) {
-    //   router.push("../home")
-    // } else {
-    //   // router.reload()
-    //   setFormData({email: "", password: "",})
-    //   createNotification("warning")
-    // }
+  }
   };
 
   const createNotification = (type) => {

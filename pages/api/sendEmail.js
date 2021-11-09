@@ -9,14 +9,15 @@ import getConfig from 'next/config';
 
 mail.setApiKey(process.env.SENDGRID_API_KEY)
 
-const resetPassword = async (req, res) => {
+const resetPasswordEmail = async (req, res) => {
   // const users = await User.find({}).lean().exec();
   switch (req.method) {
     case 'POST':
+      try {
       const { serverRuntimeConfig } = getConfig();
       console.log(req.body)
       const { email } = req.body
-      const user = await User.findOne({email: email}).lean().exec();
+      const user = await User.findOne({email: email}, {username: 1, password: 1}).lean().exec();
       console.log(user)
       if(!user) {
         return res.status(409).json({ message: `User with the email "${email}" does not exist` });  
@@ -24,16 +25,16 @@ const resetPassword = async (req, res) => {
         const payload = { sub: user._id, email: email };
         console.log(user.password)
         console.log(serverRuntimeConfig.secret)
-        const activationKey = serverRuntimeConfig.secret + user.password
+        const secretKey = serverRuntimeConfig.secret + user.password
         // console.log(payload.password)
-        console.log(activationKey)
-        const jwt = Jwt.sign(payload, activationKey, { expiresIn: '1m' });
-        console.log(jwt)
+        console.log(secretKey)
+        const jwtKey = Jwt.sign(payload, secretKey, { expiresIn: '1m' });
+        console.log(jwtKey)
         const message = `
           Dear ${user.username}: \r\n
           \r\n
           Please click the following link to reset your password:\r\n
-          http://localhost:3000/reset-password/${jwt} \r\n
+          http://localhost:3000/reset-password/${user._id}/${jwtKey} \r\n
           \r\n
           Regards,\r\n
           Admin from Eshop
@@ -47,12 +48,16 @@ const resetPassword = async (req, res) => {
         }
         
         mail.send(data)
+        return res.status(200).json("An Email is sent");
       }
+    } catch (error) {
+      return res.status(400).json("Failed to post users data");
+    }
     case 'GET':
-      return res.status(200).json({ name: 'John Doe' })
+      return res.status(405).json("We only support POST")
     default:
       break
   } 
 }
 
-export default connectDB(resetPassword)
+export default connectDB(resetPasswordEmail)
