@@ -21,8 +21,13 @@ const resetPassword = async (req, res) => {
       if(!user) {
         return res.status(409).json({ message: `User with the email "${email}" does not exist` });  
       } else {
-        const claims = { sub: user._id, email: email };
-        const jwt = Jwt.sign(claims, serverRuntimeConfig.secret, { expiresIn: '1m' });
+        const payload = { sub: user._id, email: email };
+        console.log(user.password)
+        console.log(serverRuntimeConfig.secret)
+        const activationKey = serverRuntimeConfig.secret + user.password
+        // console.log(payload.password)
+        console.log(activationKey)
+        const jwt = Jwt.sign(payload, activationKey, { expiresIn: '1m' });
         console.log(jwt)
         const message = `
           Dear ${user.username}: \r\n
