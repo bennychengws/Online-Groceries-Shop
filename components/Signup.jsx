@@ -69,8 +69,9 @@ const Signup = () => {
           await new Promise(resolve => setTimeout(resolve, 3000));
           router.push("/")
         } catch (e) {
-          console.log(e.response.data.message);
-          createNotification("warning", e.response.data.message)
+//          console.log(e.response.data.message);
+          console.log(e)
+          createNotification("warning", e)
         }
     }
     setFormData({username: "", email: "", password: ""})
@@ -86,7 +87,7 @@ const Signup = () => {
       case "success":
         return NotificationManager.success(`You have succefully created an account`, "Successful Registration");
       case "error":
-        return NotificationManager.error('Please enter a valid email and a password with at least 6 characters', 'Incorrect Email/Password', 3000);
+        return NotificationManager.error('Please enter a valid email and a password with at least 6 characters', 'Invalid Email/Password', 3000);
       case "warning":
         return NotificationManager.warning(item, 'Duplicated Username/Email', 3000);
   
@@ -180,7 +181,7 @@ const Signup = () => {
             }
             value={formData.address}
           /> */}
-              {formData.password.length > 0 && formData.password.length < 6 ? (
+      {formData.password.length > 0 && formData.password.length < 6 ? (
           <p className="text-red-500 text-xs italic mt-1">
             Please enter a password with at least 6 characters.
           </p>
