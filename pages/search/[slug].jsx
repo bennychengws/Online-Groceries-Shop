@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import moduleCss from "../../styles/search.module.css";
 import Image from "next/image";
-// import { useRouter } from 'next/router'
 import NavBar from "../../components/NavBar";
 import backArrow from "../../images/back_arrow.png";
 import authenticationCheck from "../../lib/authenticationCheck";
@@ -17,17 +16,11 @@ import appleJuice from "../../images/apple_juice.png";
 import sprite from "../../images/sprite_can.png";
 import GoodsV2 from "../../components/GoodsV2";
 import Goods from "../../components/Goods";
-
+import { useFilterContext } from "../../context/FilterContext";
 
 const search = (props) => {
-  // const router = useRouter();
-  // console.log(props.data)
-  // const [searchQuery, setSearchQuery] = useState(" ");
-  // const handleSearchBoxSubmit = (event) => {
-  //   event.preventDefault();
-  //   router.push(`/search?=${searchQuery}`);
-  //   return null
-  // }
+  const router = useRouter();
+  const [filterState, dispatchFilter] = useFilterContext()
   const {data} = props
 //   console.log("passed data: " + data)
   const [showFilter, setShowFilter] = useState(false);
@@ -36,51 +29,76 @@ const search = (props) => {
   const [categorySet, setCategorySet] = useState(new Set())
   const [brandSet, setBrandSet] = useState(new Set())
 
-  useEffect(()=>{
+  useEffect(() => {
+    var categories = new Set()
+    var brands = new Set()
+
+    for (var i = 0; i < data.length; i++ ) {
+      for (var j = 0; j < data.length; j++ ) {
+        if (data[i].categoryTags[j] !== undefined) {
+          categories.add(data[i].categoryTags[j])
+          continue
+        }
+      }
+    }    
+
+    for (var k = 0; k < data.length; k++ ) {
+      brands.add(data[k].brand)
+    }    
+
+    setCategorySet(categories)
+    setBrandSet(brands)
+
+
     setDisplayedData(data)
-  })
-  // const [catList, setCatList] = useState([]);
-  // const [brandList, setBrandList] = useState([]);
-  // const beverageList = [
-  //   {
-  //     name: "Diet Coke",
-  //     productImage: <Image src={dietCoke} width="35px" height="80px"></Image>,
-  //     amount: "355ml",
-  //     price: 7,
-  //   },
-  //   {
-  //     name: "Sprite Can",
-  //     productImage: <Image src={sprite} width="45px" height="80px"></Image>,
-  //     amount: "325ml",
-  //     price: 6.5,
-  //   },
-  //   {
-  //     name: "Apple & Grape Juice",
-  //     productImage: <Image src={appleJuice} width="80px" height="80px"></Image>,
-  //     amount: "2L",
-  //     price: 15,
-  //   },
-  //   {
-  //     name: "Orange Juice",
-  //     productImage: (
-  //       <Image src={orangeJuice} width="80px" height="80px"></Image>
-  //     ),
-  //     amount: "2L",
-  //     price: 15,
-  //   },
-  //   {
-  //     name: "Coca Cola Can",
-  //     productImage: <Image src={coca} width="45px" height="80px"></Image>,
-  //     amount: "325ml",
-  //     price: 6.8,
-  //   },
-  //   {
-  //     name: "Pepsi Can",
-  //     productImage: <Image src={pepsi} width="45px" height="80px"></Image>,
-  //     amount: "330ml",
-  //     price: 6.8,
-  //   },
-  // ];
+    dispatchFilter({type: "filter_stored", value: ""})
+  }, [data])
+
+  useEffect(() => {
+    console.log(data)
+    console.log(filterState.brands)
+    console.log(filterState.categories)
+    if (filterState.brands && filterState.categories !== undefined) {
+      // let filteredBrands = filterState.brands.slice()
+      // let filteredCategories = filterState.categories.slice()
+      // console.log(filteredBrands)
+      // console.log(filteredCategories)
+
+      let fitleredData = new Set()
+      for (var k = 0; k < data.length; k++ ) {
+        let isCheckedInBrands = false;
+        let isCheckedInCategories = false;
+        for (var m = 0; m < filterState.brands.length; m++ ) {
+          if (data[k].brand === filterState.brands[m]) {
+            // console.log(data[k].name)
+            isCheckedInBrands = true;
+            // fitleredData.add(data[k])
+            break
+          }
+        }
+
+        for (var p = 0; p < filterState.categories.length; p++ ) {
+          for (var r = 0; r < data[k].categoryTags.length; r++ ) {
+            // console.log(data[k].categoryTags.length)
+            if (data[k].categoryTags[r] === filterState.categories[p]) {
+              // console.log(data[k].categoryTags[r])
+              // console.log(data[k].name)
+              // fitleredData.add(data[k])
+              isCheckedInCategories= true;
+              break
+            }
+          }
+        }
+        if (isCheckedInBrands && isCheckedInCategories) {
+          fitleredData.add(data[k])
+        }
+      }
+
+      console.log(fitleredData)
+      setDisplayedData(Array.from(fitleredData))
+    }
+  }, [filterState])
+
   
   // useEffect(() =>{
   //   var categoryList = []
@@ -94,25 +112,27 @@ const search = (props) => {
   //   console.log(categoryList) 
   // })
 
-  useEffect(() => {
-    var categories = new Set()
-    for (var i = 0; i < data.length; i++ ) {
-      for (var j = 0; j < data.length; j++ ) {
-        if (data[i].categoryTags[j] !== undefined) {
-          categories.add(data[i].categoryTags[j])
-        }
-      }
-    }    
-    setCategorySet(categories)
-  }, [])
+  // useEffect(() => {
+  //   var categories = new Set()
+  //   var brands = new Set()
 
-  useEffect(() => {
-    var brands = new Set()
-    for (var i = 0; i < data.length; i++ ) {
-      brands.add(data[i].brand)
-    }    
-    setBrandSet(brands)
-  }, [])
+  //   for (var i = 0; i < data.length; i++ ) {
+  //     for (var j = 0; j < data.length; j++ ) {
+  //       if (data[i].categoryTags[j] !== undefined) {
+  //         categories.add(data[i].categoryTags[j])
+  //         continue
+  //       }
+  //     }
+  //   }    
+
+  //   for (var k = 0; k < data.length; k++ ) {
+  //     brands.add(data[k].brand)
+  //   }    
+
+  //   setCategorySet(categories)
+  //   setBrandSet(brands)
+
+  // }, [])
 
   return (
     <div className={moduleCss.container} style={{ overflow: showFilter ? "hidden" : "auto", height: showFilter ? "100vh" : "auto" }}>
@@ -161,40 +181,3 @@ export async function getServerSideProps(context) {
   }
 }
 
-// export async function getServerSideProps(context) {
-
-//   switch (context.params.category) {
-//     case "fresh-fruits-and-vegetables":
-//       var title = "Fresh Fruits & Vegetables"
-//       break;
-//     case "cooking-oil-and-ghee":
-//       var title = "Cooking Oil & Ghee"
-//       break;
-//     case "meat-and-fish":
-//       var title = "Meat & Fish"
-//       break;
-//     case "bakery-and-snacks":
-//       var title = "Bakery & Snacks"
-//       break;
-//     case "dairy-and-eggs":
-//       var title = "Dairy & Eggs"
-//       break;
-//     case "beverages":
-//       var title = "Beverages"
-//       break;
-//     case "groceries":
-//       var title = "Groceries"
-//       break;
-//   }
-
-//   const data = await fetch(`http://localhost:3000/api/explore/${context.params.category}`);
-//   const productData = await data.json();
-
-//   //you can make DB queries using the data in context.query
-//   return {
-//     props: {
-//       title: title,
-//       categoryData: productData //pass it to the page props
-//     }
-//   }
-// }

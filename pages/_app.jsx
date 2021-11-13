@@ -4,6 +4,7 @@ import 'tailwindcss/tailwind.css'
 import 'react-notifications/lib/notifications.css';
 // import { UserContextProvider } from '../context/UserContext';
 import { UserWrapper } from '../context/UserContext';
+import { FilterWrapper } from '../context/FilterContext';
 import getConfig from 'next/config';
 import Jwt from "jsonwebtoken";
 import { useRouter } from 'next/router'
@@ -80,6 +81,7 @@ function MyApp({ Component, pageProps }) {
     <>
       {/* <UserContextProvider> */}
       <PayPalScriptProvider options= {initialOptions}>
+      <FilterWrapper>
       <UserWrapper>
         <Head>
           <link rel="stylesheet" href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css" />
@@ -88,6 +90,7 @@ function MyApp({ Component, pageProps }) {
         {/* {authenticated && <Component {...pageProps} />}         */}
         <Component {...pageProps} />
       </UserWrapper>
+      </FilterWrapper>
       </PayPalScriptProvider>
       {/* </UserContextProvider> */}
     </>

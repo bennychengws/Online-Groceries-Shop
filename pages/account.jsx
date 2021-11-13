@@ -16,12 +16,14 @@ import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode"
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { useUserContext } from "../context/UserContext";
+import { useFilterContext } from "../context/FilterContext";
 import fetchHandler from "../lib/fetchHandler";
 
 
 const account = () => {
   // const {userState, setUserContent} = useContext(UserContext);
   const [userState, dispatch] = useUserContext()
+  const [filterState, dispatchFilter] = useFilterContext()
 
   // useEffect(() => {
   //   if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
@@ -32,9 +34,9 @@ const account = () => {
 
 
   // setUserState(accountInfo)
-  console.log(userState)
-  console.log(Object.keys(userState))
-  console.log(JSON.stringify(userState))
+  // console.log(userState)
+  // console.log(Object.keys(userState))
+  // console.log(JSON.stringify(userState))
 
   // if (typeof window !== "undefined") {
   //   var a = JSON.parse(localStorage.getItem('myAccount'))
@@ -110,6 +112,8 @@ const account = () => {
     const res = await fetchHandler(`api/logout`, "POST" )
     if(res.ok) {
       localStorage.removeItem('myAccount');
+      dispatch({type: "init_stored", value: ""})
+      dispatchFilter({type: "filter_stored", value: ""})
       router.push("/")
     }
   }
