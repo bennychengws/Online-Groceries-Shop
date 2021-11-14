@@ -44,3 +44,4 @@ const loginAPI = async (req, res) => {
 }
 
 export default connectDB(loginAPI)
+

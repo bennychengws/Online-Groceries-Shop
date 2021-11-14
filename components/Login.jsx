@@ -13,15 +13,18 @@ const Login = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
+
     // username: "",
     email: "",
     password: "",
     // address: "",
+
   });
   const [isRevealPwd, setIsRevealPwd] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log(formData);
     // const res = await fetch("api/login", {
     //   method: 'POST',
@@ -38,7 +41,7 @@ const Login = () => {
       setFormData({email: "", password: "",})
       createNotification("warning")
     }
-  };
+
 
   useEffect(() => {
     // Prefetch the homepage

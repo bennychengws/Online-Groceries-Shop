@@ -28,3 +28,4 @@ const logoutAPI = async (req, res) => {
 }
 
 export default authenticate(connectDB(logoutAPI))
+
