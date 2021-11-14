@@ -1,4 +1,4 @@
-import getConfig from 'next/config';
+// import getConfig from 'next/config';
 import connectDB from '../../middleware/mongodb';
 import Jwt from "jsonwebtoken";
 import cookie from 'cookie';
@@ -9,7 +9,7 @@ import authenticate from '../../middleware/authenticate';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 const loginAPI = async (req, res) => {
-  const { serverRuntimeConfig } = getConfig();
+//  const { serverRuntimeConfig } = getConfig();
   console.log(req.body.formData);
   // const users = await User.find({}).lean().exec();
   const { email, password } = req.body
@@ -24,7 +24,7 @@ const loginAPI = async (req, res) => {
       } else {
         // authentication successful
         const claims = { sub: user._id, email: user.email };
-        const jwt = Jwt.sign(claims, serverRuntimeConfig.secret, { expiresIn: '1h' });
+        const jwt = Jwt.sign(claims, process.env.JWT_SECRET, { expiresIn: '1h' });
         console.log(jwt)
         res.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
           httpOnly: true,

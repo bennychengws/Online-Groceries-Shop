@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 // import { clientAuthenticationCheck } from '../lib/clientAuthenticationCheck';
 // import { authenticationCheck } from '../lib/authenticationCheck';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-// import {PAYPAL_CLIENT_ID} from '../utils/constants'
 
 function MyApp({ Component, pageProps }) {
   // const router = useRouter()

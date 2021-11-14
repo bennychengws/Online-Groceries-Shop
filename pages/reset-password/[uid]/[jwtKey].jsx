@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
-import getConfig from 'next/config';
+// import getConfig from 'next/config';
 import Jwt from "jsonwebtoken";
 import axios from "axios";
 import moduleCss from "../../../styles/resetPassword.module.css";
@@ -170,13 +170,13 @@ const resetPassword = ({uid}) => {
 export default resetPassword;
 
 export async function getServerSideProps(context) {
-  const { serverRuntimeConfig } = getConfig();
+//  const { serverRuntimeConfig } = getConfig();
   const { uid, jwtKey } = context.params;
   console.log(uid)
   console.log(jwtKey)
   try {
     var res = await axios.get(`http://localhost:3000/api/reset-password/${uid}`);
-    const secretKey = serverRuntimeConfig.secret + res.data.password
+    const secretKey = process.env.JWT_SECRET + res.data.password
     const payload = Jwt.verify(jwtKey, secretKey)
 //    console.log(payload)
     // console.log(res.data)

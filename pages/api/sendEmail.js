@@ -1,9 +1,8 @@
 import connectDB from '../../middleware/mongodb';
 import User from '../../models/user';
-import bcrypt from 'bcrypt'
 import mail from '@sendgrid/mail';
 import Jwt from "jsonwebtoken";
-import getConfig from 'next/config';
+//import getConfig from 'next/config';
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
@@ -14,7 +13,7 @@ const resetPasswordEmail = async (req, res) => {
   switch (req.method) {
     case 'POST':
       try {
-      const { serverRuntimeConfig } = getConfig();
+//      const { serverRuntimeConfig } = getConfig();
       console.log(req.body)
       const { email } = req.body
       const user = await User.findOne({email: email}, {username: 1, password: 1}).lean().exec();
@@ -23,13 +22,8 @@ const resetPasswordEmail = async (req, res) => {
         return res.status(409).json({ message: `User with the email "${email}" does not exist` });  
       } else {
         const payload = { sub: user._id, email: email };
-        console.log(user.password)
-        console.log(serverRuntimeConfig.secret)
-        const secretKey = serverRuntimeConfig.secret + user.password
-        // console.log(payload.password)
-        console.log(secretKey)
+        const secretKey = process.env.JWT_SECRET + user.password
         const jwtKey = Jwt.sign(payload, secretKey, { expiresIn: '1m' });
-        console.log(jwtKey)
         const message = `
           Dear ${user.username}: \r\n
           \r\n

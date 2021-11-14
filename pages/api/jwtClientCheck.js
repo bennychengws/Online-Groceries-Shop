@@ -1,9 +1,9 @@
-import getConfig from 'next/config';
+// import getConfig from 'next/config';
 import Jwt from "jsonwebtoken";
 
 export default async (req, res) => {
-  const { serverRuntimeConfig } = getConfig();
-  Jwt.verify(req.cookies.auth, serverRuntimeConfig.secret, async function (err, decoded) {
+//  const { serverRuntimeConfig } = getConfig();
+  Jwt.verify(req.cookies.auth, process.env.JWT_SECRET, async function (err, decoded) {
     console.log(req.cookies.auth)
     if (!err && decoded) {
       console.log("internal api ok")

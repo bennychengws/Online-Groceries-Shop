@@ -41,7 +41,7 @@ const Login = () => {
       setFormData({email: "", password: "",})
       createNotification("warning")
     }
-
+  };
 
   useEffect(() => {
     // Prefetch the homepage
