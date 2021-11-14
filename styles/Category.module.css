@@ -1,6 +1,8 @@
 .container {
-    /* z-index: 10; */
+    z-index: 10;
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     font-family: 'Gilroy', sans-serif;
     margin: 0;
@@ -16,8 +18,10 @@
 
 @media screen and (min-width: 767px) {
     .container {
-        /* z-index: 10; */
+        z-index: 10;
         position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         font-family: 'Gilroy', sans-serif;
         margin: 0;

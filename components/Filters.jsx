@@ -101,19 +101,19 @@ const Filters = ({ show, onClose, categoryData, brandData }) => {
           {categoryData.length === 0 ? <div></div> : <div className={moduleCss.Title}>Categories</div>}
           <div className="mt-4 flex flex-col">
             {categoryData.map((category, index) => (
-              <label className="inline-flex items-center mb-2" key={index}>
+              <div className="inline-flex items-center mb-2" key={index}>
                 <input type="checkbox" className="form-checkbox text-green-500 rounded" name={category} value={category} onChange={() => handleOnChange(index, catCheckedState, setCatCheckedState)} checked={catCheckedState[index]}></input>
                 <span className={`ml-2 ${moduleCss.optionColor}`}>{category}</span>
-              </label>              
+              </div>              
             ))}
           </div>
           {brandData.length === 0 ? <div></div> : <div className={moduleCss.Title}>Brand</div>}
           <div className="mt-4 flex flex-col">
             {brandData.map((brand, index) => (
-              <label className="inline-flex items-center mb-2" key={index}>
+              <div className="inline-flex items-center mb-2" key={index}>
                 <input type="checkbox" className="form-checkbox text-green-500 rounded" name={brand} value={brand} onChange={() => handleOnChange(index, brandCheckedState, setBrandCheckedState)} checked={brandCheckedState[index]}></input>
                 <span className={`ml-2 ${moduleCss.optionColor}`}>{brand}</span>
-              </label>              
+              </div>              
             ))}
           </div>
         </div>

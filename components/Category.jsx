@@ -12,63 +12,80 @@ import orangeJuice from "../images/orange_juice.png";
 import appleJuice from "../images/apple_juice.png";
 import sprite from "../images/sprite_can.png";
 import Goods from "../components/Goods";
+import GoodsV2 from "../components/GoodsV2"
+import { useFilterContext } from "../context/FilterContext";
 
-const Category = ({ children, show, onClose }) => {
+const Category = ({ children, show, onClose, content }) => {
+  const [filterState, dispatchFilter] = useFilterContext()
   const [isBrowser, setIsBrowser] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  const beverageList = [
-    {
-      name: "Diet Coke",
-      productImage: (
-        <Image src={dietCoke} width="35px" height="80px"></Image>
-      ),
-      amount: "355ml",
-      price: 7,
-    },
-    {
-      name: "Sprite Can",
-      productImage: (
-        <Image src={sprite} width="45px" height="80px"></Image>
-      ),
-      amount: "325ml",
-      price: 6.5,
-    },
-    {
-      name: "Apple & Grape Juice",
-      productImage: (
-        <Image src={appleJuice} width="80px" height="80px"></Image>
-      ),
-      amount: "2L",
-      price: 15,
-    },
-    {
-      name: "Orange Juice",
-      productImage: (
-        <Image src={orangeJuice} width="80px" height="80px"></Image>
-      ),
-      amount: "2L",
-      price: 15,
-    },
-    {
-      name: "Coca Cola Can",
-      productImage: <Image src={coca} width="45px" height="80px"></Image>,
-      amount: "325ml",
-      price: 6.8,
-    },
-    {
-      name: "Pepsi Can",
-      productImage: (
-        <Image src={pepsi} width="45px" height="80px"></Image>
-      ),
-      amount: "330ml",
-      price: 6.8,
-    },
-  ];
+  const [displayedData, setDisplayedData] = useState([])
+  const [categorySet, setCategorySet] = useState(new Set())
+  const [brandSet, setBrandSet] = useState(new Set())
 
   useEffect(() => {
     setIsBrowser(true);
     console.log("cateogry created");
   }, []);
+
+  useEffect(() => {
+    var categories = new Set()
+    var brands = new Set()
+
+    for (var i = 0; i < content.length; i++ ) {
+      for (var j = 0; j < content.length; j++ ) {
+        if (content[i].categoryTags[j] !== undefined) {
+          categories.add(content[i].categoryTags[j])
+          continue
+        }
+      }
+    }    
+
+    for (var k = 0; k < content.length; k++ ) {
+      brands.add(content[k].brand)
+    }    
+
+    setCategorySet(categories)
+    setBrandSet(brands)
+
+
+    setDisplayedData(content)
+    dispatchFilter({type: "filter_stored", value: ""})
+  }, [content])
+
+  useEffect(() => {
+    console.log(content)
+    console.log(filterState.brands)
+    console.log(filterState.categories)
+    if (filterState.brands && filterState.categories !== undefined) {
+      let fitleredData = new Set()
+      for (var k = 0; k < content.length; k++ ) {
+        let isCheckedInBrands = false;
+        let isCheckedInCategories = false;
+        for (var m = 0; m < filterState.brands.length; m++ ) {
+          if (content[k].brand === filterState.brands[m]) {
+            isCheckedInBrands = true;
+            break
+          }
+        }
+
+        for (var p = 0; p < filterState.categories.length; p++ ) {
+          for (var r = 0; r < content[k].categoryTags.length; r++ ) {
+            if (content[k].categoryTags[r] === filterState.categories[p]) {
+              isCheckedInCategories= true;
+              break
+            }
+          }
+        }
+        if (isCheckedInBrands && isCheckedInCategories) {
+          fitleredData.add(content[k])
+        }
+      }
+
+      console.log(fitleredData)
+      setDisplayedData(Array.from(fitleredData))
+    }
+  }, [filterState])
 
   const handleCloseClick = (e) => {
     e.preventDefault();
@@ -90,11 +107,11 @@ const Category = ({ children, show, onClose }) => {
         </div>
       </div>
       <div className={moduleCss.productContainer}>
-        {beverageList.map((item, index) => (
-          <Goods key={index}>{item}</Goods>
+        {displayedData.map((item, index) => (
+          <GoodsV2 key={index}>{item}</GoodsV2>
         ))}
       </div>
-      <Filters onClose={() => setShowFilter(false)} show={showFilter}></Filters>
+      <Filters onClose={() => setShowFilter(false)} show={showFilter} categoryData={Array.from(categorySet)} brandData={Array.from(brandSet)}></Filters>
     </div>
   ) : null;
 

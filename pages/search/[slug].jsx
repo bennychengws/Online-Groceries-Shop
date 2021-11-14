@@ -149,14 +149,14 @@ const search = (props) => {
           <Image src={filterIcon} width="16.8px" height="17.85px"></Image>
         </div>
       </div>
-      <div className={moduleCss.productContainer}>
-        {/* {beverageList.map((item, index) => (
-          <Goods key={index}>{item}</Goods>
-        ))} */}
-        {displayedData.map((item, index) => (
-          <GoodsV2 key={index}>{item}</GoodsV2>
-        ))}        
-      </div>
+      {displayedData.length > 0 ?
+        <div className={moduleCss.productContainer}>
+          {displayedData.map((item, index) => (
+            <GoodsV2 key={index}>{item}</GoodsV2>
+          ))}        
+        </div> 
+        : <div style={{fontWeight: "bold"}}>No Matched Result</div>
+      }
       <NavBar />
       <Filters onClose={() => setShowFilter(false)} show={showFilter} categoryData={Array.from(categorySet)} brandData={Array.from(brandSet)}></Filters>
     </div>

@@ -148,7 +148,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   // ]
 
   // const deliveryList = [{ list: ["DHL", "SF Express", "Pick up at our store"], rowControl: { display: isDeliveryCollapsed ? "block" : "none" } }]
-  const deliveryList = [{list: ["Pick up at our store"], rowControl: {display: isDeliveryCollapsed ? "block" : "none"}}]
+  const deliveryList = [{list: ["Ship to registered address"], rowControl: {display: isDeliveryCollapsed ? "block" : "none"}}]
   const paymentList = [{ list: ["Paybal", "FPS", "MasterCard"], rowControl: { display: isPaymentCollapsed ? "block" : "none" } }]
   const promoCodeList = [{ list: ["None"], rowControl: { display: isPromoCodeCollapsed ? "block" : "none" } }]
 
