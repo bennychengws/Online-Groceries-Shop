@@ -7,10 +7,11 @@ import Link from "next/link";
 import { useRouter } from 'next/router'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import fetchHandler from "../lib/fetchHandler";
+import getConfig from 'next/config';
 
 const Login = () => {
   const router = useRouter();
-
+  const { publicRuntimeConfig } = getConfig();
   const [formData, setFormData] = useState({
 
     // username: "",
@@ -32,7 +33,7 @@ const Login = () => {
     //     formData
     //   }),
     // });
-    const res = await fetchHandler("api/login", "POST", undefined, formData)
+    const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/login`, "POST", undefined, formData)
     if(res.ok) {
       router.push("../home")
     } else {
