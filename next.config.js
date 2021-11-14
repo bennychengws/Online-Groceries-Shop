@@ -1,5 +1,6 @@
 module.exports = {
   env: {
+    PAYPAL_CLIENT_ID: "AUNoSVgSLuz9QuQv9d414brbmTW5M4SKTgzbRe7MshLFjgOkoOtBGZG97zokiJDyHboqXjTrCu2rfwKr"
   },
   reactStrictMode: false,
   publicRuntimeConfig: {
