@@ -22,6 +22,12 @@ const Failed = ({ show, onClose }) => {
 
   const modalContent = show ? (
     <div className={moduleCss.styledModalOverlay}>
+      <style jsx global>{`
+        body {
+          overflow: hidden;
+        }
+      `}
+      </style>
       <div className={moduleCss.styledModal}>
         <div>
           <Link href="#">

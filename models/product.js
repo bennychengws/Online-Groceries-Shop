@@ -56,7 +56,16 @@ const product = new Schema({
     type: String,
     required: false,
     default: ""
-  }
+  },
+  likedBy: {
+    type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
+  },
+  addedToCartBy : {
+    type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
+  },
+  orderedBy : {
+    type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
+  },
 });
 
 

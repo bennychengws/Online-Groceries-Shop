@@ -1,0 +1,101 @@
+.container {
+    margin: 2vh 0;
+    padding: 0;
+    font-family: 'Gilroy', sans-serif;
+}
+
+.pageTitleWithIcon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pageTitle {
+    margin-left: 0.5rem;
+}
+
+.methodTitle {
+    display:inline;
+    border-bottom: dotted;
+    border-bottom-width: 1px;
+    border-color: rgba(83, 177, 117, 1);
+}
+
+.paymentContent {
+    display: block;
+    height: auto;
+    width: auto;
+    border: dotted;
+    margin-top: 1vh;
+    padding: 1rem;
+    border-radius: 10px;
+    border-color: rgba(83, 177, 117, 1);
+}
+
+.streetAddressWrapper {
+    margin-top: 1vh;
+}
+
+.streetAddressTitle{
+    display:inline;
+    border-bottom: dotted;
+    border-bottom-width: 1px;
+    border-color: rgba(83, 177, 117, 1);
+}
+
+.optionalButtonWrapper {
+    display: flex;
+    height: auto;
+    width: auto;
+    margin: 0.5rem;
+    align-items: center;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inputField {
+    margin-left: 1vw;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-bottom-color:rgba(83, 177, 117, 1);
+    /* border-radius: 5px; */
+    width: 70%;
+}
+
+.inputField:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+
+}
+
+.submitCancelRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.submit {
+    margin-top: 2vh;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #53B175;
+    color: white;
+    /* border: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    padding: 3px;
+    border-color: rgba(83, 177, 117, 1); */
+}
+
+.cancel {
+    margin-top: 2vh;
+    margin-left: 1vw;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: palevioletred;
+    color: white;
+    cursor: pointer;
+}

@@ -54,11 +54,13 @@
 }
 
 .itemImage {
-    width: 55px;
-    height: 55px;
+    position: relative;
+    width: 70px;
+    height: 80px;
     display: flex;
     align-items: center;
-    margin-right: 5vw
+    margin-right: 5vw;
+    cursor: pointer;
 }
 
 .imgAndDescription {

@@ -1,4 +1,7 @@
 
+// import getConfig from 'next/config';
+// import Jwt from "jsonwebtoken";
+import authenticationCheck from "../lib/authenticationCheck";
 import Image from "next/image";
 import carrotImage from "../images/Group.png";
 import moduleCss from "../styles/index.module.css";
@@ -11,6 +14,7 @@ export default function Home() {
   // const onChange = (e) => {
   //   setFormData({ ...formData, uername: e.target.value });
   // };
+
 
   return (
     <Layout>
@@ -28,4 +32,21 @@ export default function Home() {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+  const authenticated = authenticationCheck(context)
+
+  if (authenticated) {
+    return {
+      redirect: {
+        destination: '../home',
+        permanent: true,
+      },      
+    };
+  }
+  
+  return {
+    props: {},
+  };
 }

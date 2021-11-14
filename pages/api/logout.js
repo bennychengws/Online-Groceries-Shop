@@ -1,15 +1,31 @@
-import { withIronSession } from "next-iron-session";
+import connectDB from '../../middleware/mongodb';
+import cookie from 'cookie';
+import authenticate from '../../middleware/authenticate';
 
-function handler(req, res, session) {
-  req.session.destroy();
-  res.send("Logged out");
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
+const logoutAPI = async (req, res) => {
+  switch (req.method) {
+    case 'POST':
+      res.setHeader('Set-Cookie', [
+        cookie.serialize('auth', '', {
+          maxAge: -1,
+          path: '/',
+        }),
+      ]);
+      return res.status(200).json({ message: 'Logout' });
+      // return res.status(405).json({ message: 'We only support GET' });
+    case 'GET':
+      // res.setHeader('Set-Cookie', [
+      //   cookie.serialize('auth', '', {
+      //     maxAge: -1,
+      //     path: '/',
+      //   }),
+      // ]);
+      // return res.status(200).json({ message: 'Logout' });
+      return res.status(405).json({ message: 'We only support POST' });
+  }
 }
 
-export default withIronSession(handler, {
-  password: "complex_password_at_least_32_characters_long",
-  cookieName: "myapp_cookiename",
-  // if your localhost is served on http:// then disable the secure flag
-  cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
-  },
-});
+export default authenticate(connectDB(logoutAPI))
+

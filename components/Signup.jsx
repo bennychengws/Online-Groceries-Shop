@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from 'next/router'
 import axios from "axios";
 import moduleCss from "../styles/Signup.module.css";
 import showPwdImg from "../images/eye_visible_hide_hidden_show_icon_145988.png";
@@ -8,17 +9,31 @@ import validator from 'validator';
 import vector from "../images/Vector.png";
 import cross from "../images/Cross.png";
 import Link from "next/link";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 const Signup = () => {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     email: "",
-    // address: "",
   });
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isRevealPwd, setIsRevealPwd] = useState(false);
+  const [isUsername, setIsUsername] = useState(false);
+
+  const validateUsername = (e) => {
+    setFormData({ ...formData, username: e.target.value })
+    // console.log(e.target.value)
+    // console.log(e.target.value.length)
+    if (e.target.value.length > 0) {
+      setIsUsername(true)
+    } else {
+      setIsUsername(false)
+    }
+  }
 
   const validateEmail = (e) => {
     if (validator.isEmail(e.target.value)) {
@@ -29,14 +44,55 @@ const Signup = () => {
     setFormData({ ...formData, email: e.target.value })
   }
 
-  const handleClick = async (e) => {
-    if (!isEmailValid) {
-      alert("Please enter a valid email")
+  const validatePassword = (e) => {
+    setFormData({ ...formData, password: e.target.value })
+    // console.log(e.target.value)
+    // console.log(e.target.value.length)
+    if (e.target.value.length >= 6) {
+      setIsPasswordValid(true)
     } else {
-      console.log(formData);
-      const res = await axios.post("api/signup", formData);
+      setIsPasswordValid(false)
     }
+  }
+
+  const handleClick = async (e) => {
+    // console.log(formData);
+    if(!isUsername) {
+      createNotification("info")
+    }
+    else if (!isEmailValid || !isPasswordValid) {
+      createNotification("error")
+    } else {
+        try {
+          await axios.post("api/signup", formData);
+          createNotification("success")
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          router.push("/")
+        } catch (e) {
+//          console.log(e.response.data.message);
+          console.log(e)
+          createNotification("warning", e)
+        }
+    }
+    setFormData({username: "", email: "", password: ""})
+    setIsUsername(false)
+    setIsEmailValid(false)
+    setIsPasswordValid(false)
   };
+
+  const createNotification = (type, item) => {
+    switch (type) {
+      case "info":
+        return NotificationManager.info(`Your username should not be empty`, "Username");
+      case "success":
+        return NotificationManager.success(`You have succefully created an account`, "Successful Registration");
+      case "error":
+        return NotificationManager.error('Please enter a valid email and a password with at least 6 characters', 'Invalid Email/Password', 3000);
+      case "warning":
+        return NotificationManager.warning(item, 'Duplicated Username/Email', 3000);
+  
+    }
+  }
 
   return (
     <div className={moduleCss.container}>
@@ -57,9 +113,9 @@ const Signup = () => {
           name="username"
           placeholder="Username"
           onChange={(e) =>
-            setFormData({ ...formData, username: e.target.value })
+            validateUsername(e)
           }
-          value={formData.uesrname}
+          value={formData.username}
         />
       </div>
 
@@ -89,14 +145,20 @@ const Signup = () => {
       <label className="block text-gray-500 text-base font-bold mb-1">
         Password
       </label>
-      <div className={moduleCss.pwdContainer}>
+      <div className={moduleCss.pwdContainer}
+        style={{
+          borderColor: formData.password.length > 0 && formData.password.length < 6
+            ? "rgba(239, 68, 68, 1)"
+            : "rgba(226, 226, 226, 1)"
+        }}    
+      >    
         <input
           type={isRevealPwd ? "text" : "password"}
           className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-teal-500"
           name="password"
           placeholder="Password"
           onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
+            validatePassword(e)
           }
           value={formData.password}
         />
@@ -107,7 +169,7 @@ const Signup = () => {
             height="20vh"
             onClick={() => setIsRevealPwd((prevState) => !prevState)}
           ></Image>
-        </span>
+        </span>  
       </div>
       {/* <input
             type="text"
@@ -119,6 +181,11 @@ const Signup = () => {
             }
             value={formData.address}
           /> */}
+      {formData.password.length > 0 && formData.password.length < 6 ? (
+          <p className="text-red-500 text-xs italic mt-1">
+            Please enter a password with at least 6 characters.
+          </p>
+        ) : null}    
       <div className={moduleCss.declaration}>
         <div className="text-left text-sm text-gray-500">
           By continuing, you agree to the
@@ -164,6 +231,7 @@ const Signup = () => {
           </a>
         </Link>
       </div>
+      <NotificationContainer/>
     </div>
 
   );

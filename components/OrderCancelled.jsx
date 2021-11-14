@@ -17,6 +17,12 @@ const OrderCancelled = ({ show }) => {
 
   const modalContent = show ? (
     <div className={moduleCss.layout}>
+      <style jsx global>{`
+        body {
+          overflow: hidden;
+        }
+      `}
+      </style>
       <div className={moduleCss.container}>
         <div className={moduleCss.acceptedImage}>
           <Image src={acceptedIcon} width="269px" height="240px"></Image>
