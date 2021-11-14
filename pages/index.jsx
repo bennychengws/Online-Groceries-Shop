@@ -1,20 +1,11 @@
-
-// import getConfig from 'next/config';
-// import Jwt from "jsonwebtoken";
 import authenticationCheck from "../lib/authenticationCheck";
 import Image from "next/image";
 import carrotImage from "../images/Group.png";
 import moduleCss from "../styles/index.module.css";
 import Layout from "../components/Layout";
-
-// import { useState } from "react";
 import Login from "../components/Login.jsx";
 
 export default function Home() {
-  // const onChange = (e) => {
-  //   setFormData({ ...formData, uername: e.target.value });
-  // };
-
 
   return (
     <Layout>

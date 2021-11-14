@@ -9,11 +9,7 @@ class MainDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>
-          {/* <script src={`https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&currency=HKD`}>
-            // Required. Replace YOUR_CLIENT_ID with your sandbox client ID.
-          </script> */}
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />
