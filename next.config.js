@@ -7,11 +7,11 @@ module.exports = {
   publicRuntimeConfig: {
       apiUrl: process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000/api' // development api
-          : 'https://onlinegroceriesapp-5elo86c4n-bennychengws.vercel.app/api' // production api
+          : 'https://onlinegroceriesapp.vercel.app/api' // production api
       , 
       domainUrl: process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000' // development api
-      : 'https://onlinegroceriesapp-5elo86c4n-bennychengws.vercel.app' // production api  
+      : 'https://onlinegroceriesapp.vercel.app' // production api  
   },
 };
 
