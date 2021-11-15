@@ -11,6 +11,7 @@ import card from "../images/card.png"
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import fetchHandler from "../lib/fetchHandler";
 import { useUserContext } from "../context/UserContext";
+import getConfig from 'next/config';
 
 const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   //   const elementRef = useRef();
@@ -26,6 +27,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   const [paypalErrorMessage, setPaypalErrorMessage] = useState("");
   const [orderID, setOrderID] = useState(false);
   const [billingDetails, setBillingDetails] = useState("");
+  const { publicRuntimeConfig } = getConfig();
 
   // console.log(cartList)
 
@@ -73,7 +75,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
 
   const onApprove = (data, actions) => {
     return actions.order.capture().then(async function (details) {
-      await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "PUT", undefined, []);
+      await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleCart`, "PUT", undefined, []);
       dispatch({ type: "init_stored", value: { ...userState, cart: [] } })
 
       let orderTime = new Date()
@@ -89,7 +91,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
       }
       let orderArray = userState.orders.slice()
       orderArray.push(newOrder)
-      await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleOrder`, "PUT", undefined, newOrder);
+      await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleOrder`, "PUT", undefined, newOrder);
       dispatch({ type: "init_stored", value: { ...userState, orders: orderArray } })
       const { payer } = details;
       setBillingDetails(payer);

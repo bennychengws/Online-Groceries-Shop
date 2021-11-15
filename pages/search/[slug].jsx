@@ -17,6 +17,7 @@ import sprite from "../../images/sprite_can.png";
 import GoodsV2 from "../../components/GoodsV2";
 import Goods from "../../components/Goods";
 import { useFilterContext } from "../../context/FilterContext";
+import getConfig from 'next/config';
 
 const search = (props) => {
   const router = useRouter();
@@ -166,11 +167,12 @@ const search = (props) => {
 export default search;
 
 export async function getServerSideProps(context) {
+  const { publicRuntimeConfig } = getConfig();
   const authenticated = authenticationCheck(context)
   if (!authenticated) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  const data = await fetch(`http://localhost:3000/api/search/${context.params.slug}`);
+  const data = await fetch(`${publicRuntimeConfig.apiUrl}/search/${context.params.slug}`);
   const productData = await data.json();
 //   console.log("server side:" + productData)
   return {

@@ -17,8 +17,11 @@ import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode";
 import fetchHandler from "../lib/fetchHandler";
 import { useUserContext } from "../context/UserContext";
+import getConfig from 'next/config';
 
 const favourite = ({ favourite }) => {
+  const { publicRuntimeConfig } = getConfig();
+
   // const [favouriteList, setFavouriteList] = useState([
   //   {
   //     name: "Diet Coke",
@@ -82,7 +85,7 @@ const favourite = ({ favourite }) => {
 
   const deleteItem = async (item) => {
     var newArray = userState.favourite.slice()
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleFavourite`, "DELETE", undefined, item._id);
+    const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleFavourite`, "DELETE", undefined, item._id);
     if (res.ok) {
       setFavouriteList(favouriteList.filter((otherItems) => otherItems._id !== item._id))
       let anArray = newArray.filter((otherIDs) => otherIDs !== item._id)
@@ -137,7 +140,7 @@ const favourite = ({ favourite }) => {
     //   }),
     // });
 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "PUT", undefined, cartArray);
+    const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleCart`, "PUT", undefined, cartArray);
 
     if (res.ok) {
       // let originalArray = userState.cart.slice()
@@ -250,6 +253,7 @@ const favourite = ({ favourite }) => {
 export default favourite;
 
 export async function getServerSideProps(context) {
+  const { publicRuntimeConfig } = getConfig();
   //Check authentication and get user account information 
   //As well as the favourite product ID 
   const authenticated = authenticationCheck(context)
@@ -259,7 +263,7 @@ export async function getServerSideProps(context) {
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
   console.log("decoded: " + decoded.sub)
-  const favouriteAPIData = await fetchHandler(`http://localhost:3000/api/user/${decoded.sub}/actions/handleFavourite`, "GET", context)
+  const favouriteAPIData = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${decoded.sub}/actions/handleFavourite`, "GET", context)
   console.log(`favouriteAPI status: ${favouriteAPIData.status}`)
   if (favouriteAPIData.status === 401) {
     return { redirect: { destination: '/', permanent: true, }, };

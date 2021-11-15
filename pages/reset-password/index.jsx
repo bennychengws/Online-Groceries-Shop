@@ -7,8 +7,10 @@ import carrotImage from "../../images/Group.png";
 import backArrow from "../../images/back_arrow.png";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import axios from "axios";
+import getConfig from 'next/config';
 
 const index = () => {
+  const { publicRuntimeConfig } = getConfig();
 
   const router = useRouter()
   const [formData, setformData] = useState({
@@ -19,7 +21,7 @@ const index = () => {
     e.preventDefault();
     console.log(formData.email);
     try {
-    await axios.post("http://localhost:3000/api/sendEmail", formData)
+    await axios.post(`${publicRuntimeConfig.apiUrl}/sendEmail`, formData)
     createNotification("success")
     } catch (error) { 
 

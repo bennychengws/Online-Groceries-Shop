@@ -2,7 +2,7 @@ import React from "react";
 import Product from "../models/product";
 import axios from "axios";
 import Image from "next/image";
-
+import getConfig from 'next/config';
 import moduleCss from "../styles/test.module.css";
 
 const test = ({ products }) => {
@@ -26,7 +26,8 @@ const test = ({ products }) => {
 export default test;
 
 export async function getServerSideProps() {
-  const data = await fetch("http://localhost:3000/api/product");
+  const { publicRuntimeConfig } = getConfig();
+  const data = await fetch(`${publicRuntimeConfig.apiUrl}/product`);
   const productData = await data.json();
   return {
     props: { products: productData },

@@ -11,11 +11,13 @@ import logOut from "../images/logOut.png";
 // import { UserContext } from "../context/UserContext";
 import { useUserContext } from "../context/UserContext";
 import fetchHandler from "../lib/fetchHandler";
+import getConfig from 'next/config';
 
 const address = () => {
   const router = useRouter();
   // const {userState, setUserContent} = useContext(UserContext);
   const [userState, dispatch] = useUserContext()
+  const { publicRuntimeConfig } = getConfig();
 
   // useEffect(() => {
   //   dispatch({type: "init_stored", value: account})
@@ -64,7 +66,7 @@ const address = () => {
       //     formData
       //   }),
       // });
-      const res = await fetchHandler(`api/user/${userState._id}/info/address`, "PUT", undefined, formData)
+      const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/info/address`, "PUT", undefined, formData)
       if(res.ok) {
         dispatch({type: "init_stored", value: { ...userState, address: formData}})
         console.log("updated address")
@@ -83,7 +85,7 @@ const address = () => {
 
   const handleLogout = async() => {
     console.log("clicked")
-    const res = await fetch("api/logout", {method: 'GET',})
+    const res = await fetch(`${publicRuntimeConfig.apiUrl}/logout`, {method: 'GET',})
     if(res.ok) {
       router.push("/")
     }

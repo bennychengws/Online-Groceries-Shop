@@ -10,9 +10,10 @@ import vector from "../images/Vector.png";
 import cross from "../images/Cross.png";
 import Link from "next/link";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-
+import getConfig from 'next/config';
 
 const Signup = () => {
+  const { publicRuntimeConfig } = getConfig();
   const router = useRouter()
   const [formData, setFormData] = useState({
     username: "",
@@ -64,7 +65,7 @@ const Signup = () => {
       createNotification("error")
     } else {
         try {
-          await axios.post("api/signup", formData);
+          await axios.post(`${publicRuntimeConfig.apiUrl}/signup`, formData);
           createNotification("success")
           await new Promise(resolve => setTimeout(resolve, 3000));
           router.push("/")

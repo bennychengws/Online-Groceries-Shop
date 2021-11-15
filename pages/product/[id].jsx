@@ -17,9 +17,10 @@ import expandArrow from "../../images/back arrow.png";
 import backArrow from "../../images/back_arrow.png";
 import add from "../../images/addQtyButton.png"
 import reduce from "../../images/reduceQtyButton.png"
-import { set } from "mongoose";
+import getConfig from 'next/config';
 
 const product = ({productItem}) => {
+  const { publicRuntimeConfig } = getConfig();
   const router = useRouter()
   const [userState, dispatch] = useUserContext()
   const [cart, setCart] = useState([])
@@ -99,7 +100,7 @@ const product = ({productItem}) => {
     //   }),
     // });
 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleFavourite`, method, undefined, addToFavouriteItemInfo)
+    const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleFavourite`, method, undefined, addToFavouriteItemInfo)
     
     // The setIsFavourite(!isFavourite) will not change isFavourite after the end of the handleFavourite function
     if(res.ok && isFavourite===false) {
@@ -163,7 +164,7 @@ const product = ({productItem}) => {
       }
     }
 
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, 'PUT', undefined, cartArray)
+    const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleCart`, 'PUT', undefined, cartArray)
 
     if(res.ok) {
       // let newArray = userState.cart.slice()
@@ -237,6 +238,7 @@ const product = ({productItem}) => {
 export default product;
 
 export async function getServerSideProps(context) {
+  const { publicRuntimeConfig } = getConfig();
   const authenticated = authenticationCheck(context)
   if (!authenticated) {
     return {redirect: {destination: '/', permanent: true,}, };
@@ -251,7 +253,7 @@ export async function getServerSideProps(context) {
   //   return {redirect: {destination: '/', permanent: true,}, };
   // }
   // const accountData =  await accAPIData.json();
-  const productAPIdata = await fetchHandler(`http://localhost:3000/api/product/${context.params.id}`, "GET", context);
+  const productAPIdata = await fetchHandler(`${publicRuntimeConfig.apiUrl}/product/${context.params.id}`, "GET", context);
   // const productAPIdata = await fetch(`http://localhost:3000/api/product/${context.params.id}`, {
   //   headers: {cookie: context.req?.headers.cookie}} 
   // );

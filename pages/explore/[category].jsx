@@ -14,6 +14,7 @@ import appleJuice from "../../images/apple_juice.png";
 import sprite from "../../images/sprite_can.png";
 import GoodsV2 from "../../components/GoodsV2";
 import { useFilterContext } from "../../context/FilterContext";
+import getConfig from 'next/config';
 
 const exploreCategory = ({title, data}) => {
   // const router = useRouter();
@@ -125,6 +126,7 @@ const exploreCategory = ({title, data}) => {
 export default exploreCategory;
 
 export async function getServerSideProps(context) {
+  const { publicRuntimeConfig } = getConfig();
 
   switch (context.params.category) {
     case "fresh-fruits-and-vegetables":
@@ -150,7 +152,7 @@ export async function getServerSideProps(context) {
       break;
   }
 
-  const data = await fetch(`http://localhost:3000/api/explore/${context.params.category}`);
+  const data = await fetch(`${publicRuntimeConfig.apiUrl}/explore/${context.params.category}`);
   const productData = await data.json();
 
   //you can make DB queries using the data in context.query

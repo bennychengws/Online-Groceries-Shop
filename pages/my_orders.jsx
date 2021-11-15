@@ -12,7 +12,7 @@ import banana from "../images/banana.png";
 import authenticationCheck from "../lib/authenticationCheck";
 import fetchHandler from "../lib/fetchHandler";
 import jwt_decode from "jwt-decode";
-
+import getConfig from 'next/config';
 
 const myOrders = ({ orders }) => {
   const router = useRouter()
@@ -92,10 +92,11 @@ export async function getServerSideProps(context) {
   if (!authenticated) {
     return { redirect: { destination: '/', permanent: true, }, };
   }
+  const { publicRuntimeConfig } = getConfig();
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
   console.log("decoded: " + decoded.sub)
-  const orderAPIData = await fetchHandler(`http://localhost:3000/api/user/${decoded.sub}/actions/handleOrder`, "GET", context)
+  const orderAPIData = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${decoded.sub}/actions/handleOrder`, "GET", context)
   console.log(`orderAPI status: ${orderAPIData.status}`)
   if (orderAPIData.status === 401) {
     return { redirect: { destination: '/', permanent: true, }, };

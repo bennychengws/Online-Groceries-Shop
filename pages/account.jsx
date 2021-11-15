@@ -18,12 +18,13 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { useUserContext } from "../context/UserContext";
 import { useFilterContext } from "../context/FilterContext";
 import fetchHandler from "../lib/fetchHandler";
-
+import getConfig from 'next/config';
 
 const account = () => {
   // const {userState, setUserContent} = useContext(UserContext);
   const [userState, dispatch] = useUserContext()
   const [filterState, dispatchFilter] = useFilterContext()
+  const { publicRuntimeConfig } = getConfig();
 
   // useEffect(() => {
   //   if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
@@ -90,7 +91,7 @@ const account = () => {
       //     email: userState.email
       //   }),
       // });
-      const res = await fetchHandler(`api/user/${userState._id}/info/username`, "PUT", undefined, {username: userState.username})
+      const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/info/username`, "PUT", undefined, {username: userState.username})
       if(res.ok) {
         createNotification("success")
         console.log("updated username")
@@ -109,7 +110,7 @@ const account = () => {
   const handleLogout = async() => {
     console.log("clicked")
     // const res = await fetch("api/logout", {method: 'GET',})
-    const res = await fetchHandler(`api/logout`, "POST" )
+    const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/logout`, "POST" )
     if(res.ok) {
       localStorage.removeItem('myAccount');
       dispatch({type: "init_stored", value: ""})

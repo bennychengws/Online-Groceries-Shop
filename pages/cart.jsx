@@ -20,9 +20,11 @@ import banana from "../images/banana.png";
 import jwt_decode from "jwt-decode";
 import fetchHandler from "../lib/fetchHandler";
 import { useUserContext } from "../context/UserContext";
+import getConfig from 'next/config';
 
 const cart = ({ cart }) => {
   const router = useRouter()
+  const { publicRuntimeConfig } = getConfig();
   const [showModal, setShowModal] = useState(false);
   const [totalPriceCount, setTotalPriceCount] = useState(0);
 
@@ -122,7 +124,7 @@ const cart = ({ cart }) => {
     var newArray = userState.cart.slice()
     // const itemToBeDeleted = {_id: item._id, quantity: item.quantity} 
     // const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "DELETE", undefined, itemToBeDeleted);
-    const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "DELETE", undefined, item._id);
+    const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleCart`, "DELETE", undefined, item._id);
     if (res.ok) {
       // setCartList(cartList.filter((otherItems) => otherItems._id !== item._id))
       // let anArray = newArray.filter((otherIDs) => otherIDs._id !== item._id)
@@ -233,6 +235,7 @@ const cart = ({ cart }) => {
 export default cart;
 
 export async function getServerSideProps(context) {
+  const { publicRuntimeConfig } = getConfig();
   const authenticated = authenticationCheck(context)
   if (!authenticated) {
     return { redirect: { destination: '/', permanent: true, }, };
@@ -240,7 +243,7 @@ export async function getServerSideProps(context) {
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
   console.log("decoded: " + decoded.sub)
-  const cartAPIData = await fetchHandler(`http://localhost:3000/api/user/${decoded.sub}/actions/handleCart`, "GET", context)
+  const cartAPIData = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${decoded.sub}/actions/handleCart`, "GET", context)
   console.log(`cartAPI status: ${cartAPIData.status}`)
   if (cartAPIData.status === 401) {
     return { redirect: { destination: '/', permanent: true, }, };

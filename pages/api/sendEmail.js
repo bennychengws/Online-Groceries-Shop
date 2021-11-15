@@ -2,6 +2,8 @@ import connectDB from '../../middleware/mongodb';
 import User from '../../models/user';
 import mail from '@sendgrid/mail';
 import Jwt from "jsonwebtoken";
+import getConfig from 'next/config';
+
 //import getConfig from 'next/config';
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
@@ -21,6 +23,7 @@ const resetPasswordEmail = async (req, res) => {
       if(!user) {
         return res.status(409).json({ message: `User with the email "${email}" does not exist` });  
       } else {
+        const { publicRuntimeConfig } = getConfig();
         const payload = { sub: user._id, email: email };
         const secretKey = process.env.JWT_SECRET + user.password
         const jwtKey = Jwt.sign(payload, secretKey, { expiresIn: '1m' });
@@ -28,7 +31,7 @@ const resetPasswordEmail = async (req, res) => {
           Dear ${user.username}: \r\n
           \r\n
           Please click the following link to reset your password:\r\n
-          http://localhost:3000/reset-password/${user._id}/${jwtKey} \r\n
+          ${publicRuntimeConfig.domainUrl}/reset-password/${user._id}/${jwtKey} \r\n
           \r\n
           Regards,\r\n
           Admin from Eshop

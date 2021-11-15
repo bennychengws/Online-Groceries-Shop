@@ -11,9 +11,11 @@ import carrotImage from "../../../images/Group.png";
 import backArrow from "../../../images/back_arrow.png";
 import showPwdImg from "../../../images/eye_visible_hide_hidden_show_icon_145988.png";
 import hidePwdImg from "../../../images/eye_slash_visible_hide_hidden_show_icon_145987.png";
+import getConfig from 'next/config';
 
 const resetPassword = ({uid}) => {
   const router = useRouter()
+  const { publicRuntimeConfig } = getConfig();
   const [formData, setformData] = useState({
     _id: uid,
     newPassword: "",
@@ -38,7 +40,7 @@ const resetPassword = ({uid}) => {
     } else {
       try {
         console.log('passed');
-        await axios.put(`http://localhost:3000/api/reset-password/${uid}`, formData);
+        await axios.put(`${publicRuntimeConfig.apiUrl}/reset-password/${uid}`, formData);
         createNotification("success")
         await new Promise(resolve => setTimeout(resolve, 3000));
         router.push("/")
@@ -170,12 +172,12 @@ const resetPassword = ({uid}) => {
 export default resetPassword;
 
 export async function getServerSideProps(context) {
-//  const { serverRuntimeConfig } = getConfig();
+ const { publicRuntimeConfig } = getConfig();
   const { uid, jwtKey } = context.params;
   console.log(uid)
   console.log(jwtKey)
   try {
-    var res = await axios.get(`http://localhost:3000/api/reset-password/${uid}`);
+    var res = await axios.get(`${publicRuntimeConfig.apiUrl}/reset-password/${uid}`);
     const secretKey = process.env.JWT_SECRET + res.data.password
     const payload = Jwt.verify(jwtKey, secretKey)
 //    console.log(payload)
