@@ -121,6 +121,8 @@ const home = ({products, account}) => {
 		router.push({pathname: `../search/${searchQuery}`});
   };
 
+  console.log(products)
+
   return (
     <div>
       <div className={moduleCss.container} style={{overflow: showSeeAll ? "hidden" : "auto", height: showSeeAll ? "100vh": "auto"}}>
