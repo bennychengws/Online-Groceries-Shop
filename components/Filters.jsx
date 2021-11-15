@@ -51,8 +51,8 @@ const Filters = ({ show, onClose, categoryData, brandData }) => {
         filteredBrands.push(brandData[i]) 
       }
     }      
-    console.log(filteredCategories)
-    console.log(filteredBrands)
+    // console.log(filteredCategories)
+    // console.log(filteredBrands)
     dispatchFilter({type: "filter_stored", value: {categories: filteredCategories, brands: filteredBrands, catCheckedSetting: catCheckedState, brandCheckedSetting: brandCheckedState}})
     // dispatch({type: "catCheckedState_stored", value: catCheckedState})
     // dispatch({type: "brandCheckedState_stored", value: brandCheckedState})

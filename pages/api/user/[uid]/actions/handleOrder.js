@@ -16,7 +16,7 @@ const handleOrderAPI = async (req, res) => {
     case "PUT":
       try {
         console.log("Put method");
-        console.log(req.body);
+        // console.log(req.body);
         // let newOrder = {
         //     orderId: mongoose.Types.ObjectId()
         // }
@@ -33,7 +33,7 @@ const handleOrderAPI = async (req, res) => {
     case 'DELETE':
       try {
         console.log("Delete method")
-        console.log(req.body)
+        // console.log(req.body)
         // await User.updateOne({_id: uid}, {$pull: {cart: {_id: req.body._id}}})
         // await Product.updateOne({_id: req.body._id}, {$pull: {addedToCartBy: uid}}) 
         await User.updateOne({_id: uid}, {$pull: {orders: {_id: req.body}}})  

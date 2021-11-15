@@ -24,7 +24,7 @@ const myOrders = ({ orders }) => {
     setOderList(orders)
   }, [])
 
-  console.log(orderList)
+  // console.log(orderList)
 
   const handleCancel = (orderID) => {
     setOrderToBeDeleted(orderID)

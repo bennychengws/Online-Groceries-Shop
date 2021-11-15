@@ -47,25 +47,3 @@ const helloAPI = async (req, res) => {
 }
 
 export default connectDB(helloAPI)
-
-// const app = express()
-
-// const connectDB = (req, res, next) => {
-//   console.log('middleware')
-//   next()
-// }
-
-
-// // app.post('api/signup', (req, res,) => {
-//   console.log('middleware')
-//   next()
-//   res.status(200).json({ name: 'John Doe' }
-// } ,(req, res,) => {
-//   console.log(req.body);
-//   res.status(200).json({ name: 'John Doe' })
-// })
-
-// app.get('api/signup', (req, res) => {
-//   console.log(req.body);
-//   res.status(200).json({ name: 'John Doe' })
-// })

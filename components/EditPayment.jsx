@@ -18,11 +18,11 @@ const EditPayment = () => {
     ExpirationMonth: "",
     ExpirationYear: "",
   });
-  console.log(formData);
+  // console.log(formData);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(formData)
+    // console.log(formData)
     // if(isChangingAddress) {
     //   // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
     //   const res = await fetch(`api/user/${paymentAcctInfo.email}/info/address`, {

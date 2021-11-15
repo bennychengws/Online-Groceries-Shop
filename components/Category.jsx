@@ -25,7 +25,7 @@ const Category = ({ children, show, onClose, content }) => {
 
   useEffect(() => {
     setIsBrowser(true);
-    console.log("cateogry created");
+    console.log("category created");
   }, []);
 
   useEffect(() => {
@@ -54,9 +54,9 @@ const Category = ({ children, show, onClose, content }) => {
   }, [content])
 
   useEffect(() => {
-    console.log(content)
-    console.log(filterState.brands)
-    console.log(filterState.categories)
+    // console.log(content)
+    // console.log(filterState.brands)
+    // console.log(filterState.categories)
     if (filterState.brands && filterState.categories !== undefined) {
       let fitleredData = new Set()
       for (var k = 0; k < content.length; k++ ) {
@@ -82,7 +82,7 @@ const Category = ({ children, show, onClose, content }) => {
         }
       }
 
-      console.log(fitleredData)
+      // console.log(fitleredData)
       setDisplayedData(Array.from(fitleredData))
     }
   }, [filterState])

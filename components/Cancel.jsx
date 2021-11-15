@@ -35,7 +35,7 @@ const Cancel = ({show, orderId, onClose}) => {
       // dispatch({type: "init_stored", value: { ...userState, cart: anArray}})
       // setCartList(cartList.filter((otherItems) => otherItems._id !== item._id))
       let anArray = newArray.filter((otherOrders) => otherOrders._id !== orderId)
-      console.log(anArray)
+      // console.log(anArray)
       dispatch({ type: "init_stored", value: { ...userState, orders: anArray } })
       setShowModal(true)
     } else if (res.status === 401) {

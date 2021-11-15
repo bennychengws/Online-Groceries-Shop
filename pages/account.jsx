@@ -79,8 +79,8 @@ const account = () => {
 
   const handleEditUsername = async() => {
     setIsEditing(!isEditing)
-    console.log("user: " + userState.username)
-    console.log(userState)
+    // console.log("user: " + userState.username)
+    // console.log(userState)
     if(isEditing) {
       // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
       // const res = await fetch(`api/user/${userState.email}/info/username`, {
@@ -108,7 +108,7 @@ const account = () => {
   }
 
   const handleLogout = async() => {
-    console.log("clicked")
+    console.log("clicked logout")
     // const res = await fetch("api/logout", {method: 'GET',})
     const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/logout`, "POST" )
     if(res.ok) {

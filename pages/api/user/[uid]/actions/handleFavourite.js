@@ -15,7 +15,7 @@ const handleFavouriteAPI = async (req, res) => {
     case 'PUT':
       try {
         console.log("Put method")
-        console.log(req.body)
+        // console.log(req.body)
         // const { username, email } = req.body.formData
         // console.log(email)
         // console.log(username)
@@ -32,7 +32,7 @@ const handleFavouriteAPI = async (req, res) => {
     case 'DELETE':
       try {
         console.log("Delete method")
-        console.log(req.body)
+        // console.log(req.body)
         // const { username, email } = req.body.formData
         // console.log(email)
         // console.log(username)
@@ -42,7 +42,7 @@ const handleFavouriteAPI = async (req, res) => {
         await Product.updateOne({_id: req.body}, {$pull: {likedBy: uid}}) 
         return res.status(200).json({message: 'The Product is successfully deleted from favourite', success: true});
       } catch(error) {
-        // console.log("an error occured")
+        console.log("an error occured")
         return res.status(400).json({message: new Error(error).message, success: false,});
       } 
     case 'GET':

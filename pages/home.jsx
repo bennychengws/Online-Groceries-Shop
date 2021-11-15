@@ -52,7 +52,7 @@ const home = ({products, account}) => {
   //   }
   // }, [userState])  
 
-  console.log(userState)
+  // console.log(userState)
 
   const promoList = [
     {

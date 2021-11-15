@@ -56,14 +56,10 @@ const search = (props) => {
   }, [data])
 
   useEffect(() => {
-    console.log(data)
-    console.log(filterState.brands)
-    console.log(filterState.categories)
+    // console.log(data)
+    // console.log(filterState.brands)
+    // console.log(filterState.categories)
     if (filterState.brands && filterState.categories !== undefined) {
-      // let filteredBrands = filterState.brands.slice()
-      // let filteredCategories = filterState.categories.slice()
-      // console.log(filteredBrands)
-      // console.log(filteredCategories)
 
       let fitleredData = new Set()
       for (var k = 0; k < data.length; k++ ) {
@@ -71,20 +67,14 @@ const search = (props) => {
         let isCheckedInCategories = false;
         for (var m = 0; m < filterState.brands.length; m++ ) {
           if (data[k].brand === filterState.brands[m]) {
-            // console.log(data[k].name)
             isCheckedInBrands = true;
-            // fitleredData.add(data[k])
             break
           }
         }
 
         for (var p = 0; p < filterState.categories.length; p++ ) {
           for (var r = 0; r < data[k].categoryTags.length; r++ ) {
-            // console.log(data[k].categoryTags.length)
             if (data[k].categoryTags[r] === filterState.categories[p]) {
-              // console.log(data[k].categoryTags[r])
-              // console.log(data[k].name)
-              // fitleredData.add(data[k])
               isCheckedInCategories= true;
               break
             }
@@ -95,7 +85,7 @@ const search = (props) => {
         }
       }
 
-      console.log(fitleredData)
+      // console.log(fitleredData)
       setDisplayedData(Array.from(fitleredData))
     }
   }, [filterState])

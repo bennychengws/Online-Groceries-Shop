@@ -10,13 +10,13 @@ import authenticate from '../../middleware/authenticate';
 
 const loginAPI = async (req, res) => {
 //  const { serverRuntimeConfig } = getConfig();
-  console.log(req.body.formData);
+  // console.log(req.body.formData);
   // const users = await User.find({}).lean().exec();
   const { email, password } = req.body
   switch (req.method) {
     case 'POST':
       const user = await User.findOne({email: email}).lean().exec();
-      console.log(user)
+      // console.log(user)
       if (!user || !bcrypt.compareSync(password, user.password)) {
         // authentication failed
         console.log('Incorret email or password')
@@ -25,7 +25,7 @@ const loginAPI = async (req, res) => {
         // authentication successful
         const claims = { sub: user._id, email: user.email };
         const jwt = Jwt.sign(claims, process.env.JWT_SECRET, { expiresIn: '1h' });
-        console.log(jwt)
+        // console.log(jwt)
         res.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
           httpOnly: true,
           secure: process.env.NODE_ENV !== 'development',

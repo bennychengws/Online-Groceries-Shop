@@ -50,9 +50,9 @@ const exploreCategory = ({title, data}) => {
   }, [data])
 
   useEffect(() => {
-    console.log(data)
-    console.log(filterState.brands)
-    console.log(filterState.categories)
+    // console.log(data)
+    // console.log(filterState.brands)
+    // console.log(filterState.categories)
     if (filterState.brands && filterState.categories !== undefined) {
       // let filteredBrands = filterState.brands.slice()
       // let filteredCategories = filterState.categories.slice()
@@ -89,7 +89,7 @@ const exploreCategory = ({title, data}) => {
         }
       }
 
-      console.log(fitleredData)
+      // console.log(fitleredData)
       setDisplayedData(Array.from(fitleredData))
     }
   }, [filterState])

@@ -75,7 +75,7 @@ const favourite = ({ favourite }) => {
     setCart(userState.cart)
   }, [userState])
 
-  console.log(favourite)
+  // console.log(favourite)
 
   // const [addToCartList , setAddToCartList] = useState([]) 
   const [cart, setCart] = useState([])
@@ -108,17 +108,17 @@ const favourite = ({ favourite }) => {
     }
 
     let cartArray = cart
-    console.log(cartArray)
+    // console.log(cartArray)
     for (var m = 0; m < addToCartItemInfo.length; m++) {
-      console.log("addToCartItemInfo id: " + addToCartItemInfo[m]._id)
+      // console.log("addToCartItemInfo id: " + addToCartItemInfo[m]._id)
       let duplicated = false;
       for (var n = 0; n < cartArray.length; n++) {
-        console.log("cartArray id: " + cartArray[n]._id)
+        // console.log("cartArray id: " + cartArray[n]._id)
         if (addToCartItemInfo[m]._id === cartArray[n]._id) {
-          console.log(`Quantity of ${addToCartItemInfo[m]._id} in old cartArray: ` + cartArray[n].quantity)
-          console.log(`Quantity of ${addToCartItemInfo[m]._id} in addToCartItemInfo: ` + addToCartItemInfo[m].quantity)
+          // console.log(`Quantity of ${addToCartItemInfo[m]._id} in old cartArray: ` + cartArray[n].quantity)
+          // console.log(`Quantity of ${addToCartItemInfo[m]._id} in addToCartItemInfo: ` + addToCartItemInfo[m].quantity)
           cartArray[n].quantity = addToCartItemInfo[m].quantity + cartArray[n].quantity
-          console.log(`Quantity of ${addToCartItemInfo[m]._id} in new cartArray: ` + cartArray[n].quantity)
+          // console.log(`Quantity of ${addToCartItemInfo[m]._id} in new cartArray: ` + cartArray[n].quantity)
           duplicated = true
           setCart(cartArray)
           break;
@@ -129,7 +129,7 @@ const favourite = ({ favourite }) => {
         setCart(cartArray)
       }
     }
-    console.log(cart)
+    // console.log(cart)
     // const res = await fetchHandler(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, "PUT", undefined, addToCartItemInfo);
 
     // const res = await fetch(`http://localhost:3000/api/user/${userState._id}/actions/handleCart`, {

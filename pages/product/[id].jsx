@@ -142,17 +142,17 @@ const product = ({productItem}) => {
     //   }),
       // });
     let cartArray = cart
-    console.log(cartArray)
+    // console.log(cartArray)
     for (var m = 0; m < addToCartItemInfo.length; m++) {
-      console.log("addToCartItemInfo id: " + addToCartItemInfo[m]._id)
+      // console.log("addToCartItemInfo id: " + addToCartItemInfo[m]._id)
       let duplicated = false;
       for (var n = 0; n < cartArray.length; n++) {
-        console.log("cartArray id: " + cartArray[n]._id)
+        // console.log("cartArray id: " + cartArray[n]._id)
         if (addToCartItemInfo[m]._id === cartArray[n]._id) {
-          console.log(`Quantity of ${addToCartItemInfo[m]._id} in old cartArray: `  + cartArray[n].quantity)
-          console.log(`Quantity of ${addToCartItemInfo[m]._id} in addToCartItemInfo: `  + addToCartItemInfo[m].quantity)
+          // console.log(`Quantity of ${addToCartItemInfo[m]._id} in old cartArray: `  + cartArray[n].quantity)
+          // console.log(`Quantity of ${addToCartItemInfo[m]._id} in addToCartItemInfo: `  + addToCartItemInfo[m].quantity)
           cartArray[n].quantity = addToCartItemInfo[m].quantity + cartArray[n].quantity
-          console.log(`Quantity of ${addToCartItemInfo[m]._id} in new cartArray: `  + cartArray[n].quantity)
+          // console.log(`Quantity of ${addToCartItemInfo[m]._id} in new cartArray: `  + cartArray[n].quantity)
           duplicated = true
           setCart(cartArray)
           break;

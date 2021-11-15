@@ -28,9 +28,9 @@ const resetPassword = ({uid}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData._id)
-    console.log(formData.newPassword);
-    console.log(formData.confirmPassword);
+    // console.log(formData._id)
+    // console.log(formData.newPassword);
+    // console.log(formData.confirmPassword);
     if(!formData.newPassword) {
       createNotification("info")
     } else if (formData.newPassword.length <= 6) {
@@ -174,8 +174,8 @@ export default resetPassword;
 export async function getServerSideProps(context) {
  const { publicRuntimeConfig } = getConfig();
   const { uid, jwtKey } = context.params;
-  console.log(uid)
-  console.log(jwtKey)
+  // console.log(uid)
+  // console.log(jwtKey)
   try {
     var res = await axios.get(`${publicRuntimeConfig.apiUrl}/reset-password/${uid}`);
     const secretKey = process.env.JWT_SECRET + res.data.password

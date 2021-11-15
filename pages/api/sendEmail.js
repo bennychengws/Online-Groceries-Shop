@@ -16,10 +16,10 @@ const resetPasswordEmail = async (req, res) => {
     case 'POST':
       try {
 //      const { serverRuntimeConfig } = getConfig();
-      console.log(req.body)
+      // console.log(req.body)
       const { email } = req.body
       const user = await User.findOne({email: email}, {username: 1, password: 1}).lean().exec();
-      console.log(user)
+      // console.log(user)
       if(!user) {
         return res.status(409).json({ message: `User with the email "${email}" does not exist` });  
       } else {

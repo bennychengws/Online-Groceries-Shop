@@ -7,7 +7,7 @@ import authenticate from '../../middleware/authenticate';
 // dbConnect();
 
 const productAPI = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   switch (req.method) {
     case 'POST':
       const {name, category, brand, price, amounPerQty, productDetail, nutritions, rating, productImage} = req.body

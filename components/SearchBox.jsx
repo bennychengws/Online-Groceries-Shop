@@ -14,7 +14,7 @@ const SearchBox = () => {
 	};
 
 	const handleSearchBoxSubmit = (event) => {
-		console.log(searchQuery)
+		// console.log(searchQuery)
 		event.preventDefault();
 		router.push({pathname: `../search/${searchQuery}`});
 		return null

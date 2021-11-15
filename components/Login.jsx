@@ -25,7 +25,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    // console.log(formData);
     // const res = await fetch("api/login", {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },

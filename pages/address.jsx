@@ -48,14 +48,14 @@ const address = () => {
     streetAddressLine1: "",
     streetAddressLine2: ""
   });
-  console.log(formData);
+  // console.log(formData);
 
   const [isChangingAddress, setIsChangingAddress] = useState(false)
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     setIsChangingAddress(!isChangingAddress)
-    console.log(formData)
+    // console.log(formData)
     if(isChangingAddress) {
       // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
       // const res = await fetch(`api/user/${userState.email}/info/address`, {
@@ -84,7 +84,7 @@ const address = () => {
   }
 
   const handleLogout = async() => {
-    console.log("clicked")
+    console.log("clicked logout")
     const res = await fetch(`${publicRuntimeConfig.apiUrl}/logout`, {method: 'GET',})
     if(res.ok) {
       router.push("/")

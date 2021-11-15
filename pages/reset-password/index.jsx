@@ -19,7 +19,7 @@ const index = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.email);
+    // console.log(formData.email);
     try {
     await axios.post(`${publicRuntimeConfig.apiUrl}/sendEmail`, formData)
     createNotification("success")
