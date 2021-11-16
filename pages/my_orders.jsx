@@ -26,8 +26,9 @@ const myOrders = ({ orders }) => {
 
   // console.log(orderList)
 
-  const handleCancel = (orderID) => {
-    setOrderToBeDeleted(orderID)
+  const handleCancel = (order) => {
+    console.log(order)
+    setOrderToBeDeleted(order)
     setShowModal(true)
   }
 
@@ -71,7 +72,7 @@ const myOrders = ({ orders }) => {
                     <div className={moduleCss.statusItem}>Expected Arrival Date: <div style={{fontWeight:"normal"}}>{Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(order.expectedArrivalDate))}</div></div>
                   }
                   <div className={moduleCss.statusItem}>{order.status}</div>
-                  <button className={moduleCss.cancelOrder} onClick={() => handleCancel(order._id)}>Cancel?</button>
+                  <button className={moduleCss.cancelOrder} onClick={() => handleCancel(order)}>Cancel?</button>
                   <div></div>
                 </div>
               </div>
@@ -79,7 +80,7 @@ const myOrders = ({ orders }) => {
           })}
         </div>
       </div>
-      <Cancel onClose={() => setShowModal(false)} show={showModal} orderId={orderToBeDeleted}></Cancel>
+      <Cancel onClose={() => setShowModal(false)} show={showModal} order={orderToBeDeleted}></Cancel>
       <NavBar />
     </div>
   );

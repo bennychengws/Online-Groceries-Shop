@@ -12,6 +12,7 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import fetchHandler from "../lib/fetchHandler";
 import { useUserContext } from "../context/UserContext";
 import getConfig from 'next/config';
+import mongoose from 'mongoose';
 
 const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   //   const elementRef = useRef();
@@ -80,7 +81,8 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
 
       let orderTime = new Date()
       let newOrder = {
-        _orderID: "",
+        _id: mongoose.Types.ObjectId(),
+        orderedBy: userState._id,
         totalPrice: totalPrice,
         status: "Pending to deliver",
         items: cartList,

@@ -54,6 +54,7 @@ const user = new Schema({
         shipTo: { type: Object, default: ""  },
         expectedArrivalDate: {type: Date},
         actualArrivalDate: {type: Date},
+        orderedBy : {type: Schema.Types.ObjectId}
       },
     ],
   },

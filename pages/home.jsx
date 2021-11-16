@@ -102,7 +102,7 @@ const home = ({products, account}) => {
 
     let processingBestSellingArray = [];
     products.map((item) => {
-      if (item.totalSales >= 10) {            
+      if (item.totalSalesOrderNumber >= 10) {            
         processingBestSellingArray.push(item)
       }
     })
@@ -121,7 +121,7 @@ const home = ({products, account}) => {
 		router.push({pathname: `../search/${searchQuery}`});
   };
 
-  console.log(products)
+  // console.log(products)
 
   return (
     <div>
@@ -201,7 +201,7 @@ const home = ({products, account}) => {
             </div>
           ))} */}
           {bestSellingList.map((item) => {
-            if (item.totalSales >= 10) {            
+            if (item.totalSalesOrderNumber >= 10) {            
             return <div key={item.name} className={moduleCss.product}>
               <GoodsV2>{item}</GoodsV2>
             </div>

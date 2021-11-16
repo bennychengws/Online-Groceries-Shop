@@ -57,13 +57,18 @@ const product = new Schema({
     required: false,
     default: ""
   },
+  totalSalesOrderNumber: {
+    type: Number,
+    required: true,
+    default: 0
+  },
   likedBy: {
     type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
   },
   addedToCartBy : {
     type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
   },
-  orderedBy : {
+  orders : {
     type: [{ type: Schema.Types.ObjectId, ref: 'users' }]
   },
 });

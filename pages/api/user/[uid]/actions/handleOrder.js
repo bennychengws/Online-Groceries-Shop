@@ -16,15 +16,16 @@ const handleOrderAPI = async (req, res) => {
     case "PUT":
       try {
         console.log("Put method");
-        // console.log(req.body);
+        console.log(req.body);
         // let newOrder = {
         //     orderId: mongoose.Types.ObjectId()
         // }
-        
+        const { _id } = req.body;
         await User.updateOne({ _id: uid }, { $addToSet: { orders: req.body } });        
-        var idArray = [];
+        let idArray = [];
         for (var i = 0; i < req.body.items.length; i++) { idArray.push(req.body.items[i]._id);}
-        await Product.updateMany({ _id: { $in: idArray } }, { $addToSet: { orderedBy: uid } });
+        await Product.updateMany({ _id: { $in: idArray } }, { $addToSet: { orders: _id }});
+        await Product.updateMany({ _id: { $in: idArray } }, { $inc: { totalSalesOrderNumber: 1 }});
         return res.status(200).json({message: "The Product is successfully ordered", success: true,});
       } catch (error) {
         console.log("an error occured");
@@ -33,11 +34,14 @@ const handleOrderAPI = async (req, res) => {
     case 'DELETE':
       try {
         console.log("Delete method")
-        // console.log(req.body)
-        // await User.updateOne({_id: uid}, {$pull: {cart: {_id: req.body._id}}})
-        // await Product.updateOne({_id: req.body._id}, {$pull: {addedToCartBy: uid}}) 
-        await User.updateOne({_id: uid}, {$pull: {orders: {_id: req.body}}})  
-        await Product.updateOne({_id: req.body}, {$pull: {orderedBy: uid}}) 
+        console.log(req.body)
+        const { _id } = req.body;
+        await User.updateOne({_id: uid}, {$pull: {orders: {_id: req.body}}})
+        let idArray = [];
+        for (var j = 0; j < req.body.items.length; j++) { idArray.push(req.body.items[j]._id);}
+        // await Product.updateMany({_id: req.body}, {$pull: {orders: uid}})
+        await Product.updateMany({ _id: { $in: idArray } }, { $pull: { orders: _id }});
+        await Product.updateMany({ _id: { $in: idArray } }, { $inc: { totalSalesOrderNumber: -1 }}); 
         return res.status(200).json({message: 'The Product is successfully deleted from order', success: true});
       } catch(error) {
         return res.status(400).json({message: new Error(error).message, success: false,});
