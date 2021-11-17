@@ -11,7 +11,7 @@ const handleFavouriteAPI = async (req, res) => {
   var { uid } = req.query
   switch (req.method) {
     case 'POST':
-        return res.status(405).json({ message: 'We only support Get, Put, and elete' });
+        return res.status(405).json({ message: 'We only support Get, Put, and Delete' });
     case 'PUT':
       try {
         console.log("Put method")

@@ -10,22 +10,23 @@ const productItemAPI = async (req, res) => {
   console.log(id);
   switch (req.method) {
     case 'POST':
-      const {name, category, brand, price, amounPerQty, productDetail, nutritions, rating, productImage} = req.body
-      const product = new Product({
-        name,
-        category,
-        brand,
-        price,
-        // productTotalPrice,
-        amounPerQty,
-        // orderQuantity,
-        productDetail,
-        nutritions,
-        rating,
-        productImage
-      })
-      await product.save()
-      return res.status(200).json({ name: 'John Doe' })
+      // const {name, category, brand, price, amounPerQty, productDetail, nutritions, rating, productImage} = req.body
+      // const product = new Product({
+      //   name,
+      //   category,
+      //   brand,
+      //   price,
+      //   // productTotalPrice,
+      //   amounPerQty,
+      //   // orderQuantity,
+      //   productDetail,
+      //   nutritions,
+      //   rating,
+      //   productImage
+      // })
+      // await product.save()
+      // return res.status(200).json({ name: 'John Doe' })
+      return res.status(405).json("We only support GET")
     case 'GET':
       try {
         const product = await Product.findOne({_id: id}).lean().exec();

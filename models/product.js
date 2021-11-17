@@ -7,8 +7,8 @@ const product = new Schema({
     required: true,
     default: "",
   },
-  category: {
-    type: String,
+  categoryTags: {
+    type: Array,
     required: true,
     default: "",
   },
@@ -17,26 +17,21 @@ const product = new Schema({
     required: true,
     default: "",
   },
-  price: {
+  markedPrice: {
     type: Number,
     required: true,
     default: 0,
   },
-  // productTotalPrice: {
-  //   type: Number,
-  //   required: false,
-  //   default: 0,
-  // },
+  discountedPrice: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   amounPerQty: {
     type: String,
     required: true,
     default: "",
   },
-  // orderQuantity: {
-  //   type: Number,
-  //   required: false,
-  //   default: 0,
-  // },
   productDetail: {
     type: String,
     required: false,
