@@ -43,7 +43,7 @@ const myOrders = ({ orders }) => {
                 <div className={moduleCss.orderHeaderGeneral}>
                   <div className={moduleCss.orderHeaderItems}><div className={moduleCss.orderHeaderTitle}>ID:</div>{" "}<div className={moduleCss.orderHeaderContent}>{order._id}</div></div>
                   <div className={moduleCss.orderHeaderItems}><div className={moduleCss.orderHeaderTitle}>Placed On:</div><div className={moduleCss.orderHeaderContent}>{Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(order.orderTime))}</div></div>
-                  <div className={moduleCss.orderHeaderItems}><div className={moduleCss.orderHeaderTitle}>Total:</div><div className={moduleCss.orderHeaderContent}>${order.totalPrice}</div></div>
+                  <div className={moduleCss.orderHeaderItems}><div className={moduleCss.orderHeaderTitle}>Total:</div><div className={moduleCss.orderHeaderContent}>${order.totalPrice.$numberDecimal}</div></div>
                 </div>
                 <div className={moduleCss.orderHeaderAddress}>
                   <div className={moduleCss.orderHeaderItems}>
@@ -60,7 +60,7 @@ const myOrders = ({ orders }) => {
                       </div>
                       <ul>
                         <li className={moduleCss.name}>{item.name}</li>
-                        <li className={moduleCss.price}>${item.productTotalPrice}</li>
+                        <li className={moduleCss.price}>${item.productTotalPrice.$numberDecimal}</li>
                         <li className={moduleCss.amountAndQty}>Total qty: {item.quantity}</li>
                       </ul>
                     </div>

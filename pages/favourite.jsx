@@ -198,7 +198,7 @@ const favourite = ({ favourite }) => {
                 </div>
                 <div className={moduleCss.amount}>{item.amountPerQty}</div>
                 <div className={moduleCss.rowAndButton}>
-                  <div style={{ fontWeight: "bold" }}>${item.discountedPrice}</div>
+                  <div style={{ fontWeight: "bold" }}>${item.discountedPrice.$numberDecimal}</div>
                   <div className={moduleCss.carts} onClick={() => addToCart([item])}><Image src={cartButton} layout="fill" objectFit="contain" quality={100}></Image></div>
                 </div>
               </div>

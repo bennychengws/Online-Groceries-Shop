@@ -18,7 +18,7 @@ import add from "../../images/addQtyButton.png"
 import reduce from "../../images/reduceQtyButton.png"
 import getConfig from 'next/config';
 import mongoose from "mongoose";
-import Big from "big-js";
+import Big from "big.js";
 
 const product = ({productItem}) => {
   const { publicRuntimeConfig } = getConfig();
@@ -52,7 +52,7 @@ const product = ({productItem}) => {
   const handleQuantityIncrease = (product) => {
     const newProduct = {...product};
     newProduct.quantity++;
-    newProduct.productTotalPrice = newProduct.price.times(newProduct.quantity).valueOf()
+    newProduct.productTotalPrice = newProduct.price.times(newProduct.quantity).toFixed(2);
     setProduct(newProduct);
   };
 
@@ -60,14 +60,14 @@ const product = ({productItem}) => {
     const newProduct = {...product};
     if (newProduct.quantity > 1){
       newProduct.quantity--
-      newProduct.productTotalPrice = newProduct.price * newProduct.quantity
+      newProduct.productTotalPrice = newProduct.price.times(newProduct.quantity).toFixed(2);
     }
     setProduct(newProduct);
   };
 
   useEffect(() => {
     const newProduct = {...product};
-    newProduct.productTotalPrice = newProduct.price * newProduct.quantity
+    newProduct.productTotalPrice = newProduct.price.times(newProduct.quantity).toFixed(2);
     setProduct(newProduct) 
   }, [])
 

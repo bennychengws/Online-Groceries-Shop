@@ -21,6 +21,7 @@ import jwt_decode from "jwt-decode";
 import fetchHandler from "../lib/fetchHandler";
 import { useUserContext } from "../context/UserContext";
 import getConfig from 'next/config';
+import Big from "big.js";
 
 const cart = ({ cart }) => {
   const router = useRouter()
@@ -74,7 +75,8 @@ const cart = ({ cart }) => {
   useEffect(() => {
     let dummyArray = [...cart]
     dummyArray.map((item) => {
-      item.productTotalPrice = item.discountedPrice * item.quantity
+      let price = new Big(item.discountedPrice.$numberDecimal)
+      item.productTotalPrice = price.times(item.quantity).toFixed(2);
     })
     setCartList(dummyArray)
   }, [])
@@ -87,7 +89,8 @@ const cart = ({ cart }) => {
     newCartList[index].quantity++;
 
     setCartList(newCartList);
-    newCartList[index].productTotalPrice = newCartList[index].discountedPrice * newCartList[index].quantity
+    let price = new Big(newCartList[index].discountedPrice.$numberDecimal)
+    newCartList[index].productTotalPrice = price.times(newCartList[index].quantity).toFixed(2)
     calculateTotal();
   };
 
@@ -97,13 +100,15 @@ const cart = ({ cart }) => {
       newCartList[index].quantity--;
     }
     setCartList(newCartList);
-    newCartList[index].productTotalPrice = newCartList[index].discountedPrice * newCartList[index].quantity
+    let price = new Big(newCartList[index].discountedPrice.$numberDecimal)
+    newCartList[index].productTotalPrice = price.times(newCartList[index].quantity).toFixed(2)
     calculateTotal();
   };
 
   const calculateTotal = () => {
     const totalPrice = cartList.reduce((total, item) => {
-      return total + item.productTotalPrice;
+      let originalTotal = new Big(total)
+      return originalTotal.plus(item.productTotalPrice).toFixed(2);
     }, 0);
 
     setTotalPriceCount(totalPrice);
