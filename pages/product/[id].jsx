@@ -8,7 +8,6 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import authenticationCheck from "../../lib/authenticationCheck";
 import fetchHandler from "../../lib/fetchHandler";
 import { useUserContext } from "../../context/UserContext";
-
 import Rating from "../../components/Rating"
 import heartE from "../../images/heartEmpty.png";
 import heartR from "../../images/heartRed.png";
@@ -18,6 +17,7 @@ import backArrow from "../../images/back_arrow.png";
 import add from "../../images/addQtyButton.png"
 import reduce from "../../images/reduceQtyButton.png"
 import getConfig from 'next/config';
+import mongoose from "mongoose";
 
 const product = ({productItem}) => {
   const { publicRuntimeConfig } = getConfig();
@@ -34,7 +34,7 @@ const product = ({productItem}) => {
     productImage: productImage,
     amount: amountPerQty,
     quantity: 1,
-    price: discountedPrice,
+    price: discountedPrice.$numberDecimal,
     productTotalPrice: 1,
     productDetail: productDetail,
     nutritions: nutritions,

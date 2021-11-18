@@ -18,12 +18,12 @@ const product = new Schema({
     default: "",
   },
   markedPrice: {
-    type: Number,
+    type: Schema.Types.Decimal128,
     required: true,
     default: 0,
   },
   discountedPrice: {
-    type: Number,
+    type: Schema.Types.Decimal128,
     required: true,
     default: 0,
   },

@@ -43,12 +43,12 @@ const user = new Schema({
               productImage: {type: String, required: false, default: ""},
               quantity: { type: Number, required: true },
               amounPerQty: {type: String, default: ""},
-              discountedPrice: { type: Number, default: 0, required: true },
-              productTotalPrice: { type: Number, default: 0, required: true },
+              discountedPrice: { type: Schema.Types.Decimal128, default: 0, required: true },
+              productTotalPrice: { type: Schema.Types.Decimal128, default: 0, required: true },
             }
           ]
         },
-        totalPrice: { type: Number, default: 0, required: true },
+        totalPrice: { type: Schema.Types.Decimal128, default: 0, required: true },
         status: { type: String, default: "Pending to deliver" },
         orderTime: { type: Date, required: true },
         shipTo: { type: Object, default: ""  },
