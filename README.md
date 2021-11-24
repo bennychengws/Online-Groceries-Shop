@@ -6,7 +6,6 @@ Account: benny@gmail.com
 
 Password: abcd
 
-
 Please use the following Paypal sandbox account for checkout.
 
 Account: sb-tfbim8386247@personal.example.com
