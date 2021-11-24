@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext  } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +6,6 @@ import moduleCss from "../styles/home.module.css";
 import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
 import Slider from "../components/Slider";
-import Goods from "../components/Goods";
 import GoodsV2 from "../components/GoodsV2";
 import Category from "../components/Category";
 import carrotImage from "../images/Group.png";
@@ -14,45 +13,22 @@ import location from "../images/locationicon.png";
 import fruits from "../images/fruits_&_vegetables.png";
 import eggs from "../images/dairy_&_eggs.png";
 import drinks from "../images/beverages.png";
-import banana from "../images/banana.png";
-import apple from "../images/apple.png";
-import pear from "../images/pear.png";
-import bellPR from "../images/bellPepperR.png";
-import ginger from "../images/ginger.png";
-import chicken from "../images/chicken.png";
-import beefBone from "../images/beefBone.png";
 import rice from "../images/rice.png";
 import pulses from "../images/pulses.png";
-// import {fetchWrapper} from "../lib/fetchWrapper";
 import authenticationCheck from "../lib/authenticationCheck";
-import axios from "axios"
 import jwt_decode from "jwt-decode";
 import fetchHandler from "../lib/fetchHandler";
-// import { UserContext } from "../context/UserContext";
 import { useUserContext } from "../context/UserContext";
 import getConfig from 'next/config';
 
 
 const home = ({products, account}) => {
   const router = useRouter();
-  // const {userState, setUserContent} = useContext(UserContext);
-  // const [userState, setUserState] = useUserContext()
   const [userState, dispatch] = useUserContext()
-  // dispatch({type: "init_stored", value: account})
 
   useEffect(() => {
-    // setUserContent(account)
-    // setUserState(account)
     dispatch({type: "init_stored", value: account})
   }, [])
-
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //   localStorage.setItem('myAccount', JSON.stringify(userState))
-  //   }
-  // }, [userState])  
-
-  // console.log(userState)
 
   const promoList = [
     {
@@ -84,9 +60,6 @@ const home = ({products, account}) => {
   const [offerList, setOfferList] = useState([]);
   const [bestSellingList, setBestSellingList] = useState([]);
   const [groceriesList, setGroceriesList] = useState([]);
-  // const [pulseList, setPulseList] = useState([]);
-  // const [riceList, setRiceList] = useState([]);
-
   const [showSeeAll, setShowSeeAll] = useState(false);
   const [categoryContent, setCategoryContent] = useState("");
   const [contentData, setContentData] = useState([]);
@@ -121,8 +94,6 @@ const home = ({products, account}) => {
 		router.push({pathname: `../search/${searchQuery}`});
   };
 
-  // console.log(products)
-
   return (
     <div>
       <div className={moduleCss.container} style={{overflow: showSeeAll ? "hidden" : "auto", height: showSeeAll ? "100vh": "auto"}}>
@@ -136,7 +107,6 @@ const home = ({products, account}) => {
           <div>Hong Kong</div>
         </div>
         <div style={{marginBottom: "2vh"}}>
-          {/* <SearchBox searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearchBoxSubmit /> */}
           <SearchBox/>
         </div>
         
@@ -170,18 +140,6 @@ const home = ({products, account}) => {
           </Link>
         </div>
         <div className={moduleCss.productContainer}>
-          {/* {offerList.map((item) => (
-            <div key={item.name} className={moduleCss.product}>
-              <Goods>{item}</Goods>
-            </div>
-          ))} */}
-          {/* {products.map((item) => {
-            if (item.discounts[0] >= 0.15) {            
-            return <div key={item._id} className={moduleCss.product}>
-              <GoodsV2>{item}</GoodsV2>
-            </div>
-            }
-          })}           */}
           {offerList.map((item) => {
             return <div key={item._id} className={moduleCss.product}>
               <GoodsV2>{item}</GoodsV2>
@@ -195,11 +153,6 @@ const home = ({products, account}) => {
           </Link>
         </div>
         <div className={moduleCss.productContainer}>
-          {/* {bestSellingList.map((item) => (
-            <div key={item.name} className={moduleCss.product}>
-              <Goods>{item}</Goods>
-            </div>
-          ))} */}
           {bestSellingList.map((item) => {
             if (item.totalSalesOrderNumber >= 10) {            
             return <div key={item.name} className={moduleCss.product}>
@@ -231,11 +184,6 @@ const home = ({products, account}) => {
           </div>
         </div>
         <div className={moduleCss.productContainer}>
-          {/* {groceriesList.map((item) => (
-            <div key={item.name} className={moduleCss.product}>
-              <Goods>{item}</Goods>
-            </div>
-          ))} */}
           {groceriesList.map((item) => {
             if (item.categoryTags.includes("groceries")) {            
             return <div key={item.name} className={moduleCss.product}>
@@ -265,58 +213,12 @@ export async function getServerSideProps(context) {
   const decoded = jwt_decode(token);
   console.log("decoded: " + decoded.sub)
   const accAPIData = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${decoded.sub}`, "GET", context);
-  // const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
-  //   headers: {cookie: context.req?.headers.cookie}} 
-  // );
-  // const productAPIData = await fetch("http://localhost:3000/api/product", {
-  //   headers: {cookie: context.req?.headers.cookie}} 
-  // );
   const productAPIData = await fetchHandler(`${publicRuntimeConfig.apiUrl}/product`, "GET", context);
   console.log(`productAPI status: ${productAPIData.status}`)
   if(accAPIData.status === 401 || productAPIData.status === 401) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  // const productData = await productAPIData.json();
-  // const accountData = await accAPIData.json();
   return {
     props: { account: accAPIData.data, products: productAPIData.data },
   };
 }
-
-// export async function getServerSideProps(context) {
-//   try {
-//   var res = await axios.get(
-//     "http://localhost:3000/api/product",
-//     {
-//       headers: {
-//         cookie: context.req?.headers.cookie
-//       }
-//     } 
-//   );
-//   var productData = await res.data;
-//   console.log(res.status)
-//   } catch (error) {
-//     if (error instanceof TypeError) {
-//       return {
-//         redirect: {
-//           destination: '/',
-//           permanent: true,
-//         },
-//       }      
-//     }
-//   // if(error.res === 401) {
-//   //   return {
-//   //     redirect: {
-//   //       destination: '/',
-//   //       permanent: true,
-//   //     },
-//   //   }
-//   // }
-//   }
-//   // console.log(res)
-//   // const data = await fetchWrapper.get("http://localhost:3000/api/product", context)
-  
-//   return {
-//     props: { products: productData },
-//   };
-// }

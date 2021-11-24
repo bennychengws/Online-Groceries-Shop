@@ -8,39 +8,15 @@ import {NotificationContainer, NotificationManager} from "react-notifications";
 import moduleCss from "../styles/address.module.css";
 import delivery from "../images/deliceryAddress.png";
 import logOut from "../images/logOut.png";
-// import { UserContext } from "../context/UserContext";
 import { useUserContext } from "../context/UserContext";
 import fetchHandler from "../lib/fetchHandler";
 import getConfig from 'next/config';
 
 const address = () => {
   const router = useRouter();
-  // const {userState, setUserContent} = useContext(UserContext);
   const [userState, dispatch] = useUserContext()
   const { publicRuntimeConfig } = getConfig();
 
-  // useEffect(() => {
-  //   dispatch({type: "init_stored", value: account})
-  // }, [])
-  // console.log(typeof window !== "undefined" )
-  // console.log(localStorage.getItem('myAccount') )
-
-  // useEffect(() => {
-  //   if(typeof window !== "undefined" && localStorage.getItem('myAccount')) {
-  //     setUserContent(JSON.parse(localStorage.getItem('myAccount')))
-  //   }
-  // }, [])
-  // const {address} = userState
-  // const {city} = address
-  // console.log(address)
-  // console.log(address.country)
-  // console.log(city)
-
-  // if (typeof window !== "undefined") {
-  //   var a = JSON.parse(localStorage.getItem('myAccount'))
-
-  // }
-  // console.log(a)
   const [formData, setFormData] = useState({
     country: "",
     region: "",
@@ -48,24 +24,13 @@ const address = () => {
     streetAddressLine1: "",
     streetAddressLine2: ""
   });
-  // console.log(formData);
 
   const [isChangingAddress, setIsChangingAddress] = useState(false)
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     setIsChangingAddress(!isChangingAddress)
-    // console.log(formData)
     if(isChangingAddress) {
-      // const res = await fetchWrapper.put(`api/user/${accountInfo.email}`, formData) 
-      // const res = await fetch(`api/user/${userState.email}/info/address`, {
-      //   method: 'PUT',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({
-      //     email,
-      //     formData
-      //   }),
-      // });
       const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/info/address`, "PUT", undefined, formData)
       if(res.ok) {
         dispatch({type: "init_stored", value: { ...userState, address: formData}})
@@ -182,22 +147,3 @@ export async function getServerSideProps(context) {
     props: {}
   };
 }
-// export async function getServerSideProps(context) {
-//   const authenticated = authenticationCheck(context)
-//   if (!authenticated) {
-//     return {redirect: {destination: '/', permanent: true,}, };
-//   }
-//   const token = context.req.cookies.auth
-//   const decoded = jwt_decode(token);
-//   const data = await fetch(`http://localhost:3000/api/user/${decoded.email}/info/address`, {
-//     headers: {cookie: context.req?.headers.cookie}} 
-//   );
-//   console.log(data.status)
-//   if(data.status === 401) {
-//     return {redirect: {destination: '/', permanent: true,}, };
-//   }
-//   const addressData = await data.json();
-//   return {
-//     props: {addressInfo: addressData}
-//   };
-// }

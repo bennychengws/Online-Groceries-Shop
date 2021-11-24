@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import moduleCss from "../../styles/product.module.css";
 import Image from "next/image";
-import Link from "next/link";
-import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import authenticationCheck from "../../lib/authenticationCheck";
 import fetchHandler from "../../lib/fetchHandler";
@@ -17,7 +15,6 @@ import backArrow from "../../images/back_arrow.png";
 import add from "../../images/addQtyButton.png"
 import reduce from "../../images/reduceQtyButton.png"
 import getConfig from 'next/config';
-import mongoose from "mongoose";
 import Big from "big.js";
 
 const product = ({productItem}) => {
@@ -25,8 +22,6 @@ const product = ({productItem}) => {
   const router = useRouter()
   const [userState, dispatch] = useUserContext()
   const [cart, setCart] = useState([])
-  // console.log(accountInfo.cart)
-  // console.log(accountInfo.email)
   const {_id, name, category, productImage, brand, amountPerQty, nutritions, productDetail, rating, discount, discountedPrice} = productItem;
   const addToFavouriteItemInfo = _id
 
@@ -43,8 +38,6 @@ const product = ({productItem}) => {
   })
 
   const addToCartItemInfo = [{_id: _id, quantity: product.quantity}]
-  // console.log(addToCartItemInfo)
-
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isFavourite, setIsFavourite] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
@@ -72,7 +65,6 @@ const product = ({productItem}) => {
   }, [])
 
   useEffect(() => {
-    // for(var i = 0; i < accountInfo.favourite.length; i++) {
       for(var i = 0; i < userState?.favourite?.length; i++) {
       // if (accountInfo.favourite[i]._id === _id) {
         if (userState?.favourite[i] === _id) {
@@ -91,15 +83,6 @@ const product = ({productItem}) => {
     if(!isFavourite) {
       var method = 'PUT'
     }
-    // console.log("ready to fetch")
-    // console.log(method)
-    // const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleFavourite`, {
-    //   method: method,
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     addToFavouriteItemInfo
-    //   }),
-    // });
 
     const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleFavourite`, method, undefined, addToFavouriteItemInfo)
     
@@ -122,38 +105,12 @@ const product = ({productItem}) => {
   }
 
   const handleCart = async() => {
-    // if(!isAddedToCart) {
-    //   for(var i = 0; i < accountInfo.cart.length; i++) {
-    //     if (accountInfo.cart[i]._id === _id) {
-    //       createNotification("info", `${name} is already in your cart`)
-    //       return;
-    //     }
-    //   }
-    // } else {
-    //   createNotification("info", `${name} is already in your cart`)
-    //   return;
-    // }
-
-    // setIsAddedToCart(true)
-    // const res = await fetch(`http://localhost:3000/api/user/${accountInfo.email}/actions/handleCart`, {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     addToCartItemInfo
-    //   }),
-      // });
     let cartArray = cart
-    // console.log(cartArray)
     for (var m = 0; m < addToCartItemInfo.length; m++) {
-      // console.log("addToCartItemInfo id: " + addToCartItemInfo[m]._id)
       let duplicated = false;
       for (var n = 0; n < cartArray.length; n++) {
-        // console.log("cartArray id: " + cartArray[n]._id)
         if (addToCartItemInfo[m]._id === cartArray[n]._id) {
-          // console.log(`Quantity of ${addToCartItemInfo[m]._id} in old cartArray: `  + cartArray[n].quantity)
-          // console.log(`Quantity of ${addToCartItemInfo[m]._id} in addToCartItemInfo: `  + addToCartItemInfo[m].quantity)
           cartArray[n].quantity = addToCartItemInfo[m].quantity + cartArray[n].quantity
-          // console.log(`Quantity of ${addToCartItemInfo[m]._id} in new cartArray: `  + cartArray[n].quantity)
           duplicated = true
           setCart(cartArray)
           break;
@@ -168,10 +125,6 @@ const product = ({productItem}) => {
     const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleCart`, 'PUT', undefined, cartArray)
 
     if(res.ok) {
-      // let newArray = userState.cart.slice()
-      // let [value] = addToCartItemInfo
-      // newArray.push(value)
-      // dispatch({type: "init_stored", value: { ...userState, cart: newArray}})
       dispatch({type: "init_stored", value: { ...userState, cart: cartArray}})
       createNotification("success", `You have added the ${name} to Cart`)
     } else if(res.status === 401) {
@@ -194,21 +147,6 @@ const product = ({productItem}) => {
         return NotificationManager.error(message, 'Ooops', 3000, () => {}, false );        
     }
   }
-
-  // const handleTest = async() => {
-  //   console.log(accountInfo.favourite)
-  //   var processingArray = []
-  //   for(var i = 0; i < accountInfo.favourite.length; i++) {
-  //     for (const [key, value] of Object.entries(accountInfo.favourite[i])) {
-  //       if (key === "_id")
-  //       processingArray.push(value);
-  //     }
-  //     console.log(processingArray)
-  //   }
-  //   let url = `http://localhost:3000/api/syncFavouriteDetails/${processingArray.join('/')}`
-  //   console.log(url)
-  //   const res = await fetch(url);
-  // }
   
   return (
     <div className={moduleCss.container}>
@@ -244,24 +182,10 @@ export async function getServerSideProps(context) {
   if (!authenticated) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  // const token = context.req.cookies.auth
-  // const decoded = jwt_decode(token);
-  // const accAPIData = await fetch(`http://localhost:3000/api/user/${decoded.email}`, {
-  //   headers: {cookie: context.req?.headers.cookie}} 
-  // );
-  // console.log(accAPIData.status)
-  // if(accAPIData.status === 401) {
-  //   return {redirect: {destination: '/', permanent: true,}, };
-  // }
-  // const accountData =  await accAPIData.json();
   const productAPIdata = await fetchHandler(`${publicRuntimeConfig.apiUrl}/product/${context.params.id}`, "GET", context);
-  // const productAPIdata = await fetch(`http://localhost:3000/api/product/${context.params.id}`, {
-  //   headers: {cookie: context.req?.headers.cookie}} 
-  // );
   if(productAPIdata.status === 401) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
-  // const productData = await productAPIdata.json();
   return {
     props: { productItem: productAPIdata.data},
   };

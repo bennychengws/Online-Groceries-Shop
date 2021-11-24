@@ -1,5 +1,5 @@
 import moduleCss from '../styles/MultipleItemSlider.module.css';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 const multipleItemSlider = ({ children, show }) => {
   const [currentIndex, setCurrentIndex] = useState(0)

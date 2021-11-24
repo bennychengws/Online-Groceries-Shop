@@ -1,10 +1,6 @@
 import connectDB from '../../../../../middleware/mongodb';
 import User from '../../../../../models/user';
 import authenticate from '../../../../../middleware/authenticate';
-// import dbConnect from '../../utils/dbConnect';
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-// dbConnect();
 
 const addressAPI = async (req, res) => {
   var { uid } = req.query
@@ -30,7 +26,6 @@ const addressAPI = async (req, res) => {
     case 'GET':
       try {
         console.log(uid)
-        // const users = await User.find({}).lean().exec();
         const user = await User.findOne({_id: uid}, {address: 1, email: 1}).lean().exec();
         return res.status(200).json(user)      
       } catch (error) {

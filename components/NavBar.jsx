@@ -14,8 +14,6 @@ import favouriteGreenIcon from "../images/favourite_green.png"
 import accountIcon from "../images/account.png";
 import accountGreenIcon from "../images/account_green.png";
 
-// {console.log(router.pathname)}
-
 const navBar = () => {
   const [isShop, setIsShop] = useState(false);
   const [isExplore, setIsExplore] = useState(false);
@@ -51,7 +49,7 @@ const navBar = () => {
         console.log("non-navbar's path")
     }
   })
-  // layout="fill" objectFit="contain" quality={100}
+  
   return (
       <div className={moduleCss.container}>
 

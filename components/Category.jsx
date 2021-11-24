@@ -5,13 +5,6 @@ import Image from "next/image";
 import backArrow from "../images/back_arrow.png";
 import filterIcon from "../images/Filter.png";
 import Filters from "../components/Filters";
-import coca from "../images/coca_cola.png";
-import pepsi from "../images/pepsi.png";
-import dietCoke from "../images/diet_coke.png";
-import orangeJuice from "../images/orange_juice.png";
-import appleJuice from "../images/apple_juice.png";
-import sprite from "../images/sprite_can.png";
-import Goods from "../components/Goods";
 import GoodsV2 from "../components/GoodsV2"
 import { useFilterContext } from "../context/FilterContext";
 
@@ -54,9 +47,6 @@ const Category = ({ children, show, onClose, content }) => {
   }, [content])
 
   useEffect(() => {
-    // console.log(content)
-    // console.log(filterState.brands)
-    // console.log(filterState.categories)
     if (filterState.brands && filterState.categories !== undefined) {
       let fitleredData = new Set()
       for (var k = 0; k < content.length; k++ ) {
@@ -81,8 +71,6 @@ const Category = ({ children, show, onClose, content }) => {
           fitleredData.add(content[k])
         }
       }
-
-      // console.log(fitleredData)
       setDisplayedData(Array.from(fitleredData))
     }
   }, [filterState])

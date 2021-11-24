@@ -5,18 +5,14 @@ import mail from "@sendgrid/mail";
 import Jwt from "jsonwebtoken";
 import getConfig from "next/config";
 
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const resetPassword = async (req, res) => {
-  // const users = await User.find({}).lean().exec();
   switch (req.method) {
     case "PUT":
       try {
         const { _id, newPassword } = req.body
-        // console.log(_id)
-        // console.log(newPassword)
+
         const hashedPassword = bcrypt.hashSync(newPassword, 10)
         console.log("hashed")
         await User.updateOne({_id: _id}, {$set: {password: hashedPassword}}) 
@@ -25,9 +21,7 @@ const resetPassword = async (req, res) => {
         return res.status(400).json("failed to put users data");
       }
     case "GET":
-      // console.log(req.query);
       const { uid } = req.query;
-      // console.log(uid);
       try {
         const user = await User.findOne({ _id: uid }, { password: 1 })
           .lean()

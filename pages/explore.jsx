@@ -12,12 +12,10 @@ import bakery from "../images/bakery_&_snacks.png";
 import eggs from "../images/dairy_&_eggs.png";
 import drinks from "../images/beverages.png";
 import groceries from "../images/groceries.png";
-// import Category from "../components/Category";
 import authenticationCheck from "../lib/authenticationCheck";
 
 const explore = () => {
   const [showModal, setShowModal] = useState(false);
-  // const [categoryContent, setCategoryContent] = useState("");
   const categoryList = [
     {
       id: "fresh-fruits-and-vegetables",
@@ -76,9 +74,6 @@ const explore = () => {
             <Link key={item.id} href={{pathname: "explore/[category]", query: {category: item.id}}}>
               <div
                 className={`${moduleCss.categroy} ${item.categoryStyle}`}
-                // onClick={() => (
-                //   setShowModal(true), setCategoryContent(item.title)
-                // )}
               >
                 {item.image}
                 <div>{item.title}</div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import moduleCss from "../styles/Checkout.module.css"
 import Link from "next/link";
@@ -7,7 +7,6 @@ import Failed from "../components/Failed";
 import Accepted from "../components/Accepted";
 import expandArrow from "../images/back arrow.png";
 import downArrow from "../images/downArrow.png";
-import card from "../images/card.png"
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import fetchHandler from "../lib/fetchHandler";
 import { useUserContext } from "../context/UserContext";
@@ -15,7 +14,6 @@ import getConfig from 'next/config';
 import mongoose from 'mongoose';
 
 const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
-  //   const elementRef = useRef();
   const [isBrowser, setIsBrowser] = useState(false);
   const [isDeliveryCollapsed, setIsDeliveryCollapsed] = useState(false);
   const [isPaymentCollapsed, setIsPaymentCollapsed] = useState(false);
@@ -30,11 +28,8 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   const [billingDetails, setBillingDetails] = useState("");
   const { publicRuntimeConfig } = getConfig();
 
-  // console.log(cartList)
 
   useEffect(() => {
-    // const divElement = elementRef.current;
-    // console.log(divElement)
     setIsBrowser(true);
   }, []);
 
@@ -52,7 +47,6 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
         purchase_units: [
           {
             amount: {
-              // charge users $499 per order
               value: totalPrice,
             },
           },
@@ -67,12 +61,6 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
         return orderID;
       });
   };
-  // sb-3plcd8386248@business.example.com
-  // z_&GL(?3
-
-  // sb-tfbim8386247@personal.example.com
-  // /v)7OLL+
-
 
   const onApprove = (data, actions) => {
     return actions.order.capture().then(async function (details) {
@@ -107,50 +95,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
     });
   };
 
-  // const handlePlaceOrder = (e) => {
-  //   setShowAcceptedModal(true);
-  //   handleCloseClick(e);
-  // }
-
-  // const itemList = [
-  //   {
-  //     rowTitle: "Delivery",
-  //     rowOnClick: () => setIsDeliveryCollapsed(!isDeliveryCollapsed),
-  //     rowBody: "Select Method",
-  //     rowArrow: isDeliveryCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>,
-  //     rowCursorStyle: {cursor: "pointer"},
-  //     rowControl: {display: isDeliveryCollapsed ? "block" : "none"},
-  //     options: ["DHL","SF Express", "Pick up at our store"]
-  //   },
-  //   {
-  //     rowTitle: "Payment",
-  //     rowOnClick: () => setIsPaymentCollapsed(!isPaymentCollapsed),
-  //     rowBody: <div className={moduleCss.ImagePattern}><Image src={card} width="21.61px" height="16px"></Image></div>,
-  //     rowArrow: isPaymentCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>,
-  //     rowCursorStyle: {cursor: "pointer"},
-  //     rowControl: {display: isPaymentCollapsed ? "block" : "none"},
-  //     options: ["Paybal", "FPS", "MasterCard"]
-  //   },
-  //   {
-  //     rowTitle: "Promo Code",
-  //     rowOnClick: () => setIsPromoCodeCollapsed(!isPromoCodeCollapsed),
-  //     rowBody: "Pick discount",
-  //     rowArrow: isPromoCodeCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>,
-  //     rowCursorStyle: {cursor: "pointer"},
-  //     rowControl: {display: isPromoCodeCollapsed ? "block" : "none"},
-  //     options: [ "None"]
-  //   },
-  //   {
-  //     rowTitle: "Total Cost",
-  //     rowOnClick: () => void 0,
-  //     rowBody: "$13.97",
-  //     rowArrow: "",
-  //     rowCursorStyle: {cursor: "auto"},
-  //     rowControl: {display: "none"},
-  //     options: []
-  //   },
-  // ]
-
+  // To be optimised
   // const deliveryList = [{ list: ["DHL", "SF Express", "Pick up at our store"], rowControl: { display: isDeliveryCollapsed ? "block" : "none" } }]
   const deliveryList = [{list: ["Ship to registered address"], rowControl: {display: isDeliveryCollapsed ? "block" : "none"}}]
   const paymentList = [{ list: ["Paybal", "FPS", "MasterCard"], rowControl: { display: isPaymentCollapsed ? "block" : "none" } }]
@@ -237,8 +182,6 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
           <Link href="#">
             <a className={moduleCss.styledModalDeclarationDetails}> Conditions</a>
           </Link></div></div>
-        {/* <Link href="../home"> */}
-        {/* <button className={moduleCss.styledModalButton} onClick={() => setShowAcceptedModal(true)}>Place Order</button> */}
         <div className={moduleCss.styledModalButton} >
           <PayPalButtons
             style={{
@@ -252,7 +195,6 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
             onApprove={onApprove}
           />
         </div>
-        {/* </Link> */}
       </div>
       <Accepted show={showAcceptedModal}></Accepted>
       <Failed show={showFailedModal} onClose={() => setShowFailedModal(false)}></Failed>
@@ -261,7 +203,6 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
 
   if (isBrowser) {
     return ReactDOM.createPortal(
-      //   <div ref={elementRef}>Hello from modal</div>,
       modalContent,
       document.getElementById("checkout-root")
     );

@@ -3,6 +3,7 @@ import { UserReducer, initialState } from "./UserReducer";
 
 const UserContext = createContext();
 
+// Alternatives
 // const UserContextProvider = ({ children }) => {
 //   const [userState, setUserState] = useState({});
 

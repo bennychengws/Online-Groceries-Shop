@@ -2,9 +2,6 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const user = new Schema({
-  // _id: {
-  //   type: Schema.Types.ObjectId,
-  // },
   username: {
     type: String,
     required: true,

@@ -3,19 +3,11 @@ import { useRouter } from "next/router";
 import moduleCss from "../../styles/search.module.css";
 import Image from "next/image";
 import NavBar from "../../components/NavBar";
-import backArrow from "../../images/back_arrow.png";
 import authenticationCheck from "../../lib/authenticationCheck";
 import filterIcon from "../../images/Filter.png";
 import Filters from "../../components/Filters";
 import SearchBox from "../../components/SearchBox";
-import coca from "../../images/coca_cola.png";
-import pepsi from "../../images/pepsi.png";
-import dietCoke from "../../images/diet_coke.png";
-import orangeJuice from "../../images/orange_juice.png";
-import appleJuice from "../../images/apple_juice.png";
-import sprite from "../../images/sprite_can.png";
 import GoodsV2 from "../../components/GoodsV2";
-import Goods from "../../components/Goods";
 import { useFilterContext } from "../../context/FilterContext";
 import getConfig from 'next/config';
 
@@ -23,9 +15,7 @@ const search = (props) => {
   const router = useRouter();
   const [filterState, dispatchFilter] = useFilterContext()
   const {data} = props
-//   console.log("passed data: " + data)
   const [showFilter, setShowFilter] = useState(false);
-  // console.log(data)
   const [displayedData, setDisplayedData] = useState([])
   const [categorySet, setCategorySet] = useState(new Set())
   const [brandSet, setBrandSet] = useState(new Set())
@@ -56,9 +46,6 @@ const search = (props) => {
   }, [data])
 
   useEffect(() => {
-    // console.log(data)
-    // console.log(filterState.brands)
-    // console.log(filterState.categories)
     if (filterState.brands && filterState.categories !== undefined) {
 
       let fitleredData = new Set()
@@ -84,46 +71,9 @@ const search = (props) => {
           fitleredData.add(data[k])
         }
       }
-
-      // console.log(fitleredData)
       setDisplayedData(Array.from(fitleredData))
     }
   }, [filterState])
-
-  
-  // useEffect(() =>{
-  //   var categoryList = []
-  //   for (var i = 0; i < data.length; i++ ) {
-  //     for (var j = 0; j < data.length; j++ ) {
-  //       if (data[i].categoryTags[j] !== undefined) {
-  //         categoryList.push(data[i].categoryTags[j])
-  //       }
-  //     }
-  //   }
-  //   console.log(categoryList) 
-  // })
-
-  // useEffect(() => {
-  //   var categories = new Set()
-  //   var brands = new Set()
-
-  //   for (var i = 0; i < data.length; i++ ) {
-  //     for (var j = 0; j < data.length; j++ ) {
-  //       if (data[i].categoryTags[j] !== undefined) {
-  //         categories.add(data[i].categoryTags[j])
-  //         continue
-  //       }
-  //     }
-  //   }    
-
-  //   for (var k = 0; k < data.length; k++ ) {
-  //     brands.add(data[k].brand)
-  //   }    
-
-  //   setCategorySet(categories)
-  //   setBrandSet(brands)
-
-  // }, [])
 
   return (
     <div className={moduleCss.container} style={{ overflow: showFilter ? "hidden" : "auto", height: showFilter ? "100vh" : "auto" }}>
@@ -164,7 +114,6 @@ export async function getServerSideProps(context) {
   }
   const data = await fetch(`${publicRuntimeConfig.apiUrl}/search/${context.params.slug}`);
   const productData = await data.json();
-//   console.log("server side:" + productData)
   return {
     props: {
       data: productData

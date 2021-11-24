@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from 'next/router'
 import moduleCss from "../../styles/resetPassword.module.css";
 import Layout from "../../components/Layout";
@@ -19,7 +19,6 @@ const index = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData.email);
     try {
     await axios.post(`${publicRuntimeConfig.apiUrl}/sendEmail`, formData)
     createNotification("success")

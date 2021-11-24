@@ -13,7 +13,6 @@ class MainDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {/* <div id="product-root"></div> */}
           <div id="cancel-root"></div>
           <div id="filters-root"></div>
           <div id="category-root"></div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import moduleCss from "../styles/accepted.module.css";
-// import Layout from "../components/Layout";
 import Image from "next/image";
 import Link from "next/link";
 import acceptedIcon from "../images/acceptedIcon.png";

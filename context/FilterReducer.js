@@ -5,11 +5,5 @@ export const FilterReducer = (state, action) => {
     case "filter_stored": {
       return action.value;
     }
-    // case "catCheckedState_stored": {
-    //   return action.value;
-    // }
-    // case "brandCheckedState_stored": {
-    //   return action.value;
-    // }
   }
 };

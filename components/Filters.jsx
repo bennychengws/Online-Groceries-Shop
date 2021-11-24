@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import moduleCss from "../styles/Filters.module.css";
 import Link from "next/link";
-import Image from "next/image";
-import { set } from "mongoose";
 import { useFilterContext } from "../context/FilterContext";
 
 const Filters = ({ show, onClose, categoryData, brandData }) => {
@@ -19,8 +17,6 @@ const Filters = ({ show, onClose, categoryData, brandData }) => {
 
   useEffect(() => {
     setIsBrowser(true);
-    // setCatList(categoryData);
-    // setBrandList(brandData);
     console.log("filter created");
   }, []);
   
@@ -51,11 +47,8 @@ const Filters = ({ show, onClose, categoryData, brandData }) => {
         filteredBrands.push(brandData[i]) 
       }
     }      
-    // console.log(filteredCategories)
-    // console.log(filteredBrands)
+
     dispatchFilter({type: "filter_stored", value: {categories: filteredCategories, brands: filteredBrands, catCheckedSetting: catCheckedState, brandCheckedSetting: brandCheckedState}})
-    // dispatch({type: "catCheckedState_stored", value: catCheckedState})
-    // dispatch({type: "brandCheckedState_stored", value: brandCheckedState})
     onClose();
   };
 
@@ -66,28 +59,12 @@ const Filters = ({ show, onClose, categoryData, brandData }) => {
     }
   }, [categoryData]);
 
-  // useEffect(() => {
-  //   if (filterState.catCheckedSetting !== undefined) {
-  //     setCatCheckedState(filterState.catCheckedSetting)
-  //   }
-  // }, [])
-
   useEffect(() => {
     if (filterState.brandCheckedSetting === undefined) {
       let processingArray = new Array(brandData?.length).fill(true)
       setBrandCheckedState(processingArray)
     }
   }, [brandData]);
-
-  // useEffect(() => {
-  //   if (filterState.brandCheckedSetting !== undefined) {
-  //     setBrandCheckedState(filterState.brandCheckedSetting)
-  //   }
-  // }, [])
-
-  // console.log(catCheckedState)
-  // console.log(brandCheckedState)
-
 
   const modalContent = show ? (
     <div className={moduleCss.container}>

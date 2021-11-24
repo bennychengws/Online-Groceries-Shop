@@ -13,31 +13,17 @@ const Login = () => {
   const router = useRouter();
   const { publicRuntimeConfig } = getConfig();
   const [formData, setFormData] = useState({
-
-    // username: "",
     email: "",
     password: "",
-    // address: "",
-
   });
   const [isRevealPwd, setIsRevealPwd] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // console.log(formData);
-    // const res = await fetch("api/login", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     formData
-    //   }),
-    // });
     const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/login`, "POST", undefined, formData)
     if(res.ok) {
       router.push("../home")
     } else {
-      // router.reload()
       setFormData({email: "", password: "",})
       createNotification("warning")
     }
@@ -90,6 +76,7 @@ const Login = () => {
             <div>
               <div
                 className={moduleCss.pwdContainer}
+              // To be optimised
               // style={{
               //   borderColor: !formData.password.trim()
               //     ? "rgba(239, 68, 68, 1)"
@@ -131,14 +118,12 @@ const Login = () => {
             </div>
           </div>
           <div className="flex justify-center">
-          {/* <Link href="../home"> */}
             <button
               className=" w-full bg-green-500 hover:bg-green-700 text-white font-bold py-3 my-1 rounded-2xl focus:outline-none focus:shadow-outline"
               type="submit"
             >
                 Log In
             </button>
-          {/* </Link> */}
           </div>
         </form>
         <p className="text-center text-gray-500 text-sm font-bold">

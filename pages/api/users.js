@@ -1,10 +1,6 @@
 import connectDB from '../../middleware/mongodb';
 import User from '../../models/user';
 import authenticate from '../../middleware/authenticate';
-// import dbConnect from '../../utils/dbConnect';
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-// dbConnect();
 
 const usersAPI = async (req, res) => {
   switch (req.method) {

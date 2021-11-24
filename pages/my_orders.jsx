@@ -1,14 +1,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
-import Link from "next/link";
 import moduleCss from "../styles/order.module.css";
 import NavBar from "../components/NavBar";
 import Cancel from "../components/Cancel";
-import bellPR from "../images/bellPepperR.png";
-import eggCR from "../images/eggChickenRed.png";
-import ginger from "../images/ginger.png";
-import banana from "../images/banana.png";
 import authenticationCheck from "../lib/authenticationCheck";
 import fetchHandler from "../lib/fetchHandler";
 import jwt_decode from "jwt-decode";
@@ -23,8 +18,6 @@ const myOrders = ({ orders }) => {
   useEffect(() => {
     setOderList(orders)
   }, [])
-
-  // console.log(orderList)
 
   const handleCancel = (order) => {
     console.log(order)

@@ -4,22 +4,14 @@ import mail from '@sendgrid/mail';
 import Jwt from "jsonwebtoken";
 import getConfig from 'next/config';
 
-//import getConfig from 'next/config';
-
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 mail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const resetPasswordEmail = async (req, res) => {
-  // const users = await User.find({}).lean().exec();
   switch (req.method) {
     case 'POST':
       try {
-//      const { serverRuntimeConfig } = getConfig();
-      // console.log(req.body)
       const { email } = req.body
       const user = await User.findOne({email: email}, {username: 1, password: 1}).lean().exec();
-      // console.log(user)
       if(!user) {
         return res.status(409).json({ message: `User with the email "${email}" does not exist` });  
       } else {
@@ -34,7 +26,7 @@ const resetPasswordEmail = async (req, res) => {
           ${publicRuntimeConfig.domainUrl}/reset-password/${user._id}/${jwtKey} \r\n
           \r\n
           Regards,\r\n
-          Admin from Eshop
+          Admin from the Online Groceries Shop
         `;
         const data = {
           to: 'bennychengws@gmail.com',

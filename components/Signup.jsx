@@ -27,8 +27,6 @@ const Signup = () => {
 
   const validateUsername = (e) => {
     setFormData({ ...formData, username: e.target.value })
-    // console.log(e.target.value)
-    // console.log(e.target.value.length)
     if (e.target.value.length > 0) {
       setIsUsername(true)
     } else {
@@ -47,8 +45,6 @@ const Signup = () => {
 
   const validatePassword = (e) => {
     setFormData({ ...formData, password: e.target.value })
-    // console.log(e.target.value)
-    // console.log(e.target.value.length)
     if (e.target.value.length >= 6) {
       setIsPasswordValid(true)
     } else {
@@ -57,7 +53,6 @@ const Signup = () => {
   }
 
   const handleClick = async (e) => {
-    // console.log(formData);
     if(!isUsername) {
       createNotification("info")
     }

@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
 import moduleCss from "../../styles/Category.module.css";
 import Image from "next/image";
-// import { useRouter } from 'next/router'
 import NavBar from "../../components/NavBar";
-import backArrow from "../../images/back_arrow.png";
 import filterIcon from "../../images/Filter.png";
 import Filters from "../../components/Filters";
-import coca from "../../images/coca_cola.png";
-import pepsi from "../../images/pepsi.png";
-import dietCoke from "../../images/diet_coke.png";
-import orangeJuice from "../../images/orange_juice.png";
-import appleJuice from "../../images/apple_juice.png";
-import sprite from "../../images/sprite_can.png";
 import GoodsV2 from "../../components/GoodsV2";
 import { useFilterContext } from "../../context/FilterContext";
 import getConfig from 'next/config';
 
 const exploreCategory = ({title, data}) => {
-  // const router = useRouter();
   const [filterState, dispatchFilter] = useFilterContext()
   const [showFilter, setShowFilter] = useState(false);
   const [displayedData, setDisplayedData] = useState([])
@@ -50,35 +41,21 @@ const exploreCategory = ({title, data}) => {
   }, [data])
 
   useEffect(() => {
-    // console.log(data)
-    // console.log(filterState.brands)
-    // console.log(filterState.categories)
     if (filterState.brands && filterState.categories !== undefined) {
-      // let filteredBrands = filterState.brands.slice()
-      // let filteredCategories = filterState.categories.slice()
-      // console.log(filteredBrands)
-      // console.log(filteredCategories)
-
       let fitleredData = new Set()
       for (var k = 0; k < data.length; k++ ) {
         let isCheckedInBrands = false;
         let isCheckedInCategories = false;
         for (var m = 0; m < filterState.brands.length; m++ ) {
           if (data[k].brand === filterState.brands[m]) {
-            // console.log(data[k].name)
             isCheckedInBrands = true;
-            // fitleredData.add(data[k])
             break
           }
         }
 
         for (var p = 0; p < filterState.categories.length; p++ ) {
           for (var r = 0; r < data[k].categoryTags.length; r++ ) {
-            // console.log(data[k].categoryTags.length)
             if (data[k].categoryTags[r] === filterState.categories[p]) {
-              // console.log(data[k].categoryTags[r])
-              // console.log(data[k].name)
-              // fitleredData.add(data[k])
               isCheckedInCategories= true;
               break
             }
@@ -89,7 +66,6 @@ const exploreCategory = ({title, data}) => {
         }
       }
 
-      // console.log(fitleredData)
       setDisplayedData(Array.from(fitleredData))
     }
   }, [filterState])

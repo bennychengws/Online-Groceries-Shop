@@ -1,9 +1,9 @@
+// Incompleted, to be optimised
 import React, { useState } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import NavBar from "../components/NavBar";
-import EditPayment from "../components/EditPayment";
-import authenticationCheck from "../lib/authenticationCheck";
+//import EditPayment from "../components/EditPayment";
 import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import moduleCss from "../styles/payment.module.css";

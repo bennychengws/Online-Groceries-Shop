@@ -2,10 +2,6 @@ import connectDB from "../../../../../middleware/mongodb";
 import User from "../../../../../models/user";
 import Product from "../../../../../models/product";
 import authenticate from "../../../../../middleware/authenticate";
-// import dbConnect from '../../utils/dbConnect';
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-// dbConnect();
 
 const handleCartAPI = async (req, res) => {
   var { uid } = req.query;
@@ -15,11 +11,6 @@ const handleCartAPI = async (req, res) => {
     case "PUT":
       try {
         console.log("Put method");
-        // console.log(req.body);
-        // await User.updateMany(
-        //   { _id: uid },
-        //   { $push: { cart: { $each: req.body } } }
-        // );
         await User.updateOne({ _id: uid }, { $set: { cart: req.body } });        
         var idArray = [];
         for (var i = 0; i < req.body.length; i++) { idArray.push(req.body[i]._id);}
@@ -32,9 +23,6 @@ const handleCartAPI = async (req, res) => {
     case 'DELETE':
       try {
         console.log("Delete method")
-        // console.log(req.body)
-        // await User.updateOne({_id: uid}, {$pull: {cart: {_id: req.body._id}}})
-        // await Product.updateOne({_id: req.body._id}, {$pull: {addedToCartBy: uid}}) 
         await User.updateOne({_id: uid}, {$pull: {cart: {_id: req.body}}})  
         await Product.updateOne({_id: req.body}, {$pull: {addedToCartBy: uid}}) 
         return res.status(200).json({message: 'The Product is successfully deleted from cart', success: true});

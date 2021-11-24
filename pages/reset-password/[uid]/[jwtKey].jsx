@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from 'next/router'
-// import getConfig from 'next/config';
 import Jwt from "jsonwebtoken";
 import axios from "axios";
 import moduleCss from "../../../styles/resetPassword.module.css";
@@ -8,7 +7,6 @@ import Layout from "../../../components/Layout";
 import Image from "next/image";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import carrotImage from "../../../images/Group.png";
-import backArrow from "../../../images/back_arrow.png";
 import showPwdImg from "../../../images/eye_visible_hide_hidden_show_icon_145988.png";
 import hidePwdImg from "../../../images/eye_slash_visible_hide_hidden_show_icon_145987.png";
 import getConfig from 'next/config';
@@ -28,9 +26,6 @@ const resetPassword = ({uid}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData._id)
-    // console.log(formData.newPassword);
-    // console.log(formData.confirmPassword);
     if(!formData.newPassword) {
       createNotification("info")
     } else if (formData.newPassword.length <= 6) {
@@ -49,22 +44,6 @@ const resetPassword = ({uid}) => {
         createNotification("error2", error) 
       }
     }
-
-    // const res = await fetch("api/login", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     formData
-    //   }),
-    // });
-    // const res = await fetchHandler("api/login", "POST", undefined, formData)
-    // if(res.ok) {
-    //   router.push("../home")
-    // } else {
-    //   // router.reload()
-    //   setFormData({email: "", password: "",})
-    //   createNotification("warning")
-    // }
   };
   const createNotification = (type, item) => {
     switch (type) {
@@ -174,14 +153,10 @@ export default resetPassword;
 export async function getServerSideProps(context) {
  const { publicRuntimeConfig } = getConfig();
   const { uid, jwtKey } = context.params;
-  // console.log(uid)
-  // console.log(jwtKey)
   try {
     var res = await axios.get(`${publicRuntimeConfig.apiUrl}/reset-password/${uid}`);
     const secretKey = process.env.JWT_SECRET + res.data.password
     const payload = Jwt.verify(jwtKey, secretKey)
-//    console.log(payload)
-    // console.log(res.data)
   } catch (error) {
     console.log(error)
     return {redirect: {destination: '/reset-password', permanent: true,}, };
