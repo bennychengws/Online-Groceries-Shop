@@ -1,3 +1,13 @@
+# Test Account Information
+
+Please use the following account to login for test if you do not want to sign up a new account.
+Account: benny@gmail.com
+Password: abcd
+
+Please use the following Paypal sandbox account for checkout.
+Account: sb-tfbim8386247@personal.example.com
+Password: /v)7OLL+
+
 # Next.js + Tailwind CSS Example
 
 This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
