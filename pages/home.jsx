@@ -37,7 +37,7 @@ const home = ({products, account}) => {
       image: <Image src={fruits} width="150px" height="100px"></Image>,
       bgColor: moduleCss.vegeColor,
       contentColor: moduleCss.vegeContentColor,
-      linkTo: "../explore",
+      linkTo: "../explore/fresh-fruits-and-vegetables",
     },
     {
       categoryName: "Fresh Eggs",
@@ -45,7 +45,7 @@ const home = ({products, account}) => {
       image: <Image src={eggs} width="100px" height="100px"></Image>,
       bgColor: moduleCss.eggColor,
       contentColor: moduleCss.eggContentColor,
-      linkTo: "../explore",
+      linkTo: "../explore/dairy-and-eggs",
     },
     {
       categoryName: "New Drinks",
@@ -53,7 +53,7 @@ const home = ({products, account}) => {
       image: <Image src={drinks} width="100px" height="100px"></Image>,
       bgColor: moduleCss.drinkColor,
       contentColor: moduleCss.drinkContentColor,
-      linkTo: "../explore",
+      linkTo: "../explore/beverages",
     },
   ];
 
