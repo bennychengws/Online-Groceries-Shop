@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from 'next/router'
-import moduleCss from "../../styles/resetPassword.module.css";
+import moduleCss from "../../styles/resetPassword.module.scss";
 import Layout from "../../components/Layout";
 import Image from "next/image";
 import carrotImage from "../../images/Group.png";

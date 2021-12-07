@@ -1,3 +1,5 @@
+@import 'colors';
+
 .container {
     margin: 0;
     font-family: 'Gilroy', sans-serif;
@@ -63,7 +65,7 @@
     width: 100%;
     border-top: solid;
     border-top-width: 0.1px;
-    border-color: rgba(226, 226, 226, 1);
+    border-color: $customGrey;
 
 }
 
@@ -76,7 +78,7 @@
     justify-content: space-between;
     border-bottom: solid;
     border-bottom-width: 0.1px;
-    border-color: rgba(226, 226, 226, 1);
+    border-color: $customGrey;
     cursor: pointer;
 }
 
@@ -97,7 +99,7 @@
     width: 80%;
     justify-content: center;
     background-color: rgba(242, 243, 242, 1);
-    color: rgba(83, 177, 117, 1);
+    color: $customLightGreen;
     border-radius: 10px;
     margin: 0 5vw;
     position: absolute;

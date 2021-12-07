@@ -1,10 +1,12 @@
+@import 'colors';
+
 .pwdContainer {
     position: relative;
     /* z-index: 1; */
     display:flex;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-color: rgba(226, 226, 226, 1);
+    border-color: $customGrey;
 }
 /* 
 .pwdIcon {

@@ -1,3 +1,5 @@
+@import 'colors';
+
 .styledModalOverlay {
     z-index: 5;
     position:  fixed;
@@ -56,5 +58,5 @@
 .noStyle {
     border-color: rgba(83, 177, 117, 0.7);
     background-color: rgba(83, 177, 117, 0.3);
-    color: rgba(83, 177, 117, 1);
+    color: $customLightGreen;
 }

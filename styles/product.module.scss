@@ -1,3 +1,5 @@
+@import 'colors';
+
 .container {
     position: absolute;
     top: 0;
@@ -144,9 +146,9 @@
 
 .addToBasket {
     display: flex;
-    background-color: rgba(83, 177, 117, 1);
+    background-color: $customLightGreen;
     border-radius: 10px;
-    border-color: rgba(72, 158, 103, 1);
+    border-color: $customGreen;
     padding: 1vh 0;
     width: 80%;
     justify-content: center;

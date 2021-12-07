@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import moduleCss from "../styles/product.module.css";
+import moduleCss from "../styles/product.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import Rating from "../components/Rating"

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
-import moduleCss from "../../styles/product.module.css";
+import moduleCss from "../../styles/product.module.scss";
 import Image from "next/image";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import authenticationCheck from "../../lib/authenticationCheck";

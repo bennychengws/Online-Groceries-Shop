@@ -1,3 +1,5 @@
+@import 'colors';
+
 .container {
     margin: 0;
     padding: 0 0 75px 0;
@@ -30,7 +32,7 @@
     margin-top: 1vh;
     padding: 1rem;
     border-radius: 10px;
-    border-color: rgba(83, 177, 117, 1);
+    border-color: $customLightGreen;
 }
 
 .streetAddressWrapper {
@@ -41,7 +43,7 @@
     display:inline;
     border-bottom: dotted;
     border-bottom-width: 1px;
-    border-color: rgba(83, 177, 117, 1);
+    border-color: $customLightGreen;
 }
 
 .press {
@@ -62,7 +64,7 @@
     margin-left: 1vw;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-bottom-color:rgba(83, 177, 117, 1);
+    border-bottom-color: $customLightGreen;
     /* border-radius: 5px; */
     width: 70%;
 }
@@ -108,7 +110,7 @@
     width: 80%;
     justify-content: center;
     background-color: rgba(242, 243, 242, 1);
-    color: rgba(83, 177, 117, 1);
+    color: $customLightGreen;
     border-radius: 10px;
     margin: 0 5vw;
     position: absolute;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from 'next/router'
 import axios from "axios";
-import moduleCss from "../styles/signup.module.css";
+import moduleCss from "../styles/signup.module.scss";
 import showPwdImg from "../images/eye_visible_hide_hidden_show_icon_145988.png";
 import hidePwdImg from "../images/eye_slash_visible_hide_hidden_show_icon_145987.png";
 import Image from "next/image";

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
-import Link from "next/link";
-import moduleCss from "../styles/favourite.module.css";
+import moduleCss from "../styles/favourite.module.scss";
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import NavBar from "../components/NavBar";
 import cross from "../images/crossClose.png";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import ReactDOM from "react-dom";
-import moduleCss from "../styles/OrderCancelled.module.css";
+import moduleCss from "../styles/OrderCancelled.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import acceptedIcon from "../images/acceptedIcon.png";

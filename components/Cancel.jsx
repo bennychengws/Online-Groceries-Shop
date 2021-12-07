@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import moduleCss from "../styles/Cancel.module.css";
+import moduleCss from "../styles/Cancel.module.scss";
 import OrderCanceled from "../components/OrderCancelled";
 import fetchHandler from "../lib/fetchHandler";
 import { useUserContext } from "../context/UserContext";

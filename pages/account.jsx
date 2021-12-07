@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from "next/link";
-import moduleCss from "../styles/account.module.css";
+import moduleCss from "../styles/account.module.scss";
 import NavBar from "../components/NavBar";
 import logOut from "../images/logOut.png";
 import pencil from "../images/pencil.png";

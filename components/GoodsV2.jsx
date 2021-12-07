@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import moduleCss from "../styles/Goods.module.css";
+import moduleCss from "../styles/Goods.module.scss";
 import addToCart from "../images/add_to_cart.png";
 
 const Goods = ({ children }) => {

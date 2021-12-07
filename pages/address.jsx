@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar";
 import authenticationCheck from "../lib/authenticationCheck";
 import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from "react-notifications";
-import moduleCss from "../styles/address.module.css";
+import moduleCss from "../styles/address.module.scss";
 import delivery from "../images/deliceryAddress.png";
 import logOut from "../images/logOut.png";
 import { useUserContext } from "../context/UserContext";

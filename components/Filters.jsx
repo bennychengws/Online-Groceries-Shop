@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import moduleCss from "../styles/Filters.module.css";
+import moduleCss from "../styles/Filters.module.scss";
 import Link from "next/link";
 import { useFilterContext } from "../context/FilterContext";
 

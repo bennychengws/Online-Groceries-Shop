@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from 'next/router'
 import Jwt from "jsonwebtoken";
 import axios from "axios";
-import moduleCss from "../../../styles/resetPassword.module.css";
+import moduleCss from "../../../styles/resetPassword.module.scss";
 import Layout from "../../../components/Layout";
 import Image from "next/image";
 import {NotificationContainer, NotificationManager} from 'react-notifications';

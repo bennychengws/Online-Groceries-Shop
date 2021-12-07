@@ -1,3 +1,5 @@
+@import 'colors';
+
 .container {
     margin: 0 5vw;
 }
@@ -21,7 +23,7 @@
     display:flex;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-color: rgba(226, 226, 226, 1);
+    border-color: $customGrey;
     margin-bottom: 3vh;
 }
 
@@ -31,7 +33,7 @@
     display:flex;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-color: rgba(226, 226, 226, 1);    
+    border-color: $customGrey;    
 }
 
 .signUpTitle {

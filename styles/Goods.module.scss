@@ -1,3 +1,5 @@
+@import 'colors';
+
 .productBackground {
     display: flex;
     flex-direction: column;
@@ -12,7 +14,7 @@
     font-weight: bold;
     font-size: calc(0.8em + 0.5vw);
     /* cursor: pointer; */
-    border-color: rgba(226, 226, 226, 1);
+    border-color: $customGrey;
     padding: 15px 10px 0px 10px;
 }
 
@@ -89,7 +91,7 @@
         font-weight: bold;
         font-size: calc(0.7em + 0.1vw);
         /* cursor: pointer; */
-        border-color: rgba(226, 226, 226, 1);
+        border-color: $customGrey;
         padding: 15px 10px 0px 10px;
         max-height: 30vh;
     }

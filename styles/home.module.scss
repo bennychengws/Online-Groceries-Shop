@@ -131,31 +131,25 @@
   font-size: calc(0.25em + 0.5vw);
 }
 
-.vegeColor {
+@mixin sliderColorTheme($theme: rgba(198, 255, 168, 0.3)) {
   background: #C6FFDD;  /* fallback for old browsers */
   background: -webkit-linear-gradient(180deg, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(180deg, rgba(251, 215, 134, 0.3), rgba(236, 233, 230, 0.3), rgba(198, 255, 168, 0.3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(180deg, rgba(251, 215, 134, 0.3), rgba(236, 233, 230, 0.3), $theme); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border: solid;
   border-width: 0.5px;
   border-color: rgba(242, 243, 242, 1);
+}
+
+.vegeColor {
+  @include sliderColorTheme
 }
 
 .eggColor {
-  background: #C6FFDD;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(180deg, #f7797d, #FBD786, #F7797D);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(180deg, rgba(251, 215, 134, 0.3), rgba(236, 233, 230, 0.3), rgba(251, 189, 191, 0.3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  border: solid;
-  border-width: 0.5px;
-  border-color: rgba(242, 243, 242, 1);
+  @include sliderColorTheme($theme: rgba(251, 189, 191, 0.3))
 }
 
 .drinkColor {
-  background: #C6FFDD;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(180deg, #f7797d, #FBD786, #B7DFF5);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(180deg, rgba(251, 215, 134, 0.3), rgba(236, 233, 230, 0.3), rgba(109, 213, 250, 0.3)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  border: solid;
-  border-width: 0.5px;
-  border-color: rgba(242, 243, 242, 1);
+  @include sliderColorTheme($theme: rgba(109, 213, 250, 0.3))
 }
 
 .vegeContentColor {

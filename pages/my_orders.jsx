@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
-import moduleCss from "../styles/order.module.css";
+import moduleCss from "../styles/order.module.scss";
 import NavBar from "../components/NavBar";
 import Cancel from "../components/Cancel";
 import authenticationCheck from "../lib/authenticationCheck";

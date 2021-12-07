@@ -1,3 +1,5 @@
+@import 'colors';
+
 .container {
     margin: 0;
     padding: 0 0 70px 0;
@@ -28,9 +30,8 @@
     padding: 3vh 0 2vh 0;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-color:  rgba(226, 226, 226, 1);
+    border-color:  $customGrey;
     width: 100%;
-
 }
 
 .itemContentWrapper {
@@ -38,19 +39,20 @@
     padding: 0 10vw ;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-color:  rgba(226, 226, 226, 1);
+    border-color:  $customGrey;
 }
 
 .itemContent {
     width: 100%;
+
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-bottom-color: rgba(226, 226, 226, 1);
+    border-bottom-color: $customGrey;
     padding: 1.5vh 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
 }
 
 .itemImage {
@@ -79,57 +81,50 @@
     font-size: calc(0.5em + 0.5vw);
 }
 
-.quantityContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 110px;
-    margin-top: 10px;
-}
-
-.Qty {
-    font-weight: bold;
-    color: rgba(24, 23, 37, 1);
-
-}
-
-.qtyControlIcon {
-    display: flex;
-    cursor: pointer;
-}
-
-.crossAndPrice {
+.Buttons {
     display: flex;
     flex-direction: column;
     font-weight: bold;
-    align-items: flex-end;
-    justify-content: space-between;
-
+    align-items: center;
 }
 
-/* .price {
+.rowAndButton {
     display: flex;
-    justify-self: center;
-} */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
 
-.checkOut {
+.carts {
+    position: relative;
     display: flex;
-    background-color: rgba(83, 177, 117, 1);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    /* margin-left: 3vw; */
+}
+
+.cross {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    /* margin-left: 2vw; */
+}
+
+.addAllToCart {
+    display: flex;
+    background-color: $customLightGreen;
     border-radius: 10px;
-    border-color: rgba(72, 158, 103, 1);
+    border-color: $customGreen;
     padding: 1vh 0;
     width: 80%;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
     color: white;
     margin: 3vh 0;
+    /* position: fixed;
+    bottom: 13vh; */
         
-}
-
-.totalPrice {
-    background-color: rgba(72, 158, 103, 1);
-    /* color: rgba(252, 252, 252, 1); */
-    font-size: calc(0.5em + 0.5vw);
-    padding: 2px 5px;
-    border-radius: 5px;
 }

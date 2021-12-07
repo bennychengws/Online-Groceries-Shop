@@ -1,3 +1,5 @@
+@import 'colors';
+
 .layout {
     z-index: 5;
     position: fixed;
@@ -10,6 +12,7 @@
     font-family: 'Gilroy', sans-serif;
     min-height: 100vh;
     background-color: white;
+    
 }
 
 .container {
@@ -36,9 +39,9 @@
 .track {
     position: absolute;
     bottom: 12vh;
-    background-color: rgba(83, 177, 117, 1);
+    background-color: $customLightGreen;
     border-radius: 10px;
-    border-color: rgba(72, 158, 103, 1);
+    border-color: $customGreen;
     padding: 2vh 0;
     width: 80%;
     color: white;
@@ -51,7 +54,7 @@
     font-weight: bold;
 }
 
-.orderCancelled {
+.orderAccepted {
     /* position: absolute; */
     top: 50vh;
     font-weight: bold;

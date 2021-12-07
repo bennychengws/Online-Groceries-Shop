@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 //import EditPayment from "../components/EditPayment";
 import jwt_decode from "jwt-decode";
 import {NotificationContainer, NotificationManager} from "react-notifications";
-import moduleCss from "../styles/payment.module.css";
+import moduleCss from "../styles/payment.module.scss";
 import payment from "../images/paymentMethod.png";
 import logOut from "../images/logOut.png";
 import getConfig from 'next/config';

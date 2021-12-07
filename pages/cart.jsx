@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
-import moduleCss from "../styles/cart.module.css";
+import moduleCss from "../styles/cart.module.scss";
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import authenticationCheck from "../lib/authenticationCheck";
 import { clientAuthenticationCheck } from "../lib/clientAuthenticationCheck";

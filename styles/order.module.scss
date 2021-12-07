@@ -1,3 +1,5 @@
+@import 'colors';
+
 .container {
     margin: 0;
     padding: 0 0 70px 0;
@@ -29,7 +31,7 @@
     padding: 3vh 0 2vh 0;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-color:  rgba(226, 226, 226, 1);
+    border-color:  $customGrey;
     width: 100%;
 
 }
@@ -39,14 +41,14 @@
     padding: 0 10vw ;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-color:  rgba(226, 226, 226, 1);
+    border-color:  $customGrey;
 }
 
 .order {
     width: 100%;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-bottom-color: rgba(226, 226, 226, 1);
+    border-bottom-color: $customGrey;
     padding: 1.5vh 0;
     display: flex;
     flex-direction: column;
@@ -74,7 +76,7 @@
     margin-bottom: 3vh;
     /* border-bottom-color: rgb(83, 177, 96, 0.7); */
     border-bottom-color: rgba(180, 180, 180, 1);;
-    background-color: rgba(226, 226, 226, 1);
+    background-color: $customGrey;
 }
 
 .orderHeaderGeneral {
