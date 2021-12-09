@@ -163,5 +163,15 @@
     margin-bottom: 10px; 
 }
 
+.noticeContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.notice {
+    line-height: 1.25rem;
+    font-weight: 700;
+    color: darkblue
+}
 
 

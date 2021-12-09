@@ -13,8 +13,8 @@ const Login = () => {
   const router = useRouter();
   const { publicRuntimeConfig } = getConfig();
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "benny@gmail.com",
+    password: "abcd",
   });
   const [isRevealPwd, setIsRevealPwd] = useState(false);
 
@@ -127,7 +127,7 @@ const Login = () => {
           </div>
         </form>
         <p className="text-center text-gray-500 text-sm font-bold">
-          Doesn't have an account?{" "}
+          Don't have an account?{" "}
           <Link href="../signup">
             <a className="text-green-500" href="../signup">
               Signup

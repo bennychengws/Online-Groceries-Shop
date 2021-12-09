@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Failed from "../components/Failed";
 import Accepted from "../components/Accepted";
+import Notice from "../components/Notice";
 import expandArrow from "../images/back arrow.png";
 import downArrow from "../images/downArrow.png";
 import { PayPalButtons } from "@paypal/react-paypal-js";
@@ -20,6 +21,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
   const [isPromoCodeCollapsed, setIsPromoCodeCollapsed] = useState(false);
   const [showAcceptedModal, setShowAcceptedModal] = useState(false);
   const [showFailedModal, setShowFailedModal] = useState(false);
+  const [showNoticeModal, setShowNoticeModal] = useState(false);
   const [userState, dispatch] = useUserContext()
 
   const [succeeded, setSucceeded] = useState(false);
@@ -181,7 +183,9 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
           </Link> And
           <Link href="#">
             <a className={moduleCss.styledModalDeclarationDetails}> Conditions</a>
-          </Link></div></div>
+          </Link></div>
+          <div className={moduleCss.noticeContainer}><button className={moduleCss.notice} onClick={() => setShowNoticeModal(true)}>Notice to Visitors</button></div>
+          </div>
         <div className={moduleCss.styledModalButton} >
           <PayPalButtons
             style={{
@@ -198,6 +202,7 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
       </div>
       <Accepted show={showAcceptedModal}></Accepted>
       <Failed show={showFailedModal} onClose={() => setShowFailedModal(false)}></Failed>
+      <Notice onClose={() => setShowNoticeModal(false)} show={showNoticeModal}></Notice>
     </div >
   ) : null;
 

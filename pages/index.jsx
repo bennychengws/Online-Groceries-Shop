@@ -1,11 +1,14 @@
+import { useState } from "react";
 import authenticationCheck from "../lib/authenticationCheck";
 import Image from "next/image";
 import carrotImage from "../images/Group.png";
-import moduleCss from "../styles/index.module.css";
+import moduleCss from "../styles/index.module.scss";
 import Layout from "../components/Layout";
 import Login from "../components/Login.jsx";
+import Notice from "../components/Notice";
 
 export default function Home() {
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <Layout>
@@ -16,11 +19,15 @@ export default function Home() {
         <div className={moduleCss.loginContainer}>
           <div className={moduleCss.loginIntro}>
             <div className={moduleCss.loggingIn}>Login</div>
-            <div className="text-gray-500">Enter your username and password</div>
+            <div className={moduleCss.instructionContainer}>
+              <div className="text-gray-500">Enter your username and password</div>
+              <div className={moduleCss.noticeContainer}><button className={moduleCss.notice} onClick={() => setShowModal(true)}>Notice to Visitors</button></div>
+            </div>
           </div>
           <Login />
         </div>
       </div>
+      <Notice onClose={() => setShowModal(false)} show={showModal}></Notice>
     </Layout>
   );
 }

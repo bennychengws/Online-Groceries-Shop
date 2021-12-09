@@ -1,8 +1,21 @@
+@import 'colors';
+
 .container {
     display: flex;
     flex-direction: column;
   /* background: rgb(205,205,236);
     background: linear-gradient(0deg, #d9e7ff 0%,#e3ffe7 100%); */
+}
+
+.noticeContainer {
+    display: flex;
+}
+
+.notice {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    color: rgba(16, 185, 129, 1)
 }
 
 .image {
@@ -22,9 +35,13 @@
     display: flex;
     flex-direction: column;
     margin: 0 5vw;
+}
 
+.instructionContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 .loginIntro {
-    margin-bottom: 4vh;
+    margin-bottom: 3vh;
 }
