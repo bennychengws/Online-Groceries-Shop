@@ -13,15 +13,15 @@ export default function Home() {
   return (
     <Layout>
       <div className={moduleCss.container}>
-        <div className={moduleCss.image}>
+        <div>
           <Image src={carrotImage} width="30vw" height="40vh"></Image>
         </div>
         <div className={moduleCss.loginContainer}>
-          <div className={moduleCss.loginIntro}>
-            <div className={moduleCss.loggingIn}>Login</div>
+          <div>
+            <div>Login</div>
             <div className={moduleCss.instructionContainer}>
-              <div className="text-gray-500">Enter your username and password</div>
-              <div className={moduleCss.noticeContainer}><button className={moduleCss.notice} onClick={() => setShowModal(true)}>Notice to Visitors</button></div>
+              <div>Enter your username and password</div>
+              <div><button onClick={() => setShowModal(true)}>Notice to Visitors</button></div>
             </div>
           </div>
           <Login />

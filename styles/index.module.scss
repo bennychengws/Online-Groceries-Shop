@@ -5,43 +5,44 @@
     flex-direction: column;
   /* background: rgb(205,205,236);
     background: linear-gradient(0deg, #d9e7ff 0%,#e3ffe7 100%); */
-}
-
-.noticeContainer {
-    display: flex;
-}
-
-.notice {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 700;
-    color: rgba(16, 185, 129, 1)
-}
-
-.image {
-    display: flex;
-    justify-content: center;
-    margin: 11vh 0;
-}
-
-.loggingIn {
-    font-weight: bold;
-    font-size: calc(1.25em + 0.5vw);
-    margin-bottom: 0.5vh;
-  
+    > div:first-child {
+        display: flex;
+        justify-content: center;
+        margin: 11vh 0;    
+    }
 }
 
 .loginContainer {
     display: flex;
     flex-direction: column;
     margin: 0 5vw;
+    
+    > div:first-child {
+        margin-bottom: 3vh;
+
+        > div:first-child {
+            font-weight: bold;
+            font-size: calc(1.25em + 0.5vw);
+            margin-bottom: 0.5vh;
+        }
+
+    }
 }
 
 .instructionContainer {
     display: flex;
     flex-direction: column;
-}
 
-.loginIntro {
-    margin-bottom: 3vh;
+    :first-child {
+        color: rgba(107, 114, 128, 1);
+    }
+
+    :last-child {
+        display: flex;
+
+        button {
+            font-weight: 700;
+            color: rgba(16, 185, 129, 1)
+        }
+    }
 }
