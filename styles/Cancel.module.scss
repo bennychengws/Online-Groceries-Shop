@@ -13,6 +13,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 
 }
+
 .styledModal {
     width: 60%;
     height: auto;
@@ -24,39 +25,40 @@
     align-self: center;
     overflow: hidden;
 
-}
-
-.question {
-    margin: 10%;
-    text-align: center;
-    font-weight: bold;
-    font-size: calc(1em + 0.5vw);
-    color: rgba(24, 23, 37, 1);
+    h1 {
+        margin: 10%;
+        text-align: center;
+        font-weight: bold;
+        font-size: calc(1em + 0.5vw);
+        color: rgba(24, 23, 37, 1);
+    }
 }
 
 .buttonContainer{
-    margin: 5%;
+    margin: 5% 7%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
 }
 
-.buttonStyle {
+@mixin buttonStyleTheme {
     border: solid;
     border-radius: 10px;
     border-width: 1px;
-    padding: 5px 10px;
+    padding: 1vh 3vw;
 }
 
 .yesStyle {
     border-color: rgba(248, 164, 76, 0.7);
     background-color: rgba(253, 229, 76, 0.3);
     color: rgba(247, 165, 87, 1);
+    @include buttonStyleTheme()
 }
 
 .noStyle {
     border-color: rgba(83, 177, 117, 0.7);
     background-color: rgba(83, 177, 117, 0.3);
     color: $customLightGreen;
+    @include buttonStyleTheme()
 }

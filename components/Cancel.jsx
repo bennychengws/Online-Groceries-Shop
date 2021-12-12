@@ -53,10 +53,10 @@ const Cancel = ({show, order, onClose}) => {
       `}
       </style>
       <div className={moduleCss.styledModal}>
-        <div className={moduleCss.question}>Are you sure to cancel this order?</div>
+        <h1>Are you sure to cancel this order?</h1>
         <div className={moduleCss.buttonContainer}>
-          <button className={`${moduleCss.buttonStyle} ${moduleCss.yesStyle}`} onClick={deleteOrder}>Yes</button>
-          <button className={`${moduleCss.buttonStyle} ${moduleCss.noStyle}`} onClick={handleCloseClick}>No</button>
+          <button className={moduleCss.yesStyle} onClick={deleteOrder}>Yes</button>
+          <button className={moduleCss.noStyle} onClick={handleCloseClick}>No</button>
         </div>      
       </div>
       <OrderCanceled show={showModal}></OrderCanceled> 

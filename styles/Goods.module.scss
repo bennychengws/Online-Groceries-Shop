@@ -12,7 +12,7 @@
     min-width: 114px;
     min-height: 163px;
     font-weight: bold;
-    font-size: calc(0.8em + 0.5vw);
+    font-size: calc(0.8em + 0.4vw);
     /* cursor: pointer; */
     border-color: $customGrey;
     padding: 15px 10px 0px 10px;
@@ -20,7 +20,7 @@
 
 .productName {
     color: rgba(24, 23, 37, 1);
-    font-size: calc(1rem + 0.5vw);
+    font-size: calc(0.8rem + 0.4vw);
 }
 
 .productTopPanel {
@@ -37,7 +37,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 5px 7px;
-    font-size: calc(1rem + 0.5vw);
+    font-size: calc(0.8rem + 0.4vw);
     color: rgba(24, 23, 37, 1)
 }
 
@@ -45,80 +45,54 @@
     position: relative;
     width: 65%;
     height: 55%;
-    cursor: "pointer";
+    cursor: pointer;
 }
 
 
 @media screen and (max-width: 360px) {
+    .productImage {
+        width: 65%;
+        height: 55%;
+    }
+
     .productName {
-        color: rgba(24, 23, 37, 1);
         font-size: calc(0.6rem + 0.5vw);
-    
     }
     
     .productTopPanel {
-        width: 40vw;
-        padding: 5px 7px;
-        /* background-color: green; */
-        text-align: left;
         font-size: calc(0.4rem + 0.5vw);
     }
     
     .productBottomPanel {
-        display: flex;
-        flex-direction: row;
-        width: 40vw;
-        align-items: center;
-        justify-content: space-between;
-        padding: 5px 7px;
         font-size: calc(0.6rem + 0.5vw);
-        color: rgba(24, 23, 37, 1)
     }
 }
 
 @media screen and (min-width: 767px) {
     .productBackground {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        text-align: center;
-        border-radius: 10px;
-        border: solid;
-        border-width: 1px;
-        min-width: 114px;
-        min-height: 163px;
-        font-weight: bold;
         font-size: calc(0.7em + 0.1vw);
-        /* cursor: pointer; */
-        border-color: $customGrey;
         padding: 15px 10px 0px 10px;
         max-height: 30vh;
     }
+
+    .productImage {
+        width: 65%;
+        height: 55%;
+    }
     
     .productName {
-        color: rgba(24, 23, 37, 1);
         font-size: calc(0.9rem + 0.2vw);
-    
     }
     
     .productTopPanel {
         min-width: 216px;
         width: 15vw;
         padding: 0 7px;
-        /* background-color: green; */
-        text-align: left;
     }
     
     .productBottomPanel {
-        display: flex;
-        flex-direction: row;
         min-width: 216px;
         width: 15vw;
-        align-items: center;
-        justify-content: space-between;
-        padding: 5px 7px;
         font-size: calc(0.9rem + 0.2vw);
-        color: rgba(24, 23, 37, 1)
     }
 }

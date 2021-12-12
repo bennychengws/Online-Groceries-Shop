@@ -86,7 +86,7 @@ const Category = ({ children, show, onClose, content }) => {
         <div className={moduleCss.back} onClick={handleCloseClick}>
           <Image src={backArrow} width="10px" height="18px"></Image>
         </div>
-        <div className={moduleCss.childrenTitle}>{children}</div>
+        <h1>{children}</h1>
         <div
           className={moduleCss.filter}
           onClick={() => (setShowFilter(true), console.log("Clicked"))}

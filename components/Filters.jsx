@@ -6,10 +6,6 @@ import { useFilterContext } from "../context/FilterContext";
 
 const Filters = ({ show, onClose, categoryData, brandData }) => {
   const [filterState, dispatchFilter] = useFilterContext()
-
-  const [newCatList, setNewCatList] = useState([]);
-  const [newbrandList, setNewBrandList] = useState([]);
-
   const [catCheckedState, setCatCheckedState] = useState([]);
   const [brandCheckedState, setBrandCheckedState] = useState([]);
 
@@ -70,32 +66,32 @@ const Filters = ({ show, onClose, categoryData, brandData }) => {
     <div className={moduleCss.container}>
       <div className={moduleCss.topPanel}>
         <Link href="#"><a onClick={handleCloseClick} className={moduleCss.styledModalHeader}>x</a></Link>
-        <div>Filters</div>
+        <h1>Filters</h1>
         <div> </div>
       </div>
       <div className={moduleCss.filterPanel}>
         <div className={moduleCss.filterContent}>
-          {categoryData.length === 0 ? <div></div> : <div className={moduleCss.Title}>Categories</div>}
+          {categoryData.length === 0 ? <div></div> : <h2 className={moduleCss.Title}>Categories</h2>}
           <div className="mt-4 flex flex-col">
             {categoryData.map((category, index) => (
               <div className="inline-flex items-center mb-2" key={index}>
                 <input type="checkbox" className="form-checkbox text-green-500 rounded" name={category} value={category} onChange={() => handleOnChange(index, catCheckedState, setCatCheckedState)} checked={catCheckedState[index]}></input>
-                <span className={`ml-2 ${moduleCss.optionColor}`}>{category}</span>
+                <span className={`ml-2`}>{category}</span>
               </div>              
             ))}
           </div>
-          {brandData.length === 0 ? <div></div> : <div className={moduleCss.Title}>Brand</div>}
+          {brandData.length === 0 ? <div></div> : <h2 className={moduleCss.Title}>Brand</h2>}
           <div className="mt-4 flex flex-col">
             {brandData.map((brand, index) => (
               <div className="inline-flex items-center mb-2" key={index}>
                 <input type="checkbox" className="form-checkbox text-green-500 rounded" name={brand} value={brand} onChange={() => handleOnChange(index, brandCheckedState, setBrandCheckedState)} checked={brandCheckedState[index]}></input>
-                <span className={`ml-2 ${moduleCss.optionColor}`}>{brand}</span>
+                <span className={`ml-2`}>{brand}</span>
               </div>              
             ))}
           </div>
         </div>
         {categoryData.length === 0 && brandData.length === 0 ? <div></div> :
-          <button className={moduleCss.applyFilter} onClick={handleApplyFilter}>Apply Filter</button>
+          <button onClick={handleApplyFilter}>Apply Filter</button>
         }
       </div>
     </div>

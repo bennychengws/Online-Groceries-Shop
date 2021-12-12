@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from 'next/link'
-import moduleCss from "../styles/NavBar.module.css";
+import moduleCss from "../styles/NavBar.module.scss";
 import shopIcon from "../images/shop.png";
 import shopGreenIcon from "../images/shop_green.png";
 import exploreIcon from "../images/explore.png";

@@ -1,3 +1,4 @@
+// Just a backup plan if a multiple slider is to be delivered
 import moduleCss from '../styles/MultipleItemSlider.module.css';
 import { useEffect, useState } from 'react';
 

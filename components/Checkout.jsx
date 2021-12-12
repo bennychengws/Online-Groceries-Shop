@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import moduleCss from "../styles/Checkout.module.css"
+import moduleCss from "../styles/Checkout.module.scss"
 import Link from "next/link";
 import Image from "next/image";
 import Failed from "../components/Failed";
@@ -113,36 +113,39 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
       </style>
       <div className={moduleCss.styledModal}>
         <div className={moduleCss.styledModalHeader}>
-          <div className={moduleCss.styledModalCheckOut}>Checkout</div>
-          <Link href="#"><a href="#" onClick={handleCloseClick} className={moduleCss.styledModalCross}>x</a></Link>
+          <h1>Checkout</h1>
+          <Link href="#"><a href="#" onClick={handleCloseClick}>x</a></Link>
         </div>
         <div className={moduleCss.styledModalContent}>
-          <div className={moduleCss.styledModalRow}>
-            <div className={moduleCss.styledModalFirstRow}>
-              <div className={moduleCss.styledModalRowTitle}>Delivery</div>
+          <div className={moduleCss.rowContainer}>
+            <div className={moduleCss.firstRow}>
+              <div className={moduleCss.rowTitle}>Delivery</div>
               <div className={moduleCss.rightOptions} onClick={() => setIsDeliveryCollapsed(!isDeliveryCollapsed)}>
-                <div className={moduleCss.StyledModalRowBody}>Select Method</div>
-                <div className={moduleCss.ImagePattern}>{isDeliveryCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div>
+                <div className={moduleCss.rowBody}>Select Method</div>
+                <div className={moduleCss.imagePattern}>{isDeliveryCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div>
               </div>
             </div>
             {deliveryList.map((option, upperIndex) => (
-              <div key={upperIndex} className={moduleCss.styledModalSecondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
+              <div key={upperIndex} className={moduleCss.secondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
                 {option.list.map((item, index) => {
-                  return <label key={index} className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors1" value={index + 1} defaultChecked={index === 0 ? true : false}></input></label>
+                  return <label key={index} className="inline-flex items-center">
+                      <span className="mr-2">{item}</span>
+                      <input type="radio" className="form-radio text-indigo-600" name="radio-colors1" value={index + 1} defaultChecked={index === 0 ? true : false}></input>
+                    </label>
                 })}
               </div></div></div></div>
             ))}
           </div>
-          {/* <div className={moduleCss.styledModalRow}>
-            <div className={moduleCss.styledModalFirstRow}>
-              <div className={moduleCss.styledModalRowTitle}>Payment</div>
+          {/* <div className={moduleCss.rowContainer}>
+            <div className={moduleCss.firstRow}>
+              <div className={moduleCss.rowTitle}>Payment</div>
               <div className={moduleCss.rightOptions} onClick={() => setIsPaymentCollapsed(!isPaymentCollapsed)}>
-                <div className={moduleCss.StyledModalRowBody}><div className={moduleCss.ImagePattern}><Image src={card} width="21.61px" height="16px"></Image></div></div>
-                <div className={moduleCss.ImagePattern}>{isPaymentCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div>
+                <div className={moduleCss.rowBody}><div className={moduleCss.imagePattern}><Image src={card} width="21.61px" height="16px"></Image></div></div>
+                <div className={moduleCss.imagePattern}>{isPaymentCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div>
               </div>
             </div>
             {paymentList.map((option, upperIndex) => (
-              <div key={upperIndex} className={moduleCss.styledModalSecondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
+              <div key={upperIndex} className={moduleCss.secondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
                 {option.list.map((item, index) => {
                   if (index === 0) {
                     return <label key={index} className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors2" value={index + 1} defaultChecked></input></label>
@@ -153,38 +156,38 @@ const Checkout = ({ show, onClose, totalPrice, cartList, children, title }) => {
               </div></div></div></div>
             ))}
           </div> */}
-          <div className={moduleCss.styledModalRow}>
-            <div className={moduleCss.styledModalFirstRow}>
-              <div className={moduleCss.styledModalRowTitle}>Promo Code</div>
+          <div className={moduleCss.rowContainer}>
+            <div className={moduleCss.firstRow}>
+              <div className={moduleCss.rowTitle}>Promo Code</div>
               <div className={moduleCss.rightOptions} onClick={() => setIsPromoCodeCollapsed(!isPromoCodeCollapsed)}>
-                <div className={moduleCss.StyledModalRowBody}>Pick discount</div>
-                <div className={moduleCss.ImagePattern}>{isPromoCodeCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div>
+                <div className={moduleCss.rowBody}>Pick discount</div>
+                <div className={moduleCss.imagePattern}>{isPromoCodeCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div>
               </div>
             </div>
             {promoCodeList.map((option, upperIndex) => (
-              <div key={upperIndex} className={moduleCss.styledModalSecondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
+              <div key={upperIndex} className={moduleCss.secondRow} style={option.rowControl}><div className="block"><div className="mt-2"><div className="flex flex-col items-end">
                 {option.list.map((item, index) => {
                   return <label key={index} className="inline-flex items-center"><span className="mr-2">{item}</span><input type="radio" className="form-radio text-indigo-600" name="radio-colors3" value={index + 1} defaultChecked={index === 0 ? true : false}></input></label>
                 })}
               </div></div></div></div>
             ))}
           </div>
-          <div className={moduleCss.styledModalRow}>
-            <div className={moduleCss.styledModalFirstRow}>
-              <div className={moduleCss.styledModalRowTitle}>Total Cost</div>
-              <div className={moduleCss.StyledModalRowBody}>${totalPrice}</div>
+          <div className={moduleCss.rowContainer}>
+            <div className={moduleCss.firstRow}>
+              <div className={moduleCss.rowTitle}>Total Cost</div>
+              <div className={moduleCss.rowBody}>${totalPrice}</div>
             </div>
           </div>
         </div>
 
         <div className={moduleCss.styledModalDeclaration}>By placing an order you agree to our <div>
           <Link href="#">
-            <a className={moduleCss.styledModalDeclarationDetails}>Terms</a>
+            <a>Terms</a>
           </Link> And
           <Link href="#">
-            <a className={moduleCss.styledModalDeclarationDetails}> Conditions</a>
+            <a> Conditions</a>
           </Link></div>
-          <div className={moduleCss.noticeContainer}><button className={moduleCss.notice} onClick={() => setShowNoticeModal(true)}>Notice to Visitors</button></div>
+          <div className={moduleCss.noticeContainer}><button onClick={() => setShowNoticeModal(true)}>Notice to Visitors</button></div>
           </div>
         <div className={moduleCss.styledModalButton} >
           <PayPalButtons

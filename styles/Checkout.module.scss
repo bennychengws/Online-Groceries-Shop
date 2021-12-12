@@ -21,20 +21,6 @@
 
 }
 
-
-@media screen and (min-width: 767px) {
-    .styledModal {
-        width: 60%;
-        height: auto;
-        border-radius: 15px 15px 15px 15px;
-        background-color: rgba(242, 243, 242, 1);
-        display:flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-self: center;
-    }
-}
-
 .styledModalHeader{
     display: flex;
     flex-direction: row;
@@ -44,28 +30,25 @@
     margin-bottom: 5px;
     border-bottom: solid;
     border-bottom-width: 1px;
-    border-color: rgba(226, 226, 226, 0.7)
-}
+    border-color: rgba(226, 226, 226, 0.7);
 
-.styledModalCheckOut {
-    font-size: calc(1em + 0.5vw);
-    font-weight: bold;
-    color: rgba(24, 23, 37);
+    h1 {
+        font-size: calc(1em + 0.5vw);
+        font-weight: bold;
+        color: rgba(24, 23, 37);
+    }
 
-}
-
-.styledModalCross {
-    /* display: flex;
-    justify-content: flex-end; */
-    font-size: 25px;
-    cursor: pointer;
+    a {
+        font-size: 25px;
+        cursor: pointer;   
+    }
 }
 
 .styledModalContent{
     padding: 0px 15px; 
 }
 
-.styledModalRow {
+.rowContainer {
     display: flex;
     flex-direction: column;
     padding: 1.5vh 0px;
@@ -75,7 +58,7 @@
 }
 
 
-.styledModalFirstRow{
+.firstRow{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -84,18 +67,18 @@
     border-color: rgba(226, 226, 226, 0.7) */
 }
 
-.styledModalSecondRow {
+.secondRow {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     margin-top: 1vh;
 }
 
-.styledModalRowTitle {
+.rowTitle {
     color: #7C7C7C;
 }
 
-.StyledModalRowBody {
+.rowBody {
     color: rgba(24, 23, 37);
     font-weight: bold;
     margin-right: 5px;
@@ -106,10 +89,9 @@
     flex-direction: row;
     align-items: center;
     cursor: pointer;
-
 }
 
-.ImagePattern{
+.imagePattern{
     display: flex;
     align-items: center;
 }
@@ -119,30 +101,11 @@
     font-size: 13.35px;
     color: #7C7C7C;
 
-}
-
-.styledModalDeclarationDetails {
-    font-weight: bold;
-    color: rgba(24, 23, 37);
-
-}
-
-
-@media screen and (min-width: 767px) {
-    .styledModalDeclaration {
-        text-align: center;
-        padding: 10px 15px;
-        font-size: 0.9em;
-        color: #7C7C7C;
-    }
-
-    .styledModalDeclarationDetails {
+    a {
         font-weight: bold;
         color: rgba(24, 23, 37);
-
     }
 }
-
 
 /* .styledModalButton {
     background-color: #53B175;
@@ -165,13 +128,35 @@
 
 .noticeContainer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+
+    button {
+        line-height: 1.25rem;
+        font-weight: 700;
+        color: darkblue
+    }
 }
 
-.notice {
-    line-height: 1.25rem;
-    font-weight: 700;
-    color: darkblue
+@media screen and (min-width: 767px) {
+    .styledModal {
+        width: 60%;
+        border-radius: 15px 15px 15px 15px;
+        align-self: center;
+    }
+
+    .styledModalDeclaration {
+        text-align: center;
+        padding: 10px 15px;
+        font-size: 0.9em;
+        color: #7C7C7C;
+
+        a{
+            font-weight: bold;
+            color: rgba(24, 23, 37);
+        }
+    }
+
+    .noticeContainer {
+        justify-content: center;
+    }
 }
-
-
