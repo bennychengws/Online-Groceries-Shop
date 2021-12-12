@@ -21,7 +21,7 @@ export default function Home() {
             <div className={moduleCss.loggingIn}>Login</div>
             <div className={moduleCss.instructionContainer}>
               <div className="text-gray-500">Enter your username and password</div>
-              <div className={moduleCss.noticeContainer}><button className={moduleCss.notice} onClick={() => setShowModal(true)}>Notice to Visitors</button></div>
+              <div className={moduleCss.noticeContainer}><button onClick={() => setShowModal(true)}>Notice to Visitors</button></div>
             </div>
           </div>
           <Login />

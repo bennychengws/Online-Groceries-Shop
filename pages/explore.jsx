@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SearchBox from "../components/SearchBox";
-import moduleCss from "../styles/explore.module.css";
-import { useRouter } from "next/router";
+import moduleCss from "../styles/explore.module.scss";
 import { useState } from "react";
 import NavBar from "../components/NavBar";
 import fruits from "../images/fruits_&_vegetables.png";
@@ -60,21 +59,18 @@ const explore = () => {
       categoryStyle: moduleCss.groceries,
     },
   ];
-  const router = useRouter();
 
   return (
     <div>
       <div className={moduleCss.container} style={{overflow: showModal ? "hidden" : "auto", height: showModal ? "100vh": "auto"}}>
-        <div className={moduleCss.title}>Find Products</div>
-        <div style={{marginBottom: "2vh"}}>
+        <h1>Find Products</h1>
+        <div className={moduleCss.searchBoxContainer}>
           <SearchBox />
         </div>
         <div className={moduleCss.productContainer}>
           {categoryList.map((item) => (
             <Link key={item.id} href={{pathname: "explore/[category]", query: {category: item.id}}}>
-              <div
-                className={`${moduleCss.categroy} ${item.categoryStyle}`}
-              >
+              <div className={`${moduleCss.category} ${item.categoryStyle}`}>
                 {item.image}
                 <div>{item.title}</div>
               </div>

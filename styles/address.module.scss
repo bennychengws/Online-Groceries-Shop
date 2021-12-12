@@ -3,14 +3,14 @@
 .container {
     margin: 0;
     padding: 0 0 75px 0;
-
     font-family: 'Gilroy', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start
 }
-.pageTitleContent {
+
+.pageContent {
     margin: 7vh 5vw 2vh 5vw;
 }
 
@@ -18,11 +18,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    h5 {
+        margin-left: 0.5rem;
+    }
 }
 
-.pageTitle {
-    margin-left: 0.5rem;
-}
 
 .addressContent {
     display: block;
@@ -33,17 +34,37 @@
     padding: 1rem;
     border-radius: 10px;
     border-color: $customLightGreen;
+
+    span {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    
+        > input {
+            margin-left: 1vw;
+            border-bottom: solid;
+            border-bottom-width: 1px;
+            border-bottom-color: $customLightGreen;
+            /* border-radius: 5px; */
+            width: 70%;
+        }
+    
+        > input:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+    }
 }
 
 .streetAddressWrapper {
     margin-top: 1vh;
-}
 
-.streetAddressTitle{
-    display:inline;
-    border-bottom: dotted;
-    border-bottom-width: 1px;
-    border-color: $customLightGreen;
+    h5 {
+        display:inline;
+        border-bottom: dotted;
+        border-bottom-width: 1px;
+        border-color: $customLightGreen;    
+    }
 }
 
 .press {
@@ -52,27 +73,6 @@
     padding: 5px;
     background-color: #53B175;
     color: white;
-}
-
-.inputWrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.inputField {
-    margin-left: 1vw;
-    border-bottom: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: $customLightGreen;
-    /* border-radius: 5px; */
-    width: 70%;
-}
-
-.inputField:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-
 }
 
 .submitCancelRow {
@@ -128,12 +128,8 @@
 @media screen and (min-width: 767px) {
     .container {
         padding: 70px 0 0 0;
-        font-family: 'Gilroy', sans-serif;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start
     }
+
     .pageTitleContent {
         margin: 2vh 5vw 2vh 5vw;
     }

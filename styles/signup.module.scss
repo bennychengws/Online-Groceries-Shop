@@ -8,32 +8,27 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 3vh;
-
 }
-
 
 .inputContainer {
     margin-bottom: 3vh;
-
 }
 
-.emailContainer {
+@mixin commonEmailAndPwdTheme{
     position: relative;
-    /* z-index: 1; */
     display:flex;
     border-bottom: solid;
     border-bottom-width: 1px;
     border-color: $customGrey;
+}
+
+.emailContainer {
+    @include commonEmailAndPwdTheme();
     margin-bottom: 3vh;
 }
 
-.pwdContainer {
-    position: relative;
-    /* z-index: 1; */
-    display:flex;
-    border-bottom: solid;
-    border-bottom-width: 1px;
-    border-color: $customGrey;    
+.pwdContainer { 
+    @include commonEmailAndPwdTheme();
 }
 
 .signUpTitle {

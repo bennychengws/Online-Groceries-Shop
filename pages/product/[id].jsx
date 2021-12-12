@@ -152,14 +152,45 @@ const product = ({productItem}) => {
     <div className={moduleCss.container}>
       <div className={moduleCss.upperPart}>
         <div className={moduleCss.backArrowImg} onClick={() => router.back()}><Image src={backArrow} width="8.4px" height="14px"></Image></div>
-        <div className={moduleCss.productImage}><Image src={`data:image/png;base64,${product.productImage}`} layout="fill" objectFit="contain" quality={100}></Image></div>
+        <div className={moduleCss.productImage}>
+          <Image src={`data:image/png;base64,${product.productImage}`} layout="fill" objectFit="contain" quality={100}></Image>
+        </div>
       </div>
       <div>
-        <div className={moduleCss.nameAndHeart}><div>{product.name}</div><div className={moduleCss.heartImg} onClick={handleFavourite}><Image src={isFavourite ? heartR: heartE} layout="fill" objectFit="contain" quality={100}></Image></div></div>
+        <div className={moduleCss.nameAndHeart}>
+          <div>{product.name}</div>
+          <button onClick={handleFavourite}>
+            <Image src={isFavourite ? heartR: heartE} layout="fill" objectFit="contain" quality={100}></Image>
+          </button>
+        </div>
         <div className={moduleCss.amount}>{product.amount}</div>  
-        <div className={moduleCss.qtyAndPrice}><div className={moduleCss.qtyPanel}><div className={moduleCss.reduceQtyButton} onClick={() => handleQuantityDecrease(product)}><Image src={reduce} width="35px" height="35px"></Image></div><div>{product.quantity}</div><div className={moduleCss.addQtyButton} onClick={() => handleQuantityIncrease(product)}><Image src={add} width="35px" height="35px"></Image></div></div><div>${product.productTotalPrice}</div></div>
-        <div className={moduleCss.productDetailPanel}><div className={moduleCss.productDetailAndExpand} onClick={() => setIsCollapsed(!isCollapsed)}><div className={moduleCss.infoTitle}>Product Detail</div><div className={moduleCss.expandButton}>{isCollapsed ? <Image src={downArrow} width="14px" height="8.4px"></Image> : <Image src={expandArrow} width="8.4px" height="14px"></Image>}</div></div><div className={moduleCss.productDetail} style={{display: isCollapsed ? "block" : "none"}}>{product.productDetail}</div></div>
-        <div className={moduleCss.infoPanel}><div className={moduleCss.infoTitle}>Nutritions</div><div className={moduleCss.nutri}>{product.nutritions}</div></div>
+        <div className={moduleCss.qtyAndPrice}>
+          <div className={moduleCss.qtyPanel}>
+            <div className={moduleCss.reduceQtyButton} onClick={() => handleQuantityDecrease(product)}>
+              <Image src={reduce} width="35px" height="35px"></Image>
+            </div>
+            <div>{product.quantity}</div>
+            <div className={moduleCss.addQtyButton} onClick={() => handleQuantityIncrease(product)}>
+              <Image src={add} width="35px" height="35px"></Image>
+            </div>
+          </div>
+          <div>${product.productTotalPrice}</div>
+        </div>
+        <div className={moduleCss.productDetailPanel}>
+          <div className={moduleCss.productDetailAndExpand} onClick={() => setIsCollapsed(!isCollapsed)}>
+            <div className={moduleCss.infoTitle}>Product Detail</div>
+            <div className={moduleCss.expandButton}>
+              {isCollapsed 
+              ? <Image src={downArrow} width="14px" height="8.4px"></Image> 
+              : <Image src={expandArrow} width="8.4px" height="14px"></Image>}
+            </div>
+          </div>
+          <div className={moduleCss.productDetail} style={{display: isCollapsed ? "block" : "none"}}>{product.productDetail}</div>
+        </div>
+        <div className={moduleCss.infoPanel}>
+          <div className={moduleCss.infoTitle}>Nutritions</div>
+          <div className={moduleCss.nutri}>{product.nutritions}</div>
+        </div>
         <div className={moduleCss.infoPanel}>
           <div className={moduleCss.infoTitle}>Review</div>
           <div><Rating>{product.rating}</Rating></div>

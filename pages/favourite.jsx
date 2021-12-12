@@ -98,7 +98,7 @@ const favourite = ({ favourite }) => {
   return (
     <div>
       <div className={moduleCss.container}>
-        <div className={moduleCss.title}>Favourite</div>
+        <h1>Favourite</h1>
         <div className={moduleCss.itemContentWrapper} style={{ borderBottom: favouriteList.length === 0 ? "hidden" : "" }}>
           {favouriteList.map((item, index) => {
             return <div key={item.name} className={moduleCss.itemContent} style={{ borderBottom: index === favouriteList.length - 1 ? "hidden" : "" }}>

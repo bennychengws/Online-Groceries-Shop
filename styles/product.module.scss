@@ -48,14 +48,13 @@
     font-size: calc(1rem + 0.5vw);
     font-weight: bold;
     color: rgba(24, 23, 37, 1);
-}
 
-.heartImg {
-    position: relative;
-    display: flex;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
+    button {
+        position: relative;
+        display: flex;
+        width: 24px;
+        height: 24px;
+    }
 }
 
 .amount {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import moduleCss from "../../styles/Category.module.css";
+import moduleCss from "../../styles/category.module.scss";
 import Image from "next/image";
 import NavBar from "../../components/NavBar";
 import filterIcon from "../../images/Filter.png";
@@ -77,7 +77,7 @@ const exploreCategory = ({title, data}) => {
         {/* <div className={moduleCss.back} onClick={() => router.back()}>
           <Image src={backArrow} width="10px" height="18px"></Image>
         </div> */}
-        <div className={moduleCss.childrenTitle}>{title}</div>
+        <h1>{title}</h1>
         <div
           className={moduleCss.filter}
           onClick={() => (setShowFilter(true), console.log("Clicked"))}

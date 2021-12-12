@@ -93,7 +93,14 @@ const account = () => {
             {
               isEditing ? 
               <div>
-              <input type="text" name="username" onChange={(e) => dispatch({type: "init_stored", value: { ...userState, username: e.target.value}})} value={userState.username} placeholder="Your New Username" className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"></input>
+              <input 
+                type="text" 
+                name="username" 
+                onChange={(e) => dispatch({type: "init_stored", value: { ...userState, username: e.target.value}})} 
+                value={userState.username} 
+                placeholder="Your New Username" 
+                className="py-1 appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500">
+              </input>
               {/* <button onClick={handleSubmitEditedUsername}>Submit</button> */}
               </div>
               : <div>{userState.username}</div>

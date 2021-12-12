@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import Image from "next/image";
 import moduleCss from "../styles/cart.module.scss";
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 import authenticationCheck from "../lib/authenticationCheck";
 import { clientAuthenticationCheck } from "../lib/clientAuthenticationCheck";
 import NavBar from "../components/NavBar";
@@ -13,25 +16,25 @@ import reduce from "../images/reduceQtyButton.png";
 import jwt_decode from "jwt-decode";
 import fetchHandler from "../lib/fetchHandler";
 import { useUserContext } from "../context/UserContext";
-import getConfig from 'next/config';
+import getConfig from "next/config";
 import Big from "big.js";
 
 const cart = ({ cart }) => {
-  const router = useRouter()
+  const router = useRouter();
   const { publicRuntimeConfig } = getConfig();
   const [showModal, setShowModal] = useState(false);
   const [totalPriceCount, setTotalPriceCount] = useState(0);
-  const [userState, dispatch] = useUserContext()
-  const [cartList, setCartList] = useState([])
+  const [userState, dispatch] = useUserContext();
+  const [cartList, setCartList] = useState([]);
 
   useEffect(() => {
-    let dummyArray = [...cart]
+    let dummyArray = [...cart];
     dummyArray.map((item) => {
-      let price = new Big(item.discountedPrice.$numberDecimal)
+      let price = new Big(item.discountedPrice.$numberDecimal);
       item.productTotalPrice = price.times(item.quantity).toFixed(2);
-    })
-    setCartList(dummyArray)
-  }, [])
+    });
+    setCartList(dummyArray);
+  }, []);
 
   const handleQuantityIncrease = (index) => {
     const newCartList = [...cartList];
@@ -39,8 +42,10 @@ const cart = ({ cart }) => {
     newCartList[index].quantity++;
 
     setCartList(newCartList);
-    let price = new Big(newCartList[index].discountedPrice.$numberDecimal)
-    newCartList[index].productTotalPrice = price.times(newCartList[index].quantity).toFixed(2)
+    let price = new Big(newCartList[index].discountedPrice.$numberDecimal);
+    newCartList[index].productTotalPrice = price
+      .times(newCartList[index].quantity)
+      .toFixed(2);
     calculateTotal();
   };
 
@@ -50,78 +55,158 @@ const cart = ({ cart }) => {
       newCartList[index].quantity--;
     }
     setCartList(newCartList);
-    let price = new Big(newCartList[index].discountedPrice.$numberDecimal)
-    newCartList[index].productTotalPrice = price.times(newCartList[index].quantity).toFixed(2)
+    let price = new Big(newCartList[index].discountedPrice.$numberDecimal);
+    newCartList[index].productTotalPrice = price
+      .times(newCartList[index].quantity)
+      .toFixed(2);
     calculateTotal();
   };
 
   const calculateTotal = () => {
     const totalPrice = cartList.reduce((total, item) => {
-      let originalTotal = new Big(total)
+      let originalTotal = new Big(total);
       return originalTotal.plus(item.productTotalPrice).toFixed(2);
     }, 0);
 
     setTotalPriceCount(totalPrice);
-    console.log("cT")
+    console.log("cT");
   };
 
   useEffect(() => {
     calculateTotal();
-  })
+  });
 
   useEffect(async () => {
-    const isAuthenticated = await clientAuthenticationCheck()
-    if (!isAuthenticated) router.push("/")
-  }, [calculateTotal])
+    const isAuthenticated = await clientAuthenticationCheck();
+    if (!isAuthenticated) router.push("/");
+  }, [calculateTotal]);
 
   const deleteItem = async (item) => {
-    var newArray = userState.cart.slice()
-    const res = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleCart`, "DELETE", undefined, item._id);
+    var newArray = userState.cart.slice();
+    const res = await fetchHandler(
+      `${publicRuntimeConfig.apiUrl}/user/${userState._id}/actions/handleCart`,
+      "DELETE",
+      undefined,
+      item._id
+    );
     if (res.ok) {
-      setCartList(cartList.filter((otherItems) => otherItems._id !== item._id))
-      let anArray = newArray.filter((otherIDs) => otherIDs._id !== item._id)
-      dispatch({ type: "init_stored", value: { ...userState, cart: anArray } })
-      createNotification("warning", item)
+      setCartList(cartList.filter((otherItems) => otherItems._id !== item._id));
+      let anArray = newArray.filter((otherIDs) => otherIDs._id !== item._id);
+      dispatch({ type: "init_stored", value: { ...userState, cart: anArray } });
+      createNotification("warning", item);
     } else if (res.status === 401) {
-      createNotification("error", null, "Sorry you are not authenticated")
-      router.push("/")
+      createNotification("error", null, "Sorry you are not authenticated");
+      router.push("/");
     } else {
-      createNotification("error", null, "Some errors occur, please try again")
+      createNotification("error", null, "Some errors occur, please try again");
     }
-  }
+  };
 
   const handleCheckout = () => {
     if (totalPriceCount > 0) {
-      setShowModal(true)
-      console.log("checkout opened")
+      setShowModal(true);
+      console.log("checkout opened");
     } else {
-      console.log("empty cart")
-      createNotification("omitted")
+      console.log("empty cart");
+      createNotification("omitted");
     }
-  }
+  };
 
   const createNotification = (type, item, message) => {
     switch (type) {
       case "info":
-        return NotificationManager.info(`${item.name} is already in your cart`, "Duplicated");
+        return NotificationManager.info(
+          `${item.name} is already in your cart`,
+          "Duplicated"
+        );
       case "success":
-        return NotificationManager.success(`You have added the ${item.name} to Cart`, "Added to Cart");
+        return NotificationManager.success(
+          `You have added the ${item.name} to Cart`,
+          "Added to Cart"
+        );
       case "warning":
-        return NotificationManager.warning(`You have deleted the ${item.name} from Favourite`, 'Deleted', 3000);
+        return NotificationManager.warning(
+          `You have deleted the ${item.name} from Favourite`,
+          "Deleted",
+          3000
+        );
       case "error":
-        return NotificationManager.error(message, 'Ooops', 3000, () => { }, false);
+        return NotificationManager.error(
+          message,
+          "Ooops",
+          3000,
+          () => {},
+          false
+        );
       case "omitted":
-        return NotificationManager.warning(`Please make sure that your cart is not empty`, 'Empty Cart');
+        return NotificationManager.warning(
+          `Please make sure that your cart is not empty`,
+          "Empty Cart"
+        );
     }
-  }
+  };
 
   return (
     <div>
       <div className={moduleCss.container}>
-        <div className={moduleCss.title}>My Cart</div>
-        <div className={moduleCss.itemContentWrapper} style={{ borderBottom: cartList.length === 0 ? "hidden" : "" }}>
+        <h1>My Cart</h1>
+        <div
+          className={moduleCss.itemContentWrapper}
+          style={{ borderBottom: cartList.length === 0 ? "hidden" : "" }}
+        >
           {cartList.map((item, index) => {
-            return <div key={item._id} className={moduleCss.itemContent} style={{ borderBottom: index === cartList.length - 1 ? "hidden" : "" }}><div className={moduleCss.imgAndDescription}><div className={moduleCss.itemImage}><Image src={`data:image/png;base64,${item.productImage}`} layout="fill" objectFit="contain" quality={100} onClick={() => router.push(`/product/${item._id}`)}></Image></div><div><div className={moduleCss.name}>{item.name}</div><div className={moduleCss.amount}>{item.amountPerQty}</div><div className={moduleCss.quantityContainer}><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityDecrease(index)}><Image src={reduce} width="35px" height="35px"></Image></div><div className={moduleCss.Qty}>{item.quantity}</div><div className={moduleCss.qtyControlIcon} onClick={() => handleQuantityIncrease(index)}><Image src={add} width="35px" height="35px"></Image></div></div></div></div><div className={moduleCss.crossAndPrice}><div style={{ cursor: "pointer" }} onClick={() => deleteItem(item)}><Image src={cross} width="14.16px" height="14px"></Image></div><div className={moduleCss.price}>${item.productTotalPrice}</div><div></div></div></div>
+            return (
+              <div
+                key={item._id}
+                className={moduleCss.itemContent}
+                style={{
+                  borderBottom: index === cartList.length - 1 ? "hidden" : "",
+                }}
+              >
+                <div className={moduleCss.imgAndDescription}>
+                  <div className={moduleCss.itemImage}>
+                    <Image
+                      src={`data:image/png;base64,${item.productImage}`}
+                      layout="fill"
+                      objectFit="contain"
+                      quality={100}
+                      onClick={() => router.push(`/product/${item._id}`)}
+                    ></Image>
+                  </div>
+                  <div>
+                    <div className={moduleCss.name}>{item.name}</div>
+                    <div className={moduleCss.amount}>{item.amountPerQty}</div>
+                    <div className={moduleCss.quantityContainer}>
+                      <div
+                        className={moduleCss.qtyControlIcon}
+                        onClick={() => handleQuantityDecrease(index)}
+                      >
+                        <Image src={reduce} width="35px" height="35px"></Image>
+                      </div>
+                      <div className={moduleCss.Qty}>{item.quantity}</div>
+                      <div
+                        className={moduleCss.qtyControlIcon}
+                        onClick={() => handleQuantityIncrease(index)}
+                      >
+                        <Image src={add} width="35px" height="35px"></Image>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className={moduleCss.crossAndPrice}>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => deleteItem(item)}
+                  >
+                    <Image src={cross} width="14.16px" height="14px"></Image>
+                  </div>
+                  <div>
+                    ${item.productTotalPrice}
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            );
           })}
           {/* {cartList.map((item, index) => {
             if (index === cartList.length - 1) {
@@ -131,9 +216,24 @@ const cart = ({ cart }) => {
             }
           })} */}
         </div>
-        <Checkout onClose={() => setShowModal(false)} show={showModal} totalPrice={totalPriceCount} cartList={cartList}></Checkout>
-        <button className={moduleCss.checkOut} onClick={handleCheckout} style={{ position: cartList.length === 0 ? "fixed" : "", bottom: cartList.length === 0 ? "13vh" : "0" }}><div></div>Go to Checkout<div className={moduleCss.totalPrice}>${totalPriceCount}</div></button>
+        <button
+          className={moduleCss.checkOut}
+          onClick={handleCheckout}
+          style={{
+            position: cartList.length === 0 ? "fixed" : "",
+            bottom: cartList.length === 0 ? "13vh" : "0",
+          }}
+        >
+          <div></div>Go to Checkout
+          <div className={moduleCss.totalPrice}>${totalPriceCount}</div>
+        </button>
       </div>
+      <Checkout
+        onClose={() => setShowModal(false)}
+        show={showModal}
+        totalPrice={totalPriceCount}
+        cartList={cartList}
+      ></Checkout>      
       <NotificationContainer />
       <NavBar />
       {/* <Failed
@@ -153,17 +253,21 @@ export default cart;
 
 export async function getServerSideProps(context) {
   const { publicRuntimeConfig } = getConfig();
-  const authenticated = authenticationCheck(context)
+  const authenticated = authenticationCheck(context);
   if (!authenticated) {
-    return { redirect: { destination: '/', permanent: true, }, };
+    return { redirect: { destination: "/", permanent: true } };
   }
-  const token = context.req.cookies.auth
+  const token = context.req.cookies.auth;
   const decoded = jwt_decode(token);
-  console.log("decoded: " + decoded.sub)
-  const cartAPIData = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${decoded.sub}/actions/handleCart`, "GET", context)
-  console.log(`cartAPI status: ${cartAPIData.status}`)
+  console.log("decoded: " + decoded.sub);
+  const cartAPIData = await fetchHandler(
+    `${publicRuntimeConfig.apiUrl}/user/${decoded.sub}/actions/handleCart`,
+    "GET",
+    context
+  );
+  console.log(`cartAPI status: ${cartAPIData.status}`);
   if (cartAPIData.status === 401) {
-    return { redirect: { destination: '/', permanent: true, }, };
+    return { redirect: { destination: "/", permanent: true } };
   }
   return {
     props: { cart: cartAPIData.data },

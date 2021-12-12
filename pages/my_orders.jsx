@@ -28,19 +28,19 @@ const myOrders = ({ orders }) => {
   return (
     <div>
       <div className={moduleCss.container}>
-        <div className={moduleCss.title}>My Orders</div>
+        <h1>My Orders</h1>
         <div className={moduleCss.orderWrapper} style={{ borderBottom: orderList.length === 0 ? "hidden" : "" }}>
           {orderList.map((order, index) => {
             return <div key={order._id} className={moduleCss.order} style={{ borderBottom: index === orderList.length - 1 ? "hidden" : "" }}>
               <div className={moduleCss.orderHeader}>
                 <div className={moduleCss.orderHeaderGeneral}>
-                  <div className={moduleCss.orderHeaderItems}><div className={moduleCss.orderHeaderTitle}>ID:</div>{" "}<div className={moduleCss.orderHeaderContent}>{order._id}</div></div>
-                  <div className={moduleCss.orderHeaderItems}><div className={moduleCss.orderHeaderTitle}>Placed On:</div><div className={moduleCss.orderHeaderContent}>{Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(order.orderTime))}</div></div>
-                  <div className={moduleCss.orderHeaderItems}><div className={moduleCss.orderHeaderTitle}>Total:</div><div className={moduleCss.orderHeaderContent}>${order.totalPrice.$numberDecimal}</div></div>
+                  <div><div>ID:</div>{" "}<div>{order._id}</div></div>
+                  <div><div>Placed On:</div><div>{Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(order.orderTime))}</div></div>
+                  <div><div>Total:</div><div>${order.totalPrice.$numberDecimal}</div></div>
                 </div>
                 <div className={moduleCss.orderHeaderAddress}>
-                  <div className={moduleCss.orderHeaderItems}>
-                    <div className={moduleCss.orderHeaderTitle}>To: </div><div className={moduleCss.orderHeaderContent}>{order.shipTo.streetAddressLine1}, {order.shipTo.streetAddressLine2}, {order.shipTo.city}</div>
+                  <div>
+                    <div>To: </div><div>{order.shipTo.streetAddressLine1}, {order.shipTo.streetAddressLine2}, {order.shipTo.city}</div>
                   </div>
                 </div>
               </div>
@@ -61,11 +61,11 @@ const myOrders = ({ orders }) => {
                 </div>
                 <div className={moduleCss.status}>
                   {order.status === "Arrived" ? 
-                    <div className={moduleCss.statusItem}>Actual Arrival Date: <div style={{fontWeight:"normal"}}>{Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(order.actualArrivalDate))}</div></div> : 
-                    <div className={moduleCss.statusItem}>Expected Arrival Date: <div style={{fontWeight:"normal"}}>{Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(order.expectedArrivalDate))}</div></div>
+                    <div>Actual Arrival Date: <div style={{fontWeight:"normal"}}>{Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(order.actualArrivalDate))}</div></div> : 
+                    <div>Expected Arrival Date: <div style={{fontWeight:"normal"}}>{Intl.DateTimeFormat('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(order.expectedArrivalDate))}</div></div>
                   }
-                  <div className={moduleCss.statusItem}>{order.status}</div>
-                  <button className={moduleCss.cancelOrder} onClick={() => handleCancel(order)}>Cancel?</button>
+                  <div>{order.status}</div>
+                  <button onClick={() => handleCancel(order)}>Cancel?</button>
                   <div></div>
                 </div>
               </div>

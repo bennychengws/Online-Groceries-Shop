@@ -67,17 +67,17 @@ const address = () => {
 
   return (
     <div className={moduleCss.container}>
-      <div className={moduleCss.pageTitleContent}>
+      <div className={moduleCss.pageContent}>
         <div className={moduleCss.pageTitleWithIcon}>
           <Image src={delivery} width="16.81px" height="20.17px"></Image>
-          <div className={moduleCss.pageTitle}>Registered Address</div>
+          <h5>Registered Address</h5>
         </div>
         <div className={moduleCss.addressContent}>
           <div>Country: {userState?.address?.country}</div>
           <div>Region: {userState?.address?.region}</div>
           <div>City: {userState?.address?.city}</div>
           <div className={moduleCss.streetAddressWrapper}>
-            <div className={moduleCss.streetAddressTitle}>Street Address</div>
+            <h5>Street Address</h5>
             <div>Line 1: {userState?.address?.streetAddressLine1}</div>
             <div>Line 2: {userState?.address?.streetAddressLine2}</div>
           </div>
@@ -86,31 +86,31 @@ const address = () => {
         <div style={{display: isChangingAddress ? "block" : "none", marginTop: "3vh"}}>
           <div className={moduleCss.pageTitleWithIcon} >
             <Image src={delivery} width="16.81px" height="20.17px"></Image>
-            <div className={moduleCss.pageTitle}>New Address</div>
+            <h5>New Address</h5>
           </div>
           <form className={moduleCss.addressContent} onSubmit={handleSubmit}>
-            <div className={moduleCss.inputWrapper} >
-              <div>Country:</div>
-              <input className={moduleCss.inputField} onChange={(e) =>setFormData({ ...formData, country: e.target.value })} value={formData.country}></input>
-            </div>
-            <div className={moduleCss.inputWrapper} >
-              <div>Region:</div>
-              <input className={moduleCss.inputField} onChange={(e) =>setFormData({ ...formData, region: e.target.value })} value={formData.region}></input>
-            </div>
-            <div className={moduleCss.inputWrapper} >
-              <div>City:</div>
-              <input className={moduleCss.inputField} onChange={(e) =>setFormData({ ...formData, city: e.target.value })} value={formData.city}></input>
-            </div>            
+            <span>
+              <label>Country:</label>
+              <input onChange={(e) =>setFormData({ ...formData, country: e.target.value })} value={formData.country}></input>
+            </span>
+            <span>
+              <label>Region:</label>
+              <input onChange={(e) =>setFormData({ ...formData, region: e.target.value })} value={formData.region}></input>
+            </span>
+            <span>
+              <label>City:</label>
+              <input  onChange={(e) =>setFormData({ ...formData, city: e.target.value })} value={formData.city}></input>
+            </span>            
             <div className={moduleCss.streetAddressWrapper}>
-              <div className={moduleCss.streetAddressTitle}>Street Address</div>
-              <div className={moduleCss.inputWrapper} >
-              <div>Line 1:</div>
-              <input className={moduleCss.inputField} onChange={(e) =>setFormData({ ...formData, streetAddressLine1: e.target.value })} value={formData.streetAddressLine1}></input>
-            </div>   
-            <div className={moduleCss.inputWrapper} >
-              <div>Line 2:</div>
-              <input className={moduleCss.inputField} onChange={(e) =>setFormData({ ...formData, streetAddressLine2: e.target.value })} value={formData.streetAddressLine2}></input>
-            </div>   
+              <h5>Street Address</h5>
+              <span>
+                <label>Line 1:</label>
+                <input onChange={(e) =>setFormData({ ...formData, streetAddressLine1: e.target.value })} value={formData.streetAddressLine1}></input>
+              </span>   
+              <span>
+                <label>Line 2:</label>
+                <input onChange={(e) =>setFormData({ ...formData, streetAddressLine2: e.target.value })} value={formData.streetAddressLine2}></input>
+              </span>   
             </div>
             <div className={moduleCss.submitCancelRow}>
               <button className={moduleCss.submit}>Submit</button>

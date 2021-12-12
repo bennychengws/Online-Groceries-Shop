@@ -90,7 +90,15 @@ const home = ({products, account}) => {
     setGroceriesList(processingGroceriesArray)      
   }, [])
 
-  const handleClickTab = (searchQuery) => {
+  const handleClickSeeAll = (e, title, data) => {
+    e.preventDefault();
+    setShowSeeAll(true);
+    setCategoryContent(title);
+    setContentData(data);
+  }
+
+  const handleClickTab = (e, searchQuery) => {
+    e.preventDefault();
 		router.push({pathname: `../search/${searchQuery}`});
   };
 
@@ -106,7 +114,7 @@ const home = ({products, account}) => {
           </div>
           <div>Hong Kong</div>
         </div>
-        <div style={{marginBottom: "2vh"}}>
+        <div className={moduleCss.searchBoxContainer}>
           <SearchBox/>
         </div>
         
@@ -121,9 +129,7 @@ const home = ({products, account}) => {
                       <div className={moduleCss.promoTitle}>
                         {item.categoryName}
                       </div>
-                      <div
-                        className={`${moduleCss.promoContent} ${item.contentColor}`}
-                      >
+                      <div className={`${moduleCss.promoContent} ${item.contentColor}`}>
                         {item.content}
                       </div>
                     </div>
@@ -135,9 +141,9 @@ const home = ({products, account}) => {
         </div>
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Exclusive Offer</div>
-          <Link href="#">
-            <div className={moduleCss.seeAll} onClick={() => (setShowSeeAll(true), setCategoryContent("Exclusive Offer"), setContentData(offerList))}>See all</div>
-          </Link>
+          {/* <Link href="#"> */}
+            <button className={moduleCss.seeAll} onClick={(e) => handleClickSeeAll(e, "Exclusive Offer", offerList)}>See all</button>
+          {/* </Link> */}
         </div>
         <div className={moduleCss.productContainer}>
           {offerList.map((item) => {
@@ -148,9 +154,9 @@ const home = ({products, account}) => {
         </div>
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Best Selling</div>
-          <Link href="#">
-            <div className={moduleCss.seeAll} onClick={() => (setShowSeeAll(true), setCategoryContent("Best Selling"), setContentData(bestSellingList))}>See all</div>
-          </Link>
+          {/* <Link href="#"> */}
+            <button className={moduleCss.seeAll} onClick={(e) => handleClickSeeAll(e, "Best Selling", bestSellingList)}>See all</button>
+          {/* </Link> */}
         </div>
         <div className={moduleCss.productContainer}>
           {bestSellingList.map((item) => {
@@ -163,19 +169,19 @@ const home = ({products, account}) => {
         </div>
         <div className={moduleCss.subtitleRows}>
           <div className={moduleCss.subtitles}>Groceries</div>
-          <Link href="#">
-            <div className={moduleCss.seeAll} onClick={() => (setShowSeeAll(true), setCategoryContent("Groceries"), setContentData(groceriesList))}>See all</div>
-          </Link>
+          {/* <Link href="#"> */}
+            <button className={moduleCss.seeAll} onClick={(e) => handleClickSeeAll(e, "Groceries", groceriesList)}>See all</button>
+          {/* </Link> */}
         </div>
         <div className={moduleCss.tabContainer}>
-          <div className={`${moduleCss.tab} ${moduleCss.pulseTabBgColor}`} onClick={()=> handleClickTab("pulse")}>
+          <div className={moduleCss.pulseTab} onClick={(e) => handleClickTab(e, "pulse")}>
             <div>
               <Image src={pulses} width="71.9px" heigh="71.9px"></Image>
             </div>
             <div>Pulses</div>
             <div></div>
           </div>
-          <div className={`${moduleCss.tab} ${moduleCss.riceTabBgColor}`} onClick={()=> handleClickTab("rice")}>
+          <div className={moduleCss.riceTab} onClick={(e)=> handleClickTab(e, "rice")}>
             <div>
               <Image src={rice} width="69.6px" heigh="70.84px"></Image>
             </div>
@@ -211,7 +217,7 @@ export async function getServerSideProps(context) {
   }
   const token = context.req.cookies.auth
   const decoded = jwt_decode(token);
-  console.log("decoded: " + decoded.sub)
+//  console.log("decoded: " + decoded.sub)
   const accAPIData = await fetchHandler(`${publicRuntimeConfig.apiUrl}/user/${decoded.sub}`, "GET", context);
   const productAPIData = await fetchHandler(`${publicRuntimeConfig.apiUrl}/product`, "GET", context);
   console.log(`productAPI status: ${productAPIData.status}`)

@@ -7,20 +7,9 @@
   flex-direction: column;
   overflow: hidden;
   height: auto;
-}
-
-@media screen and (min-width: 767px) {
-  .container {
-    margin: 0 5vw;
+  @media screen and (min-width: 767px) {
     padding: 70px 0 0 0;
-    font-family: "Gilroy", sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    height: auto;
   }
-  
 }
 
 .carrotImage {
@@ -44,6 +33,10 @@
   padding-right: 5px;
 }
 
+.searchBoxContainer {
+  margin-bottom: 2vh;
+}
+
 .subtitles {
   font-weight: bold;
   font-size: calc(1em + 0.5vw);
@@ -60,7 +53,7 @@
 .seeAll {
   color: rgba(16, 185, 129, 1);
   font-size: calc(0.25em + 0.5vw);
-  cursor: pointer;
+  // cursor: pointer;
 }
 
 .productContainer {
@@ -81,27 +74,18 @@
 
 @media screen and (min-width: 767px) {
   .productContainer {
-    width: 100%;
-    height: 35vh;
-    display: flex;
-    flex-direction: row;
     overflow: hidden;
-    white-space: nowrap; 
   }
 
   .productContainer:hover {
     overflow-y: hidden;
     overflow-x: auto;
-
   }
   
   .product {
-    display: flex;
-    border-radius: 10px;
     margin-right: 2vw;
   }
 }
-
 
 .promo {
   display: flex;
@@ -169,7 +153,7 @@
   flex-direction: row;
 }
 
-.tab {
+@mixin tabTheme($theme) {
   display: flex;
   flex-direction: row;  
   align-items: center;
@@ -181,13 +165,14 @@
   padding: 10px;
   justify-content: space-around;
   cursor: pointer;
+  background-color: $theme;
 }
 
-.pulseTabBgColor {
-  background-color: rgba(248, 164, 76, 0.15);
+.pulseTab {
+  @include tabTheme(rgba(248, 164, 76, 0.15));
 }
 
-.riceTabBgColor {
-  background-color: rgba(183, 223, 245, 0.25);
+.riceTab {
+  @include tabTheme(rgba(183, 223, 245, 0.25));
 }
 

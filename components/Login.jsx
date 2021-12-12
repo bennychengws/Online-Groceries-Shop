@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import moduleCss from "../styles/Login.module.scss";
 import showPwdImg from "../images/eye_visible_hide_hidden_show_icon_145988.png";
 import hidePwdImg from "../images/eye_slash_visible_hide_hidden_show_icon_145987.png";
 import Image from "next/image";
@@ -74,8 +73,8 @@ const Login = () => {
               Password
             </label>
             <div>
-              <div
-                className={moduleCss.pwdContainer}
+              <div 
+                className="relative flex border-b border-r border-teal-500"
               // To be optimised
               // style={{
               //   borderColor: !formData.password.trim()

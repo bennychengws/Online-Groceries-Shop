@@ -9,31 +9,20 @@
     flex-direction: column;
     align-items: center;
 
-}
-
-@media screen and (min-width: 767px) {
-    .container {
-        margin: 0;
+    @media screen and (min-width: 767px) {
         padding: 70px 0 0 0;
-        font-family: 'Gilroy', sans-serif;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    
     }
-}
 
-.title {
-    font-weight: bold;
-    font-size: calc(1.25em + 0.5vw);
-    text-align: center;
-    padding: 3vh 0 2vh 0;
-    border-bottom: solid;
-    border-bottom-width: 1px;
-    border-color:  $customGrey;
-    width: 100%;
-
+    h1 {
+        font-weight: bold;
+        font-size: calc(1.25em + 0.5vw);
+        text-align: center;
+        padding: 3vh 0 2vh 0;
+        border-bottom: solid;
+        border-bottom-width: 1px;
+        border-color:  $customGrey;
+        width: 100%;
+    }
 }
 
 .orderWrapper {
@@ -84,6 +73,11 @@
     flex-direction: row;
     width: 50%;
     justify-content: space-between;
+    > div {
+        > div:first-child {
+            font-weight: bold;
+        }
+    }
 }
     
 .orderHeaderAddress {
@@ -91,10 +85,11 @@
     flex-direction: column;
     width: 50%;
     align-items: flex-end;
-}
-
-.orderHeaderTitle {
-    font-weight: bold;
+    > div {
+        > div:first-child {
+            font-weight: bold;
+        }
+    }
 }
 
 @media screen and (max-width: 1023px) {
@@ -103,34 +98,33 @@
         flex-direction: column;
         width: 100%;
     }
+
+    @mixin orderHeaderDetailTheme {
+        > div {
+            display: flex;
+            
+            > div:first-child {
+                display: inline;    
+                margin-right: 5px;
+            }
+            
+            > div {
+                display: inline-flex;    
+            }
+        }
+    }
     
     .orderHeaderGeneral {
         flex-direction: column;
         width: 100%;
+        @include orderHeaderDetailTheme()
     }
     
     .orderHeaderAddress {
         width: 100%;
         align-items: flex-start;
+        @include orderHeaderDetailTheme()
     }
-
-    .orderHeaderItems {
-        display: flex;
-        /* width: 80%;     */
-    }
-    
-    .orderHeaderTitle {
-        display: inline;    
-        margin-right: 5px;
-        /* width: 25%;   */
-    }
-
-    .orderHeaderContent {
-        display: inline-flex;    
-        /* width: 100%;   */
-        /* word-wrap: break-word; */
-    }
-
 }
 
 .orderInfo {
@@ -193,20 +187,20 @@
     border-left-width: 1px;
     border-left-color: rgb(83, 177, 96);
     padding-left: 3vw;
-}
 
-.statusItem {
-    margin-bottom: 3vh;
-}
+    > div {
+        margin-bottom: 3vh;
+    }
 
-.cancelOrder{
-    border: solid;
-    border-radius: 10px;
-    border-width: 1px;
-    border-color: rgba(248, 164, 76, 0.7);
-    background-color: rgba(253, 229, 76, 0.3);
-    color: rgba(247, 165, 87, 1);
-    padding: 2px 5px;
+    button {
+        border: solid;
+        border-radius: 10px;
+        border-width: 1px;
+        border-color: rgba(248, 164, 76, 0.7);
+        background-color: rgba(253, 229, 76, 0.3);
+        color: rgba(247, 165, 87, 1);
+        padding: 2px 5px;
+    }
 }
 
 

@@ -69,7 +69,7 @@ const resetPassword = ({uid}) => {
         </div>
         <div className={moduleCss.loginContainer}>
           <div className={moduleCss.loginIntro}>
-            <div className={moduleCss.loggingIn}>Reset Password</div>
+            <div className={moduleCss.title}>Reset Password</div>
             <div className="text-gray-500">We will never shall your email with anyone else.</div>
           </div>
           <form className=" rounded mb-4" onSubmit={handleSubmit}>
