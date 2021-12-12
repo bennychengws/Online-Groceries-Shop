@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import moduleCss from "../styles/Category.module.css";
+import moduleCss from "../styles/category.module.scss";
 import Image from "next/image";
 import backArrow from "../images/back_arrow.png";
 import filterIcon from "../images/Filter.png";
