@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import moduleCss from "../styles/AcceptedOrder.module.scss";
+import moduleCss from "../styles/accepted.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import acceptedIcon from "../images/acceptedIcon.png";
