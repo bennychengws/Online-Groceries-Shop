@@ -1,4 +1,3 @@
-import connectDB from '../../middleware/mongodb';
 import dbConnect from '../../lib/dbConnect';
 import User from '../../models/user';
 import mail from '@sendgrid/mail';
