@@ -1,9 +1,9 @@
-import connectDB from '../../../middleware/mongodb';
+import dbConnect from '../../../lib/dbConnect';
 import Product from '../../../models/product';
 
 const productItemAPI = async (req, res) => {
   const { id } = req.query
-  console.log(id);
+  await dbConnect();
   switch (req.method) {
     case 'POST':
       return res.status(405).json("We only support GET")
@@ -20,4 +20,4 @@ const productItemAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(productItemAPI)
+export default productItemAPI;

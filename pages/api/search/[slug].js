@@ -1,7 +1,8 @@
-import connectDB from '../../../middleware/mongodb';
+import dbConnect from '../../../lib/dbConnect';
 import Product from '../../../models/product';
 
 const searchAPI = async (req, res) => {
+  await dbConnect();
   switch (req.method) {
     case 'POST':
       return res.status(405).json("We only support GET")
@@ -21,4 +22,4 @@ const searchAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(searchAPI)
+export default searchAPI;

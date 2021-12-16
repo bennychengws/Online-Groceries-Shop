@@ -1,9 +1,10 @@
-import connectDB from '../../../../../middleware/mongodb';
+import dbConnect from '../../../../../lib/dbConnect';
 import User from '../../../../../models/user';
 import authenticate from '../../../../../middleware/authenticate';
 
 const addressAPI = async (req, res) => {
   var { uid } = req.query
+  await dbConnect();
   switch (req.method) {
     case 'POST':
         return res.status(405).json({ message: 'We only support Get and Put' });
@@ -37,4 +38,4 @@ const addressAPI = async (req, res) => {
   } 
 }
 
-export default authenticate(connectDB(addressAPI))
+export default authenticate(addressAPI);

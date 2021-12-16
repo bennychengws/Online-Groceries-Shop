@@ -1,10 +1,11 @@
-import connectDB from "../../../../../middleware/mongodb";
+import dbConnect from "../../../../../lib/dbConnect";
 import User from "../../../../../models/user";
 import Product from "../../../../../models/product";
 import authenticate from "../../../../../middleware/authenticate";
 
 const handleCartAPI = async (req, res) => {
   var { uid } = req.query;
+  await dbConnect();
   switch (req.method) {
     case 'POST':
         return res.status(405).json({ message: 'We only support Get, Put, and Delete' });
@@ -53,4 +54,4 @@ const handleCartAPI = async (req, res) => {
   }
 };
 
-export default authenticate(connectDB(handleCartAPI));
+export default authenticate(handleCartAPI);

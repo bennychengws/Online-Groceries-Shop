@@ -1,13 +1,12 @@
-import connectDB from "../../../middleware/mongodb";
+import dbConnect from "../../../lib/dbConnect";
 import User from "../../../models/user";
 import bcrypt from "bcrypt";
 import mail from "@sendgrid/mail";
-import Jwt from "jsonwebtoken";
-import getConfig from "next/config";
 
 mail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const resetPassword = async (req, res) => {
+  await dbConnect();
   switch (req.method) {
     case "PUT":
       try {
@@ -35,4 +34,4 @@ const resetPassword = async (req, res) => {
   }
 };
 
-export default connectDB(resetPassword);
+export default resetPassword;

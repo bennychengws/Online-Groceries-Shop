@@ -1,10 +1,10 @@
-import connectDB from '../../../../../middleware/mongodb';
+import dbConnect from '../../../../../lib/dbConnect';
 import User from '../../../../../models/user';
 import authenticate from '../../../../../middleware/authenticate';
 
 const usernameAPI = async (req, res) => {
   var { uid } = req.query
-  console.log(uid)
+  await dbConnect();
   switch (req.method) {
     case 'POST':
         return res.status(405).json({ message: 'We only support Get and Put' });
@@ -30,4 +30,4 @@ const usernameAPI = async (req, res) => {
   } 
 }
 
-export default authenticate(connectDB(usernameAPI))
+export default authenticate(usernameAPI);

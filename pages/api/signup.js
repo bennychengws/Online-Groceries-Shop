@@ -1,8 +1,9 @@
-import connectDB from '../../middleware/mongodb';
+import dbConnect from '../../lib/dbConnect';
 import User from '../../models/user';
 import bcrypt from 'bcrypt'
 
-const helloAPI = async (req, res) => {
+const signUpAPI = async (req, res) => {
+  await dbConnect();
   switch (req.method) {
     case 'POST':
       const {username, email, password} = req.body
@@ -40,4 +41,4 @@ const helloAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(helloAPI)
+export default signUpAPI;

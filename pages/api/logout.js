@@ -1,8 +1,9 @@
-import connectDB from '../../middleware/mongodb';
+import dbConnect from '../../lib/dbConnect';
 import cookie from 'cookie';
 import authenticate from '../../middleware/authenticate';
 
 const logoutAPI = async (req, res) => {
+  await dbConnect();
   switch (req.method) {
     case 'POST':
       res.setHeader('Set-Cookie', [
@@ -18,5 +19,5 @@ const logoutAPI = async (req, res) => {
   }
 }
 
-export default authenticate(connectDB(logoutAPI))
+export default authenticate(logoutAPI);
 

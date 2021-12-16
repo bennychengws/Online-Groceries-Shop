@@ -1,13 +1,12 @@
-import connectDB from '../../middleware/mongodb';
+import dbConnect from '../../lib/dbConnect'
 import Jwt from "jsonwebtoken";
 import cookie from 'cookie';
 import User from '../../models/user';
 import bcrypt from 'bcrypt'
-import authenticate from '../../middleware/authenticate';
-
 
 const loginAPI = async (req, res) => {
   const { email, password } = req.body
+  await dbConnect();
   switch (req.method) {
     case 'POST':
       const user = await User.findOne({email: email}).lean().exec();
@@ -34,5 +33,5 @@ const loginAPI = async (req, res) => {
   } 
 }
 
-export default connectDB(loginAPI)
+export default loginAPI;
 
