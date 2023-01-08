@@ -13,7 +13,7 @@ const Login = () => {
   const { publicRuntimeConfig } = getConfig();
   const [formData, setFormData] = useState({
     email: "benny@gmail.com",
-    password: "abcd",
+    password: "123456",
   });
   const [isRevealPwd, setIsRevealPwd] = useState(false);
 

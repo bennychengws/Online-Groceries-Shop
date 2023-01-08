@@ -76,10 +76,10 @@ const cart = ({ cart }) => {
     calculateTotal();
   });
 
-  useEffect(async () => {
+  useEffect(() => {async () => {
     const isAuthenticated = await clientAuthenticationCheck();
     if (!isAuthenticated) router.push("/");
-  }, [calculateTotal]);
+  }}, [calculateTotal]);
 
   const deleteItem = async (item) => {
     var newArray = userState.cart.slice();
@@ -103,13 +103,20 @@ const cart = ({ cart }) => {
   };
 
   const handleCheckout = () => {
-    if (totalPriceCount > 0) {
-      setShowModal(true);
-      console.log("checkout opened");
-    } else {
+    if (cartList.length == 0) {
       console.log("empty cart");
-      createNotification("omitted");
-    }
+      createNotification("omitted");      
+    } else if (userState.address.streetAddressLine1 == "" ) {
+      console.log("empty address");
+      createNotification("empty address");
+    } else if (totalPriceCount <= 0) {
+      console.log("non-positive price");
+      createNotification("non-positive price");
+    } else {
+      setShowModal(true);
+      console.log("checkout opened");      
+    } 
+    
   };
 
   const createNotification = (type, item, message) => {
@@ -126,7 +133,7 @@ const cart = ({ cart }) => {
         );
       case "warning":
         return NotificationManager.warning(
-          `You have deleted the ${item.name} from Favourite`,
+          `You have deleted the ${item.name} from Cart`,
           "Deleted",
           3000
         );
@@ -143,6 +150,16 @@ const cart = ({ cart }) => {
           `Please make sure that your cart is not empty`,
           "Empty Cart"
         );
+      case "empty address":
+        return NotificationManager.warning(
+          `Please make sure that your delivery address is not empty`,
+          "Empty Address"
+        );
+      case "non-positive price":
+        return NotificationManager.warning(
+          `Please contact administrator for non-positive total price calculated`,
+          `non-positive price`
+        );        
     }
   };
 

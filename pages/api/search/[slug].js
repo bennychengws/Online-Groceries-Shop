@@ -11,7 +11,7 @@ const searchAPI = async (req, res) => {
         const { slug } = req.query
         console.log("req: " + slug);
         var val = slug
-        const product = await Product.find({$or: [{$text: {$search: slug}}, {name: new RegExp(val, "i")}]}).lean().exec();
+        const product = await Product.find({name: { $regex: val, $options: 'i' } }).lean().exec();
         return res.status(200).json(JSON.stringify(product))        
       } catch (error) {
         return res.status(400).json("failed to get products data")        

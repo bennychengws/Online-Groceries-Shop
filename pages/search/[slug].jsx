@@ -24,18 +24,21 @@ const search = (props) => {
     var categories = new Set()
     var brands = new Set()
 
-    for (var i = 0; i < data.length; i++ ) {
-      for (var j = 0; j < data.length; j++ ) {
-        if (data[i].categoryTags[j] !== undefined) {
-          categories.add(data[i].categoryTags[j])
-          continue
+    if (data != null) {
+      for (var i = 0; i < data.length; i++ ) {
+        for (var j = 0; j < data.length; j++ ) {
+          if (data[i].categoryTags[j] !== undefined) {
+            categories.add(data[i].categoryTags[j])
+            continue
+          }
         }
-      }
-    }    
+      }    
 
-    for (var k = 0; k < data.length; k++ ) {
-      brands.add(data[k].brand)
-    }    
+      for (var k = 0; k < data.length; k++ ) {
+        brands.add(data[k].brand)
+      }       
+    }
+   
 
     setCategorySet(categories)
     setBrandSet(brands)
@@ -90,13 +93,14 @@ const search = (props) => {
           <Image src={filterIcon} width="16.8px" height="17.85px"></Image>
         </div>
       </div>
-      {displayedData.length > 0 ?
+      {displayedData != null ? displayedData.length > 0 ?
         <div className={moduleCss.productContainer}>
           {displayedData.map((item, index) => (
             <GoodsV2 key={index}>{item}</GoodsV2>
           ))}        
         </div> 
-        : <div style={{fontWeight: "bold"}}>No Matched Result</div>
+        : <div style={{fontWeight: "bold"}}>No Matched Result</div> 
+        : <div style={{fontWeight: "bold"}}>There Is Error In Searching Results. Please Contact Administrator.</div>  
       }
       <NavBar />
       <Filters onClose={() => setShowFilter(false)} show={showFilter} categoryData={Array.from(categorySet)} brandData={Array.from(brandSet)}></Filters>
@@ -113,12 +117,24 @@ export async function getServerSideProps(context) {
     return {redirect: {destination: '/', permanent: true,}, };
   }
   const data = await fetch(`${publicRuntimeConfig.apiUrl}/search/${context.params.slug}`);
-  const productData = await data.json();
-  return {
-    props: {
-      data: productData
-
+  // console.log(data)
+  try {
+    const productData = await data.json();
+    return {
+      props: {
+        data: productData
+  
+      }
     }
-  }
+
+  } catch (error) {
+    console.log(error)
+    return {
+      props : {
+
+      }
+    }
+  } 
+  
 }
 

@@ -39,7 +39,7 @@ const user = new Schema({
               name: { type: String, required: true, default: "",},
               productImage: {type: String, required: false, default: ""},
               quantity: { type: Number, required: true },
-              amounPerQty: {type: String, default: ""},
+              amountPerQty: {type: String, default: ""},
               discountedPrice: { type: Schema.Types.Decimal128, default: 0, required: true },
               productTotalPrice: { type: Schema.Types.Decimal128, default: 0, required: true },
             }

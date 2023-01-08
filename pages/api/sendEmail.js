@@ -30,8 +30,8 @@ const resetPasswordEmail = async (req, res) => {
           Admin from the Online Groceries Shop
         `;
         const data = {
-          to: 'bennychengws@gmail.com',
-          from: 'bearcastlecws@gmail.com',
+          to: email,
+          from: 'bearcastle@protonmail.com',
           subject: 'Reset Password',
           text: message,
           html: message.replace(/\r\n/g, '<br>')

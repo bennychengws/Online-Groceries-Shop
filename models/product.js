@@ -27,7 +27,7 @@ const product = new Schema({
     required: true,
     default: 0,
   },
-  amounPerQty: {
+  amountPerQty: {
     type: String,
     required: true,
     default: "",

@@ -52,7 +52,7 @@ const myOrders = ({ orders }) => {
                         <Image src={`data:image/png;base64,${item.productImage}`} layout="fill" objectFit="contain" quality={100} onClick={() => router.push(`/product/${item._id}`)}></Image>
                       </div>
                       <ul>
-                        <li className={moduleCss.name}>{item.name}</li>
+                        <li className={moduleCss.name}>{item.name}, {item.amountPerQty}</li>
                         <li className={moduleCss.price}>${item.productTotalPrice.$numberDecimal}</li>
                         <li className={moduleCss.amountAndQty}>Total qty: {item.quantity}</li>
                       </ul>

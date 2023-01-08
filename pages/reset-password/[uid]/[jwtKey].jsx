@@ -70,7 +70,7 @@ const resetPassword = ({uid}) => {
         <div className={moduleCss.loginContainer}>
           <div className={moduleCss.loginIntro}>
             <div className={moduleCss.title}>Reset Password</div>
-            <div className="text-gray-500">We will never shall your email with anyone else.</div>
+            <div className="text-gray-500">We will never share your email with anyone else.</div>
           </div>
           <form className=" rounded mb-4" onSubmit={handleSubmit}>
             <div className={moduleCss.pwdContainer}
@@ -105,11 +105,11 @@ const resetPassword = ({uid}) => {
             ) : null}  
             <div className={moduleCss.pwdContainer}
               style={{
+                marginTop: "0.75rem",
                 borderColor: formData.confirmPassword.length > 0 && formData.confirmPassword.length < 6
                   ? "rgba(239, 68, 68, 1)"
                   : "rgba(226, 226, 226, 1)"
               }} 
-              style={{marginTop: "0.75rem"}}
             >
               <input
                 className="appearance-none bg-transparent w-full text-gray-700 leading-tight focus:outline-none border-b border-teal-500"

@@ -11,7 +11,8 @@ module.exports = {
       , 
       domainUrl: process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000' // development api
-      : 'https://onlinegroceriesapp.vercel.app' // production api  
+      : 'https://onlinegroceriesapp.vercel.app' // production api
   },
+  swcMinify: true,
 };
 
