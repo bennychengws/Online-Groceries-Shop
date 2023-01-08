@@ -27,6 +27,6 @@ module.exports = {
       ? 'http://localhost:3000' // development api
       : 'https://onlinegroceriesapp.vercel.app' // production api
   },
-  swcMinify: true,
+  // swcMinify: true,
 };
 
