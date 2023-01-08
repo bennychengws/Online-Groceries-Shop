@@ -4,7 +4,7 @@ Please use the following account to login for test if you do not want to sign up
 
 Account: benny@gmail.com
 
-Password: abcd
+Password: 123456
 
 Please use the following Paypal sandbox account for checkout.
 
